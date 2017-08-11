@@ -9,10 +9,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class home extends AppCompatActivity {
-ImageView customers ;
+private ImageView customers ;
+    Bundle homebundle = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        homebundle = getIntent().getExtras();
         setContentView(R.layout.activity_home);
         customers = (ImageView) findViewById(R.id.Customers);
 
@@ -20,8 +22,11 @@ ImageView customers ;
         customers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle b= new Bundle();
+                b.putString("employeeId",homebundle.getString("employeeId"));
                 Intent i = new Intent(home.this,customer_activity.class);
-                startActivity(i);
+                i.putExtras(b);
+                startActivity(i,b);
             }
         });
 

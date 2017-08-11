@@ -40,6 +40,19 @@ public class LOGIN extends AppCompatActivity {
         forgotPin = (TextView)findViewById(R.id.forgotPin);
         register =(TextView)findViewById(R.id.register);
 
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userName.setText("");
+                password.setText("");
+            }
+        });
+
+        signInButton = (Button)findViewById(R.id.logIn);
+        clearButton = (Button)findViewById(R.id.logClear);
+        forgotPin = (TextView)findViewById(R.id.forgotPin);
+        register =(TextView)findViewById(R.id.register);
+
 
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +64,7 @@ public class LOGIN extends AppCompatActivity {
 
 
 
-        ((Button)findViewById(R.id.logIn)).setOnClickListener(new View.OnClickListener() {
+        signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String username = userName.getText().toString();
@@ -74,11 +87,16 @@ public class LOGIN extends AppCompatActivity {
 
                             LoginDTO loginDTO = response.body();
                             if( !loginDTO.isError()){
-                                //Now go to DashBoard.
+                                //TODO Now go to DashBoard.
+                                //Pass in a Bundle to Dashboard loginDTO.getEmployee().getEmployeeId()
+                            }
+                            else {
+                                //TODO Show error message TextBox that user is invalid
                             }
                         }
                         else{
                             //Do Validation code here.
+                            //TODO Error - Message-  Technical Problem. Pls try again.
 
                         }
                     }
@@ -86,7 +104,8 @@ public class LOGIN extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<LoginDTO> call, Throwable t) {
                         //DoValidation here.
-                    System.out.println("Failed");
+                        //TODO Error - Message-  Technical Problem. Pls try again.
+
                     }
                 });
 
@@ -116,4 +135,6 @@ public class LOGIN extends AppCompatActivity {
     public boolean isPasswordValid(String pass){
         return  password.length()>=5;
     }
+
+    
 }

@@ -1,13 +1,13 @@
 package prodcastd.prodcast.samayu.com.prodcastd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import com.samayu.prodcast.prodcastd.dto.LoginDTO;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
@@ -17,7 +17,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class LOGIN extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     EditText userName;
 
@@ -25,7 +25,7 @@ public class LOGIN extends AppCompatActivity {
     TextView forgotPin,register;
 
     View focusView = null;
-    Context context;
+
 
 
     EditText password = null;
@@ -69,8 +69,8 @@ public class LOGIN extends AppCompatActivity {
             public void onClick(View view) {
                 String username = userName.getText().toString();
                 String pass = password.getText().toString();
-                boolean cancel = false;
-                if (checkValid(username,pass)== cancel){
+
+                if (checkValid(username,pass)){
                     return ;
 
                 }
@@ -88,16 +88,28 @@ public class LOGIN extends AppCompatActivity {
                             LoginDTO loginDTO = response.body();
                             if( !loginDTO.isError()){
                                 //TODO Now go to DashBoard.
+                                Intent intent =new Intent(LoginActivity.this,home.class);
+
+                                Bundle bundle =  new Bundle();
+                                bundle.putString("employeeId",String.valueOf(loginDTO.getEmployee().getEmployeeId()));
+                                intent.putExtras(bundle);
+                                startActivity(intent,bundle);
+
+                                //new ProdcastDClient().getClient().getCustomers(""+employeeId)
+
+
+
                                 //Pass in a Bundle to Dashboard loginDTO.getEmployee().getEmployeeId()
                             }
                             else {
                                 //TODO Show error message TextBox that user is invalid
+                                userName.setError("User is invalid");
                             }
                         }
                         else{
                             //Do Validation code here.
                             //TODO Error - Message-  Technical Problem. Pls try again.
-
+                            signInButton.setError("Sorry for the technical problem. Please try again");
                         }
                     }
 
@@ -136,5 +148,5 @@ public class LOGIN extends AppCompatActivity {
         return  password.length()>=5;
     }
 
-    
+
 }

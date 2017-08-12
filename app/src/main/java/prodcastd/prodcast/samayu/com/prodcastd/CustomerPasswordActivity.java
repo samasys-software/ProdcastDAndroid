@@ -7,26 +7,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CustomerPasswordActivity extends AppCompatActivity {
    private   EditText oldPassword,newPassword,confirmPassword;
    private Button submit,reset;
     View focusView = null;
     boolean cancel = false;
-    private String employeeId;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_password_activity);
-        employeeId = getIntent().getExtras().getString("employeeId");
-        EditText empTextBox = (EditText)findViewById(R.id.employeeId);
-        empTextBox.setText(employeeId);
         oldPassword =(EditText)findViewById(R.id.oldPassword);
         newPassword = (EditText)findViewById(R.id.newPassword);
         confirmPassword=(EditText)findViewById(R.id.confirmPassword);
@@ -36,7 +36,7 @@ public class CustomerPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
+                attemptChangePassword();
 
             }
         });
@@ -89,7 +89,27 @@ public class CustomerPasswordActivity extends AppCompatActivity {
         if (checkValue(oldPass,newpass,confirmpass)){
             return;
         }
-        Call<ProdcastDTO> prodcastDTOCall = new ProdcastDClient().getClient().authenticate(newPassword.getText().toString(),confirmPassword.getText().toString());
+        String employeeIdString = String.valueOf( SessionInfo.instance().getEmployee().getEmployeeId());
+        Call<ProdcastDTO> prodcastDTOCall = new ProdcastDClient().getClient().changePassword(employeeIdString,oldPass, newpass);
+        prodcastDTOCall.enqueue(new Callback<ProdcastDTO>() {
+            @Override
+            public void onResponse(Call<ProdcastDTO> call, Response<ProdcastDTO> response) {
+                if( response.isSuccessful() ){
+                    ProdcastDTO dto = response.body();
+                    if( dto.isError()){
+                        //TODO Show the ERror Message
+                    }
+                    else{
+                     //TODO Show Confirmation MEssage - and clear all the textboxes.
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProdcastDTO> call, Throwable t) {
+
+            }
+        });
 
     }
 }

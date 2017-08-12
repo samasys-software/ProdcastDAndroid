@@ -14,13 +14,15 @@
         <activity android:name=".home"></activity>
         <activity android:name=".customer_activity"></activity>
         <activity android:name=".LoginActivity">
+        </activity>
+        <activity android:name=".CustomerPasswordActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CustomerPasswordActivity"></activity>
     </application>
 
 </manifest>

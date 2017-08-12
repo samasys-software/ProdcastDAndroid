@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/green_bg"
-    tools:context="prodcastd.prodcast.samayu.com.prodcastd.LOGIN">
+    tools:context="prodcastd.prodcast.samayu.com.prodcastd.LoginActivity">
 
     <RelativeLayout
         android:id="@+id/rlprodimg"

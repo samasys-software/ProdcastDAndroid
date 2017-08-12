@@ -1,13 +1,13 @@
 package prodcastd.prodcast.samayu.com.prodcastd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import com.samayu.prodcast.prodcastd.dto.LoginDTO;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
@@ -17,7 +17,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class LOGIN extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     EditText userName;
 
@@ -69,8 +69,8 @@ public class LOGIN extends AppCompatActivity {
             public void onClick(View view) {
                 String username = userName.getText().toString();
                 String pass = password.getText().toString();
-                boolean cancel = false;
-                if (checkValid(username,pass)== cancel){
+
+                if (checkValid(username,pass)){
                     return ;
 
                 }
@@ -88,6 +88,11 @@ public class LOGIN extends AppCompatActivity {
                             LoginDTO loginDTO = response.body();
                             if( !loginDTO.isError()){
                                 //TODO Now go to DashBoard.
+                                Bundle bundle = new Bundle();
+                                bundle.putString("employeeId",String.valueOf( loginDTO.getEmployee().getEmployeeId()));
+                                Intent i = new Intent(LoginActivity.this,Home.class);
+                                i.putExtras(bundle);
+                                startActivity(i,bundle);
                                 //Pass in a Bundle to Dashboard loginDTO.getEmployee().getEmployeeId()
                             }
                             else {
@@ -105,7 +110,7 @@ public class LOGIN extends AppCompatActivity {
                     public void onFailure(Call<LoginDTO> call, Throwable t) {
                         //DoValidation here.
                         //TODO Error - Message-  Technical Problem. Pls try again.
-
+                        t.printStackTrace();
                     }
                 });
 

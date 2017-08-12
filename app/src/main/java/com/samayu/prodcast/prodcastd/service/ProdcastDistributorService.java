@@ -9,6 +9,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by sarathan732 on 8/10/2017.
@@ -20,5 +21,5 @@ public interface ProdcastDistributorService {
     public Call<LoginDTO> authenticate(@Field("userid") String userId , @Field("password") String password);
 
     @GET("prodcast/global/customers")
-    public Call<CustomerListDTO> getCustomers(@Path("employeeId") String employeeId );
+    public Call<CustomerListDTO> getCustomers(@Query("employeeId") String employeeId );
 }

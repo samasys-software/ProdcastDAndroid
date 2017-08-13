@@ -6,6 +6,7 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+
 <android.support.design.widget.TextInputLayout
     android:paddingLeft="5dp"
     android:layout_height="wrap_content"
@@ -76,33 +77,288 @@
         android:hint="Customer Desc2"
         android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/selectDay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="0.22"
+        android:autofillHints="SELECTDAY" />
 
     <Spinner
         android:id="@+id/spinner3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:autofillHints="Se"/>
+        android:layout_weight="0.16"
+        android:autofillHints="Se" />
 
     <Spinner
-        android:id="@+id/spinner4"
+        android:id="@+id/spinner2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints="Store Type"/>
+        android:layout_weight="0.12" />
 
+    <Spinner
+        android:id="@+id/storetype"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="STORE TYPE"/>
+<android.support.design.widget.NavigationView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+</android.support.design.widget.NavigationView>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+
+    <android.support.design.widget.TextInputLayout
+        android:paddingLeft="5dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingRight="5dp">
+
+        <EditText
+            android:id="@+id/unitNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="UNIT NUMBER" />
+
+
+    </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+        android:paddingLeft="5dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingRight="5dp">
+
+        <EditText
+            android:id="@+id/billingAddress3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="BILLING ADDRESS3"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:paddingLeft="5dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingRight="5dp">
+
+        <EditText
+            android:id="@+id/state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="STATE"/>
+    </android.support.design.widget.TextInputLayout>
+    <Spinner
+        android:id="@+id/country"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.22"
+        android:autofillHints="COUNTRY" />
+    <android.support.design.widget.TextInputLayout
+        android:paddingLeft="5dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingRight="5dp">
+
+        <EditText
+            android:id="@+id/pinCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="PINCODE"/>
+    </android.support.design.widget.TextInputLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.design.widget.TextInputLayout
+            android:paddingLeft="5dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingRight="5dp">
+
+            <EditText
+                android:id="@+id/firstName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="FIRST NAME"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:paddingLeft="5dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingRight="5dp">
+
+            <EditText
+                android:id="@+id/lastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="LAST NAME"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:paddingLeft="5dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingRight="5dp">
+
+            <EditText
+                android:id="@+id/phoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="PHONE NUMBER"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:paddingLeft="5dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingRight="5dp">
+
+            <EditText
+                android:id="@+id/mobileNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="MOBILE NUMBER"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:paddingLeft="5dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingRight="5dp">
+
+            <EditText
+                android:id="@+id/emailAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="EMAIL ADDRESS"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:paddingLeft="5dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingRight="5dp">
+
+            <EditText
+                android:id="@+id/note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="NOTE"/>
+        </android.support.design.widget.TextInputLayout>
+        <CheckBox
+            android:id="@+id/smsAllowed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SMS ALLOWED" />
+        <CheckBox
+            android:id="@+id/active"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ACTIVE" />
+
+    </LinearLayout>
 
 </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/sNo"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+
+            android:text="S NO"
+            android:textAllCaps="true"
+            android:textColor="#629a1e"
+            android:background="@drawable/border_textbox"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
+
+
+        <TextView
+            android:text="COMPANY NAME"
+
+            android:textAllCaps="true"
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/border_textbox"
+            android:id="@+id/cName"
+            android:textColor="#629a1e"
+            android:textSize="16sp"
+            android:textStyle="bold"
+
+
+            />
+        <TextView
+            android:text="FIRST NAME"
+            android:textAllCaps="true"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:id="@+id/fName"
+            android:textColor="#629a1e"
+            android:background="@drawable/border_textbox"
+            android:textSize="16sp"
+            android:textStyle="bold"
+
+
+            />
+        <TextView
+            android:text="LAST NAME"
+            android:textAllCaps="true"
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:id="@+id/lName"
+            android:textColor="#629a1e"
+            android:background="@drawable/border_textbox"
+            android:textSize="16sp"
+            android:textStyle="bold"
+
+            />
+    </LinearLayout>
+
+</LinearLayout>
+
+
 
 
 

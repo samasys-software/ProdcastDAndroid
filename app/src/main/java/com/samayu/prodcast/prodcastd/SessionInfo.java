@@ -18,9 +18,9 @@ public class SessionInfo {
         this.employee = employee;
     }
 
-    private SessionInfo sessionInfo = new SessionInfo();
+    private static SessionInfo sessionInfo = new SessionInfo();
 
-    public SessionInfo instance(){
+    public static SessionInfo instance(){
         return sessionInfo;
     }
 

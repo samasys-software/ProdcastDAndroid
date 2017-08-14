@@ -1,11 +1,16 @@
 package prodcastd.prodcast.samayu.com.prodcastd;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
@@ -18,9 +23,9 @@ import retrofit2.Response;
 public class CustomerPasswordActivity extends AppCompatActivity {
    private   EditText oldPassword,newPassword,confirmPassword;
    private Button submit,reset;
-    View focusView = null;
-    boolean cancel = false;
-
+   private View focusView = null;
+   private boolean cancel = false;
+    private Context context;
 
 
     @Override
@@ -32,11 +37,16 @@ public class CustomerPasswordActivity extends AppCompatActivity {
         confirmPassword=(EditText)findViewById(R.id.confirmPassword);
         submit=(Button)findViewById(R.id.submit);
         reset=(Button)findViewById(R.id.reset);
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                attemptChangePassword();
+
+                if(attemptChangePassword()){
+                    Intent intent=new Intent(CustomerPasswordActivity.this,home.class);
+                    startActivity(intent);
+                };
 
             }
         });
@@ -48,6 +58,7 @@ public class CustomerPasswordActivity extends AppCompatActivity {
                 confirmPassword.setText("");
             }
         });
+
     }
     public boolean checkValue(String oldpass,String newpass, String confirmpass){
         if (TextUtils.isEmpty(oldpass)){
@@ -81,26 +92,47 @@ public class CustomerPasswordActivity extends AppCompatActivity {
         }
         return cancel;
     }
-    private void attemptChangePassword(){
-        String oldPass = oldPassword.getText().toString();
-        String newpass = newPassword.getText().toString();
+    public void onBackPressed(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(CustomerPasswordActivity.this);
+        builder.setTitle("Exit this page!!!")
+                .setMessage("Do yo want to go to previous page?")
+                .setCancelable(false)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        CustomerPasswordActivity.super.onBackPressed();
+                    }
+                })
+                .setNegativeButton("Cancel",null);
+        AlertDialog alert = builder.create();
+
+        alert.show();
+
+    }
+
+    private boolean attemptChangePassword(){
+        final String oldPass = oldPassword.getText().toString();
+        final String newpass = newPassword.getText().toString();
         String confirmpass =confirmPassword.getText().toString();
         ;
         if (checkValue(oldPass,newpass,confirmpass)){
-            return;
+            return cancel;
         }
         String employeeIdString = String.valueOf( SessionInfo.instance().getEmployee().getEmployeeId());
-        Call<ProdcastDTO> prodcastDTOCall = new ProdcastDClient().getClient().changePassword(employeeIdString,oldPass, newpass);
+        final Call<ProdcastDTO> prodcastDTOCall = new ProdcastDClient().getClient().changePassword(employeeIdString,oldPass, newpass);
         prodcastDTOCall.enqueue(new Callback<ProdcastDTO>() {
             @Override
             public void onResponse(Call<ProdcastDTO> call, Response<ProdcastDTO> response) {
                 if( response.isSuccessful() ){
                     ProdcastDTO dto = response.body();
-                    if( dto.isError()){
+                    if(dto.isError()) {
                         //TODO Show the ERror Message
+
+                        Toast.makeText(context, "Error in changing the password", Toast.LENGTH_LONG).show();
                     }
                     else{
                      //TODO Show Confirmation MEssage - and clear all the textboxes.
+                        Toast.makeText(context, "Password Changed Successfully", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -110,6 +142,7 @@ public class CustomerPasswordActivity extends AppCompatActivity {
 
             }
         });
+        return cancel;
 
     }
 }

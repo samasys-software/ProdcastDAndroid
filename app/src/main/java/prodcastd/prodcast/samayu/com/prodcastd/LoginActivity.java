@@ -50,22 +50,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        signInButton = (Button)findViewById(R.id.logIn);
-        clearButton = (Button)findViewById(R.id.logClear);
-        forgotPin = (TextView)findViewById(R.id.forgotPin);
-        register =(TextView)findViewById(R.id.register);
-
-
-        clearButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                userName.setText("");
-                password.setText("");
-
-            }
-        });
-
 
 
         signInButton.setOnClickListener(new View.OnClickListener() {

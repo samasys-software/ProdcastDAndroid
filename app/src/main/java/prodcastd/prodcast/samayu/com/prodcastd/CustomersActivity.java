@@ -17,7 +17,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class customer_activity extends AppCompatActivity {
+public class CustomersActivity extends AppCompatActivity {
     private String employeeId;
     private ListView cuslist;
     private Context context;

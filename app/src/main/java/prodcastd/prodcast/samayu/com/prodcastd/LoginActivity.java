@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                             LoginDTO loginDTO = response.body();
                             if( !loginDTO.isError()){
                                 //TODO Now go to DashBoard.
-                                Intent intent =new Intent(LoginActivity.this,Home.class);
+                                Intent intent =new Intent(LoginActivity.this,home.class);
                                 SessionInfo.instance().setEmployee( loginDTO.getEmployee());
                                 Bundle bundle =  new Bundle();
                                 bundle.putString("employeeId",String.valueOf(loginDTO.getEmployee().getEmployeeId()));
@@ -85,7 +85,6 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(intent,bundle);
                                 signInButton.setEnabled(true);
                                 //new ProdcastDClient().getClient().getCustomers(""+employeeId)
-
 
 
 
@@ -107,7 +106,6 @@ public class LoginActivity extends AppCompatActivity {
                     public void onFailure(Call<LoginDTO> call, Throwable t) {
                         //DoValidation here.
                         //TODO Error - Message-  Technical Problem. Pls try again.
-                        t.printStackTrace();
                         signInButton.setEnabled(true);
                     }
                 });

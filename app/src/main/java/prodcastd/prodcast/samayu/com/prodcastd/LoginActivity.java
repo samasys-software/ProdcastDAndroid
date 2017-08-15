@@ -1,6 +1,5 @@
 package prodcastd.prodcast.samayu.com.prodcastd;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -77,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                             LoginDTO loginDTO = response.body();
                             if( !loginDTO.isError()){
                                 //TODO Now go to DashBoard.
-                                Intent intent =new Intent(LoginActivity.this,home.class);
+                                Intent intent =new Intent(LoginActivity.this,Home.class);
                                 SessionInfo.instance().setEmployee( loginDTO.getEmployee());
                                 Bundle bundle =  new Bundle();
                                 bundle.putString("employeeId",String.valueOf(loginDTO.getEmployee().getEmployeeId()));

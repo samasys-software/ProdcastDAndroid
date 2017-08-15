@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class home extends AppCompatActivity {
+public class Home extends AppCompatActivity {
 private ImageView customers ;
     Bundle homebundle = null;
     private ImageView conPassword;
@@ -23,7 +23,7 @@ private ImageView customers ;
             public void onClick(View view) {
                 Bundle b= new Bundle();
                 b.putString("employeeId",homebundle.getString("employeeId"));
-                Intent i = new Intent(home.this,CustomersActivity.class);
+                Intent i = new Intent(Home.this,CustomersActivity.class);
                 i.putExtras(b);
                 startActivity(i,b);
             }
@@ -31,7 +31,7 @@ private ImageView customers ;
         conPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(home.this,CustomerPasswordActivity.class);
+                Intent intent = new Intent(Home.this,CustomerPasswordActivity.class);
                 startActivity(intent);
             }
         });

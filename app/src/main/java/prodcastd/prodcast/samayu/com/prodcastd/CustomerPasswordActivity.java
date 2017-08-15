@@ -24,8 +24,6 @@ public class CustomerPasswordActivity extends AppCompatActivity {
    private   EditText oldPassword,newPassword,confirmPassword;
    private Button submit,reset;
    private View focusView = null;
-   private boolean cancel = false;
-    private Context context;
 
 
     @Override
@@ -41,12 +39,7 @@ public class CustomerPasswordActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                if(attemptChangePassword()){
-                    Intent intent=new Intent(CustomerPasswordActivity.this,home.class);
-                    startActivity(intent);
-                };
+                attemptChangePassword();
 
             }
         });
@@ -61,6 +54,8 @@ public class CustomerPasswordActivity extends AppCompatActivity {
 
     }
     public boolean checkValue(String oldpass,String newpass, String confirmpass){
+
+        boolean cancel = false;
         if (TextUtils.isEmpty(oldpass)){
             oldPassword.setError("This Field is Empty");
             focusView = oldPassword;
@@ -87,9 +82,6 @@ public class CustomerPasswordActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        else {
-            cancel = false;
-        }
         return cancel;
     }
     public void onBackPressed(){
@@ -110,13 +102,13 @@ public class CustomerPasswordActivity extends AppCompatActivity {
 
     }
 
-    private boolean attemptChangePassword(){
+    private void attemptChangePassword(){
         final String oldPass = oldPassword.getText().toString();
         final String newpass = newPassword.getText().toString();
         String confirmpass =confirmPassword.getText().toString();
-        ;
+
         if (checkValue(oldPass,newpass,confirmpass)){
-            return cancel;
+            return ;
         }
         String employeeIdString = String.valueOf( SessionInfo.instance().getEmployee().getEmployeeId());
         final Call<ProdcastDTO> prodcastDTOCall = new ProdcastDClient().getClient().changePassword(employeeIdString,oldPass, newpass);
@@ -128,21 +120,25 @@ public class CustomerPasswordActivity extends AppCompatActivity {
                     if(dto.isError()) {
                         //TODO Show the ERror Message
 
-                        Toast.makeText(context, "Error in changing the password", Toast.LENGTH_LONG).show();
+                        Toast.makeText(CustomerPasswordActivity.this
+                                , "Error in changing the password", Toast.LENGTH_LONG).show();
                     }
                     else{
                      //TODO Show Confirmation MEssage - and clear all the textboxes.
-                        Toast.makeText(context, "Password Changed Successfully", Toast.LENGTH_LONG).show();
+                        Toast.makeText(CustomerPasswordActivity.this, "Password Changed Successfully", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(CustomerPasswordActivity.this,home.class);
+                        startActivity(intent);
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ProdcastDTO> call, Throwable t) {
-
+                    //TODO : Technical Error. Please try again.
+                Toast.makeText(CustomerPasswordActivity.this,"Technical Error. Please try again.",Toast.LENGTH_LONG).show();
             }
         });
-        return cancel;
+
 
     }
 }

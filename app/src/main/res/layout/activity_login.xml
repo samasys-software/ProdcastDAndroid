@@ -32,24 +32,22 @@
     <RelativeLayout
         android:id="@+id/mainlog"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_height="150dp"
+        android:background="@drawable/yellow_background"
         android:layout_below="@+id/rlprodimg"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/yellow_background">
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp">
 
         <RelativeLayout
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/form_bg">
+            android:background="@drawable/form_bg"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="23dp">
 
             <ImageButton
                 android:id="@+id/imageButton1"
@@ -67,9 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="50dp"
@@ -79,29 +75,30 @@
                 android:inputType="textEmailAddress"
                 android:paddingLeft="15dp"
                 android:textAllCaps="false"
-                android:textColor="#a4a4a3" />
+                android:textColor="#a4a4a3"
+                android:layout_alignParentEnd="true" />
 
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/password"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_height="40dp"
+
+            android:layout_marginRight="30dp"
+            android:background="@drawable/form_bg"
             android:layout_below="@+id/username"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/form_bg">
+            android:layout_alignStart="@+id/username"
+            android:layout_marginTop="20dp">
 
             <ImageButton
                 android:id="@+id/imageButton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="18dp"
                 android:background="@drawable/password_icon" />
 
             <EditText
@@ -121,8 +118,7 @@
                 android:inputType="textPassword"
                 android:paddingLeft="15dp"
                 android:textAllCaps="true"
-                android:textColor="#a4a4a3"
-                />
+                android:textColor="#a4a4a3" />
 
         </RelativeLayout>
     </RelativeLayout>
@@ -178,27 +174,26 @@
             android:id="@+id/register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
-            android:layout_marginStart="30dp"
             android:text="Register"
             android:textColor="#345904"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:layout_alignBaseline="@+id/forgotPin"
+            android:layout_alignBottom="@+id/forgotPin"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="46dp" />
 
         <TextView
             android:id="@+id/forgotPin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="37dp"
             android:layout_marginRight="30dp"
             android:text="Forgot Pin?"
             android:textColor="#345904"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
 

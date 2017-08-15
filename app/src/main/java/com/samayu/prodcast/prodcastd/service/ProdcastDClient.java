@@ -25,11 +25,14 @@ public class ProdcastDClient {
        httpClientBuilder.interceptors().add(new Interceptor() {
            @Override
            public Response intercept(Chain chain) throws IOException {
+
                Request request = chain.request();
-               Response response = chain.proceed( request );
+               Response response = chain.proceed(request);
                String body = response.body().string();
 
-               return response.newBuilder().body(ResponseBody.create(response.body().contentType(), body )).build();
+               return response.newBuilder().body(ResponseBody.create(response.body().contentType(), body)).build();
+
+
            }
        });
        Gson gson = new GsonBuilder()

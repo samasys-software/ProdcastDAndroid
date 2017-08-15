@@ -121,7 +121,8 @@
                 android:inputType="textPassword"
                 android:paddingLeft="15dp"
                 android:textAllCaps="true"
-                android:textColor="#a4a4a3" />
+                android:textColor="#a4a4a3"
+                />
 
         </RelativeLayout>
     </RelativeLayout>

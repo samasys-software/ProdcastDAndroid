@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.LoginDTO;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 
@@ -50,10 +52,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String username = userName.getText().toString();
                 String pass = password.getText().toString();
 
@@ -62,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
 
-
+                signInButton.setEnabled(false);
 
 
                 Call<LoginDTO> loginDTOCall = new ProdcastDClient().getClient().authenticate( userName.getText().toString() , password.getText().toString() );
@@ -75,15 +77,13 @@ public class LoginActivity extends AppCompatActivity {
                             LoginDTO loginDTO = response.body();
                             if( !loginDTO.isError()){
                                 //TODO Now go to DashBoard.
-
-                                Bundle bundle = new Bundle();
-                                bundle.putString("employeeId",String.valueOf( loginDTO.getEmployee().getEmployeeId()));
-                                Intent i = new Intent(LoginActivity.this,Home.class);
-                                i.putExtras(bundle);
-                                startActivity(i,bundle);
-
-
-
+                                Intent intent =new Intent(LoginActivity.this,Home.class);
+                                SessionInfo.instance().setEmployee( loginDTO.getEmployee());
+                                Bundle bundle =  new Bundle();
+                                bundle.putString("employeeId",String.valueOf(loginDTO.getEmployee().getEmployeeId()));
+                                intent.putExtras(bundle);
+                                startActivity(intent,bundle);
+                                signInButton.setEnabled(true);
                                 //new ProdcastDClient().getClient().getCustomers(""+employeeId)
 
 
@@ -108,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                         //DoValidation here.
                         //TODO Error - Message-  Technical Problem. Pls try again.
                         t.printStackTrace();
+                        signInButton.setEnabled(true);
                     }
                 });
 
@@ -121,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(pass)){
             password.setError("Please enter some value");
             focusView = password;
+            password.setText("");
             cancel = true;
 
         }

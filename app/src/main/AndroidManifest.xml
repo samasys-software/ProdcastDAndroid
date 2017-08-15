@@ -14,9 +14,9 @@
         android:roundIcon="@drawable/p_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Home" />
+        <activity android:name=".customer_activity" />
 
-        <activity android:name=".Home"></activity>
-        <activity android:name=".customer_activity"></activity>
         <activity android:name=".LoginActivity">
 
         </activity>
@@ -29,9 +29,10 @@
             </intent-filter>
 
         </activity>
+        <activity android:name=".CustomerPasswordActivity">
 
-       <!-- <activity android:name=".CustomerPasswordActivity"></activity>-->
-
+        </activity>
+        <activity android:name=".OrderEntry"></activity>
     </application>
 
 </manifest>

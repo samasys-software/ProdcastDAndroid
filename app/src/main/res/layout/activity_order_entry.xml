@@ -20,8 +20,8 @@
 
         <TextView
             android:id="@+id/billNo"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:layout_weight="0.28"
             android:text="Bill No"
@@ -33,8 +33,8 @@
 
         <TextView
             android:id="@+id/billDate"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_width="125dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:layout_weight="0.07"
             android:text="Bill Date"
@@ -46,8 +46,8 @@
 
         <TextView
             android:id="@+id/total"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_width="125dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:layout_weight="0.49"
             android:text="Total"
@@ -62,10 +62,25 @@
 
     <ListView
         android:id="@+id/billsView"
-        android:layout_width="match_parent"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_alignStart="@+id/linearmain"
         android:layout_below="@+id/linearmain" />
+
+    <ListView
+        android:id="@+id/billsDate"
+        android:layout_width="125dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/linearmain"
+        android:layout_toEndOf="@+id/billsView" />
+
+    <ListView
+        android:id="@+id/billsTotal"
+        android:layout_width="125dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linearmain"
+        android:layout_toEndOf="@+id/billsDate" />
 
     <AutoCompleteTextView
         android:id="@+id/acTextViev"

@@ -25,7 +25,7 @@ import retrofit2.Response;
 
 public class OrderEntry extends AppCompatActivity {
     private String employeeId;
-    private ListView billsView;
+    private ListView billsView,billDate,billTotal;
     private AutoCompleteTextView customerNames;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,8 @@ public class OrderEntry extends AppCompatActivity {
         employeeId=getIntent().getExtras().getString("employeeId");
         setContentView(R.layout.activity_order_entry);
         billsView = (ListView)findViewById(R.id.billsView);
+        
+
         customerNames = (AutoCompleteTextView)findViewById(R.id.acTextViev);
         customerNames.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

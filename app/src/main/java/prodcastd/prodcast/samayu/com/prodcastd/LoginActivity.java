@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView forgotPin,register;
 
     View focusView = null;
-    Context context;
+
 
 
     EditText password = null;
@@ -48,19 +48,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        signInButton = (Button)findViewById(R.id.logIn);
-        clearButton = (Button)findViewById(R.id.logClear);
-        forgotPin = (TextView)findViewById(R.id.forgotPin);
-        register =(TextView)findViewById(R.id.register);
-
-
-        clearButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                userName.setText("");
-                password.setText("");
-            }
-        });
 
 
 
@@ -88,21 +75,31 @@ public class LoginActivity extends AppCompatActivity {
                             LoginDTO loginDTO = response.body();
                             if( !loginDTO.isError()){
                                 //TODO Now go to DashBoard.
+
                                 Bundle bundle = new Bundle();
                                 bundle.putString("employeeId",String.valueOf( loginDTO.getEmployee().getEmployeeId()));
                                 Intent i = new Intent(LoginActivity.this,Home.class);
                                 i.putExtras(bundle);
                                 startActivity(i,bundle);
+
+
+
+                                //new ProdcastDClient().getClient().getCustomers(""+employeeId)
+
+
+
+
                                 //Pass in a Bundle to Dashboard loginDTO.getEmployee().getEmployeeId()
                             }
                             else {
                                 //TODO Show error message TextBox that user is invalid
+                                userName.setError("User is invalid");
                             }
                         }
                         else{
                             //Do Validation code here.
                             //TODO Error - Message-  Technical Problem. Pls try again.
-
+                            signInButton.setError("Sorry for the technical problem. Please try again");
                         }
                     }
 
@@ -141,5 +138,5 @@ public class LoginActivity extends AppCompatActivity {
         return  password.length()>=5;
     }
 
-    
+
 }

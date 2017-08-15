@@ -25,19 +25,36 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
     <EditText
-        android:id="@+id/ed"
+        android:id="@+id/customerId1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
         android:padding="5dp"
         android:hint="Customer Id1"
-        android:autofillHints="Customer Id1"
+
         android:inputType="textPersonName"
         android:layout_marginTop="5dp"
         android:background="@drawable/border_textbox"
         />
 </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+        <EditText
+            android:id="@+id/customerId2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:padding="5dp"
+            android:hint="Customer Id2"
+
+            android:inputType="textPersonName"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/border_textbox"
+            />
+    </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
@@ -55,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/customerDesc1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -68,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/customerDesc2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -86,33 +103,52 @@
         android:autofillHints="SELECTDAY" />
 
     <Spinner
-        android:id="@+id/spinner3"
+        android:id="@+id/area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.16"
-        android:autofillHints="Se" />
+        android:autofillHints="AREA" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/selectCustomerType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.12" />
+        android:layout_weight="0.12"
+        android:autofillHints="SELECT CUSTOMER TYPE"/>
 
     <Spinner
         android:id="@+id/storetype"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="STORE TYPE"/>
-<android.support.design.widget.NavigationView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</android.support.design.widget.NavigationView>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/log_in_button"
+        android:hint="RESET"
+        android:textColor="#fff" />
+
+    <Button
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/log_in_button"
+        android:hint="NEXT"
+        android:textColor="#fff" />
+
+
+    </RelativeLayout>
 
 
     <android.support.design.widget.TextInputLayout
@@ -129,9 +165,43 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:text="UNIT NUMBER" />
-
-
     </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:paddingLeft="5dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingRight="5dp">
+
+        <EditText
+            android:id="@+id/billingAddress1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="BILLING ADDRESS1"/>
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:paddingLeft="5dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingRight="5dp">
+
+        <EditText
+            android:id="@+id/billingAddress2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="BILLING ADDRESS2"/>
+    </android.support.design.widget.TextInputLayout>
+
+
+
 
         <android.support.design.widget.TextInputLayout
         android:paddingLeft="5dp"
@@ -147,6 +217,21 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="BILLING ADDRESS3"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:paddingLeft="5dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingRight="5dp">
+
+        <EditText
+            android:id="@+id/city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="CITY"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -177,18 +262,42 @@
         android:paddingRight="5dp">
 
         <EditText
-            android:id="@+id/pinCode"
+            android:id="@+id/postalCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="PINCODE"/>
+            android:hint="POSTALCODE"/>
     </android.support.design.widget.TextInputLayout>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/reset1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/log_in_button"
+            android:hint="RESET"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/next1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/log_in_button"
+            android:hint="SAVE"
+            android:textColor="#fff" />
+
+
+    </RelativeLayout>
 
         <android.support.design.widget.TextInputLayout
             android:paddingLeft="5dp"
@@ -292,71 +401,42 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="ACTIVE" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <Button
+                android:id="@+id/reset2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="5dp"
+                android:background="@drawable/log_in_button"
+                android:hint="RESET"
+                android:textColor="#fff" />
+
+            <Button
+                android:id="@+id/save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/log_in_button"
+                android:hint="SAVE"
+                android:textColor="#fff" />
+
+
+        </RelativeLayout>
     </LinearLayout>
 
-</LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/sNo"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-
-            android:text="S NO"
-            android:textAllCaps="true"
-            android:textColor="#629a1e"
-            android:background="@drawable/border_textbox"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            />
 
 
-        <TextView
-            android:text="COMPANY NAME"
-
-            android:textAllCaps="true"
-            android:layout_width="75dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border_textbox"
-            android:id="@+id/cName"
-            android:textColor="#629a1e"
-            android:textSize="16sp"
-            android:textStyle="bold"
 
 
-            />
-        <TextView
-            android:text="FIRST NAME"
-            android:textAllCaps="true"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:id="@+id/fName"
-            android:textColor="#629a1e"
-            android:background="@drawable/border_textbox"
-            android:textSize="16sp"
-            android:textStyle="bold"
 
 
-            />
-        <TextView
-            android:text="LAST NAME"
-            android:textAllCaps="true"
-            android:layout_width="75dp"
-            android:layout_height="match_parent"
-            android:id="@+id/lName"
-            android:textColor="#629a1e"
-            android:background="@drawable/border_textbox"
-            android:textSize="16sp"
-            android:textStyle="bold"
-
-            />
-    </LinearLayout>
-
-</LinearLayout>
 
 
 

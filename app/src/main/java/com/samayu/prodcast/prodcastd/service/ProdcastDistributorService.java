@@ -1,8 +1,14 @@
 package com.samayu.prodcast.prodcastd.service;
 
+import com.samayu.prodcast.prodcastd.dto.AdminDTO;
+import com.samayu.prodcast.prodcastd.dto.AreaDTO;
+import com.samayu.prodcast.prodcastd.dto.CountryDTO;
 import com.samayu.prodcast.prodcastd.dto.CustomerListDTO;
 import com.samayu.prodcast.prodcastd.dto.LoginDTO;
 import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
+import com.samayu.prodcast.prodcastd.dto.StoreType;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -10,6 +16,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by sarathan732 on 8/10/2017.
@@ -21,10 +28,19 @@ public interface ProdcastDistributorService {
     public Call<LoginDTO> authenticate(@Field("userid") String userId , @Field("password") String password);
 
     @GET("prodcast/global/customers")
-    public Call<CustomerListDTO> getCustomers(@Path("employeeId") String employeeId );
+    public Call<CustomerListDTO> getCustomers(@Query("employeeId") String employeeId );
 
     @POST("prodcast/global/changePassword")
     public Call<ProdcastDTO> changePassword(@Field("employeeId") String employeeId , @Field("oldPassword") String oldPassword, @Field("newPassword") String newPassword);
+
+    @GET("prodcast/global/getStoreType")
+    public Call<AdminDTO<List<StoreType>>> getStoreTypes();
+
+    @GET("prodcast/global/getCountries")
+    public Call<CountryDTO> getCountries();
+
+    @GET("prodcast/global/areas")
+    public Call<AreaDTO> getAreasForEmployee(@Query("employeeId") long employeeId);
 
     @POST("prodcast/global/saveCustomer")
     public Call<ProdcastDTO> saveCustomer(@Field("employeeId") String employeeId,

@@ -1,8 +1,14 @@
 package com.samayu.prodcast.prodcastd.service;
 
+import com.samayu.prodcast.prodcastd.dto.AdminDTO;
+import com.samayu.prodcast.prodcastd.dto.AreaDTO;
+import com.samayu.prodcast.prodcastd.dto.CountryDTO;
 import com.samayu.prodcast.prodcastd.dto.CustomerListDTO;
 import com.samayu.prodcast.prodcastd.dto.LoginDTO;
 import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
+import com.samayu.prodcast.prodcastd.dto.StoreType;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -27,6 +33,15 @@ public interface ProdcastDistributorService {
     @POST("prodcast/global/changePassword")
     @FormUrlEncoded
     public Call<ProdcastDTO> changePassword(@Field("employeeId") String employeeId , @Field("oldPassword") String oldPassword, @Field("newPassword") String newPassword);
+
+    @GET("prodcast/global/getStoreType")
+    public Call<AdminDTO<List<StoreType>>> getStoreTypes();
+
+    @GET("prodcast/global/getCountries")
+    public Call<CountryDTO> getCountries();
+
+    @GET("prodcast/global/areas")
+    public Call<AreaDTO> getAreasForEmployee(@Query("employeeId") long employeeId);
 
     @POST("prodcast/global/saveCustomer")
     @FormUrlEncoded

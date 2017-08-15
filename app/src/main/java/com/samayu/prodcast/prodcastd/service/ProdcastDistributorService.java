@@ -3,6 +3,7 @@ package com.samayu.prodcast.prodcastd.service;
 import com.samayu.prodcast.prodcastd.dto.AdminDTO;
 import com.samayu.prodcast.prodcastd.dto.AreaDTO;
 import com.samayu.prodcast.prodcastd.dto.CountryDTO;
+import com.samayu.prodcast.prodcastd.dto.CustomerDTO;
 import com.samayu.prodcast.prodcastd.dto.CustomerListDTO;
 import com.samayu.prodcast.prodcastd.dto.LoginDTO;
 import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
@@ -31,6 +32,7 @@ public interface ProdcastDistributorService {
     public Call<CustomerListDTO> getCustomers(@Query("employeeId") String employeeId );
 
     @POST("prodcast/global/changePassword")
+    @FormUrlEncoded
     public Call<ProdcastDTO> changePassword(@Field("employeeId") String employeeId , @Field("oldPassword") String oldPassword, @Field("newPassword") String newPassword);
 
     @GET("prodcast/global/getStoreType")
@@ -42,7 +44,12 @@ public interface ProdcastDistributorService {
     @GET("prodcast/global/areas")
     public Call<AreaDTO> getAreasForEmployee(@Query("employeeId") long employeeId);
 
+    @POST("prodcast/global/collection")
+    @FormUrlEncoded
+    public Call<CustomerDTO> makePayment(@Field("employeeId")long employeeId, @Field("billId")long billId, @Field("amount") double amount, @Field("customerId") long customerId, @Field("refNo") String checkNumber, @Field("refDetail") String checkComments);
+
     @POST("prodcast/global/saveCustomer")
+    @FormUrlEncoded
     public Call<ProdcastDTO> saveCustomer(@Field("employeeId") String employeeId,
                                           @Field("customerName") String customerName,
                                           @Field("customerType") String customerType ,

@@ -1,6 +1,5 @@
 package prodcastd.prodcast.samayu.com.prodcastd;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -88,7 +87,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-
                                 //Pass in a Bundle to Dashboard loginDTO.getEmployee().getEmployeeId()
                             }
                             else {
@@ -107,7 +105,6 @@ public class LoginActivity extends AppCompatActivity {
                     public void onFailure(Call<LoginDTO> call, Throwable t) {
                         //DoValidation here.
                         //TODO Error - Message-  Technical Problem. Pls try again.
-                        t.printStackTrace();
                         signInButton.setEnabled(true);
                     }
                 });

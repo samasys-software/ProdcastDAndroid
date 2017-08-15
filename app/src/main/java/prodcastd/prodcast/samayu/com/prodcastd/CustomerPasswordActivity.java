@@ -44,7 +44,7 @@ public class CustomerPasswordActivity extends AppCompatActivity {
 
 
                 if(attemptChangePassword()){
-                    Intent intent=new Intent(CustomerPasswordActivity.this,home.class);
+                    Intent intent=new Intent(CustomerPasswordActivity.this,Home.class);
                     startActivity(intent);
                 };
 

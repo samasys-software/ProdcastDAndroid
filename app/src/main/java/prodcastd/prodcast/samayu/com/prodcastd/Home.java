@@ -6,40 +6,36 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+public class Home extends AppCompatActivity {
+private ImageView customers ;
+    Bundle homebundle = null;
+    private ImageView conPassword;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        homebundle = getIntent().getExtras();
+        setContentView(R.layout.activity_home);
+        customers = (ImageView) findViewById(R.id.Customers);
+        conPassword =(ImageView)findViewById(R.id.ChangePassword);
 
-
-
-        public class Home extends AppCompatActivity {
-            private ImageView customers;
-            Bundle homeBundle = null;
-
-            protected void onCreate(Bundle savedInstanceState) {
-                super.onCreate(savedInstanceState);
-                homeBundle = getIntent().getExtras();
-
-                setContentView(R.layout.activity_home);
-                customers = (ImageView) findViewById(R.id.Customers);
-
-
-                customers.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        Bundle bundle = new Bundle();
-                        bundle.putString("employeeId", homeBundle.getString("employeeId"));
-                        Intent i = new Intent(Home.this, customer_activity.class);
-                        i.putExtras(bundle);
-                        startActivity(i, bundle);
-
-
-                       // Bundle b = new Bundle();
-                        //b.putString("employeeId", homeBundle.getString("employeeId"));
-                        //Intent i = new Intent(home.this, customer_activity.class);
-                        //i.putExtras(b);
-                        //startActivity(i, b);
-
-                    }
-                });
-
+        customers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle b= new Bundle();
+                b.putString("employeeId",homebundle.getString("employeeId"));
+                Intent i = new Intent(Home.this,CustomersActivity.class);
+                i.putExtras(b);
+                startActivity(i,b);
             }
-        }
+        });
+        conPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Home.this,CustomerPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+    }
+}

@@ -12,10 +12,11 @@
         android:id="@+id/linearmain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:layout_below="@+id/tvOutstandingBill"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:id="@+id/billNo"
@@ -60,12 +61,34 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/listview"
+        android:id="@+id/billsView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignEnd="@+id/linearmain"
-        android:layout_alignStart="@+id/linearmain"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/linearmain" />
+
+    <AutoCompleteTextView
+        android:id="@+id/acTextViev"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Search Customers"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="40dp"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:id="@+id/tvOutstandingBill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="#629a1e"
+        android:textStyle="bold"
+
+        android:text="OUTSTANDING BILLS"
+        android:layout_alignTop="@+id/acTextViev"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="59dp" />
 
 
 </RelativeLayout>

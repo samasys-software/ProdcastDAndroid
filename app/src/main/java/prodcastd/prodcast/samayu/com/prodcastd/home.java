@@ -8,10 +8,13 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.samayu.prodcast.prodcastd.SessionInfo;
+
 public class home extends AppCompatActivity {
 private ImageView customers ;
     Bundle homebundle = null;
     private ImageView conPassword;
+    private ImageView orderList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +22,7 @@ private ImageView customers ;
         setContentView(R.layout.activity_home);
         customers = (ImageView) findViewById(R.id.Customers);
         conPassword =(ImageView)findViewById(R.id.ChangePassword);
+        orderList = (ImageView)findViewById(R.id.OrderIcon);
 
         customers.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +41,16 @@ private ImageView customers ;
                 startActivity(intent);
             }
         });
-
+        orderList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle b= new Bundle();
+                b.putString("employeeId",homebundle.getString("employeeId"));
+                Intent intent = new Intent(home.this,OrderEntry.class);
+                intent.putExtras(b);
+                startActivity(intent,b);
+            }
+        });
 
     }
 }

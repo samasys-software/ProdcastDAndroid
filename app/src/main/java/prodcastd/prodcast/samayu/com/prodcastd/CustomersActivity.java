@@ -3,6 +3,7 @@ package prodcastd.prodcast.samayu.com.prodcastd;
 
 
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -33,18 +34,14 @@ import retrofit2.Response;
 
 public class CustomersActivity extends AppCompatActivity {
     private String employeeId;
-
-
     private ListView cuslist;
-
     private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_activity);
-
-
+        
         employeeId = getIntent().getExtras().getString("employeeId");
 
         listView = (ListView) findViewById(R.id.customerListView);
@@ -70,8 +67,6 @@ public class CustomersActivity extends AppCompatActivity {
                     }
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(CustomersActivity.this, android.R.layout.simple_list_item_1, newList);
                     listView.setAdapter(adapter);
-
-
                 }
             }
 
@@ -81,8 +76,8 @@ public class CustomersActivity extends AppCompatActivity {
 
             }
         });
-
     }
 }
+
 
 

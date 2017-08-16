@@ -39,8 +39,7 @@ public class CustomerPasswordActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptChangePassword();
-
+                    attemptChangePassword();
             }
         });
         reset.setOnClickListener(new View.OnClickListener() {

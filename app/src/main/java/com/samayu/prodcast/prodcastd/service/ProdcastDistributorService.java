@@ -44,6 +44,7 @@ public interface ProdcastDistributorService {
     @GET("prodcast/global/areas")
     public Call<AreaDTO> getAreasForEmployee(@Query("employeeId") long employeeId);
 
+
     @POST("prodcast/global/collection")
     @FormUrlEncoded
     public Call<CustomerDTO> makePayment(@Field("employeeId")long employeeId, @Field("billId")long billId, @Field("amount") double amount, @Field("customerId") long customerId, @Field("refNo") String checkNumber, @Field("refDetail") String checkComments);

@@ -30,7 +30,7 @@ import retrofit2.Response;
 
 
 
-public class customer_activity extends AppCompatActivity {
+public class CustomersActivity extends AppCompatActivity {
     private String employeeId;
     private ListView cuslist;
     private ListView listView;
@@ -52,7 +52,7 @@ public class customer_activity extends AppCompatActivity {
                         Customer customer = customerList.get(i);
                         newList[i] = customer.getCustomerName();
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(customer_activity.this, android.R.layout.simple_list_item_1, newList);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(CustomersActivity.this, android.R.layout.simple_list_item_1, newList);
                     listView.setAdapter(adapter);
                 }
             }

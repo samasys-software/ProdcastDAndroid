@@ -295,7 +295,7 @@ public class CustomerActivity extends AppCompatActivity {
         if (checkValid(cpyName, cusId1, cusId2,selectedDay,cusDesc1,cusDesc2,aea,selectCusType,streType unitNum,billAdd1,billAdd2,billAdd3,stat,cty,contry,pincode,lstName,fstName,phneNumber,mobNumber,emailAdd,)){
             return cancel;
         }
-        Call<ProdcastDTO> prodcastDTOCall = new ProdcastDClient().getClient().saveCustomer(cpyName, cusId1, cusId2,cusDesc1,cusDesc2, unitNum,billAdd1,billAdd2,billAdd3,stat,cty,pincode,lstName,fstName,phneNumber,mobNumber,emailAdd);
+        /*Call<ProdcastDTO> prodcastDTOCall = new ProdcastDClient().getClient().saveCustomer(cpyName, cusId1, cusId2,cusDesc1,cusDesc2, unitNum,billAdd1,billAdd2,billAdd3,stat,cty,pincode,lstName,fstName,phneNumber,mobNumber,emailAdd);
         prodcastDTOCall.enqueue(new Callback<ProdcastDTO>() {
             @Override
             public void onResponse(Call<ProdcastDTO> call, Response<ProdcastDTO> response) {
@@ -317,7 +317,7 @@ public class CustomerActivity extends AppCompatActivity {
             public void onFailure(Call<ProdcastDTO> call, Throwable t) {
 
             }
-        });
+        });*/
         return cancel;
 
 

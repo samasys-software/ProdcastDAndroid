@@ -26,11 +26,14 @@ public interface ProdcastDistributorService {
     @POST("prodcast/global/loginp")
     @FormUrlEncoded
     public Call<LoginDTO> authenticate(@Field("userid") String userId , @Field("password") String password);
+
     @GET("prodcast/global/customers")
     public Call<CustomerListDTO> getCustomers(@Query ("employeeId") long employeeId );
+
     @POST("prodcast/global/changePassword")
     @FormUrlEncoded
     public Call<ProdcastDTO> changePassword(@Field("employeeId") String employeeId , @Field("oldPassword") String oldPassword, @Field("newPassword") String newPassword);
+
     @GET("prodcast/global/getStoreType")
     public Call<AdminDTO<List<StoreType>>> getStoreTypes();
 
@@ -39,6 +42,7 @@ public interface ProdcastDistributorService {
 
     @GET("prodcast/global/areas")
     public Call<AreaDTO> getAreasForEmployee(@Query("employeeId") long employeeId);
+
     @POST("prodcast/global/saveCustomer")
     @FormUrlEncoded
     public Call<ProdcastDTO> saveCustomer(@Field("employeeId") String employeeId,

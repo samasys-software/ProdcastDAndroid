@@ -3,6 +3,8 @@ package prodcastd.prodcast.samayu.com.prodcastd;
 
 
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -29,7 +31,7 @@ import retrofit2.Response;
 
 
 
-public class customer_activity extends AppCompatActivity {
+public class CustomersActivity extends AppCompatActivity {
     private String employeeId;
 
 
@@ -45,9 +47,15 @@ public class customer_activity extends AppCompatActivity {
 
         employeeId = getIntent().getExtras().getString("employeeId");
 
-        listView =(ListView)findViewById(R.id.customerListView);
-        EditText empTextBox = (EditText)findViewById(R.id.employeeId);
-        empTextBox.setText(employeeId);
+        listView = (ListView) findViewById(R.id.customerListView);
+
+        findViewById(R.id.newCustomerButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CustomersActivity.this , CustomerActivity.class);
+                startActivity(intent );
+            }
+        });
         Call<CustomerListDTO> customerListDTOCall = new ProdcastDClient().getClient().getCustomers(SessionInfo.instance().getEmployee().getEmployeeId());
         customerListDTOCall.enqueue(new Callback<CustomerListDTO>() {
             @Override
@@ -60,28 +68,21 @@ public class customer_activity extends AppCompatActivity {
                         Customer customer = customerList.get(i);
                         newList[i] = customer.getCustomerName();
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(customer_activity.this, android.R.layout.simple_list_item_1, newList);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(CustomersActivity.this, android.R.layout.simple_list_item_1, newList);
                     listView.setAdapter(adapter);
 
 
-                    
+                }
+            }
 
+            @Override
+            public void onFailure(Call<CustomerListDTO> call, Throwable t) {
+                t.printStackTrace();
 
-                                }
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(customer_activity.this,
-                                        android.R.layout.simple_list_item_1, android.R.id.text1, newList);
-                                listView.setAdapter(adapter);
-                            }
+            }
+        });
 
-                        }
-
-                        @Override
-                        public void onFailure(Call<CustomerListDTO> call, Throwable t) {
-                            t.printStackTrace();
-
-                        }
-                    });
-
-
+    }
+}
 
 

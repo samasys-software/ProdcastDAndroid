@@ -126,7 +126,7 @@ public class CustomerPasswordActivity extends AppCompatActivity {
                     else{
                      //TODO Show Confirmation MEssage - and clear all the textboxes.
                         Toast.makeText(CustomerPasswordActivity.this, "Password Changed Successfully", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(CustomerPasswordActivity.this,home.class);
+                        Intent intent = new Intent(CustomerPasswordActivity.this,Home.class);
                         startActivity(intent);
                     }
                 }

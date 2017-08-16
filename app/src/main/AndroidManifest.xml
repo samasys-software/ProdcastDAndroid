@@ -11,21 +11,23 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Home" />
         <activity android:name=".customer_activity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".CustomerActivity" />
-        <activity android:name=".CustomerPasswordActivity" />
-        <activity android:name=".OrderEntry" />
-        <activity android:name=".OutstandingbillsPayment" />
-        <activity android:name=".Payment">
+        <activity android:name=".LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity android:name=".CustomerActivity" />
+        <activity android:name=".CustomerPasswordActivity" />
+        <activity android:name=".OrderEntry" />
+        <activity android:name=".OutstandingbillsPayment" />
+        <activity android:name=".Payment">
         </activity>
         <activity android:name=".CheckNumber" />
         <activity android:name=".CreditCardDetails" />
-        <activity android:name=".Dummy"></activity>
+
     </application>
 
 </manifest>

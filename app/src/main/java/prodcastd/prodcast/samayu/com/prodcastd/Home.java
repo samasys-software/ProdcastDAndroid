@@ -27,7 +27,7 @@ import android.widget.ImageView;
 
                         Bundle bundle = new Bundle();
                         bundle.putString("employeeId", homeBundle.getString("employeeId"));
-                        Intent i = new Intent(Home.this, customer_activity.class);
+                        Intent i = new Intent(Home.this, CustomersActivity.class);
                         i.putExtras(bundle);
                         startActivity(i, bundle);
 

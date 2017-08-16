@@ -3,6 +3,8 @@ package prodcastd.prodcast.samayu.com.prodcastd;
 
 
 
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -34,12 +36,23 @@ public class CustomersActivity extends AppCompatActivity {
     private String employeeId;
     private ListView cuslist;
     private ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_activity);
+        
         employeeId = getIntent().getExtras().getString("employeeId");
+
         listView = (ListView) findViewById(R.id.customerListView);
+
+        findViewById(R.id.newCustomerButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CustomersActivity.this , CustomerActivity.class);
+                startActivity(intent );
+            }
+        });
         Call<CustomerListDTO> customerListDTOCall = new ProdcastDClient().getClient().getCustomers(SessionInfo.instance().getEmployee().getEmployeeId());
         customerListDTOCall.enqueue(new Callback<CustomerListDTO>() {
             @Override
@@ -65,7 +78,6 @@ public class CustomersActivity extends AppCompatActivity {
         });
     }
 }
-
 
 
 

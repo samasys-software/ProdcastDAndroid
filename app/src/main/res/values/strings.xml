@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Prodcast Distributors</string>
+    <string-array name="payment_method">
+        <item>Cash</item>
+        <item>Check</item>
+        <item>Credit Card</item>
+    </string-array>
 </resources>
+

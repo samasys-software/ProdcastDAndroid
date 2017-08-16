@@ -3,6 +3,7 @@ package prodcastd.prodcast.samayu.com.prodcastd;
 
 
 
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -31,23 +32,14 @@ import retrofit2.Response;
 
 public class customer_activity extends AppCompatActivity {
     private String employeeId;
-
-
     private ListView cuslist;
-
     private ListView listView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_activity);
-
-
         employeeId = getIntent().getExtras().getString("employeeId");
-
-        listView =(ListView)findViewById(R.id.customerListView);
-        EditText empTextBox = (EditText)findViewById(R.id.employeeId);
-        empTextBox.setText(employeeId);
+        listView = (ListView) findViewById(R.id.customerListView);
         Call<CustomerListDTO> customerListDTOCall = new ProdcastDClient().getClient().getCustomers(SessionInfo.instance().getEmployee().getEmployeeId());
         customerListDTOCall.enqueue(new Callback<CustomerListDTO>() {
             @Override
@@ -62,25 +54,17 @@ public class customer_activity extends AppCompatActivity {
                     }
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(customer_activity.this, android.R.layout.simple_list_item_1, newList);
                     listView.setAdapter(adapter);
+                }
+            }
 
+            @Override
+            public void onFailure(Call<CustomerListDTO> call, Throwable t) {
+                t.printStackTrace();
 
-                    
-
-
-                                }
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(customer_activity.this,
-                                        android.R.layout.simple_list_item_1, android.R.id.text1, newList);
-                                listView.setAdapter(adapter);
-                            }
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<CustomerListDTO> call, Throwable t) {
-                            t.printStackTrace();
-
-                        }
-                    });
+            }
+        });
+    }
+}
 
 
 

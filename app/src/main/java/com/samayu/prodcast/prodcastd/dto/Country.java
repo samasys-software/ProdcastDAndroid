@@ -1,5 +1,7 @@
 package com.samayu.prodcast.prodcastd.dto;
 
+import android.widget.ArrayAdapter;
+
 /**
  * Created by nandhini on 8/15/17.
  */
@@ -38,4 +40,10 @@ public class Country {
     public void setCurrencyName(String currencyName) {
         this.currencyName = currencyName;
     }
+    public String toString(){
+        return countryName;
+    }
+
+
+
 }

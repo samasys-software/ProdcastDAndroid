@@ -5,5 +5,22 @@
         <item>Check</item>
         <item>Credit Card</item>
     </string-array>
+    <string-array name="select_day">
+        <item>Select Day</item>
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+
+    <string-array name="select_customer_type">
+        <item>Select Customer Type</item>
+        <item>Retailer</item>
+        <item>Wholesaler</item>
+    </string-array>
+
 </resources>
 

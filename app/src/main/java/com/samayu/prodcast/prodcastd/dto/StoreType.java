@@ -35,5 +35,8 @@ public class StoreType
         this.active = active;
     }
 
+    public String toString(){
+        return storeTypeName;
+    }
 
 }

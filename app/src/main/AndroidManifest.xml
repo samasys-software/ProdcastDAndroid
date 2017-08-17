@@ -17,18 +17,18 @@
 
         <activity android:name=".LoginActivity">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".CustomerActivity">
-
 
         </activity>
-        <activity android:name=".CustomerActivity" />
+
+        <activity android:name=".CustomerActivity"><intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+
+
+        </activity>
+
         <activity android:name=".CustomerPasswordActivity" />
         <activity android:name=".OrderEntry" />
         <activity android:name=".OutstandingbillsPayment" />

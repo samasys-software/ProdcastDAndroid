@@ -21,17 +21,22 @@ public class ProdcastDClient {
 
    public ProdcastDistributorService getClient(){
 
+
        OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
        httpClientBuilder.interceptors().add(new Interceptor() {
            @Override
            public Response intercept(Chain chain) throws IOException {
-
+               try{
                Request request = chain.request();
                Response response = chain.proceed(request);
                String body = response.body().string();
 
                return response.newBuilder().body(ResponseBody.create(response.body().contentType(), body)).build();
-
+           }
+           catch(Exception er ){
+               er.printStackTrace();
+               return null;
+           }
 
            }
        });

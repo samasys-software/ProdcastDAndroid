@@ -24,6 +24,16 @@ public class SessionInfo {
         this.outStandingBills = outStandingBills;
     }
 
+    public List<Bill> getCustomerBills() {
+        return customerBills;
+    }
+
+    public void setCustomerBills(List<Bill> customerBills) {
+        this.customerBills = customerBills;
+    }
+
+    private List<Bill> customerBills;
+
     private List<Bill> outStandingBills;
 
     public List<Customer> getCustomerList() {

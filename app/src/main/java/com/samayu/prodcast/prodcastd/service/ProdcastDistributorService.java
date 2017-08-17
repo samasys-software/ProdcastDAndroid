@@ -1,6 +1,7 @@
 package com.samayu.prodcast.prodcastd.service;
 
 import com.samayu.prodcast.prodcastd.dto.AdminDTO;
+import com.samayu.prodcast.prodcastd.dto.Area;
 import com.samayu.prodcast.prodcastd.dto.AreaDTO;
 import com.samayu.prodcast.prodcastd.dto.CountryDTO;
 import com.samayu.prodcast.prodcastd.dto.CustomerDTO;
@@ -44,16 +45,18 @@ public interface ProdcastDistributorService {
     @GET("prodcast/global/areas")
     public Call<AreaDTO> getAreasForEmployee(@Query("employeeId") long employeeId);
 
+    @GET("prodcast/distributor/getAreas")
+    public Call<AdminDTO<List<Area>>> getAreasForDistributor(@Query("employeeId") long employeeId );
 
     @POST("prodcast/global/collection")
     @FormUrlEncoded
-    public Call<CustomerDTO> makePayment(@Field("employeeId")long employeeId, @Field("billId")long billId, @Field("amount") double amount, @Field("customerId") long customerId, @Field("refNo") String checkNumber, @Field("refDetail") String checkComments);
+    public Call<CustomerDTO> makePayment(@Field("paymentType") int paymentType, @Field("employeeId")long employeeId, @Field("billId")long billId, @Field("amount") double amount, @Field("customerId") long customerId, @Field("refNo") String checkNumber, @Field("refDetail") String checkComments);
 
     @POST("prodcast/global/saveCustomer")
     @FormUrlEncoded
     public Call<ProdcastDTO> saveCustomer(@Field("employeeId") String employeeId,
                                           @Field("customerName") String customerName,
-                                          @Field("customerType") String customerType ,
+                                          @Field("customerType") String customerType,
                                           @Field("areaId") String areaId,
                                           @Field("weekDay") String weekDay,
                                           @Field("firstName") String firstName,
@@ -67,15 +70,5 @@ public interface ProdcastDistributorService {
                                           @Field("billingAddress3") String billingAddress3,
                                           @Field("city") String city,
                                           @Field("state") String state,
-                                          @Field("country") String countryId,
-                                          @Field("smsAllowed") String smsAllowed,
-                                          @Field("postalCode") String postalCode,
-                                          @Field("notes") String notes ,
-                                          @Field("customerId1") String customerid1 ,
-                                          @Field("customerId2") String secondId ,
-                                          @Field("customerDesc1") String desc1 ,
-                                          @Field("customerDesc2") String desc2 ,
-                                          @Field("customerId") String customerId,
-                                          @Field("active") String active,
-                                          @Field("storeTypeId") String storeType);
+                                          @Field("country") String countryId, String nte, String smsAllow, boolean activ);
 }

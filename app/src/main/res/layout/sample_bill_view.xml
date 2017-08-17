@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/prodcastd.prodcast.samayu.com.prodcastd"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    android:layout_weight="1"
+    android:orientation="horizontal">
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="0.25"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/billNumber"
+        android:textSize="16sp"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="0.25"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:id="@+id/bDate"
+        android:textSize="16sp"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="0.25"
+        android:gravity="right"
+        android:layout_height="wrap_content"
+        android:id="@+id/bTotalAmount"
+        android:textSize="16sp"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="0.25"
+        android:gravity="right"
+        android:layout_height="wrap_content"
+        android:id="@+id/bOutstandingAmount"
+        android:textSize="16sp"/>
+
+</LinearLayout>

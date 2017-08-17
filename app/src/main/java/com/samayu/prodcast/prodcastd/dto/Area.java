@@ -24,5 +24,8 @@ public class Area {
     }
 
     private String description;
+    public String toString(){
+        return description;
+    }
 
 }

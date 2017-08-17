@@ -2,6 +2,7 @@ package prodcastd.prodcast.samayu.com.prodcastd;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaCodec;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.LoginDTO;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,13 +62,19 @@ public class LoginActivity extends AppCompatActivity {
 
                 String username = userName.getText().toString();
                 String pass = password.getText().toString();
+                String email = userName.getText().toString();
+                if (!validateEmail(email)){
+                    userName.setError("Enter valid email ID");
+                    focusView = userName;
+                    return;
+                }
 
                 if (checkValid(username,pass)){
                     return ;
 
                 }
 
-                signInButton.setEnabled(false);
+
 
 
                 Call<LoginDTO> loginDTOCall = new ProdcastDClient().getClient().authenticate( userName.getText().toString() , password.getText().toString() );
@@ -115,10 +125,19 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+    private static final String EMAIL_PATTERN = "^[a-zA-Z0-9#_~!$&'()*+,;=:.\"(),:;<>@\\[\\]\\\\]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$";
+    private Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+    private Matcher matcher;
+
+    public boolean validateEmail(String email) {
+        matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
     public boolean checkValid(String username,String pass){
         boolean cancel = false;
         userName.setError(null);
         password.setError(null);
+
         if(TextUtils.isEmpty(pass)){
             password.setError("Please enter some value");
             focusView = password;
@@ -126,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
             cancel = true;
 
         }
-        else if (!isPasswordValid(pass)){
+        if (!isPasswordValid(pass)){
             password.setError("Minimun is 5 char");
         }
         if (TextUtils.isEmpty(username)){

@@ -122,7 +122,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="STORE TYPE"/>
-    <!-- <RelativeLayout
+     <RelativeLayout
          android:layout_width="match_parent"
          android:layout_height="wrap_content">
 
@@ -149,7 +149,7 @@
          android:textColor="#fff" />
 
 
-     </RelativeLayout> -->
+     </RelativeLayout>
 
 
     <android.support.design.widget.TextInputLayout
@@ -271,7 +271,7 @@
             android:inputType="textPersonName"
             android:hint="POSTALCODE"/>
     </android.support.design.widget.TextInputLayout>
-    <!-- <RelativeLayout
+     <RelativeLayout
          android:layout_width="match_parent"
          android:layout_height="wrap_content">
 
@@ -298,9 +298,9 @@
              android:textColor="#fff" />
 
 
-     </RelativeLayout> -->
+     </RelativeLayout>
 
-    <android.support.design.widget.TextInputLayout
+   <android.support.design.widget.TextInputLayout
         android:paddingLeft="5dp"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -407,7 +407,7 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/reset"
+            android:id="@+id/aareset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 

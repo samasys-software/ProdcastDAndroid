@@ -57,7 +57,7 @@ public interface ProdcastDistributorService {
     public Call<ProdcastDTO> saveCustomer(@Field("employeeId") String employeeId,
                                           @Field("customerName") String customerName,
                                           @Field("customerType") String customerType,
-                                          @Field("areaId") String areaId,
+                                          @Field("areaId") Long areaId,
                                           @Field("weekDay") String weekDay,
                                           @Field("firstName") String firstName,
                                           @Field("lastName") String lastName,

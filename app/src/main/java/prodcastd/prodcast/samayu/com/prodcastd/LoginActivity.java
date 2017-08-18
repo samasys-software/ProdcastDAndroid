@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.LoginDTO;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
+import com.samayu.prodcast.prodcastd.util.EmailVerification;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -60,7 +61,10 @@ public class LoginActivity extends AppCompatActivity {
                 String username = userName.getText().toString();
                 String pass = password.getText().toString();
                 String email = userName.getText().toString();
-                
+               if (!EmailVerification.validateEmail(email)){
+                   userName.setText("Enetr Valid email Id");
+                   return;
+               }
 
                 if (checkValid(username,pass)){
                     return ;

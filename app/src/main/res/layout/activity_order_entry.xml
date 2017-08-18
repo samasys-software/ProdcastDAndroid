@@ -17,128 +17,137 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="40dp"
         android:textColor="#000000"/>
+
+    <LinearLayout
+        android:id="@+id/llnoOutstandingBills"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/noOutstandingBills"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="No Outstanding Bills Available"
+            android:textColor="#629a1e"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/llbills"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="170dp"
+        android:layout_marginTop="5dp"
         android:orientation="vertical"
         android:visibility="gone">
 
 
-    <TextView
-        android:id="@+id/tvOutstandingBill"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:textColor="#629a1e"
-        android:textStyle="bold"
-
-        android:text="OUTSTANDING BILLS"
-        android:layout_alignTop="@+id/acTextViev"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="59dp" />
-
-    <LinearLayout
-
-        android:id="@+id/linearmain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:weightSum="1"
-        android:layout_below="@+id/tvOutstandingBill"
-        android:layout_alignParentStart="true">
-
-
         <TextView
-            android:id="@+id/billNo"
-            android:layout_width="0dp"
+            android:id="@+id/tvOutstandingBill"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:layout_weight="0.25"
-            android:text="Bill No"
-            android:textAlignment="center"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/acTextViev"
+            android:layout_marginTop="0dp"
+            android:ems="10"
+            android:text="OUTSTANDING BILLS"
             android:textColor="#629a1e"
-            android:textSize="16sp"
             android:textStyle="bold" />
 
+        <LinearLayout
 
-        <TextView
-            android:id="@+id/billDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:layout_weight="0.25"
-            android:text="Bill Date"
-            android:textAlignment="center"
-            android:textColor="#629a1e"
-            android:textSize="16sp"
-
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/total"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.25"
-            android:gravity="right"
-            android:text="Total"
-            android:textAlignment="center"
-            android:textColor="#629a1e"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/bOutstandingAmount"
-            android:layout_width="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.25"
-            android:gravity="right"
-            android:textAlignment="center"
-            android:textColor="#629a1e"
-            android:text="O.Total"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
-
-
-
-    </LinearLayout>
-
-    <ListView
-        android:id="@+id/billsView"
-        android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:listSelector="@drawable/bill_bg"
-        android:layout_alignEnd="@+id/linearmain"
-        android:layout_alignStart="@+id/linearmain"
-        android:layout_below="@+id/linearmain" />
-        <Button
-            android:id="@+id/newOrder"
+            android:id="@+id/linearmain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/log_in_button"
-            android:elevation="18dp"
-            android:text="New Order"
-            android:textColor="#fff" />
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvOutstandingBill"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:weightSum="1">
+
+
+            <TextView
+                android:id="@+id/billNo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:text="Bill No"
+                android:textAlignment="center"
+                android:textColor="#629a1e"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/billDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:text="Bill Date"
+                android:textAlignment="center"
+                android:textColor="#629a1e"
+                android:textSize="16sp"
+
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.25"
+                android:gravity="right"
+                android:text="Total"
+                android:textAlignment="center"
+                android:textColor="#629a1e"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/bOutstandingAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.25"
+                android:gravity="right"
+                android:text="O.Total"
+                android:textAlignment="center"
+                android:textColor="#629a1e"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/billsView"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:layout_alignEnd="@+id/linearmain"
+            android:layout_alignStart="@+id/linearmain"
+            android:layout_below="@+id/linearmain"
+            android:listSelector="@drawable/bill_bg" />
 
 
     </LinearLayout>
 
 
     <LinearLayout
-        android:visibility="gone"
         android:id="@+id/llpayment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/billsView"
         android:layout_toEndOf="@+id/tvOutstandingBill"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/amounttv"
@@ -148,77 +157,88 @@
             android:text="Make Payment"
             android:textColor="#345904"
             android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
 
-                <EditText
-                    android:id="@+id/cash"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_below="@id/amounttv"
-                    android:layout_marginTop="0dp"
-                    android:background="@null"
-                    android:hint="Enter the Amount"
-                    android:ems="8"
-                    android:inputType="numberDecimal"
-                    android:textColor="#345904"
-                    android:textStyle="bold" />
+            <EditText
+                android:id="@+id/cash"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/amounttv"
+                android:layout_marginTop="0dp"
+                android:background="@null"
+                android:ems="8"
+                android:hint="Enter the Amount"
+                android:inputType="numberDecimal"
+                android:textColor="#345904"
+                android:textStyle="bold" />
 
-                <Spinner
-                    android:id="@+id/paymentType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_weight="1"
-                    android:hint="Cash"
-                    android:minHeight="40dp"
-                    android:scrollbarStyle="insideOverlay" />
+            <Spinner
+                android:id="@+id/paymentType"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:hint="Cash"
+                android:minHeight="40dp"
+                android:scrollbarStyle="insideOverlay" />
         </LinearLayout>
-        <LinearLayout android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/checkPanel">
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/checkNumber"
-            android:hint="Check Number"
-            android:inputType="number"
-            />
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/checkComments"
-            android:hint="Comments"/>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/checkPanel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <EditText
+                android:id="@+id/checkNumber"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="Check Number"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/checkComments"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="Comments" />
+
+        </LinearLayout>
 
 
         <LinearLayout
             android:id="@+id/llpay"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/pay"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/log_in_button"
                 android:elevation="18dp"
                 android:text="Pay"
                 android:textColor="#fff" />
 
 
-
         </LinearLayout>
     </LinearLayout>
 
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </LinearLayout>

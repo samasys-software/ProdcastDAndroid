@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_orderEntry"
+            android:icon="@drawable/ic_list_black_24dp"
+            android:title="Order Entry" />
+        <item
+            android:id="@+id/nav_customer"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:title="Customer" />
+        <item
+            android:id="@+id/nav_passwordReset"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Change Password" />
+
+    </group>
+
+</menu>

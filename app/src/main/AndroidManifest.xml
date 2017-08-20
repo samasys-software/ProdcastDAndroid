@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +13,7 @@
         android:roundIcon="@drawable/p_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Home" />
+        <activity android:name=".Home"></activity>
         <activity android:name=".CustomersActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -20,22 +21,39 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
-
-
-        <activity android:name=".CustomerActivity">
-
-        </activity>
-
+        <activity android:name=".CustomerActivity" />
         <activity android:name=".CustomerPasswordActivity" />
-        <activity android:name=".OrderEntry"></activity>
+        <activity android:name=".OrderEntry" />
         <activity android:name=".OutstandingbillsPayment" />
-        <activity android:name=".Payment"></activity>
+        <activity android:name=".Payment" />
         <activity android:name=".CheckNumber" />
         <activity android:name=".CreditCardDetails" />
-        <activity android:name=".NewOrder"></activity>
+        <activity android:name=".NewOrder" />
+        <activity
+            android:name=".ui.CustomerListActivity"
+            android:label="@string/title_customer_list"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.CustomerDetailActivity"
+            android:label="@string/title_customer_detail"
+            android:parentActivityName=".ui.CustomerListActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="prodcastd.prodcast.samayu.com.prodcastd.ui.CustomerListActivity" />
+        </activity>
+        <activity android:name=".MainMenu"></activity>
+        <activity
+            android:name=".ui.NavigationDrawerActivity"
+            android:label="@string/title_activity_navigation_drawer"
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".ProdcastBaseActivity"
+            android:label="@string/title_activity_prodcast_base"
+            android:theme="@style/AppTheme">
+
+        </activity>
     </application>
 
 </manifest>

@@ -14,13 +14,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
+import com.samayu.prodcast.prodcastd.dto.Employee;
 import com.samayu.prodcast.prodcastd.dto.LoginDTO;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 import com.samayu.prodcast.prodcastd.util.EmailVerification;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import prodcastd.prodcast.samayu.com.prodcastd.ui.NavigationDrawerActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,10 +38,22 @@ public class LoginActivity extends AppCompatActivity {
     TextView forgotPin,register;
     View focusView = null;
     EditText password = null;
+    public static final String FILE_NAME = "prodcastLogin.txt";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Employee ep =loginRetrive();
+        if (ep != null){
+            SessionInfo.instance().setEmployee(ep);
+            Intent intent =new Intent(LoginActivity.this,Home.class);
+            SessionInfo.instance().setEmployee( ep);
+            Bundle bundle =  new Bundle();
+            bundle.putString("employeeId",String.valueOf(ep.getEmployeeId()));
+            intent.putExtras(bundle);
+            startActivity(intent,bundle);
+        }
          userName = (EditText)findViewById(R.id.logmn);
         password = (EditText)findViewById(R.id.loginPinNumber);
         signInButton = (Button)findViewById(R.id.logIn);
@@ -51,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                 signInButton.setEnabled(true);
             }
         });
+
 
 
 
@@ -80,10 +99,11 @@ public class LoginActivity extends AppCompatActivity {
                                 //TODO Now go to DashBoard.
                                 Intent intent =new Intent(LoginActivity.this,Home.class);
                                 SessionInfo.instance().setEmployee( loginDTO.getEmployee());
+                                loginToFile(loginDTO.getEmployee());
                                 Bundle bundle =  new Bundle();
                                 bundle.putString("employeeId",String.valueOf(loginDTO.getEmployee().getEmployeeId()));
                                 intent.putExtras(bundle);
-                                startActivity(intent,bundle);
+                                startActivity(intent);
                                 signInButton.setEnabled(false);
                                 //new ProdcastDClient().getClient().getCustomers(""+employeeId)
                                 //Pass in a Bundle to Dashboard loginDTO.getEmployee().getEmployeeId()
@@ -141,6 +161,33 @@ public class LoginActivity extends AppCompatActivity {
     public boolean isPasswordValid(String pass){
         return  password.length()>=5;
     }
+     public void loginToFile(Employee employee) {
+         File file = new File(getFilesDir(), FILE_NAME);
 
+
+         FileOutputStream outputStream;
+
+         try {
+             outputStream = openFileOutput(FILE_NAME, LoginActivity.this.MODE_PRIVATE);
+             ObjectOutputStream oos = new ObjectOutputStream(outputStream);
+             oos.writeObject(employee);
+             outputStream.close();
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+
+     }
+ public Employee loginRetrive(){
+     try {
+        ObjectInputStream ois =new ObjectInputStream(openFileInput(FILE_NAME));
+         Employee r =(Employee)ois.readObject();
+         return r;
+     }
+     catch (Exception e){
+         e.printStackTrace();
+         return null;
+     }
+
+ }
 
 }

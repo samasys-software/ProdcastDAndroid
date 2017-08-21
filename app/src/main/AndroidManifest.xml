@@ -16,8 +16,22 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Home" />
         <activity android:name=".CustomersActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".CustomerActivity" />
+        <activity android:name=".LoginActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+
+        <activity android:name=".CustomerActivity">
+
+        </activity>
+
+
         <activity android:name=".CustomerPasswordActivity" />
         <activity android:name=".OrderEntry" />
         <activity android:name=".OutstandingbillsPayment" />
@@ -33,11 +47,6 @@
             android:name="com.samayu.prodcast.prodcastd.ui.CustomerCreateEditActivity"
             android:label="@string/title_activity_customer_create_edit"
             android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

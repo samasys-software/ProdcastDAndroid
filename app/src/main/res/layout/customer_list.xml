@@ -3,11 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/customer_list"
+<<<<<<< HEAD
     android:name="prodcastd.prodcast.samayu.com.prodcastd.ui.CustomerListFragment"
+=======
+    android:name="com.samayu.prodcast.prodcastd.ui.CustomerListFragment"
+>>>>>>> 8efaa0d34ce38df553f66b63efc15b54f60cee3a
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
+<<<<<<< HEAD
     tools:context="prodcastd.prodcast.samayu.com.prodcastd.ui.CustomerListActivity"
+=======
+    tools:context="com.samayu.prodcast.prodcastd.ui.CustomerListActivity"
+>>>>>>> 8efaa0d34ce38df553f66b63efc15b54f60cee3a
     tools:listitem="@layout/customer_list_content" />

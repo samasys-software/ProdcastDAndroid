@@ -20,11 +20,12 @@
     android:layout_width="match_parent">
 
 
-      <Button
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="New Customer"
-          android:id="@+id/newCustomerButton"/>
+       <Button
+           android:id="@+id/newCustomerButton"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@android:color/holo_green_dark"
+           android:text="New Customer" />
     <ListView
         android:id="@+id/customerListView"
         android:layout_width="131dp"

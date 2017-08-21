@@ -1,11 +1,12 @@
 package com.samayu.prodcast.prodcastd.dto;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
  * Created by sarathan732 on 8/10/2017.
  */
-public class Employee {
+public class Employee implements Serializable {
     private long employeeId;
     private String firstname;
     private String lastname;

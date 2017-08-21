@@ -8,8 +8,10 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
+import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -95,6 +97,8 @@ public class CustomerActivity extends AppCompatActivity {
         daysMap.put("Monday","MO");
         daysMap.put("Tuesday","TU");
         daysMap.put("Wednesday","WE");
+
+
         daysMap.put("Thursday","TH");
         daysMap.put("Friday", "FR");
         daysMap.put("Saturday","SA");
@@ -312,6 +316,33 @@ public class CustomerActivity extends AppCompatActivity {
                         }
                         {
 
+                            try {
+                                Looper.prepare();
+                                manager.requestSingleUpdate(LocationManager.GPS_PROVIDER, new LocationListener() {
+                                    @Override
+                                    public void onLocationChanged(Location location) {
+                                        System.out.println("Location Changed ");
+                                    }
+
+                                    @Override
+                                    public void onStatusChanged(String s, int i, Bundle bundle) {
+                                        System.out.println("Location Status Changed ");
+                                    }
+
+                                    @Override
+                                    public void onProviderEnabled(String s) {
+                                        System.out.println("Provider Enabled ");
+                                    }
+
+                                    @Override
+                                    public void onProviderDisabled(String s) {
+                                        System.out.println("Provider Disabled");
+                                    }
+                                }, null);
+                            }
+                            catch (Exception e){
+                                e.printStackTrace();
+                            }
                             Location currentLocation = manager.getLastKnownLocation(locationProvider);
                             if(currentLocation==null){
                                 return "No Permission Available";
@@ -401,8 +432,7 @@ public class CustomerActivity extends AppCompatActivity {
 
         unitNumber.setError("");
         billingAddress1.setError("");
-        billingAddress2.setError("");
-        billingAddress3.setError("");
+
         city.setError("");
         state.setError("");
 
@@ -544,7 +574,7 @@ public class CustomerActivity extends AppCompatActivity {
         String selectCusType = (String) selectCustomerType.getSelectedItem();
         int streType = storeType.getSelectedItemPosition();
 
-        String unitNum = unitNumber.getText().toString();
+            String unitNum = unitNumber.getText().toString();
         String billAdd1 = billingAddress1.getText().toString();
         String billAdd2 = billingAddress2.getText().toString();
         String billAdd3 = billingAddress3.getText().toString();

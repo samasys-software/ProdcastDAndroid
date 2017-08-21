@@ -1,0 +1,209 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="prodcastd.prodcast.samayu.com.prodcastd.CustomerAddressFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:paddingLeft="5dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:paddingRight="5dp"
+            android:layout_weight="4"
+            >
+
+
+            <EditText
+                android:id="@+id/unitNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Unit Number"
+                android:layout_marginLeft="5dp"
+                android:layout_marginEnd="120dp"
+
+                android:background="@drawable/border_textbox"/>
+
+
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/currentLocation"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:layout_alignParentBottom="true"
+
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:background="@android:drawable/ic_menu_mylocation"
+            android:ems="10"
+            android:textColor="@color/colorGreen"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:paddingLeft="5dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingRight="5dp">
+
+        <EditText
+            android:id="@+id/billingAddress1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Billing Address1"
+            android:background="@drawable/border_textbox"/>
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:paddingLeft="5dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingRight="5dp">
+
+        <EditText
+            android:id="@+id/billingAddress2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Billing Address2"
+            android:background="@drawable/border_textbox"/>
+    </android.support.design.widget.TextInputLayout>
+
+
+
+
+    <android.support.design.widget.TextInputLayout
+        android:paddingLeft="5dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingRight="5dp">
+
+        <EditText
+            android:id="@+id/billingAddress3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Billing Address3"
+            android:background="@drawable/border_textbox"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:paddingLeft="5dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingRight="5dp">
+
+        <EditText
+            android:id="@+id/city"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="City"
+            android:background="@drawable/border_textbox"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:paddingLeft="5dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingRight="5dp">
+
+        <EditText
+            android:id="@+id/state"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="State"
+            android:background="@drawable/border_textbox"/>
+    </android.support.design.widget.TextInputLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <Spinner
+        android:id="@+id/country"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:spinnerMode="dropdown"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/border_textbox"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/dropdown_icon"/>
+    </LinearLayout>
+    <android.support.design.widget.TextInputLayout
+        android:paddingLeft="5dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingRight="5dp">
+
+        <EditText
+            android:id="@+id/postalCode"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="Postal Code"
+            android:background="@drawable/border_textbox"/>
+    </android.support.design.widget.TextInputLayout>
+     <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+         android:layout_marginStart="20dp">
+
+          <Button
+              android:id="@+id/reset1"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+
+              android:layout_marginLeft="10dp"
+              android:layout_marginStart="5dp"
+              android:background="@drawable/log_in_button"
+              android:hint="RESET"
+              android:textColor="#fff" />
+
+          <Button
+              android:id="@+id/next1"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentEnd="true"
+              android:layout_marginRight="10dp"
+              android:layout_marginEnd="5dp"
+              android:background="@drawable/log_in_button"
+              android:hint="Next"
+              android:textColor="#fff" />
+
+
+      </RelativeLayout>
+
+
+</LinearLayout>

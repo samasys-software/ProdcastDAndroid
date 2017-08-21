@@ -3,9 +3,11 @@ package prodcastd.prodcast.samayu.com.prodcastd;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInstaller;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -13,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -36,38 +39,56 @@ import retrofit2.Response;
 
 public class OrderEntry extends AppCompatActivity {
     private String employeeId;
-    private ListView billsView;
+    private ListView billsView,payment;
+    private LinearLayout checkPanel;
     private AutoCompleteTextView customerNames;
     private Spinner methodOfPayment;
     private int selectedBillIndex;
+    private FloatingActionButton fabNewOrder;
     View focusView;
     EditText cashPay, checkNumber,checkComments ;
     private Customer selectedCustomer;
     Button payButton;
+    View.OnKeyListener listener = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         employeeId=getIntent().getExtras().getString("employeeId");
         setContentView(R.layout.activity_order_entry);
+        checkPanel=(LinearLayout)findViewById(R.id.checkPanel);
         billsView = (ListView)findViewById(R.id.billsView);
         methodOfPayment=(Spinner)findViewById(R.id.paymentType);
-          checkNumber =(EditText)findViewById(R.id.checkNumber);
-         checkComments=(EditText) findViewById(R.id.checkComments);
+        fabNewOrder = (FloatingActionButton)findViewById(R.id.fab);
+        checkNumber =(EditText)findViewById(R.id.checkNumber);
+        checkComments=(EditText) findViewById(R.id.checkComments);
         cashPay = (EditText)findViewById(R.id.cash);
         Button newOrder = (Button)findViewById(R.id.newOrder);
         customerNames = (AutoCompleteTextView)findViewById(R.id.acTextViev);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(OrderEntry.this,R.array.payment_method,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         methodOfPayment.setAdapter(adapter);
+
+        listener = new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                customerNames.setOnKeyListener(null);
+                findViewById(R.id.llbills).setVisibility(View.GONE);
+                findViewById(R.id.llnoOutstandingBills).setVisibility(View.GONE);
+                fabNewOrder.setVisibility(View.GONE);
+                findViewById(R.id.llpayment).setVisibility(View.GONE);
+                return false;
+            }
+        };
+
         methodOfPayment.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 if (i == 2){
-                    findViewById(R.id.checkPanel).setVisibility(View.VISIBLE);
+                    checkPanel.setVisibility(View.VISIBLE);
                 }
                 else {
-                    findViewById(R.id.checkPanel).setVisibility(View.GONE);
+                    checkPanel.setVisibility(View.GONE);
                 }
 
             }
@@ -78,10 +99,13 @@ public class OrderEntry extends AppCompatActivity {
             }
         });
 
+
         customerNames.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 selectedCustomer= null;
+                customerNames.setOnKeyListener(listener);
+                findViewById(R.id.llbills).setVisibility(View.GONE);
                 List<Customer> customerList =SessionInfo.instance().getCustomerList();
                 String customerName = (String)adapterView.getItemAtPosition(i);
                 for (int a =0;a<customerList.size();a++){
@@ -97,8 +121,8 @@ public class OrderEntry extends AppCompatActivity {
         billsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
                 selectedBillIndex = i;
+                fabNewOrder.setVisibility(View.VISIBLE);
                     View b4 = findViewById(R.id.llpayment);
                     b4.setVisibility(View.VISIBLE);
 
@@ -108,27 +132,23 @@ public class OrderEntry extends AppCompatActivity {
         payButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                payButton.setEnabled(true);
                 makePayment();
-
             }
         });
-        newOrder.setOnClickListener(new View.OnClickListener() {
+        fabNewOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OrderEntry.this,NewOrder.class);
-                startActivity(intent);
+                Intent i = new Intent(OrderEntry.this,NewOrder.class);
+                startActivity(i);
             }
         });
-
-
         long empId= SessionInfo.instance().getEmployee().getEmployeeId();
         Call<CustomerListDTO> customerListDTOCall = new ProdcastDClient().getClient().getCustomers(empId);
        customerListDTOCall.enqueue(new Callback<CustomerListDTO>() {
-
-            @Override
+           @Override
             public void onResponse(Call<CustomerListDTO> call, Response<CustomerListDTO> response) {
                 if (response.isSuccessful()) {
-
                     CustomerListDTO customerListDTO = response.body();
                     SessionInfo.instance().setCustomerList(customerListDTO.getCustomerList());
                     SessionInfo.instance().setOutStandingBills(customerListDTO.getOutstandingBills());
@@ -141,56 +161,54 @@ public class OrderEntry extends AppCompatActivity {
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(OrderEntry.this, android.R.layout.select_dialog_item, newList);
                             customerNames.setThreshold(1);
                             customerNames.setAdapter(adapter);
-
-
-
                 }
                 else {
-
-
-                    }
+                }
             }
-
-            @Override
+           @Override
             public void onFailure(Call<CustomerListDTO> call, Throwable t) {
-
             }
         });
-
-
     }
-
-    public void recreateOutstandingBills(){
+    public void recreateOutstandingBills() {
         billsView.clearChoices();
+        fabNewOrder.setVisibility(View.VISIBLE);
         findViewById(R.id.llpayment).setVisibility(View.GONE);
         findViewById(R.id.checkPanel).setVisibility(View.GONE);
         cashPay.setText("");
         methodOfPayment.setSelection(0);
-        List<String> bills  = new LinkedList<String>();
+        List<String> bills = new LinkedList<String>();
         List<Bill> allOutStandingBills = SessionInfo.instance().getOutStandingBills();
         List<Bill> customerBills = new LinkedList<Bill>();
         SessionInfo.instance().setCustomerBills(customerBills);
-        for (int j =0;j<allOutStandingBills.size();j++){
+        for (int j = 0; j < allOutStandingBills.size(); j++) {
             Bill bill = allOutStandingBills.get(j);
-            if (bill.getCustomerId() == selectedCustomer.getId()){
-                bills.add(""+bill.getBillNumber()+" "+bill.getBillDate()+" "+bill.getBillAmount()+" "+bill.getOutstandingBalance());
+            if (bill.getCustomerId() == selectedCustomer.getId()) {
+                bills.add("" + bill.getBillNumber() + " " + bill.getBillDate() + " " + bill.getBillAmount() + " " + bill.getOutstandingBalance());
                 customerBills.add(bill);
             }
         }
-
         Bill[] billArray = new Bill[customerBills.size()];
-        for(int i=0;i<customerBills.size();i++)
-        {
-            billArray[i] = customerBills.get(i);
-        }
-        BillViewAdapter adapter = new BillViewAdapter(OrderEntry.this , billArray );
-        billsView.setAdapter( adapter );
+        if (customerBills.size() != 0) {
+            findViewById(R.id.llnoOutstandingBills).setVisibility(View.GONE);
+            fabNewOrder.setVisibility(View.VISIBLE);
+            for (int i = 0; i < customerBills.size(); i++) {
+                billArray[i] = customerBills.get(i);
+            }
+            BillViewAdapter adapter = new BillViewAdapter(OrderEntry.this, billArray);
+            billsView.setAdapter(adapter);
         /*ArrayAdapter<Object> billsAdapter = new ArrayAdapter<Object>(OrderEntry.this
                 ,android.R.layout.simple_list_item_1,bills.toArray());
         billsView.setAdapter(billsAdapter);
         billsAdapter.notifyDataSetChanged();*/
-        findViewById(R.id.llbills).setVisibility(View.VISIBLE);
-
+            findViewById(R.id.llbills).setVisibility(View.VISIBLE);
+            fabNewOrder.setVisibility(View.VISIBLE);
+        }
+        else {
+            findViewById(R.id.llnoOutstandingBills).setVisibility(View.VISIBLE);
+            findViewById(R.id.llbills).setVisibility(View.GONE);
+            fabNewOrder.setVisibility(View.VISIBLE);
+        }
     }
     private boolean validatePayment(){
         final String cash = cashPay.getText().toString();
@@ -203,24 +221,25 @@ public class OrderEntry extends AppCompatActivity {
               focusView = cashPay;
             cancel = true;
         }
-        if (methodOfPayment.getSelectedItemPosition() == 0){
+        if (methodOfPayment.getSelectedItem().toString().trim().equals("Payment Type")){
+            Toast.makeText(OrderEntry.this,"Please select Payment type!!",Toast.LENGTH_LONG).show();
             focusView = methodOfPayment;
             cancel = true;
         }
-        if (TextUtils.isEmpty(checkNo)){
-            checkNumber.setError("Please Enter the check number");
-            focusView = checkNumber;
-            cancel = true;
+        if (methodOfPayment.getSelectedItemPosition() == 2) {
+            if (TextUtils.isEmpty(checkNo)) {
+                checkNumber.setError("Please Enter the check number");
+                focusView = checkNumber;
+                cancel = true;
+            }
+            if (TextUtils.isEmpty(checkCmt)) {
+                checkComments.setError("Please Enter some comments");
+                focusView = checkComments;
+                cancel = true;
+            }
         }
-        if (TextUtils.isEmpty(checkCmt)){
-            checkComments.setError("Please Enter some comments");
-            focusView = checkComments;
-            cancel = true;
-        }
-
         try {
-
-        double paymentAmount = Double.parseDouble(cash.trim());
+            double paymentAmount = Double.parseDouble(cash.trim());
             Bill bill = SessionInfo.instance().getCustomerBills().get(selectedBillIndex);
             if (paymentAmount > bill.getOutstandingBalance()){
                 cashPay.setError("The Amount should be less than "+bill.getOutstandingBalance());
@@ -233,12 +252,13 @@ public class OrderEntry extends AppCompatActivity {
             cashPay.setError("Please Enter a Valid Amount");
             focusView = cashPay;
         }
-
         return cancel;
     }
     private void makePayment(){
+        payButton.setEnabled(false);
         final String cash = cashPay.getText().toString();
         if (validatePayment()){
+            payButton.setEnabled(true);
             return;
         }
         long employeeId =SessionInfo.instance().getEmployee().getEmployeeId();
@@ -248,7 +268,6 @@ public class OrderEntry extends AppCompatActivity {
         long customerId =bill.getCustomerId();
         String message = ""+bill.getBillNumber()+" "+bill.getBillDate()+" "+bill.getBillAmount();
         Toast.makeText(OrderEntry.this,message,Toast.LENGTH_LONG).show();
-
         String checkNo = checkNumber.getText().toString();
         String checkCmt = checkComments.getText().toString();
         final Call<CustomerDTO> customerDTOCall = new ProdcastDClient().getClient().makePayment(methodOfPayment.getSelectedItemPosition(), employeeId,billId,amount,customerId,checkNo,checkCmt);
@@ -258,7 +277,6 @@ public class OrderEntry extends AppCompatActivity {
                 if (response.isSuccessful()){
                     CustomerDTO dto = response.body();
                     if (!dto.isError()){
-
                         Toast.makeText(OrderEntry.this,"Payment Successful",Toast.LENGTH_LONG).show();
                         SessionInfo.instance().setCustomerBills(dto.getCustomer().getOutstandingBill());
                         List<Bill> newAllOutstandingBills = new LinkedList<Bill>();
@@ -270,24 +288,17 @@ public class OrderEntry extends AppCompatActivity {
                         newAllOutstandingBills.addAll( dto.getCustomer().getOutstandingBill() );
                         SessionInfo.instance().setOutStandingBills( newAllOutstandingBills );
                         recreateOutstandingBills();
-
-
-                        //Payment Hide
-                        //Reset Spinner, Text
-
-                    }
+                        }
                     else {
                         Toast.makeText(OrderEntry.this,"Payment Not Success",Toast.LENGTH_LONG).show();
                         payButton.setEnabled(true);
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<CustomerDTO> call, Throwable t) {
                 Toast.makeText(OrderEntry.this,"Sorry!! Due to technical failure payment is not successful ",Toast.LENGTH_LONG).show();
                 payButton.setEnabled(true);
-
             }
         });
     }

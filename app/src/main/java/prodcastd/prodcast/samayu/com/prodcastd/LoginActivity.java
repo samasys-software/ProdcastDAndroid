@@ -3,6 +3,7 @@ package prodcastd.prodcast.samayu.com.prodcastd;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaCodec;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.LoginDTO;
@@ -24,16 +26,10 @@ import retrofit2.Response;
 
 
 public class LoginActivity extends AppCompatActivity {
-
     EditText userName;
-
     Button signInButton,clearButton;
     TextView forgotPin,register;
-
     View focusView = null;
-
-
-
     EditText password = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 userName.setText("");
                 password.setText("");
+                signInButton.setEnabled(true);
             }
         });
 
@@ -63,27 +60,17 @@ public class LoginActivity extends AppCompatActivity {
                 String username = userName.getText().toString();
                 String pass = password.getText().toString();
                 String email = userName.getText().toString();
-                if (!validateEmail(email)){
-                    userName.setError("Enter valid email ID");
-                    focusView = userName;
-                    return;
-                }
+                
 
                 if (checkValid(username,pass)){
                     return ;
 
                 }
-
-
-
-
                 Call<LoginDTO> loginDTOCall = new ProdcastDClient().getClient().authenticate( userName.getText().toString() , password.getText().toString() );
-
                 loginDTOCall.enqueue(new Callback<LoginDTO>() {
                     @Override
                     public void onResponse(retrofit2.Call<LoginDTO> call, Response<LoginDTO> response) {
                         if( response.isSuccessful() ){
-
                             LoginDTO loginDTO = response.body();
                             if( !loginDTO.isError()){
                                 //TODO Now go to DashBoard.
@@ -93,24 +80,23 @@ public class LoginActivity extends AppCompatActivity {
                                 bundle.putString("employeeId",String.valueOf(loginDTO.getEmployee().getEmployeeId()));
                                 intent.putExtras(bundle);
                                 startActivity(intent,bundle);
-                                signInButton.setEnabled(true);
+                                signInButton.setEnabled(false);
                                 //new ProdcastDClient().getClient().getCustomers(""+employeeId)
-
-
-
-
                                 //Pass in a Bundle to Dashboard loginDTO.getEmployee().getEmployeeId()
                             }
                             else {
                                 //TODO Show error message TextBox that user is invalid
-                                userName.setError("User is invalid");
+                                Toast.makeText(LoginActivity.this,"User is Invalid",Toast.LENGTH_LONG).show();
+                                signInButton.setEnabled(true);
                             }
                         }
                         else{
                             //Do Validation code here.
                             //TODO Error - Message-  Technical Problem. Pls try again.
-                            signInButton.setError("Sorry for the technical problem. Please try again");
+                           Toast.makeText(LoginActivity.this,"Sorry for the technical problem. Please try again",Toast.LENGTH_LONG).show();
+                        signInButton.setEnabled(true);
                         }
+
                     }
 
                     @Override
@@ -125,14 +111,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    private static final String EMAIL_PATTERN = "^[a-zA-Z0-9#_~!$&'()*+,;=:.\"(),:;<>@\\[\\]\\\\]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$";
-    private Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-    private Matcher matcher;
 
-    public boolean validateEmail(String email) {
-        matcher = pattern.matcher(email);
-        return matcher.matches();
-    }
     public boolean checkValid(String username,String pass){
         boolean cancel = false;
         userName.setError(null);

@@ -1,7 +1,18 @@
 
 package prodcastd.prodcast.samayu.com.prodcastd;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.AsyncTask;
+import android.os.Looper;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +25,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
@@ -27,7 +39,14 @@ import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
 import com.samayu.prodcast.prodcastd.dto.StoreType;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
+import java.util.concurrent.ExecutionException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -67,12 +86,23 @@ public class CustomerActivity extends AppCompatActivity {
     Button nextButton;
     Button saveButton;
     View focusView = null;
-
+    TextView currentLocation;
+    Map<String,String> daysMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
+        daysMap.put("Sunday","SU");
+        daysMap.put("Monday","MO");
+        daysMap.put("Tuesday","TU");
+        daysMap.put("Wednesday","WE");
+
+
+        daysMap.put("Thursday","TH");
+        daysMap.put("Friday", "FR");
+        daysMap.put("Saturday","SA");
+        daysMap.put("Multiple Days","ML");
         // Toolbar toolbar = (Toolbar) findViewById(R.id.my_awesome_toolbar);
         //setSupportActionBar(toolbar);
         //getSupportActionBar().setLogo(R.drawable.logo);
@@ -87,7 +117,7 @@ public class CustomerActivity extends AppCompatActivity {
         selectDay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(CustomerActivity.this, adapterView.getItemAtPosition(i)+" selected",Toast.LENGTH_LONG).show();
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -99,18 +129,18 @@ public class CustomerActivity extends AppCompatActivity {
         area = (Spinner) findViewById(R.id.area);
 
         //SessionInfo.instance().getEmployee().getEmployeeId()
-        Call<AdminDTO<List<Area>>> areaDTOCall= new ProdcastDClient().getClient().getAreasForDistributor(621);
+        Call<AdminDTO<List<Area>>> areaDTOCall= new ProdcastDClient().getClient().getAreasForDistributor(SessionInfo.instance().getEmployee().getEmployeeId());
         areaDTOCall.enqueue(new Callback<AdminDTO<List<Area>>>() {
             @Override
             public void onResponse(Call<AdminDTO<List<Area>>> call, Response<AdminDTO<List<Area>>> response) {
                 if(response.isSuccessful()){
                     AdminDTO<List<Area>> areaDTO = response.body();
                     List<Area> areaList= areaDTO.getResult();
-                    String newList[] = new String[areaList.size()];
-                    for(int i= 0; i<areaList.size(); i++){
-                        Area area  = areaList.get(i);
-                        newList[i] = area.getDescription();
-                    }
+                    Area defaultArea = new Area();
+                    defaultArea.setId(-1l);
+                    defaultArea.setDescription("Select Area");
+                     areaList.add(0, defaultArea);
+
                     ArrayAdapter<Area> adapter = new ArrayAdapter<Area>(CustomerActivity.this, android.R.layout.simple_list_item_1, areaList);
                     area.setAdapter(adapter);
                     }
@@ -134,7 +164,6 @@ public class CustomerActivity extends AppCompatActivity {
         selectCustomerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(CustomerActivity.this, adapterView.getItemAtPosition(i)+" selected",Toast.LENGTH_LONG).show();
 
             }
             @Override
@@ -145,7 +174,6 @@ public class CustomerActivity extends AppCompatActivity {
 
         storeType = (Spinner) findViewById(R.id.storetype);
 
-
        Call<AdminDTO<List<StoreType>>> adminDTOCall = new ProdcastDClient().getClient().getStoreTypes();
         adminDTOCall.enqueue(new Callback<AdminDTO<List<StoreType>>>() {
             @Override
@@ -153,17 +181,17 @@ public class CustomerActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     AdminDTO<List<StoreType>> adminDTO= response.body();
                     List<StoreType> storeTypeList = adminDTO.getResult();
-                    String newList[] = new String[storeTypeList.size()];
-                    for(int i= 0; i<storeTypeList.size(); i++){
-                        StoreType storeType  = storeTypeList.get(i);
-                        newList[i] = storeType.getStoreTypeName();
-                    }
+
+                    StoreType defaultStoreType = new StoreType();
+                    defaultStoreType.setStoreTypeId(-1l);
+                    defaultStoreType.setStoreTypeName("Select Store Type");
+                    storeTypeList.add(0, defaultStoreType  );
+
+
                     ArrayAdapter<StoreType> adapter = new ArrayAdapter<StoreType>(CustomerActivity.this, android.R.layout.simple_list_item_1, storeTypeList);
                     storeType.setAdapter(adapter);
                 }
                 }
-
-
 
             @Override
             public void onFailure(Call<AdminDTO<List<StoreType>>> call, Throwable t) {
@@ -171,7 +199,7 @@ public class CustomerActivity extends AppCompatActivity {
 
             }
         });
-
+        currentLocation = (TextView) findViewById(R.id.currentLocation);
         unitNumber = (EditText) findViewById(R.id.unitNumber);
         billingAddress1 = (EditText) findViewById(R.id.billingAddress1);
         billingAddress2 = (EditText) findViewById(R.id.billingAddress2);
@@ -181,7 +209,7 @@ public class CustomerActivity extends AppCompatActivity {
         country = (Spinner) findViewById(R.id.country);
         postalCode = (EditText) findViewById(R.id.postalCode);
 
-         Call<CountryDTO> countryDTOCall = new ProdcastDClient().getClient().getCountries();
+        Call<CountryDTO> countryDTOCall = new ProdcastDClient().getClient().getCountries();
         countryDTOCall.enqueue(new Callback<CountryDTO>() {
             @Override
             public void onResponse(Call<CountryDTO> call, Response<CountryDTO> response) {
@@ -259,18 +287,137 @@ public class CustomerActivity extends AppCompatActivity {
                 saveRegistration();
 
 
+            }
+        });
+
+        currentLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AsyncTask task = new AsyncTask() {
+                    @Override
+                    protected Object doInBackground(Object[] objects) {
+                        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                        String locationProvider = LocationManager.GPS_PROVIDER;
+                        String fullAddress = "";
+                        if (ActivityCompat.checkSelfPermission(CustomerActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                                && ActivityCompat.checkSelfPermission(CustomerActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            fullAddress = "No Permission available";
+                            ActivityCompat.requestPermissions(CustomerActivity.this, new String[] {
+                                            Manifest.permission.ACCESS_FINE_LOCATION,
+                                            Manifest.permission.ACCESS_COARSE_LOCATION },
+                                    1);
+                            // TODO: Consider calling
+                            //    ActivityCompat#requestPermissions
+                            // here to request the missing permissions, and then overriding
+                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                            //                                          int[] grantResults)
+                            // to handle the case where the user grants the permission. See the documentation
+                            // for ActivityCompat#requestPermissions for more details.
+                        }
+                        {
+
+                            try {
+                                Looper.prepare();
+                                manager.requestSingleUpdate(LocationManager.GPS_PROVIDER, new LocationListener() {
+                                    @Override
+                                    public void onLocationChanged(Location location) {
+                                        System.out.println("Location Changed ");
+                                    }
+
+                                    @Override
+                                    public void onStatusChanged(String s, int i, Bundle bundle) {
+                                        System.out.println("Location Status Changed ");
+                                    }
+
+                                    @Override
+                                    public void onProviderEnabled(String s) {
+                                        System.out.println("Provider Enabled ");
+                                    }
+
+                                    @Override
+                                    public void onProviderDisabled(String s) {
+                                        System.out.println("Provider Disabled");
+                                    }
+                                }, null);
+                            }
+                            catch (Exception e){
+                                e.printStackTrace();
+                            }
+                            Location currentLocation = manager.getLastKnownLocation(locationProvider);
+                            if(currentLocation==null){
+                                return "No Permission Available";
+                            }
+                            Geocoder coder = new Geocoder(CustomerActivity.this);
+                            try {
+                                List<Address> addresses = coder.getFromLocation(currentLocation.getLatitude() , currentLocation.getLongitude() , 20 );
+                                //List<Address> addresses = coder.getFromLocation(10.828547,78.666821,20);
+                                if(addresses.size()>3){
+                                  Address address = addresses.get(0);
+
+                                    return address;
+                                }
 
 
 
+                                                          } catch (IOException e) {
+                                fullAddress+="Error "+e;
+                                e.printStackTrace();
+                            }
 
+                        }
+                        return fullAddress;
+                    }
+                };
+
+                task.execute((Object[])null);
+                Address address = null;
+                try {
+                    Object result = task.get();
+                    if( result instanceof  Address ){
+                        address = (Address) result;
+                        postalCode.setText( address.getPostalCode());
+                     String  address1 = address.getAddressLine(0);
+                       String address2 = address.getAddressLine(1);
+                        String address3 = address.getAddressLine(2);
+                        String[] address1Array = address1.split(" ");
+                        unitNumber.setText ( address1Array[0] );
+                        billingAddress1.setText(address1Array[1]);
+                        StringTokenizer st = new StringTokenizer(address2,", ");
+                        String[] address2Array = address2.split(", ");
+
+                        city.setText(st.nextToken());
+                        state.setText(st.nextToken());
+                        ArrayAdapter<Country> adapter =(ArrayAdapter<Country>) country.getAdapter();
+                       int count =  adapter.getCount();
+                        for(int i = 0; i<count; i++){
+                            Country aCountry= adapter.getItem(i);
+                            if(aCountry.getCountryName().equalsIgnoreCase(address3)){
+                                country.setSelection(i);
+                                break;
+                            }
+                        }
+                    }
+                    else if( result instanceof  String ) {
+                        String errorText = (String) task.get();
+                        //TODO UnitNumber setError.
+                    }
+                } catch (InterruptedException e) {
+
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+
+                    e.printStackTrace();
+                }
 
             }
         });
-    }//cpyName, cusId1, cusId2,selectedDay,cusDesc1,cusDesc2,aea,selectCusType,streType,
+    }
+    //cpyName, cusId1, cusId2,selectedDay,cusDesc1,cusDesc2,aea,selectCusType,streType,
     // unitNum,billAdd1,billAdd2,billAdd3,stat,cty,contry,pincode,
     // lstName,fstName,phneNumber,mobNumber,emailAdd,nte,smsAllow,activ
-    public boolean checkValid( String cpyName, String cusId1, String cusId2,String selectedDay, String cusDesc1, String cusDesc2, int aea, String selectCusType, int streType,
-                               String unitNum, String billAdd1, String billAdd2, String billAdd3, String stat, String cty,int contry, String pincode,
+    public boolean checkValid( String cpyName, String cusId1, String cusId2,String selectedDay, String cusDesc1, String cusDesc2, long aea,
+                               String selectCusType, int streType,
+                               String unitNum, String billAdd1,   String cty,String stat,int contry, String pincode,
                               String lstName, String fstName, String phneNumber, String mobNumber, String emailAdd,String nte,
                               String smsAllow, Boolean activ) {
         boolean cancel = false;
@@ -285,8 +432,7 @@ public class CustomerActivity extends AppCompatActivity {
 
         unitNumber.setError("");
         billingAddress1.setError("");
-        billingAddress2.setError("");
-        billingAddress3.setError("");
+
         city.setError("");
         state.setError("");
 
@@ -299,7 +445,7 @@ public class CustomerActivity extends AppCompatActivity {
         emailAddress.setError("");
         note.setError("");
 
-        //private static final String EMAIL_PATTERN = "^[a-zA-Z0-9#_~!$&'()*+,;=:.\"(),:;<>@\\[\\]\\\\]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$";
+
 
 
 
@@ -318,10 +464,11 @@ public class CustomerActivity extends AppCompatActivity {
             focusView = customerId2;
             cancel = true;
         }
-        if(contry <= 0){
-            focusView = country;
+        if(selectDay.getSelectedItem().toString().trim().equals("Select Day")){
+            focusView = selectDay;
             cancel = true;
         }
+
         if (TextUtils.isEmpty(cusDesc1)) {
             customerDesc1.setError("Please Enter Customer Desc1");
             focusView = customerDesc1;
@@ -332,6 +479,19 @@ public class CustomerActivity extends AppCompatActivity {
             focusView = customerDesc2;
             cancel = true;
         }
+        if(aea <= 0){
+            focusView = area;
+            cancel = true;
+        }
+       if(selectCustomerType.getSelectedItem().toString().trim().equals("Select Customer Type")){
+            focusView = selectCustomerType;
+            cancel = true;
+        }
+        if(streType <= 0){
+            focusView = storeType;
+            cancel = true;
+        }
+
         if (TextUtils.isEmpty(unitNum)) {
             unitNumber.setError("Please Enter Unit Number");
             focusView = unitNumber;
@@ -342,16 +502,7 @@ public class CustomerActivity extends AppCompatActivity {
             focusView = billingAddress1;
             cancel = true;
         }
-        if (TextUtils.isEmpty(billAdd2)) {
-            billingAddress2.setError("Please Enter Billing Address1");
-            focusView = billingAddress2;
-            cancel = true;
-        }
-        if (TextUtils.isEmpty(billAdd3)) {
-            billingAddress3.setError("Please Enter Billing Address1");
-            focusView = billingAddress3;
-            cancel = true;
-        }
+
         if (TextUtils.isEmpty(cty)) {
             city.setError("Please Enter City");
             focusView = city;
@@ -362,35 +513,50 @@ public class CustomerActivity extends AppCompatActivity {
             focusView = state;
             cancel = true;
         }
+        if(contry <= 0){
+            focusView = country;
+            cancel = true;
+        }
         if (TextUtils.isEmpty(pincode)) {
             postalCode.setError("Please Enter PostalCode");
-            focusView = state;
+            focusView = postalCode;
             cancel = true;
         }
         if (TextUtils.isEmpty(lstName)) {
-            lastName.setError("Please Enter LastName");
+            lastName.setError("Please Enter Last Name");
             focusView = lastName;
             cancel = true;
         }
         if (TextUtils.isEmpty(fstName)) {
-            firstName.setError("Please enter FIRSTNAME");
+            firstName.setError("Please Enter First Name");
             focusView = firstName;
             cancel = true;
         }
         if (TextUtils.isEmpty(phneNumber)) {
-            phoneNumber.setError("Please enter PHONE NUMBER");
+            phoneNumber.setError("Please Enter Phone Number");
             focusView = phoneNumber;
             cancel = true;
         }
         if (TextUtils.isEmpty(mobNumber)) {
-            mobileNumber.setError("Please enter MOBILE NUMBER");
+            mobileNumber.setError("Please Enter Mobile Number");
             focusView = mobileNumber;
             cancel = true;
         }
         if (TextUtils.isEmpty(emailAdd)) {
-            emailAddress.setError("Please enter EMAIL ADDRESS");
+            emailAddress.setError("Please Enter Email Address");
             focusView = emailAddress;
             cancel = true;
+        }
+        if (TextUtils.isEmpty(nte)) {
+            note.setError("Please Enter Note");
+            focusView = note;
+            cancel = true;
+        }
+        if(smsAllowed.isChecked()){
+            smsAllowed.setError("Please Select");
+        }
+        if(active.isChecked()){
+            active.setError("Please Select");
         }
 
         return cancel;
@@ -404,11 +570,11 @@ public class CustomerActivity extends AppCompatActivity {
         String selectedDay = (String)selectDay.getSelectedItem();
         String cusDesc1= customerDesc1.getText().toString();
         String cusDesc2= customerDesc2.getText().toString();
-        int aea = area.getSelectedItemPosition();
+        long aea = area.getSelectedItemPosition();
         String selectCusType = (String) selectCustomerType.getSelectedItem();
         int streType = storeType.getSelectedItemPosition();
 
-        String unitNum = unitNumber.getText().toString();
+            String unitNum = unitNumber.getText().toString();
         String billAdd1 = billingAddress1.getText().toString();
         String billAdd2 = billingAddress2.getText().toString();
         String billAdd3 = billingAddress3.getText().toString();
@@ -426,12 +592,28 @@ public class CustomerActivity extends AppCompatActivity {
         String smsAllow = String.valueOf(smsAllowed.isChecked());
         boolean activ = true;
 
-
-        if (checkValid(cpyName, cusId1, cusId2,selectedDay,cusDesc1,cusDesc2,aea,selectCusType,streType, unitNum,billAdd1,billAdd2,billAdd3,stat,cty,contry,pincode,lstName,fstName,phneNumber,mobNumber,emailAdd,nte,smsAllow,activ)){
+        if (checkValid(cpyName, cusId1, cusId2,selectedDay,cusDesc1,cusDesc2,aea,selectCusType,streType,
+                unitNum,billAdd1,stat,cty,contry,pincode,
+                lstName,fstName,phneNumber,mobNumber,emailAdd,nte,smsAllow,activ)){
             return ;
       }
-        Call<ProdcastDTO> prodcastDTOCall = new ProdcastDClient().getClient().saveCustomer(cpyName, cusId1, cusId2,cusDesc1,cusDesc2,
-                unitNum,billAdd1,billAdd2,billAdd3,stat,cty,pincode,lstName,fstName,phneNumber,mobNumber,emailAdd,nte,smsAllow,activ);
+      Area selectedArea = (Area) area.getSelectedItem();
+         long selectedAreaId = selectedArea.getId();
+
+        StoreType selectedStoreType = (StoreType) storeType.getSelectedItem();
+        long selectedStoreTypeId = selectedStoreType.getStoreTypeId();
+
+        String day = (String)selectDay.getSelectedItem();
+        String dayMapping = daysMap.get(day);
+
+
+      Country selectedCountry = (Country)country.getSelectedItem();
+          String selectedCountryId=selectedCountry.getCountryId();
+        String employeeIdString =String.valueOf(SessionInfo.instance().getEmployee().getEmployeeId());
+
+        Call<ProdcastDTO> prodcastDTOCall = new ProdcastDClient().getClient().saveCustomer(employeeIdString,cpyName,
+                selectCusType,selectedAreaId,selectedDay,fstName,lstName,emailAdd,phneNumber,mobNumber,unitNum,
+                billAdd1,billAdd2,billAdd3,stat,cty,selectedCountryId,nte,smsAllow,activ);
         
 
         prodcastDTOCall.enqueue(new Callback<ProdcastDTO>() {
@@ -447,6 +629,9 @@ public class CustomerActivity extends AppCompatActivity {
                     }
                     else{
                         Toast.makeText(CustomerActivity.this, "Customer Registration is saved Successfully", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(CustomerActivity.this,CustomersActivity.class);
+
+                        startActivity(intent);
                     }
                 }
             }
@@ -463,5 +648,6 @@ public class CustomerActivity extends AppCompatActivity {
 
 
     }
+
 
 }

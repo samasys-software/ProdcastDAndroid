@@ -49,8 +49,8 @@ public class CustomersActivity extends AppCompatActivity {
         findViewById(R.id.newCustomerButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(CustomersActivity.this , CustomerActivity.class);
-                //startActivity(intent );
+                Intent intent = new Intent(CustomersActivity.this , CustomerActivity.class);
+                startActivity(intent );
             }
         });
         Call<CustomerListDTO> customerListDTOCall = new ProdcastDClient().getClient().getCustomers(SessionInfo.instance().getEmployee().getEmployeeId());

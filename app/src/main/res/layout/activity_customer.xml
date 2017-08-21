@@ -27,7 +27,7 @@
         <EditText
             android:id="@+id/companyName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:hint="Company Name"
             android:ems="10"
             android:inputType="textPersonName"
@@ -39,7 +39,7 @@
         <EditText
             android:id="@+id/customerId1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
             android:padding="5dp"
@@ -56,7 +56,7 @@
         <EditText
             android:id="@+id/customerId2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
             android:padding="5dp"
@@ -74,7 +74,7 @@
         <EditText
             android:id="@+id/customerDesc1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
@@ -87,7 +87,7 @@
         <EditText
             android:id="@+id/customerDesc2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
@@ -99,37 +99,35 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select Day"
-        android:layout_gravity="fill_horizontal"/>
 
     <Spinner
         android:id="@+id/selectDay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="fill_horizontal"
-
-
+        android:layout_height="40dp"
         android:background="@drawable/border_textbox"
 
-        android:minHeight="50dp" />
+        android:minHeight="40dp"
+
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
 </LinearLayout>
 
     <Spinner
         android:id="@+id/area"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:minHeight="50dp"
-
+        android:layout_height="40dp"
+        android:minHeight="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/border_textbox"/>
 
     <Spinner
         android:id="@+id/selectCustomerType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="50dp"
+        android:minHeight="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
 
         android:background="@drawable/border_textbox"/>
 
@@ -137,8 +135,11 @@
         android:id="@+id/storetype"
         android:layout_width="match_parent"
 
-        android:layout_height="50dp"
-        android:minHeight="50dp"
+        android:layout_height="40dp"
+        android:minHeight="40dp"
+
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
 
         android:background="@drawable/border_textbox"/>
     <!-- <RelativeLayout
@@ -171,30 +172,52 @@
 
      </RelativeLayout> -->
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
 
     <android.support.design.widget.TextInputLayout
         android:paddingLeft="5dp"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:paddingRight="5dp">
-
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
+        android:paddingRight="5dp"
+        android:weightSum="1">
 
 
         <EditText
             android:id="@+id/unitNumber"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="UNIT NUMBER" />
+            android:hint="Unit Number"
+            android:layout_marginLeft="5dp"
+            android:layout_marginEnd="120dp"
+
+            android:background="@drawable/border_textbox"/>
+
+
     </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/currentLocation"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:layout_alignParentBottom="true"
+
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:background="@android:drawable/ic_menu_mylocation"
+            android:ems="10"
+            android:textColor="@color/colorGreen" />
+
+
+    </RelativeLayout>
 
     <android.support.design.widget.TextInputLayout
         android:paddingLeft="5dp"
@@ -205,11 +228,12 @@
         <EditText
             android:id="@+id/billingAddress1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="BILLING ADDRESS1"/>
+            android:hint="Billing Address1"
+            android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
 
 
@@ -222,11 +246,12 @@
         <EditText
             android:id="@+id/billingAddress2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="BILLING ADDRESS2"/>
+            android:hint="Billing Address2"
+            android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
 
 
@@ -241,11 +266,12 @@
         <EditText
             android:id="@+id/billingAddress3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="BILLING ADDRESS3"/>
+            android:hint="Billing Address3"
+            android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:paddingLeft="5dp"
@@ -256,11 +282,12 @@
         <EditText
             android:id="@+id/city"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="CITY"/>
+            android:hint="City"
+            android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -272,18 +299,22 @@
         <EditText
             android:id="@+id/state"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="STATE"/>
+            android:hint="State"
+            android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
     <Spinner
         android:id="@+id/country"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.22"
-        android:autofillHints="COUNTRY" />
+        android:layout_height="40dp"
+        android:layout_weight="1"
+
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/border_textbox"/>
     <android.support.design.widget.TextInputLayout
         android:paddingLeft="5dp"
         android:layout_height="wrap_content"
@@ -292,12 +323,13 @@
 
         <EditText
             android:id="@+id/postalCode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="POSTALCODE"/>
+            android:inputType="number"
+            android:hint="Postal Code"
+            android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
    <!--  <RelativeLayout
          android:layout_width="match_parent"
@@ -336,12 +368,13 @@
 
         <EditText
             android:id="@+id/firstName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="FIRST NAME"/>
+            android:hint="First Name"
+            android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:paddingLeft="5dp"
@@ -351,12 +384,13 @@
 
         <EditText
             android:id="@+id/lastName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="LAST NAME"/>
+            android:hint="Last Name"
+            android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:paddingLeft="5dp"
@@ -366,12 +400,13 @@
 
         <EditText
             android:id="@+id/phoneNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="PHONE NUMBER"/>
+            android:inputType="phone"
+            android:hint="Phone Number"
+            android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:paddingLeft="5dp"
@@ -381,12 +416,13 @@
 
         <EditText
             android:id="@+id/mobileNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="MOBILE NUMBER"/>
+            android:inputType="phone"
+            android:hint="Mobile Number"
+            android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:paddingLeft="5dp"
@@ -396,12 +432,13 @@
 
         <EditText
             android:id="@+id/emailAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="EMAIL ADDRESS"/>
+            android:hint="Email Address"
+            android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:paddingLeft="5dp"
@@ -411,39 +448,42 @@
 
         <EditText
             android:id="@+id/note"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="NOTE"/>
+            android:hint="Note"
+            android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
     <CheckBox
         android:id="@+id/smsAllowed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="SMS ALLOWED" />
+        android:text="SMS Allowed"
+        android:background="@drawable/border_textbox"/>
     <CheckBox
         android:id="@+id/active"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="ACTIVE" />
+        android:text="Acctive"
+        android:background="@drawable/border_textbox"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/aareset"
+            android:id="@+id/reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
             android:layout_marginLeft="10dp"
             android:layout_marginStart="5dp"
             android:background="@drawable/log_in_button"
-            android:hint="RESET"
+            android:hint="Reset"
             android:textColor="#fff" />
 
         <Button
@@ -454,7 +494,7 @@
             android:layout_marginEnd="5dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/log_in_button"
-            android:hint="SAVE"
+            android:hint="Save"
             android:textColor="#fff" />
 
 

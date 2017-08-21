@@ -3,62 +3,62 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-android:background ="@drawable/green_bg">
+    android:background ="@drawable/green_bg">
 
 
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentStart="true"
-    android:layout_marginBottom="25dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_row="0"
-        android:orientation="vertical"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="35dp"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="25dp">
 
-        <ImageView
-            android:id="@+id/OrderIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="96dp"
-            app:srcCompat="@drawable/order_entry" />
-
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="VIEWORDER" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="1"
-        android:layout_row="0"
-        android:orientation="vertical"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp">
-    <ImageView
-        android:id="@+id/Customers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/customer"
-        />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_gravity="center"
-            android:text="CUSTOMERS" />
-    </LinearLayout>
+            android:layout_column="0"
+            android:layout_row="0"
+            android:orientation="vertical"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="35dp"
+            >
 
-</LinearLayout>
+            <ImageView
+                android:id="@+id/OrderIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="96dp"
+                app:srcCompat="@drawable/order_entry" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="VIEWORDER" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="0"
+            android:orientation="vertical"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="40dp">
+            <ImageView
+                android:id="@+id/Customers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/customer"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:text="CUSTOMERS" />
+        </LinearLayout>
+
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -73,46 +73,46 @@ android:background ="@drawable/green_bg">
             android:layout_column="0"
             android:layout_row="1">
 
+            <ImageView
+                android:id="@+id/Payement"
+                android:layout_width="150dp"
+                android:layout_height="96dp"
+                app:srcCompat="@drawable/payment" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="PAYMENT"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_column="1"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_row="1">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
                 <ImageView
-                    android:id="@+id/Payement"
+                    android:id="@+id/Report"
                     android:layout_width="150dp"
                     android:layout_height="96dp"
-                    app:srcCompat="@drawable/payment" />
+
+                    app:srcCompat="@drawable/report" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="PAYMENT"/>
-                     </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_column="1"
-                            android:layout_marginStart="30dp"
-                            android:layout_marginTop="40dp"
-                            android:layout_row="1">
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:gravity="center">
-
-                                <ImageView
-                                    android:id="@+id/Report"
-                                    android:layout_width="150dp"
-                                    android:layout_height="96dp"
-
-                                    app:srcCompat="@drawable/report" />
-
-                                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="REPORTS"/>
-                            </LinearLayout>
-                            </LinearLayout>
-</LinearLayout>
+                    android:text="REPORTS"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -121,14 +121,14 @@ android:background ="@drawable/green_bg">
         android:layout_alignParentStart="true"
         android:layout_marginTop="350dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_row="2"
-        android:orientation="vertical"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="35dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_row="2"
+            android:orientation="vertical"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="35dp">
             <ImageView
                 android:id="@+id/ViewOrder"
                 android:layout_width="150dp"
@@ -141,7 +141,7 @@ android:background ="@drawable/green_bg">
                 android:gravity="center"
                 android:text="EDIT REPORT"
                 android:fontFamily="casual"/>
-                    </LinearLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -161,6 +161,6 @@ android:background ="@drawable/green_bg">
                 android:text="CHANGE PASSWORD"
                 android:fontFamily="casual"/>
         </LinearLayout>
-</LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

@@ -37,8 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrderEntry extends AppCompatActivity {
-    private String employeeId;
+public class OrderEntry extends ProdcastBaseActivity {
     private ListView billsView,payment;
     private LinearLayout checkPanel;
     private AutoCompleteTextView customerNames;
@@ -53,7 +52,6 @@ public class OrderEntry extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        employeeId=getIntent().getExtras().getString("employeeId");
         setContentView(R.layout.activity_order_entry);
         checkPanel=(LinearLayout)findViewById(R.id.checkPanel);
         billsView = (ListView)findViewById(R.id.billsView);

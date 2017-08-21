@@ -1,4 +1,4 @@
-package com.samayu.prodcast.util;
+package com.samayu.prodcast.prodcastd.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

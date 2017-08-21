@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rl"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fff"
-    tools:context="prodcastd.prodcast.samayu.com.prodcastd.OrderEntry">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rl"
+        android:orientation="vertical"
+        android:background="#fff">
+
     <AutoCompleteTextView
         android:id="@+id/acTextViev"
         android:layout_width="match_parent"
@@ -193,7 +192,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <EditText
                 android:id="@+id/checkNumber"
@@ -238,7 +237,8 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:layout_marginTop="10dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:srcCompat="@android:drawable/ic_input_add" />
 
 </LinearLayout>
+

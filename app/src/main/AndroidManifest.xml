@@ -32,7 +32,6 @@
 
 
 
-
         <activity android:name=".CustomerPasswordActivity" />
         <activity android:name=".OrderEntry" />
         <activity android:name=".OutstandingbillsPayment" />
@@ -72,8 +71,6 @@
             android:name="com.samayu.prodcast.prodcastd.ui.CustomerCreateEditActivity"
             android:label="@string/title_activity_customer_create_edit"
             android:theme="@style/AppTheme">
-         
-
         </activity>
     </application>
 

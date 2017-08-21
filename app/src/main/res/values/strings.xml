@@ -22,7 +22,7 @@
         <item>Retailer</item>
         <item>Wholesaler</item>
     </string-array>
-<<<<<<< HEAD
+
     <string name="title_customer_list">Customers</string>
     <string name="title_customer_detail">Customer Detail</string>
     <string name="open">Open</string>
@@ -34,17 +34,14 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_prodcast_base">ProdcastBaseActivity</string>
-=======
     <string name="title_activity_customers_maintenance">CustomersMaintenanceActivity</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_customer_list">Customers</string>
-    <string name="title_customer_detail">Customer Detail</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_customer_create_edit">CustomerCreateEditActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
->>>>>>> 8efaa0d34ce38df553f66b63efc15b54f60cee3a
+
 
 </resources>
 

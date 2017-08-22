@@ -26,9 +26,13 @@ import com.samayu.prodcast.prodcastd.ui.OnFragmentInteractionListener;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 import static prodcastd.prodcast.samayu.com.prodcastd.R.id.area;
+import static prodcastd.prodcast.samayu.com.prodcastd.R.id.companyName;
 import static prodcastd.prodcast.samayu.com.prodcastd.R.id.country;
+import static prodcastd.prodcast.samayu.com.prodcastd.R.id.customer;
+import static prodcastd.prodcast.samayu.com.prodcastd.R.id.customerId1;
 import static prodcastd.prodcast.samayu.com.prodcastd.R.id.selectDay;
 
 

@@ -1,5 +1,6 @@
 package com.samayu.prodcast.prodcastd.ui;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,16 +20,28 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.samayu.prodcast.prodcastd.SessionInfo;
+import com.samayu.prodcast.prodcastd.dto.Area;
+import com.samayu.prodcast.prodcastd.dto.Country;
 import com.samayu.prodcast.prodcastd.dto.Customer;
+import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
+import com.samayu.prodcast.prodcastd.dto.StoreType;
+import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 
 import java.util.List;
 
+import prodcastd.prodcast.samayu.com.prodcastd.CustomerActivity;
 import prodcastd.prodcast.samayu.com.prodcastd.CustomerAddressFragment;
 import prodcastd.prodcast.samayu.com.prodcastd.CustomerCompanyFragment;
 import prodcastd.prodcast.samayu.com.prodcastd.CustomerContactFragment;
+import prodcastd.prodcast.samayu.com.prodcastd.CustomersActivity;
 import prodcastd.prodcast.samayu.com.prodcastd.ProdcastValidatedFragment;
 import prodcastd.prodcast.samayu.com.prodcastd.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static prodcastd.prodcast.samayu.com.prodcastd.R.layout.fragment_customer_address;
 
@@ -130,7 +143,7 @@ boolean cancel = false;
                 }
             }
         }
-        //mSectionsPagerAdapter.getItem()
+
     }
 
     /**

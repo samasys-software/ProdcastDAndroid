@@ -3,11 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/customer_list"
-    android:name="com.samayu.prodcast.prodcastd.ui.CustomerListFragment"
+
+
+
+    android:name="prodcastd.prodcast.samayu.com.prodcastd.ui.CustomerListFragment"
+
+
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
+
     tools:context="com.samayu.prodcast.prodcastd.ui.CustomerListActivity"
+
+
+
     tools:listitem="@layout/customer_list_content" />

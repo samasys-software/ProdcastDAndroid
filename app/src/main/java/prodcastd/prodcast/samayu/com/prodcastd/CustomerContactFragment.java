@@ -17,10 +17,12 @@ import android.widget.Toast;
 import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.Area;
 import com.samayu.prodcast.prodcastd.dto.Country;
+import com.samayu.prodcast.prodcastd.dto.Customer;
 import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
 import com.samayu.prodcast.prodcastd.dto.StoreType;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 import com.samayu.prodcast.prodcastd.ui.CustomerCreateEditActivity;
+import com.samayu.prodcast.prodcastd.ui.OnFragmentInteractionListener;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,14 +32,7 @@ import static prodcastd.prodcast.samayu.com.prodcastd.R.id.country;
 import static prodcastd.prodcast.samayu.com.prodcastd.R.id.selectDay;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CustomerContactFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link CustomerContactFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class CustomerContactFragment extends ProdcastValidatedFragment {
     private OnFragmentInteractionListener mListener;
     EditText firstName;
@@ -118,9 +113,7 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+
     }
 
     @Override
@@ -140,20 +133,6 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
     public boolean checkValid(String lstName, String fstName, String phneNumber, String mobNumber, String emailAdd,String nte,
                                String smsAllow, Boolean activ) {
         boolean cancel = false;
@@ -216,6 +195,11 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
         boolean activ = true;
 
         return checkValid(lstName,fstName,phneNumber,mobNumber,emailAdd,nte,smsAllow,activ);
+    }
+
+    @Override
+    public void setDetailsInCustomer(Customer customer) {
+
     }
 
 

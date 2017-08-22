@@ -17,9 +17,11 @@ import android.widget.Spinner;
 import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.AdminDTO;
 import com.samayu.prodcast.prodcastd.dto.Area;
+import com.samayu.prodcast.prodcastd.dto.Customer;
 import com.samayu.prodcast.prodcastd.dto.StoreType;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 import com.samayu.prodcast.prodcastd.ui.CustomerCreateEditActivity;
+import com.samayu.prodcast.prodcastd.ui.OnFragmentInteractionListener;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,14 +35,7 @@ import static prodcastd.prodcast.samayu.com.prodcastd.R.id.area;
 import static prodcastd.prodcast.samayu.com.prodcastd.R.id.selectDay;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CustomerCompanyFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link CustomerCompanyFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class CustomerCompanyFragment extends ProdcastValidatedFragment {
 
 
@@ -195,6 +190,8 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
             }
         });
 
+
+
         resetButton = (Button) view.findViewById(R.id.reset) ;
 
         resetButton.setOnClickListener(new View.OnClickListener() {
@@ -299,10 +296,7 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
         return cancel;
     }
 
-                               public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+
     public boolean validate(){
 
         boolean cancel = false;
@@ -317,6 +311,11 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
         int streType = storeType.getSelectedItemPosition();
 
         return checkValid(cpyName, cusId1, cusId2,selectedDay,cusDesc1,cusDesc2,aea,selectCusType,streType);
+
+    }
+
+    @Override
+    public void setDetailsInCustomer(Customer customer) {
 
     }
 

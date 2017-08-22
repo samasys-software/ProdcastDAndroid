@@ -1,9 +1,6 @@
 package prodcastd.prodcast.samayu.com.prodcastd;
 
-import android.content.Context;
 import android.content.Intent;
-import android.media.MediaCodec;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,10 +20,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import prodcastd.prodcast.samayu.com.prodcastd.ui.NavigationDrawerActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

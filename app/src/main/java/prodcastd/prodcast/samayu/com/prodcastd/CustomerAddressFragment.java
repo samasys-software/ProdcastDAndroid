@@ -26,8 +26,10 @@ import android.widget.TextView;
 
 import com.samayu.prodcast.prodcastd.dto.Country;
 import com.samayu.prodcast.prodcastd.dto.CountryDTO;
+import com.samayu.prodcast.prodcastd.dto.Customer;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 import com.samayu.prodcast.prodcastd.ui.CustomerCreateEditActivity;
+import com.samayu.prodcast.prodcastd.ui.OnFragmentInteractionListener;
 
 import java.io.IOException;
 import java.util.List;
@@ -276,9 +278,6 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -308,10 +307,6 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
     public boolean checkValid( String unitNum, String billAdd1,   String cty,String stat,int contry, String pincode) {
         boolean cancel = false;
         unitNumber.setError("");
@@ -369,5 +364,10 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
         String pincode = postalCode.getText().toString();
 
         return checkValid(unitNum,billAdd1,stat,cty,contry,pincode);
+    }
+
+    @Override
+    public void setDetailsInCustomer(Customer customer) {
+
     }
 }

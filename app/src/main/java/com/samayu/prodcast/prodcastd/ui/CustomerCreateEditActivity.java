@@ -26,7 +26,7 @@ import prodcastd.prodcast.samayu.com.prodcastd.CustomerContactFragment;
 import prodcastd.prodcast.samayu.com.prodcastd.ProdcastValidatedFragment;
 import prodcastd.prodcast.samayu.com.prodcastd.R;
 
-public class CustomerCreateEditActivity extends AppCompatActivity implements CustomerCompanyFragment.OnFragmentInteractionListener,CustomerAddressFragment.OnFragmentInteractionListener,CustomerContactFragment.OnFragmentInteractionListener{
+public class CustomerCreateEditActivity extends AppCompatActivity implements OnFragmentInteractionListener{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -94,9 +94,13 @@ public class CustomerCreateEditActivity extends AppCompatActivity implements Cus
         return super.onOptionsItemSelected(item);
     }
 
+
+
     @Override
-    public void onFragmentInteraction(Uri uri) {
-        System.out.println("Called...");
+    public void validateAndSave() {
+            //Validate Each Fragment.
+
+        //mSectionsPagerAdapter.getItem()
     }
 
     /**

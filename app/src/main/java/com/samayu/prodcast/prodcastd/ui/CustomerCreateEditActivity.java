@@ -20,11 +20,17 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.samayu.prodcast.prodcastd.dto.Customer;
+
+import java.util.List;
+
 import prodcastd.prodcast.samayu.com.prodcastd.CustomerAddressFragment;
 import prodcastd.prodcast.samayu.com.prodcastd.CustomerCompanyFragment;
 import prodcastd.prodcast.samayu.com.prodcastd.CustomerContactFragment;
 import prodcastd.prodcast.samayu.com.prodcastd.ProdcastValidatedFragment;
 import prodcastd.prodcast.samayu.com.prodcastd.R;
+
+import static prodcastd.prodcast.samayu.com.prodcastd.R.layout.fragment_customer_address;
 
 public class CustomerCreateEditActivity extends AppCompatActivity implements OnFragmentInteractionListener{
 
@@ -39,6 +45,7 @@ public class CustomerCreateEditActivity extends AppCompatActivity implements OnF
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     public ViewPager getmViewPager() {
+
         return mViewPager;
     }
 
@@ -64,6 +71,7 @@ public class CustomerCreateEditActivity extends AppCompatActivity implements OnF
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         TabLayout tabLayout=(TabLayout) findViewById(R.id.customersTab);
         tabLayout.setupWithViewPager(mViewPager);
@@ -100,6 +108,28 @@ public class CustomerCreateEditActivity extends AppCompatActivity implements OnF
     public void validateAndSave() {
             //Validate Each Fragment.
 
+
+boolean cancel = false;
+        List<Fragment> allFragments=getSupportFragmentManager().getFragments();
+        for (int i = 0;i< allFragments.size();i++) {
+          Fragment fragment  = allFragments.get(i);
+            if (fragment instanceof ProdcastValidatedFragment) {
+                ProdcastValidatedFragment prodcastValidatedFragment =(ProdcastValidatedFragment)fragment;
+               if(! prodcastValidatedFragment.validate()){
+                   cancel = true;
+               }
+            }
+        }
+        if (!cancel){
+            Customer customer = new Customer();
+            for (int i = 0;i< allFragments.size();i++) {
+                Fragment fragment  = allFragments.get(i);
+                if (fragment instanceof ProdcastValidatedFragment) {
+                    ProdcastValidatedFragment prodcastValidatedFragment =(ProdcastValidatedFragment)fragment;
+                     prodcastValidatedFragment.setDetailsInCustomer(customer);
+                }
+            }
+        }
         //mSectionsPagerAdapter.getItem()
     }
 

@@ -41,14 +41,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CustomerAddressFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link CustomerAddressFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class CustomerAddressFragment extends ProdcastValidatedFragment {
     private OnFragmentInteractionListener mListener;
 
@@ -104,8 +97,10 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
         next1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!validate())
-                ((CustomerCreateEditActivity)getActivity()).getmViewPager().setCurrentItem(2);
+                if(!validate()){
+
+                }
+                //((CustomerCreateEditActivity)getActivity()).getmViewPager().setCurrentItem(2);
             }
         });
 
@@ -309,13 +304,13 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
      */
     public boolean checkValid( String unitNum, String billAdd1,   String cty,String stat,int contry, String pincode) {
         boolean cancel = false;
-        unitNumber.setError("");
-        billingAddress1.setError("");
+        unitNumber.setError(null);
+        billingAddress1.setError(null);
 
-        city.setError("");
-        state.setError("");
+        city.setError(null);
+        state.setError(null);
 
-        postalCode.setError("");
+        postalCode.setError(null);
         if (TextUtils.isEmpty(unitNum)) {
             unitNumber.setError("Please Enter Unit Number");
             focusView = unitNumber;
@@ -368,6 +363,7 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
 
     @Override
     public void setDetailsInCustomer(Customer customer) {
-
+     customer.setUnitNumber(unitNumber.getText().toString());
     }
+
 }

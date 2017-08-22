@@ -57,6 +57,7 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
 
     Map<String,String> daysMap = new HashMap<>();
     public CustomerCompanyFragment() {
+        System.out.println("bre");
         // Required empty public constructor
     }
 
@@ -185,8 +186,10 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!validate())
-                ((CustomerCreateEditActivity)getActivity()).getmViewPager().setCurrentItem(1);
+                if(!validate()){
+
+                }
+               // ((CustomerCreateEditActivity)getActivity()).getmViewPager().setCurrentItem(1);
             }
         });
 
@@ -244,11 +247,11 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
     public boolean checkValid( String cpyName, String cusId1, String cusId2,String selectedDay, String cusDesc1, String cusDesc2, long aea,
                                String selectCusType, int streType){
         boolean cancel = false;
-        companyName.setError("");
-        customerId1.setError("");
-        customerId2.setError("");
-        customerDesc1.setError("");
-        customerDesc2.setError("");
+        companyName.setError(null);
+        customerId1.setError(null);
+        customerId2.setError(null);
+        customerDesc1.setError(null);
+        customerDesc2.setError(null);
 
 
         if (TextUtils.isEmpty(cpyName)) {
@@ -289,10 +292,7 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
             focusView = selectCustomerType;
             cancel = true;
         }
-        if(streType <= 0){
-            focusView = storeType;
-            cancel = true;
-        }
+
         return cancel;
     }
 
@@ -316,7 +316,7 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
 
     @Override
     public void setDetailsInCustomer(Customer customer) {
-
+        customer.setCustomerName(companyName.getText().toString());
     }
 
 }

@@ -98,12 +98,7 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public  void onClick(View view) {
-                CustomerCompanyFragment cc=new  CustomerCompanyFragment();
-                cc.validate();
-                CustomerAddressFragment ca =new CustomerAddressFragment();
-                ca.validate();
-                CustomerContactFragment cco = new CustomerContactFragment();
-                cco.validate();
+               mListener.validateAndSave();
 
             }
         });
@@ -136,12 +131,12 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
     public boolean checkValid(String lstName, String fstName, String phneNumber, String mobNumber, String emailAdd,String nte,
                                String smsAllow, Boolean activ) {
         boolean cancel = false;
-        firstName.setError("");
-        lastName.setError("");
-        phoneNumber.setError("");
-        mobileNumber.setError("");
-        emailAddress.setError("");
-        note.setError("");
+        firstName.setError (null);
+        lastName.setError(null);
+        phoneNumber.setError(null);
+        mobileNumber.setError(null);
+        emailAddress.setError(null);
+        note.setError(null);
         if (TextUtils.isEmpty(lstName)) {
             lastName.setError("Please Enter Last Name");
             focusView = lastName;
@@ -199,7 +194,7 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
 
     @Override
     public void setDetailsInCustomer(Customer customer) {
-
+        customer.setLastname(lastName.getText().toString());
     }
 
 

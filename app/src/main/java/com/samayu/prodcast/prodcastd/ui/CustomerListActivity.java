@@ -46,7 +46,10 @@ public class CustomerListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_list);
-
+        boolean useCache = false;
+        if( savedInstanceState!=null ){
+            useCache = savedInstanceState.getBoolean("useCache");
+        }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
@@ -55,14 +58,14 @@ public class CustomerListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(CustomerListActivity.this, CustomerCreateEditActivity.class );
+                startActivity(intent);
             }
         });
 
         View recyclerView = findViewById(R.id.customer_list);
         assert recyclerView != null;
-        setupRecyclerView((RecyclerView) recyclerView);
+        setupRecyclerView((RecyclerView) recyclerView, useCache);
 
         if (findViewById(R.id.customer_detail_container) != null) {
             // The detail container view will be present only in the
@@ -72,27 +75,32 @@ public class CustomerListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
     }
-//SessionInfo.instance().getEmployee().getEmployeeId()
-    private void setupRecyclerView(@NonNull final RecyclerView recyclerView) {
-        Call<CustomerListDTO> customerListDTOCall = new ProdcastDClient().getClient().getCustomers(621);
-        customerListDTOCall.enqueue(new Callback<CustomerListDTO>() {
-            @Override
-            public void onResponse(Call<CustomerListDTO> call, Response<CustomerListDTO> response) {
-                if (response.isSuccessful()) {
-                    CustomerListDTO customerListDTO = response.body();
-                    List<Customer> customerList = customerListDTO.getCustomerList();
-                    SessionInfo.instance().setCustomerList(customerList);
-                    recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(customerList));
+    private void setupRecyclerView(@NonNull final RecyclerView recyclerView, boolean useCache) {
+        if( !useCache) {
+            Call<CustomerListDTO> customerListDTOCall = new ProdcastDClient().getClient().getCustomers(SessionInfo.instance().getEmployee().getEmployeeId());
+            customerListDTOCall.enqueue(new Callback<CustomerListDTO>() {
+                @Override
+                public void onResponse(Call<CustomerListDTO> call, Response<CustomerListDTO> response) {
+                    if (response.isSuccessful()) {
+                        CustomerListDTO customerListDTO = response.body();
+                        List<Customer> customerList = customerListDTO.getCustomerList();
+                        SessionInfo.instance().setCustomerList(customerList);
+                        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(customerList));
 
-                                    }
-            }
+                    }
+                }
 
-            @Override
-            public void onFailure(Call<CustomerListDTO> call, Throwable t) {
-                t.printStackTrace();
+                @Override
+                public void onFailure(Call<CustomerListDTO> call, Throwable t) {
+                    t.printStackTrace();
 
-            }
-        });
+                }
+            });
+        }
+        else{
+            recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(SessionInfo.instance().getCustomerList()));
+
+        }
 
     }
 
@@ -135,7 +143,9 @@ public class CustomerListActivity extends AppCompatActivity {
                     {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, CustomerCreateEditActivity.class);
-                        context.startActivity(intent);
+                        Bundle bundle = new Bundle();
+                        bundle.putLong("customerId", holder.mItem.getId());
+                        context.startActivity(intent,bundle);
                     }
                 }
             });

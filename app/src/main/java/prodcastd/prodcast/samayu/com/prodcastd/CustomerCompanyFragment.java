@@ -1,6 +1,7 @@
 package prodcastd.prodcast.samayu.com.prodcastd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -32,8 +33,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static prodcastd.prodcast.samayu.com.prodcastd.R.id.area;
+import static prodcastd.prodcast.samayu.com.prodcastd.R.id.customerId1;
 import static prodcastd.prodcast.samayu.com.prodcastd.R.id.selectDay;
-
+import static prodcastd.prodcast.samayu.com.prodcastd.R.id.storetype;
 
 
 public class CustomerCompanyFragment extends ProdcastValidatedFragment {
@@ -189,6 +191,7 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
                 if(!validate()){
 
                 }
+
                // ((CustomerCreateEditActivity)getActivity()).getmViewPager().setCurrentItem(1);
             }
         });
@@ -311,12 +314,26 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
         int streType = storeType.getSelectedItemPosition();
 
         return checkValid(cpyName, cusId1, cusId2,selectedDay,cusDesc1,cusDesc2,aea,selectCusType,streType);
-
     }
 
     @Override
     public void setDetailsInCustomer(Customer customer) {
         customer.setCustomerName(companyName.getText().toString());
+        customer.setCustomerId1(customerId1.getText().toString());
+        customer.setCustomerId2(customerId2.getText().toString());
+        customer.setCustomerDesc1(customerDesc1.getText().toString());
+        Area selectedArea = (Area)area.getSelectedItem();
+        customer.setArea(String.valueOf(selectedArea.getId()));
+        if (selectCustomerType.getSelectedItemPosition() == 1) {
+            customer.setCustomerType("R");
+        } else if (selectCustomerType.getSelectedItemPosition() == 2) {
+            customer.setCustomerType("W");
+        }
+        StoreType selectedStoreType = (StoreType)storeType.getSelectedItem();
+        customer.setStoreType(selectedStoreType.getStoreTypeId());
+        String day = (String)selectDay.getSelectedItem();
+        String dayMapping = daysMap.get(day);
+        customer.setWeekday(dayMapping);
     }
 
 }

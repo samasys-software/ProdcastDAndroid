@@ -98,7 +98,7 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
             @Override
             public void onClick(View view) {
                 if(!validate()){
-
+               return;
                 }
                 //((CustomerCreateEditActivity)getActivity()).getmViewPager().setCurrentItem(2);
             }
@@ -306,10 +306,8 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
         boolean cancel = false;
         unitNumber.setError(null);
         billingAddress1.setError(null);
-
         city.setError(null);
         state.setError(null);
-
         postalCode.setError(null);
         if (TextUtils.isEmpty(unitNum)) {
             unitNumber.setError("Please Enter Unit Number");
@@ -358,12 +356,21 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
         int contry = country.getSelectedItemPosition();
         String pincode = postalCode.getText().toString();
 
-        return checkValid(unitNum,billAdd1,stat,cty,contry,pincode);
+        return checkValid(unitNum, billAdd1, stat, cty, contry, pincode);
     }
 
     @Override
     public void setDetailsInCustomer(Customer customer) {
      customer.setUnitNumber(unitNumber.getText().toString());
+        customer.setBillingAddress1(billingAddress1.getText().toString());
+        customer.setBillingAddress2(billingAddress2.getText().toString());
+        customer.setBillingAddress3( billingAddress3.getText().toString());
+        customer.setState(state.getText().toString());
+        customer.setCity(city.getText().toString());
+        Country selectedCountry = (Country) country.getSelectedItem();
+        String selectedCountryId = selectedCountry.getCountryId();
+        customer.setCountry(selectedCountryId);
+        customer.setPostalCode(postalCode.getText().toString());
     }
 
 }

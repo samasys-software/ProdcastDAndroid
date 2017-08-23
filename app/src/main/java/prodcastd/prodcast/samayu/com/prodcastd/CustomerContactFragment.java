@@ -132,8 +132,8 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
         mListener = null;
     }
 
-    public boolean checkValid(String lstName, String fstName, String phneNumber, String mobNumber, String emailAdd,String nte,
-                               String smsAllow, Boolean activ) {
+    public boolean checkValid(String lstName, String fstName, String phneNumber, String mobNumber, String emailAdd,String nte
+                               ) {
         boolean cancel = false;
         firstName.setError (null);
         lastName.setError(null);
@@ -171,12 +171,6 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
             focusView = note;
             cancel = true;
         }
-        if(smsAllowed.isChecked()){
-            smsAllowed.setError("Please Select");
-        }
-        if(active.isChecked()){
-            active.setError("Please Select");
-        }
 
         return cancel;
 
@@ -190,15 +184,23 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
         String mobNumber = mobileNumber.getText().toString();
         String emailAdd = emailAddress.getText().toString();
         String nte = note.getText().toString();
-        String smsAllow = String.valueOf(smsAllowed.isChecked());
         boolean activ = true;
 
-        return checkValid(lstName,fstName,phneNumber,mobNumber,emailAdd,nte,smsAllow,activ);
+        return checkValid(lstName,fstName,phneNumber,mobNumber,emailAdd,nte);
     }
 
     @Override
     public void setDetailsInCustomer(Customer customer) {
+        customer.setFirstname(firstName.getText().toString());
         customer.setLastname(lastName.getText().toString());
+        customer.setPhonenumber(phoneNumber.getText().toString());
+        customer.setCellPhone(mobileNumber.getText().toString());
+        customer.setEmailaddress(emailAddress.getText().toString());
+        customer.setNotes(note.getText().toString());
+        customer.setSmsAllowed(smsAllowed.isChecked());
+
+
+
     }
 
 

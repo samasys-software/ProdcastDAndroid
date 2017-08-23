@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.samayu.prodcast.prodcastd.ui.CustomerCreateEditActivity;
+import com.samayu.prodcast.prodcastd.ui.CustomerListActivity;
+
 
 public class Home extends ProdcastBaseActivity  {
     private ImageView customers, orderEntry;
@@ -35,7 +38,7 @@ public class Home extends ProdcastBaseActivity  {
 
                         Bundle bundle = new Bundle();
                         bundle.putString("employeeId", homeBundle.getString("employeeId"));
-                        Intent i = new Intent(Home.this, CustomersActivity.class);
+                        Intent i = new Intent(Home.this, CustomerListActivity.class);
                         i.putExtras(bundle);
                         startActivity(i, bundle);
                     }

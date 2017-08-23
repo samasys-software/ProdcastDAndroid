@@ -12,5 +12,5 @@ public abstract class ProdcastValidatedFragment extends Fragment {
 
     public abstract boolean validate();
     public abstract void setDetailsInCustomer(Customer customer);
-    //public abstract void setTabValuesFromCustomer(Customer customer);
+    public abstract void setDetailsFromCustomer(Customer customer);
 }

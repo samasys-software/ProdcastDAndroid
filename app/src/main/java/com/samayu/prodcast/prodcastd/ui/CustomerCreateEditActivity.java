@@ -1,6 +1,7 @@
 package com.samayu.prodcast.prodcastd.ui;
 
 import android.content.Intent;
+import android.content.pm.PackageInstaller;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -26,6 +27,7 @@ import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.Area;
 import com.samayu.prodcast.prodcastd.dto.Country;
 import com.samayu.prodcast.prodcastd.dto.Customer;
+import com.samayu.prodcast.prodcastd.dto.CustomerListDTO;
 import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
 import com.samayu.prodcast.prodcastd.dto.StoreType;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
@@ -70,6 +72,7 @@ public class CustomerCreateEditActivity extends AppCompatActivity implements OnF
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private Customer currentCustomer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +91,27 @@ public class CustomerCreateEditActivity extends AppCompatActivity implements OnF
         mViewPager.setAdapter(mSectionsPagerAdapter);
         TabLayout tabLayout=(TabLayout) findViewById(R.id.customersTab);
         tabLayout.setupWithViewPager(mViewPager);
+        if( savedInstanceState!=null ){
+            long customerId = savedInstanceState.getLong("customerId");
 
+            List<Customer> customers = SessionInfo.instance().getCustomerList();
+
+            for(int i=0;i<customers.size();i++){
+                if( customers.get(i).getId() == customerId ){
+                    currentCustomer = customers.get(i);
+                    break;
+                }
+            }
+        }
+
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+
+        for(int i =0;i<fragments.size();i++){
+            Fragment fragment = fragments.get(i);
+            if( fragment instanceof ProdcastValidatedFragment ){
+                ((ProdcastValidatedFragment)fragment).setDetailsFromCustomer( currentCustomer );
+            }
+        }
 
     }
 
@@ -123,27 +146,78 @@ public class CustomerCreateEditActivity extends AppCompatActivity implements OnF
 
 
 boolean cancel = false;
+        Customer customer = new Customer();
         List<Fragment> allFragments=getSupportFragmentManager().getFragments();
         for (int i = 0;i< allFragments.size();i++) {
           Fragment fragment  = allFragments.get(i);
             if (fragment instanceof ProdcastValidatedFragment) {
                 ProdcastValidatedFragment prodcastValidatedFragment =(ProdcastValidatedFragment)fragment;
-               if(! prodcastValidatedFragment.validate()){
-                   cancel = true;
-               }
-            }
-        }
-        if (!cancel){
-            Customer customer = new Customer();
-            for (int i = 0;i< allFragments.size();i++) {
-                Fragment fragment  = allFragments.get(i);
-                if (fragment instanceof ProdcastValidatedFragment) {
-                    ProdcastValidatedFragment prodcastValidatedFragment =(ProdcastValidatedFragment)fragment;
-                     prodcastValidatedFragment.setDetailsInCustomer(customer);
+                if (prodcastValidatedFragment.validate()) {
+                    cancel = true;
                 }
             }
         }
+        if (!cancel) {
 
+            for (int i = 0; i < allFragments.size(); i++) {
+                Fragment fragment = allFragments.get(i);
+                if (fragment instanceof ProdcastValidatedFragment) {
+                    ProdcastValidatedFragment prodcastValidatedFragment = (ProdcastValidatedFragment) fragment;
+                    prodcastValidatedFragment.setDetailsInCustomer(customer);
+
+                }
+            }
+
+
+            String cpyName = customer.getCustomerName();
+            String employeeIdString = String.valueOf(SessionInfo.instance().getEmployee().getEmployeeId());
+            String selectCusType = customer.getCustomerType();
+            Long selectedAreaId = Long.parseLong(customer.getArea());
+            String selectedDay = String.valueOf(customer.getWeekday());
+            String fstName = customer.getFirstname();
+
+            long customerId = 0;
+            if( currentCustomer != null ){
+                customerId = currentCustomer.getId();
+            }
+
+            Call<CustomerListDTO> prodcastDTOCall = new ProdcastDClient().getClient().saveCustomer(employeeIdString, cpyName,
+                    selectCusType, selectedAreaId, selectedDay, fstName, customer.getLastname(), customer.getEmailaddress(),
+                    customer.getCellPhone(), customer.getPhonenumber(), customer.getUnitNumber(),
+                    customer.getBillingAddress1(), customer.getBillingAddress2(), customer.getBillingAddress3(), customer.getCity(),
+                    customer.getState(), customer.getCountry(), customer.isSmsAllowed() ? "1" : "0", customer.getPostalCode(), customer.getNotes(),
+                     customer.getCustomerId1() , customer.getCustomerId2(),customer.getCustomerDesc1() , customer.getCustomerDesc2(), customerId, "1", customer.getStoreType());
+
+
+            prodcastDTOCall.enqueue(new Callback<CustomerListDTO>() {
+                @Override
+                public void onResponse(Call<CustomerListDTO> call, Response<CustomerListDTO> response) {
+                    if (response.isSuccessful()) {
+                        CustomerListDTO prodcastDTO = response.body();
+
+                        if (prodcastDTO.isError()) {
+                            //TODO Show the ERror Message
+
+                            Toast.makeText(CustomerCreateEditActivity.this, "Customer Registration is not saved", Toast.LENGTH_LONG).show();
+                        } else {
+                            List<Customer> customerList = prodcastDTO.getCustomerList();
+                            SessionInfo.instance().setCustomerList( customerList );
+                            Toast.makeText(CustomerCreateEditActivity.this, "Customer Registration is saved Successfully", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(CustomerCreateEditActivity.this, CustomerListActivity.class);
+                            Bundle bundle= new Bundle();
+                            bundle.putBoolean("useCache" , true );
+                            startActivity(intent);
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CustomerListDTO> call, Throwable t) {
+
+                }
+
+            });
+        }
     }
 
     /**

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.ui.CustomerCreateEditActivity;
 import com.samayu.prodcast.prodcastd.ui.CustomerListActivity;
 
@@ -16,6 +17,7 @@ public class Home extends ProdcastBaseActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        SessionInfo.instance().getEmployee().getEmployeeId();
 
                homeBundle = getIntent().getExtras();
                 customers = (ImageView) findViewById(R.id.Customers);
@@ -23,10 +25,8 @@ public class Home extends ProdcastBaseActivity  {
                 orderEntry.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("employeeId",homeBundle.getString("employeeId"));
                         Intent intent = new Intent(Home.this,OrderEntry.class);
-                        intent.putExtras(bundle);
+
                         startActivity(intent);
                     }
                 });
@@ -36,11 +36,10 @@ public class Home extends ProdcastBaseActivity  {
                     @Override
                     public void onClick(View view) {
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("employeeId", homeBundle.getString("employeeId"));
+
                         Intent i = new Intent(Home.this, CustomerListActivity.class);
-                        i.putExtras(bundle);
-                        startActivity(i, bundle);
+
+                        startActivity(i );
                     }
                 });
     }

@@ -38,5 +38,16 @@ public class StoreType
     public String toString(){
         return storeTypeName;
     }
+    @Override
+    public boolean equals(Object object){
+        if (object instanceof StoreType) {
+            StoreType anotherStoreType = (StoreType) object;
+            if (anotherStoreType.getStoreTypeId() .equals( storeTypeId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }

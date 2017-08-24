@@ -14,10 +14,13 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,7 +47,7 @@ import retrofit2.Response;
 
 public class CustomerAddressFragment extends ProdcastValidatedFragment {
     private OnFragmentInteractionListener mListener;
-
+private Customer customer = new Customer();
     EditText unitNumber;
     EditText billingAddress1;
     EditText billingAddress2;
@@ -58,7 +61,7 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
     Button next1;
     View focusView = null;
 
-
+Context context;
 
 
     public CustomerAddressFragment() {
@@ -98,7 +101,7 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
             @Override
             public void onClick(View view) {
                 if(!validate()){
-               return;
+                    ((CustomerCreateEditActivity)getActivity()).getmViewPager().setCurrentItem(2);
                 }
                 //((CustomerCreateEditActivity)getActivity()).getmViewPager().setCurrentItem(2);
             }
@@ -115,6 +118,7 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
                 state.setText("");
                 country.setSelection(0);
                 postalCode.setText("");
+
 
             }
 
@@ -134,7 +138,14 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
                     countryList.add(0, defaultCountry  );
                     ArrayAdapter<Country> adapter = new ArrayAdapter<Country>(CustomerAddressFragment.this.getActivity(), android.R.layout.simple_list_item_1, countryList);
                     country.setAdapter(adapter);
+                    if (customer != null) {
 
+                        String selectedCountry = customer.getCountry();
+                        Country aCountry = new Country();
+                        aCountry.setCountryId(selectedCountry);
+                        int totalCountry = ((ArrayAdapter) country.getAdapter()).getPosition(aCountry);
+                        country.setSelection(totalCountry);
+                    }
                 }
 
             }
@@ -267,7 +278,18 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
             }
         });
 
+        if (customer != null) {
+            unitNumber.setText(customer.getUnitNumber());
+            billingAddress1.setText(customer.getBillingAddress1());
+            billingAddress2.setText(customer.getBillingAddress2());
+            billingAddress3.setText(customer.getBillingAddress3());
+            state.setText(customer.getState());
+            city.setText(customer.getCity());
 
+
+
+            postalCode.setText(customer.getPostalCode());
+        }
         return view;
     }
 
@@ -371,6 +393,12 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
         String selectedCountryId = selectedCountry.getCountryId();
         customer.setCountry(selectedCountryId);
         customer.setPostalCode(postalCode.getText().toString());
+    }
+
+    @Override
+    public void setDetailsFromCustomer(Customer customer) {
+       this.customer = customer;
+
     }
 
 }

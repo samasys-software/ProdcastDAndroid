@@ -25,14 +25,18 @@ import com.samayu.prodcast.prodcastd.ui.CustomerCreateEditActivity;
 import com.samayu.prodcast.prodcastd.ui.OnFragmentInteractionListener;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static prodcastd.prodcast.samayu.com.prodcastd.R.id.area;
+import static prodcastd.prodcast.samayu.com.prodcastd.R.id.companyName;
+import static prodcastd.prodcast.samayu.com.prodcastd.R.id.customer;
 import static prodcastd.prodcast.samayu.com.prodcastd.R.id.customerId1;
 import static prodcastd.prodcast.samayu.com.prodcastd.R.id.selectDay;
 import static prodcastd.prodcast.samayu.com.prodcastd.R.id.storetype;
@@ -40,7 +44,10 @@ import static prodcastd.prodcast.samayu.com.prodcastd.R.id.storetype;
 
 public class CustomerCompanyFragment extends ProdcastValidatedFragment {
 
+    Map<String,String> daysMap = new HashMap<>();
+    Map<String , String> inverseDayMap = new HashMap<>();
 
+    private  Customer customer = null;
     private OnFragmentInteractionListener mListener;
     EditText companyName;
     EditText customerId1;
@@ -57,17 +64,11 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
     View focusView = null;
 
 
-    Map<String,String> daysMap = new HashMap<>();
+
     public CustomerCompanyFragment() {
-        System.out.println("bre");
         // Required empty public constructor
     }
 
-
-    public static CustomerCompanyFragment newInstance() {
-        CustomerCompanyFragment fragment = new CustomerCompanyFragment();
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,6 +91,15 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
         daysMap.put("Friday", "FR");
         daysMap.put("Saturday","SA");
         daysMap.put("Multiple Days","ML");
+
+
+        Set<String> keySet = daysMap.keySet();
+        Iterator<String> stringIterator =keySet.iterator();
+       while (stringIterator.hasNext()){
+           String key = stringIterator.next();
+           inverseDayMap.put(daysMap.get(key),key);
+
+       }
 
         companyName = (EditText) view.findViewById(R.id.companyName);
         customerId1 = (EditText) view.findViewById(R.id.customerId1);
@@ -118,9 +128,9 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
         areaDTOCall.enqueue(new Callback<AdminDTO<List<Area>>>() {
             @Override
             public void onResponse(Call<AdminDTO<List<Area>>> call, Response<AdminDTO<List<Area>>> response) {
-                if(response.isSuccessful()){
+                if(response.isSuccessful()) {
                     AdminDTO<List<Area>> areaDTO = response.body();
-                    List<Area> areaList= areaDTO.getResult();
+                    List<Area> areaList = areaDTO.getResult();
                     Area defaultArea = new Area();
                     defaultArea.setId(-1l);
                     defaultArea.setDescription("Select Area");
@@ -128,6 +138,13 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
 
                     ArrayAdapter<Area> adapter = new ArrayAdapter<Area>(CustomerCompanyFragment.this.getActivity(), android.R.layout.simple_list_item_1, areaList);
                     area.setAdapter(adapter);
+                    if (customer != null) {
+                        String selectedArea = customer.getArea();
+                        Area aSelectedArea = new Area();
+                        aSelectedArea.setId(Long.parseLong(selectedArea));
+                        int areaPosition = ((ArrayAdapter<Area>) area.getAdapter()).getPosition(aSelectedArea);
+                        area.setSelection(areaPosition);
+                    }
                 }
 
             }
@@ -162,18 +179,25 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
         adminDTOCall.enqueue(new Callback<AdminDTO<List<StoreType>>>() {
             @Override
             public void onResponse(Call<AdminDTO<List<StoreType>>> call, Response<AdminDTO<List<StoreType>>> response) {
-                if(response.isSuccessful()){
-                    AdminDTO<List<StoreType>> adminDTO= response.body();
+                if(response.isSuccessful()) {
+                    AdminDTO<List<StoreType>> adminDTO = response.body();
                     List<StoreType> storeTypeList = adminDTO.getResult();
 
                     StoreType defaultStoreType = new StoreType();
                     defaultStoreType.setStoreTypeId(-1l);
                     defaultStoreType.setStoreTypeName("Select Store Type");
-                    storeTypeList.add(0, defaultStoreType  );
+                    storeTypeList.add(0, defaultStoreType);
 
 
                     ArrayAdapter<StoreType> adapter = new ArrayAdapter<StoreType>(CustomerCompanyFragment.this.getActivity(), android.R.layout.simple_list_item_1, storeTypeList);
                     storeType.setAdapter(adapter);
+                    if (customer != null) {
+                        Long selectedStoreType = customer.getStoreType();
+                        StoreType aStoreType = new StoreType();
+                        aStoreType.setStoreTypeId(selectedStoreType);
+                        int aSelectedStoreType = ((ArrayAdapter<StoreType>) storeType.getAdapter()).getPosition(aStoreType);
+                        storeType.setSelection(aSelectedStoreType);
+                    }
                 }
             }
 
@@ -190,6 +214,7 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
             public void onClick(View view) {
                 if(!validate()){
 
+                    ((CustomerCreateEditActivity)getActivity()).getmViewPager().setCurrentItem(1);
                 }
 
                // ((CustomerCreateEditActivity)getActivity()).getmViewPager().setCurrentItem(1);
@@ -214,11 +239,34 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
                 storeType.setSelection(0);
             }
         });
+        if (customer != null) {
+            companyName.setText(customer.getCustomerName());
+            customerId1.setText(customer.getCustomerId1());
+            customerId2.setText(customer.getCustomerId2());
+            customerDesc1.setText(customer.getCustomerDesc1());
+            customerDesc2.setText(customer.getCustomerDesc2());
+
+            String selectedDay = customer.getWeekday();
+            String dayDesc =  inverseDayMap.get(selectedDay);
+            int dayPos = ( (ArrayAdapter)selectDay.getAdapter()).getPosition(dayDesc);
+            selectDay.setSelection(dayPos);
 
 
 
 
-                return view;
+
+            String selectedCustomerType = customer.getCustomerType();
+
+            if (selectedCustomerType.equals("W")) {
+                selectCustomerType.setSelection(2);
+            }
+            if (selectedCustomerType.equals("R")) {
+                selectCustomerType.setSelection(1);
+            }
+
+        }
+        return view;
+
        }
     @Override
     public void onAttach(Context context) {
@@ -268,7 +316,7 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
             cancel = true;
         }
         if (TextUtils.isEmpty(cusId2)) {
-            customerId1.setError("Please enter Customer Id2");
+            customerId2.setError("Please enter Customer Id2");
             focusView = customerId2;
             cancel = true;
         }
@@ -334,6 +382,13 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
         String day = (String)selectDay.getSelectedItem();
         String dayMapping = daysMap.get(day);
         customer.setWeekday(dayMapping);
+    }
+
+    @Override
+    public void setDetailsFromCustomer(Customer customer) {
+        this.customer = customer;
+
+
     }
 
 }

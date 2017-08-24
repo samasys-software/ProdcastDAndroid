@@ -145,7 +145,8 @@ public class CustomerListActivity extends AppCompatActivity {
                         Intent intent = new Intent(context, CustomerCreateEditActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putLong("customerId", holder.mItem.getId());
-                        context.startActivity(intent,bundle);
+                        intent.putExtras(bundle);
+                        context.startActivity(intent);
                     }
                 }
             });

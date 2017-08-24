@@ -71,14 +71,14 @@ public interface ProdcastDistributorService {
                                           @Field("city") String city,
                                           @Field("state") String state,
                                           @Field("country") String countryId,
-                                          @Field("smsAllowed") String smsAllow,
+                                          @Field("smsAllowed") boolean smsAllow,
                                           @Field("postalCode") String postalCode,
                                           @Field("notes") String nte,
                                           @Field("customerId1") String customerId1,
                                           @Field("customerId2") String customerId2,
                                           @Field("customerDesc1") String customerIdDesc1,
                                           @Field("customerDesc2") String customerIdDesc2,
-                                          @Field("customerId") long customerId,
-                                          @Field("active") String activ,
-                                          @Field("storeTypeId") long storeTypeId);
+                                          @Field("customerId") Long customerId,
+                                          @Field("active") boolean activ,
+                                          @Field("storeTypeId") Long storeTypeId);
 }

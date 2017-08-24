@@ -27,5 +27,15 @@ public class Area {
     public String toString(){
         return description;
     }
+    @Override
+    public boolean equals(Object object){
+        if (object instanceof Area) {
+            Area anotherArea = (Area) object;
+            if (anotherArea.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

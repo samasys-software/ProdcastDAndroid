@@ -39,6 +39,7 @@ import static prodcastd.prodcast.samayu.com.prodcastd.R.id.selectDay;
 
 public class CustomerContactFragment extends ProdcastValidatedFragment {
     private OnFragmentInteractionListener mListener;
+    private  Customer customer = new Customer();
     EditText firstName;
     EditText lastName;
     EditText phoneNumber;
@@ -106,8 +107,21 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
 
             }
         });
+        if (customer != null) {
+            lastName.setText(customer.getLastname());
+            firstName.setText(customer.getFirstname());
+            phoneNumber.setText(customer.getPhonenumber());
+            mobileNumber.setText(customer.getCellPhone());
+            emailAddress.setText(customer.getEmailaddress());
+            note.setText(customer.getNotes());
+            active.setVisibility(View.VISIBLE);
+            smsAllowed.setChecked(customer.isSmsAllowed());
+            active.setChecked(customer.isActive());
+
+        }
 
         return view;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -198,9 +212,15 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
         customer.setEmailaddress(emailAddress.getText().toString());
         customer.setNotes(note.getText().toString());
         customer.setSmsAllowed(smsAllowed.isChecked());
+        customer.setActive(active.isChecked());
 
 
+    }
 
+    @Override
+    public void setDetailsFromCustomer(Customer customer) {
+
+this.customer = customer;
     }
 
 

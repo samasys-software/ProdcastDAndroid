@@ -60,6 +60,7 @@
         android:paddingRight="5dp">
 
         <EditText
+            android:visibility="visible"
             android:id="@+id/mobileNumber"
             android:layout_width="match_parent"
             android:layout_height="40dp"

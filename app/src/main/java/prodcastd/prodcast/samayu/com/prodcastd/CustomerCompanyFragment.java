@@ -370,6 +370,7 @@ public class CustomerCompanyFragment extends ProdcastValidatedFragment {
         customer.setCustomerId1(customerId1.getText().toString());
         customer.setCustomerId2(customerId2.getText().toString());
         customer.setCustomerDesc1(customerDesc1.getText().toString());
+        customer.setCustomerDesc2(customerDesc2.getText().toString());
         Area selectedArea = (Area)area.getSelectedItem();
         customer.setArea(String.valueOf(selectedArea.getId()));
         if (selectCustomerType.getSelectedItemPosition() == 1) {

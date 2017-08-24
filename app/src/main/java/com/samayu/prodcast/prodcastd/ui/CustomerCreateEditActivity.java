@@ -39,6 +39,7 @@ import prodcastd.prodcast.samayu.com.prodcastd.CustomerAddressFragment;
 import prodcastd.prodcast.samayu.com.prodcastd.CustomerCompanyFragment;
 import prodcastd.prodcast.samayu.com.prodcastd.CustomerContactFragment;
 import prodcastd.prodcast.samayu.com.prodcastd.CustomersActivity;
+import prodcastd.prodcast.samayu.com.prodcastd.ProdcastBaseActivity;
 import prodcastd.prodcast.samayu.com.prodcastd.ProdcastValidatedFragment;
 import prodcastd.prodcast.samayu.com.prodcastd.R;
 import retrofit2.Call;
@@ -47,7 +48,7 @@ import retrofit2.Response;
 
 import static prodcastd.prodcast.samayu.com.prodcastd.R.layout.fragment_customer_address;
 
-public class CustomerCreateEditActivity extends AppCompatActivity implements OnFragmentInteractionListener{
+public class CustomerCreateEditActivity extends ProdcastBaseActivity implements OnFragmentInteractionListener{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -79,8 +80,6 @@ public class CustomerCreateEditActivity extends AppCompatActivity implements OnF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_create_edit);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());

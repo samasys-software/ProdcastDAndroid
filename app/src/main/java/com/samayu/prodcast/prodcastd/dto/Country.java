@@ -43,7 +43,16 @@ public class Country {
     public String toString(){
         return countryName;
     }
-
+    @Override
+    public boolean equals(Object object){
+        if (object instanceof Country) {
+            Country anotherCountry = (Country) object;
+            if (anotherCountry.getCountryId().equals(countryId)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 }

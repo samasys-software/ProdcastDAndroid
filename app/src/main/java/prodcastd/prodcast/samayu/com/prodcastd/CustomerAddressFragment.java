@@ -14,10 +14,13 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,17 +44,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CustomerAddressFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link CustomerAddressFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class CustomerAddressFragment extends ProdcastValidatedFragment {
     private OnFragmentInteractionListener mListener;
-
+private Customer customer = new Customer();
     EditText unitNumber;
     EditText billingAddress1;
     EditText billingAddress2;
@@ -65,7 +61,7 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
     Button next1;
     View focusView = null;
 
-
+Context context;
 
 
     public CustomerAddressFragment() {
@@ -104,8 +100,10 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
         next1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!validate())
-                ((CustomerCreateEditActivity)getActivity()).getmViewPager().setCurrentItem(2);
+                if(!validate()){
+                    ((CustomerCreateEditActivity)getActivity()).getmViewPager().setCurrentItem(2);
+                }
+                //((CustomerCreateEditActivity)getActivity()).getmViewPager().setCurrentItem(2);
             }
         });
 
@@ -120,6 +118,7 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
                 state.setText("");
                 country.setSelection(0);
                 postalCode.setText("");
+
 
             }
 
@@ -139,7 +138,14 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
                     countryList.add(0, defaultCountry  );
                     ArrayAdapter<Country> adapter = new ArrayAdapter<Country>(CustomerAddressFragment.this.getActivity(), android.R.layout.simple_list_item_1, countryList);
                     country.setAdapter(adapter);
+                    if (customer != null) {
 
+                        String selectedCountry = customer.getCountry();
+                        Country aCountry = new Country();
+                        aCountry.setCountryId(selectedCountry);
+                        int totalCountry = ((ArrayAdapter) country.getAdapter()).getPosition(aCountry);
+                        country.setSelection(totalCountry);
+                    }
                 }
 
             }
@@ -272,7 +278,18 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
             }
         });
 
+        if (customer != null) {
+            unitNumber.setText(customer.getUnitNumber());
+            billingAddress1.setText(customer.getBillingAddress1());
+            billingAddress2.setText(customer.getBillingAddress2());
+            billingAddress3.setText(customer.getBillingAddress3());
+            state.setText(customer.getState());
+            city.setText(customer.getCity());
 
+
+
+            postalCode.setText(customer.getPostalCode());
+        }
         return view;
     }
 
@@ -309,13 +326,11 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
      */
     public boolean checkValid( String unitNum, String billAdd1,   String cty,String stat,int contry, String pincode) {
         boolean cancel = false;
-        unitNumber.setError("");
-        billingAddress1.setError("");
-
-        city.setError("");
-        state.setError("");
-
-        postalCode.setError("");
+        unitNumber.setError(null);
+        billingAddress1.setError(null);
+        city.setError(null);
+        state.setError(null);
+        postalCode.setError(null);
         if (TextUtils.isEmpty(unitNum)) {
             unitNumber.setError("Please Enter Unit Number");
             focusView = unitNumber;
@@ -363,11 +378,27 @@ public class CustomerAddressFragment extends ProdcastValidatedFragment {
         int contry = country.getSelectedItemPosition();
         String pincode = postalCode.getText().toString();
 
-        return checkValid(unitNum,billAdd1,stat,cty,contry,pincode);
+        return checkValid(unitNum, billAdd1, stat, cty, contry, pincode);
     }
 
     @Override
     public void setDetailsInCustomer(Customer customer) {
+     customer.setUnitNumber(unitNumber.getText().toString());
+        customer.setBillingAddress1(billingAddress1.getText().toString());
+        customer.setBillingAddress2(billingAddress2.getText().toString());
+        customer.setBillingAddress3( billingAddress3.getText().toString());
+        customer.setState(state.getText().toString());
+        customer.setCity(city.getText().toString());
+        Country selectedCountry = (Country) country.getSelectedItem();
+        String selectedCountryId = selectedCountry.getCountryId();
+        customer.setCountry(selectedCountryId);
+        customer.setPostalCode(postalCode.getText().toString());
+    }
+
+    @Override
+    public void setDetailsFromCustomer(Customer customer) {
+       this.customer = customer;
 
     }
+
 }

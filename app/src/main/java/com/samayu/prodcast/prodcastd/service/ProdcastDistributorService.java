@@ -54,7 +54,7 @@ public interface ProdcastDistributorService {
 
     @POST("prodcast/global/saveCustomer")
     @FormUrlEncoded
-    public Call<ProdcastDTO> saveCustomer(@Field("employeeId") String employeeId,
+    public Call<CustomerListDTO> saveCustomer(@Field("employeeId") String employeeId,
                                           @Field("customerName") String customerName,
                                           @Field("customerType") String customerType,
                                           @Field("areaId") Long areaId,
@@ -70,5 +70,15 @@ public interface ProdcastDistributorService {
                                           @Field("billingAddress3") String billingAddress3,
                                           @Field("city") String city,
                                           @Field("state") String state,
-                                          @Field("country") String countryId, String nte, String smsAllow, boolean activ);
+                                          @Field("country") String countryId,
+                                          @Field("smsAllowed") boolean smsAllow,
+                                          @Field("postalCode") String postalCode,
+                                          @Field("notes") String nte,
+                                          @Field("customerId1") String customerId1,
+                                          @Field("customerId2") String customerId2,
+                                          @Field("customerDesc1") String customerIdDesc1,
+                                          @Field("customerDesc2") String customerIdDesc2,
+                                          @Field("customerId") Long customerId,
+                                          @Field("active") boolean activ,
+                                          @Field("storeTypeId") Long storeTypeId);
 }

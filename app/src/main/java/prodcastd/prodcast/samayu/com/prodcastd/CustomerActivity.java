@@ -611,9 +611,10 @@ public class CustomerActivity extends AppCompatActivity {
           String selectedCountryId=selectedCountry.getCountryId();
         String employeeIdString =String.valueOf(SessionInfo.instance().getEmployee().getEmployeeId());
 
-        Call<ProdcastDTO> prodcastDTOCall = new ProdcastDClient().getClient().saveCustomer(employeeIdString,cpyName,
-                selectCusType,selectedAreaId,selectedDay,fstName,lstName,emailAdd,phneNumber,mobNumber,unitNum,
-                billAdd1,billAdd2,billAdd3,stat,cty,selectedCountryId,nte,smsAllow,activ);
+        Call<ProdcastDTO> prodcastDTOCall = null;
+                //new ProdcastDClient().getClient().saveCustomer(employeeIdString,cpyName,
+                //selectCusType,selectedAreaId,selectedDay,fstName,lstName,emailAdd,phneNumber,mobNumber,unitNum,
+                //billAdd1,billAdd2,billAdd3,stat,cty,selectedCountryId,nte,smsAllow,activ,);
         
 
         prodcastDTOCall.enqueue(new Callback<ProdcastDTO>() {

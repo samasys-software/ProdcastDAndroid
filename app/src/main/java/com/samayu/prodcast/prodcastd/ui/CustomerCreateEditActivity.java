@@ -1,5 +1,7 @@
 package com.samayu.prodcast.prodcastd.ui;
 
+import android.content.Intent;
+import android.content.pm.PackageInstaller;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,12 +21,31 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.samayu.prodcast.prodcastd.SessionInfo;
+import com.samayu.prodcast.prodcastd.dto.Area;
+import com.samayu.prodcast.prodcastd.dto.Country;
+import com.samayu.prodcast.prodcastd.dto.Customer;
+import com.samayu.prodcast.prodcastd.dto.CustomerListDTO;
+import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
+import com.samayu.prodcast.prodcastd.dto.StoreType;
+import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
+
+import java.util.List;
+
+import prodcastd.prodcast.samayu.com.prodcastd.CustomerActivity;
 import prodcastd.prodcast.samayu.com.prodcastd.CustomerAddressFragment;
 import prodcastd.prodcast.samayu.com.prodcastd.CustomerCompanyFragment;
 import prodcastd.prodcast.samayu.com.prodcastd.CustomerContactFragment;
+import prodcastd.prodcast.samayu.com.prodcastd.CustomersActivity;
 import prodcastd.prodcast.samayu.com.prodcastd.ProdcastValidatedFragment;
 import prodcastd.prodcast.samayu.com.prodcastd.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static prodcastd.prodcast.samayu.com.prodcastd.R.layout.fragment_customer_address;
 
 public class CustomerCreateEditActivity extends AppCompatActivity implements OnFragmentInteractionListener{
 
@@ -36,9 +57,11 @@ public class CustomerCreateEditActivity extends AppCompatActivity implements OnF
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
+
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     public ViewPager getmViewPager() {
+
         return mViewPager;
     }
 
@@ -50,12 +73,12 @@ public class CustomerCreateEditActivity extends AppCompatActivity implements OnF
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private Customer currentCustomer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_create_edit);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -64,9 +87,28 @@ public class CustomerCreateEditActivity extends AppCompatActivity implements OnF
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         TabLayout tabLayout=(TabLayout) findViewById(R.id.customersTab);
         tabLayout.setupWithViewPager(mViewPager);
+       Bundle bundle = getIntent().getExtras();
+        currentCustomer = null;
+        if(bundle != null) {
+            long customerId = bundle.getLong("customerId");
+
+            List<Customer> customers = SessionInfo.instance().getCustomerList();
+
+            for (int i = 0; i < customers.size(); i++) {
+                if (customers.get(i).getId() == customerId) {
+                    currentCustomer = customers.get(i);
+                    break;
+                }
+            }
+
+        }
+
+
+
 
 
     }
@@ -100,7 +142,86 @@ public class CustomerCreateEditActivity extends AppCompatActivity implements OnF
     public void validateAndSave() {
             //Validate Each Fragment.
 
-        //mSectionsPagerAdapter.getItem()
+
+boolean cancel = false;
+        Customer customer = new Customer();
+        List<Fragment> allFragments=getSupportFragmentManager().getFragments();
+        for (int i = 0;i< allFragments.size();i++) {
+          Fragment fragment  = allFragments.get(i);
+            if (fragment instanceof ProdcastValidatedFragment) {
+                ProdcastValidatedFragment prodcastValidatedFragment =(ProdcastValidatedFragment)fragment;
+                if (prodcastValidatedFragment.validate()) {
+                    cancel = true;
+                    getmViewPager().setCurrentItem(i);
+                }
+            }
+        }
+        if (!cancel) {
+
+            for (int i = 0; i < allFragments.size(); i++) {
+                Fragment fragment = allFragments.get(i);
+                if (fragment instanceof ProdcastValidatedFragment) {
+                    ProdcastValidatedFragment prodcastValidatedFragment = (ProdcastValidatedFragment) fragment;
+                    prodcastValidatedFragment.setDetailsInCustomer(customer);
+
+                }
+            }
+
+
+            String cpyName = customer.getCustomerName();
+            String employeeIdString = String.valueOf(SessionInfo.instance().getEmployee().getEmployeeId());
+            String selectCusType = customer.getCustomerType();
+            Long selectedAreaId = Long.parseLong(customer.getArea());
+            String selectedDay = String.valueOf(customer.getWeekday());
+            String fstName = customer.getFirstname();
+
+            long customerId = 0;
+            boolean active =true;
+            if( currentCustomer != null ){
+                customerId = currentCustomer.getId();
+                active = customer.isActive();
+            }
+
+            Call<CustomerListDTO> prodcastDTOCall = new ProdcastDClient().getClient().saveCustomer(employeeIdString, cpyName,
+                    selectCusType, selectedAreaId, selectedDay, fstName, customer.getLastname(), customer.getEmailaddress(),
+                    customer.getCellPhone(), customer.getPhonenumber(), customer.getUnitNumber(),
+                    customer.getBillingAddress1(), customer.getBillingAddress2(), customer.getBillingAddress3(), customer.getCity(),
+                    customer.getState(), customer.getCountry(), customer.isSmsAllowed()  ,
+                    customer.getPostalCode(), customer.getNotes(),
+                     customer.getCustomerId1() , customer.getCustomerId2(),customer.getCustomerDesc1() ,
+                    customer.getCustomerDesc2(), customerId, active, customer.getStoreType());
+
+
+            prodcastDTOCall.enqueue(new Callback<CustomerListDTO>() {
+                @Override
+                public void onResponse(Call<CustomerListDTO> call, Response<CustomerListDTO> response) {
+                    if (response.isSuccessful()) {
+                        CustomerListDTO prodcastDTO = response.body();
+
+                        if (prodcastDTO.isError()) {
+                            //TODO Show the ERror Message
+
+                            Toast.makeText(CustomerCreateEditActivity.this, "Customer Registration is not saved", Toast.LENGTH_LONG).show();
+                        } else {
+                            List<Customer> customerList = prodcastDTO.getCustomerList();
+                            SessionInfo.instance().setCustomerList( customerList );
+                            Toast.makeText(CustomerCreateEditActivity.this, "Customer Registration is saved Successfully", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(CustomerCreateEditActivity.this, CustomerListActivity.class);
+                            Bundle bundle= new Bundle();
+                            bundle.putBoolean("useCache" , true );
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CustomerListDTO> call, Throwable t) {
+
+                }
+
+            });
+        }
     }
 
     /**
@@ -117,9 +238,28 @@ public class CustomerCreateEditActivity extends AppCompatActivity implements OnF
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            if( position == 0 ) return new CustomerCompanyFragment();
-            if(position ==1 ) return new CustomerAddressFragment();
-            if ( position == 2 ) return new CustomerContactFragment();
+            if( position == 0 ) {
+                try {
+                    CustomerCompanyFragment ccf = new CustomerCompanyFragment();
+                    ccf.setDetailsFromCustomer(currentCustomer);
+                    return ccf;
+                }
+                catch(Error er_){
+                    er_.printStackTrace();
+                    return null;
+                }
+
+            }
+            if(position ==1 ){
+                CustomerAddressFragment caf = new CustomerAddressFragment();
+                caf.setDetailsFromCustomer(currentCustomer);
+                return caf;
+            }
+            if ( position == 2 ) {
+                CustomerContactFragment customerContactFragment = new CustomerContactFragment();
+                customerContactFragment.setDetailsFromCustomer(currentCustomer);
+                return customerContactFragment;
+            }
 
             return null;
         }

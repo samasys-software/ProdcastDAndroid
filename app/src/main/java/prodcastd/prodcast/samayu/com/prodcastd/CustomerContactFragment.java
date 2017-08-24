@@ -26,15 +26,20 @@ import com.samayu.prodcast.prodcastd.ui.OnFragmentInteractionListener;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 import static prodcastd.prodcast.samayu.com.prodcastd.R.id.area;
+import static prodcastd.prodcast.samayu.com.prodcastd.R.id.companyName;
 import static prodcastd.prodcast.samayu.com.prodcastd.R.id.country;
+import static prodcastd.prodcast.samayu.com.prodcastd.R.id.customer;
+import static prodcastd.prodcast.samayu.com.prodcastd.R.id.customerId1;
 import static prodcastd.prodcast.samayu.com.prodcastd.R.id.selectDay;
 
 
 
 public class CustomerContactFragment extends ProdcastValidatedFragment {
     private OnFragmentInteractionListener mListener;
+    private  Customer customer = new Customer();
     EditText firstName;
     EditText lastName;
     EditText phoneNumber;
@@ -98,17 +103,25 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public  void onClick(View view) {
-                CustomerCompanyFragment cc=new  CustomerCompanyFragment();
-                cc.validate();
-                CustomerAddressFragment ca =new CustomerAddressFragment();
-                ca.validate();
-                CustomerContactFragment cco = new CustomerContactFragment();
-                cco.validate();
+               mListener.validateAndSave();
 
             }
         });
+        if (customer != null) {
+            lastName.setText(customer.getLastname());
+            firstName.setText(customer.getFirstname());
+            phoneNumber.setText(customer.getPhonenumber());
+            mobileNumber.setText(customer.getCellPhone());
+            emailAddress.setText(customer.getEmailaddress());
+            note.setText(customer.getNotes());
+            active.setVisibility(View.VISIBLE);
+            smsAllowed.setChecked(customer.isSmsAllowed());
+            active.setChecked(customer.isActive());
+
+        }
 
         return view;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -133,15 +146,15 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
         mListener = null;
     }
 
-    public boolean checkValid(String lstName, String fstName, String phneNumber, String mobNumber, String emailAdd,String nte,
-                               String smsAllow, Boolean activ) {
+    public boolean checkValid(String lstName, String fstName, String phneNumber, String mobNumber, String emailAdd,String nte
+                               ) {
         boolean cancel = false;
-        firstName.setError("");
-        lastName.setError("");
-        phoneNumber.setError("");
-        mobileNumber.setError("");
-        emailAddress.setError("");
-        note.setError("");
+        firstName.setError (null);
+        lastName.setError(null);
+        phoneNumber.setError(null);
+        mobileNumber.setError(null);
+        emailAddress.setError(null);
+        note.setError(null);
         if (TextUtils.isEmpty(lstName)) {
             lastName.setError("Please Enter Last Name");
             focusView = lastName;
@@ -172,12 +185,6 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
             focusView = note;
             cancel = true;
         }
-        if(smsAllowed.isChecked()){
-            smsAllowed.setError("Please Select");
-        }
-        if(active.isChecked()){
-            active.setError("Please Select");
-        }
 
         return cancel;
 
@@ -191,15 +198,29 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
         String mobNumber = mobileNumber.getText().toString();
         String emailAdd = emailAddress.getText().toString();
         String nte = note.getText().toString();
-        String smsAllow = String.valueOf(smsAllowed.isChecked());
         boolean activ = true;
 
-        return checkValid(lstName,fstName,phneNumber,mobNumber,emailAdd,nte,smsAllow,activ);
+        return checkValid(lstName,fstName,phneNumber,mobNumber,emailAdd,nte);
     }
 
     @Override
     public void setDetailsInCustomer(Customer customer) {
+        customer.setFirstname(firstName.getText().toString());
+        customer.setLastname(lastName.getText().toString());
+        customer.setPhonenumber(phoneNumber.getText().toString());
+        customer.setCellPhone(mobileNumber.getText().toString());
+        customer.setEmailaddress(emailAddress.getText().toString());
+        customer.setNotes(note.getText().toString());
+        customer.setSmsAllowed(smsAllowed.isChecked());
+        customer.setActive(active.isChecked());
 
+
+    }
+
+    @Override
+    public void setDetailsFromCustomer(Customer customer) {
+
+this.customer = customer;
     }
 
 

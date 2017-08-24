@@ -42,11 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         if (ep != null){
             SessionInfo.instance().setEmployee(ep);
             Intent intent =new Intent(LoginActivity.this,Home.class);
-            SessionInfo.instance().setEmployee( ep);
-            Bundle bundle =  new Bundle();
-            bundle.putString("employeeId",String.valueOf(ep.getEmployeeId()));
-            intent.putExtras(bundle);
-            startActivity(intent,bundle);
+            startActivity(intent);
         }
          userName = (EditText)findViewById(R.id.logmn);
         password = (EditText)findViewById(R.id.loginPinNumber);

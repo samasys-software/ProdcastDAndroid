@@ -205,6 +205,7 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
 
     @Override
     public void setDetailsInCustomer(Customer customer) {
+
         customer.setFirstname(firstName.getText().toString());
         customer.setLastname(lastName.getText().toString());
         customer.setPhonenumber(phoneNumber.getText().toString());

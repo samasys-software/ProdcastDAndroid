@@ -49,10 +49,13 @@ public class OrderEntry extends ProdcastBaseActivity {
     private Customer selectedCustomer;
     Button payButton;
     View.OnKeyListener listener = null;
+    Bundle productBundle = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_entry);
+        productBundle = getIntent().getExtras();
+
         checkPanel=(LinearLayout)findViewById(R.id.checkPanel);
         billsView = (ListView)findViewById(R.id.billsView);
         methodOfPayment=(Spinner)findViewById(R.id.paymentType);
@@ -105,13 +108,10 @@ public class OrderEntry extends ProdcastBaseActivity {
                 customerNames.setOnKeyListener(listener);
                 findViewById(R.id.llbills).setVisibility(View.GONE);
                 List<Customer> customerList =SessionInfo.instance().getCustomerList();
-                String customerName = (String)adapterView.getItemAtPosition(i);
-                for (int a =0;a<customerList.size();a++){
-                    selectedCustomer = customerList.get(a);
-                    if (selectedCustomer.getCustomerName().equalsIgnoreCase(customerName)){
-                        break;
-                    }
-                }
+                selectedCustomer  = (Customer)adapterView.getItemAtPosition(i);
+
+
+                SessionInfo.instance().setSelectedCustomer( selectedCustomer );
 
                 recreateOutstandingBills();
             }
@@ -123,6 +123,7 @@ public class OrderEntry extends ProdcastBaseActivity {
                 fabNewOrder.setVisibility(View.VISIBLE);
                     View b4 = findViewById(R.id.llpayment);
                     b4.setVisibility(View.VISIBLE);
+                payButton.setEnabled(true);
 
             }
         });
@@ -137,44 +138,69 @@ public class OrderEntry extends ProdcastBaseActivity {
         fabNewOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent i = new Intent(OrderEntry.this,NewOrder.class);
+                SessionInfo.instance().setSelectedCustomer(selectedCustomer);
                 startActivity(i);
             }
         });
+
+
+        selectedCustomer = SessionInfo.instance().getSelectedCustomer();
+
+        if( selectedCustomer == null ){
+            fetchCustomers();
+        }
+        else{
+
+            ArrayAdapter<Customer> customeAdapter = new ArrayAdapter<Customer>(OrderEntry.this, android.R.layout.select_dialog_item,SessionInfo.instance().getCustomerList());
+            customerNames.setThreshold(1);
+            customerNames.setAdapter(customeAdapter);
+            recreateOutstandingBills();
+
+
+        }
+
+    }
+    public void fetchCustomers(){
         long empId= SessionInfo.instance().getEmployee().getEmployeeId();
+
         Call<CustomerListDTO> customerListDTOCall = new ProdcastDClient().getClient().getCustomers(empId);
-       customerListDTOCall.enqueue(new Callback<CustomerListDTO>() {
-           @Override
+        customerListDTOCall.enqueue(new Callback<CustomerListDTO>() {
+            @Override
             public void onResponse(Call<CustomerListDTO> call, Response<CustomerListDTO> response) {
                 if (response.isSuccessful()) {
                     CustomerListDTO customerListDTO = response.body();
                     SessionInfo.instance().setCustomerList(customerListDTO.getCustomerList());
                     SessionInfo.instance().setOutStandingBills(customerListDTO.getOutstandingBills());
-                        List<Customer> customerList = customerListDTO.getCustomerList();
+                    List<Customer> customerList = customerListDTO.getCustomerList();
                     String[] newList = new String[customerList.size()];
-                        for (int i = 0; i < customerList.size(); i++) {
-                            Customer customer = customerList.get(i);
-                            newList[i] = customer.getCustomerName();
-                        }
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(OrderEntry.this, android.R.layout.select_dialog_item, newList);
-                            customerNames.setThreshold(1);
-                            customerNames.setAdapter(adapter);
+                    for (int i = 0; i < customerList.size(); i++) {
+                        Customer customer = customerList.get(i);
+                        newList[i] = customer.getCustomerName();
+                    }
+                    ArrayAdapter<Customer> adapter = new ArrayAdapter<Customer>(OrderEntry.this, android.R.layout.select_dialog_item,SessionInfo.instance().getCustomerList());
+                    customerNames.setThreshold(1);
+                    customerNames.setAdapter(adapter);
                 }
                 else {
                 }
             }
-           @Override
+            @Override
             public void onFailure(Call<CustomerListDTO> call, Throwable t) {
             }
         });
     }
     public void recreateOutstandingBills() {
         billsView.clearChoices();
+
         fabNewOrder.setVisibility(View.VISIBLE);
         findViewById(R.id.llpayment).setVisibility(View.GONE);
         findViewById(R.id.checkPanel).setVisibility(View.GONE);
         cashPay.setText("");
         methodOfPayment.setSelection(0);
+
+
         List<String> bills = new LinkedList<String>();
         List<Bill> allOutStandingBills = SessionInfo.instance().getOutStandingBills();
         List<Bill> customerBills = new LinkedList<Bill>();
@@ -186,8 +212,11 @@ public class OrderEntry extends ProdcastBaseActivity {
                 customerBills.add(bill);
             }
         }
+
+
         Bill[] billArray = new Bill[customerBills.size()];
         if (customerBills.size() != 0) {
+
             findViewById(R.id.llnoOutstandingBills).setVisibility(View.GONE);
             fabNewOrder.setVisibility(View.VISIBLE);
             for (int i = 0; i < customerBills.size(); i++) {
@@ -195,10 +224,7 @@ public class OrderEntry extends ProdcastBaseActivity {
             }
             BillViewAdapter adapter = new BillViewAdapter(OrderEntry.this, billArray);
             billsView.setAdapter(adapter);
-        /*ArrayAdapter<Object> billsAdapter = new ArrayAdapter<Object>(OrderEntry.this
-                ,android.R.layout.simple_list_item_1,bills.toArray());
-        billsView.setAdapter(billsAdapter);
-        billsAdapter.notifyDataSetChanged();*/
+
             findViewById(R.id.llbills).setVisibility(View.VISIBLE);
             fabNewOrder.setVisibility(View.VISIBLE);
         }
@@ -268,6 +294,7 @@ public class OrderEntry extends ProdcastBaseActivity {
         Toast.makeText(OrderEntry.this,message,Toast.LENGTH_LONG).show();
         String checkNo = checkNumber.getText().toString();
         String checkCmt = checkComments.getText().toString();
+        payButton.setEnabled(false);
         final Call<CustomerDTO> customerDTOCall = new ProdcastDClient().getClient().makePayment(methodOfPayment.getSelectedItemPosition(), employeeId,billId,amount,customerId,checkNo,checkCmt);
         customerDTOCall.enqueue(new Callback<CustomerDTO>() {
             @Override

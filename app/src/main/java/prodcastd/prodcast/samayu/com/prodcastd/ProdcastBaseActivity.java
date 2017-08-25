@@ -16,7 +16,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.Customer;
+import com.samayu.prodcast.prodcastd.dto.Employee;
+
+import java.io.File;
 
 public class ProdcastBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -101,7 +105,15 @@ public class ProdcastBaseActivity extends AppCompatActivity implements Navigatio
         } else if (id == R.id.nav_passwordReset) {
             intent =new Intent(this, CustomerPasswordActivity.class);
             startActivity(intent);
+        }else if(id == R.id.nav_logOut){
+            File dir = getFilesDir();
+            File file = new File(dir, "prodcastLogin.txt");
+            SessionInfo.instance().destroy();
+            boolean deleted = file.delete();
+            intent = new Intent(this,LoginActivity.class);
+            startActivity(intent);
         }
+
         return true;
     }
 

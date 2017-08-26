@@ -26,6 +26,15 @@ public class SessionInfo {
         this.selectedCustomer = selectedCustomer;
     }
 
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
+
+    private float total;
     private Customer selectedCustomer;
 
     public List<OrderEntry> getCart() {

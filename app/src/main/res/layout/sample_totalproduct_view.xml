@@ -19,7 +19,7 @@
         android:layout_weight="0.25"
         android:gravity="center"
         android:layout_height="wrap_content"
-        android:id="@+id/quantity"
+        android:id="@+id/quantityEdit"
         android:textSize="16sp"/>
     <TextView
         android:layout_width="0dp"

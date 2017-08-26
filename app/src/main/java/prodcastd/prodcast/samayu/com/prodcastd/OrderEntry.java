@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
@@ -44,6 +45,7 @@ public class OrderEntry extends ProdcastBaseActivity {
     private Spinner methodOfPayment;
     private int selectedBillIndex;
     private FloatingActionButton fabNewOrder;
+    private TextView name;
     View focusView;
     EditText cashPay, checkNumber,checkComments ;
     private Customer selectedCustomer;
@@ -55,7 +57,7 @@ public class OrderEntry extends ProdcastBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_entry);
         productBundle = getIntent().getExtras();
-
+        name =(TextView)findViewById(R.id.tvName);
         checkPanel=(LinearLayout)findViewById(R.id.checkPanel);
         billsView = (ListView)findViewById(R.id.billsView);
         methodOfPayment=(Spinner)findViewById(R.id.paymentType);
@@ -68,11 +70,11 @@ public class OrderEntry extends ProdcastBaseActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(OrderEntry.this,R.array.payment_method,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         methodOfPayment.setAdapter(adapter);
-
         listener = new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 customerNames.setOnKeyListener(null);
+                findViewById(R.id.llName).setVisibility(View.GONE);
                 findViewById(R.id.llbills).setVisibility(View.GONE);
                 findViewById(R.id.llnoOutstandingBills).setVisibility(View.GONE);
                 fabNewOrder.setVisibility(View.GONE);
@@ -107,13 +109,13 @@ public class OrderEntry extends ProdcastBaseActivity {
                 selectedCustomer= null;
                 customerNames.setOnKeyListener(listener);
                 findViewById(R.id.llbills).setVisibility(View.GONE);
+                findViewById(R.id.llName).setVisibility(View.GONE);
                 List<Customer> customerList =SessionInfo.instance().getCustomerList();
                 selectedCustomer  = (Customer)adapterView.getItemAtPosition(i);
-
-
+                name.setText(selectedCustomer.getCustomerName());
                 SessionInfo.instance().setSelectedCustomer( selectedCustomer );
-
                 recreateOutstandingBills();
+
             }
         });
         billsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -146,16 +148,21 @@ public class OrderEntry extends ProdcastBaseActivity {
         });
 
 
+
         selectedCustomer = SessionInfo.instance().getSelectedCustomer();
+
 
         if( selectedCustomer == null ){
             fetchCustomers();
         }
         else{
 
+            findViewById(R.id.llName).setVisibility(View.VISIBLE);
+
             ArrayAdapter<Customer> customeAdapter = new ArrayAdapter<Customer>(OrderEntry.this, android.R.layout.select_dialog_item,SessionInfo.instance().getCustomerList());
             customerNames.setThreshold(1);
             customerNames.setAdapter(customeAdapter);
+            name.setText(selectedCustomer.getCustomerName());
             recreateOutstandingBills();
 
 
@@ -164,7 +171,7 @@ public class OrderEntry extends ProdcastBaseActivity {
     }
     public void fetchCustomers(){
         long empId= SessionInfo.instance().getEmployee().getEmployeeId();
-
+        findViewById(R.id.llName).setVisibility(View.VISIBLE);
         Call<CustomerListDTO> customerListDTOCall = new ProdcastDClient().getClient().getCustomers(empId);
         customerListDTOCall.enqueue(new Callback<CustomerListDTO>() {
             @Override
@@ -193,7 +200,8 @@ public class OrderEntry extends ProdcastBaseActivity {
     }
     public void recreateOutstandingBills() {
         billsView.clearChoices();
-
+        customerNames.setText("");
+        findViewById(R.id.llName).setVisibility(View.VISIBLE);
         fabNewOrder.setVisibility(View.VISIBLE);
         findViewById(R.id.llpayment).setVisibility(View.GONE);
         findViewById(R.id.checkPanel).setVisibility(View.GONE);
@@ -216,7 +224,7 @@ public class OrderEntry extends ProdcastBaseActivity {
 
         Bill[] billArray = new Bill[customerBills.size()];
         if (customerBills.size() != 0) {
-
+                findViewById(R.id.llName).setVisibility(View.VISIBLE);
             findViewById(R.id.llnoOutstandingBills).setVisibility(View.GONE);
             fabNewOrder.setVisibility(View.VISIBLE);
             for (int i = 0; i < customerBills.size(); i++) {
@@ -224,14 +232,17 @@ public class OrderEntry extends ProdcastBaseActivity {
             }
             BillViewAdapter adapter = new BillViewAdapter(OrderEntry.this, billArray);
             billsView.setAdapter(adapter);
-
+            findViewById(R.id.llName).setVisibility(View.VISIBLE);
             findViewById(R.id.llbills).setVisibility(View.VISIBLE);
             fabNewOrder.setVisibility(View.VISIBLE);
+            name.setText(selectedCustomer.getCustomerName());
         }
         else {
+            findViewById(R.id.llName).setVisibility(View.VISIBLE);
             findViewById(R.id.llnoOutstandingBills).setVisibility(View.VISIBLE);
             findViewById(R.id.llbills).setVisibility(View.GONE);
             fabNewOrder.setVisibility(View.VISIBLE);
+            name.setText(selectedCustomer.getCustomerName());
         }
     }
     private boolean validatePayment(){
@@ -327,9 +338,10 @@ public class OrderEntry extends ProdcastBaseActivity {
             }
         });
     }
+
     public static  class  BillViewAdapter extends ArrayAdapter<Bill>{
         public BillViewAdapter(Context context,Bill[] bills){
-            super(context,R.layout.sample_bill_view,R.id.billNumber,bills);
+            super(context,R.layout.sample_bill_view,bills);
         }
         public View getView(int position,View converView,ViewGroup parent){
             BillView billView = new BillView(getContext(),getItem(position));

@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="prodcastd.prodcast.samayu.com.prodcastd.NewOrder"
-    android:weightSum="1">
+    android:fillViewport="true"
+    >
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <LinearLayout
         android:id="@+id/llProductSearch"
         android:layout_width="match_parent"
@@ -86,38 +92,111 @@
 
 
     </LinearLayout>
-
     <ListView
         android:id="@+id/productList"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignEnd="@+id/linearmain"
-        android:layout_alignStart="@+id/linearmain"
-        android:layout_below="@+id/linearmain"
-        android:listSelector="@drawable/bill_bg" />
-<LinearLayout
-    android:orientation="vertical"
-    android:id="@+id/llTotal"
-    android:layout_width="match_parent"
-    android:layout_marginTop="10dp"
-    android:layout_height="54dp"
-    android:weightSum="1">
-    <TextView
-        android:layout_width="167dp"
-        android:layout_height="29dp"
-        android:id="@+id/tvTotal"
-        android:layout_marginLeft="50dp"/>
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="29dp"
-        android:id="@+id/displayTotal"
-        android:layout_gravity="right"
-        android:layout_marginLeft="70dp"/>
+        android:layout_height="wrap_content"
+        android:paddingEnd="10dp"
 
-</LinearLayout>
+        android:listSelector="@drawable/bill_bg" />
+
+
+    <LinearLayout
+        android:id="@+id/llTotal"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/tvTax"
+            android:layout_width="167dp"
+            android:layout_height="29dp"
+            android:layout_marginLeft="50dp"
+            android:gravity="right"
+            android:text="Tax"
+            android:textColor="#629a1e"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/displayTax"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:layout_marginLeft="30dp"
+            android:gravity="right"
+            android:textColor="#629a1e"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <TextView
+            android:id="@+id/tvTotal"
+            android:layout_width="167dp"
+            android:layout_height="29dp"
+            android:layout_marginLeft="50dp"
+            android:gravity="right"
+            android:text="Total"
+            android:textColor="#629a1e"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/displayTotal"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:layout_marginLeft="30dp"
+            android:gravity="right"
+            android:textColor="#629a1e"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/llDiscount"
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/discountType"
+            android:layout_weight="0.60"></Spinner>
+
+        <EditText
+            android:id="@+id/discountValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:hint="Discount Value"
+            android:layout_weight="0.27" />
+
+
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/discountButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/log_in_button"
+                android:layout_marginLeft="125dp"
+                android:text="Apply Discount" />
+        </LinearLayout>
+
     <Button
         android:id="@+id/button"
-        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -125,7 +204,7 @@
         android:layout_marginTop="100dp"
         android:text="Save Order" />
 
-
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
 
 

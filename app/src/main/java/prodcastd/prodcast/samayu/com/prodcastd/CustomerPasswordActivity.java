@@ -87,7 +87,7 @@ public class CustomerPasswordActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(CustomerPasswordActivity.this);
         builder.setTitle("Exit this page!!!")
                 .setMessage("Do yo want to go to previous page?")
-                .setCancelable(false)
+                .setCancelable(true)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

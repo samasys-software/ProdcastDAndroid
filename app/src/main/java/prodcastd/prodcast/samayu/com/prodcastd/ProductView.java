@@ -25,7 +25,7 @@ public class ProductView extends FrameLayout {
 
     public void setData(){
         ((TextView)findViewById(R.id.product)).setText(String.valueOf( product.getProductName()));
-        ((EditText)findViewById(R.id.quantity)).setText(String.valueOf(product.getQuantity()));
+        ((EditText)findViewById(R.id.quantityEdit)).setText(String.valueOf(product.getQuantity()));
         ((TextView)findViewById(R.id.subTotalAmount)).setText(String.valueOf(product.getSubtotal()));
 
     }

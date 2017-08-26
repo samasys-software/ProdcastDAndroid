@@ -5,6 +5,10 @@ package com.samayu.prodcast.prodcastd.dto;
  */
 
 public class ProdcastDTO {
+
+    public ProdcastDTO(){
+
+    }
     private boolean error;
     public String getErrorMessage() {
         return errorMessage;

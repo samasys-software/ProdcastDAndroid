@@ -14,25 +14,61 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/customerName"
+            android:layout_width="241dp"
+            android:layout_height="30dp"
+            android:textColor="#629a1e"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_weight="0.48" />
+    </LinearLayout>
+    <LinearLayout
         android:id="@+id/llProductSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
     <AutoCompleteTextView
         android:id="@+id/productSearch"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"/>
+        android:hint="Search Products"
+        android:layout_marginTop="15dp"
+        android:focusedByDefault="true"
+        android:layout_weight="0.81" />
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/dropDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
+<android.support.design.widget.TextInputLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
         <EditText
             android:id="@+id/etQuantity"
-            android:layout_width="150dp"
+            android:layout_width="117dp"
             android:layout_height="wrap_content"
+            android:hint="quantity"
             android:layout_marginTop="15dp"
             android:inputType="number"/>
+</android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatingActionButton"
@@ -42,7 +78,22 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             app:srcCompat="@android:drawable/ic_input_add"/>
     </LinearLayout>
     <LinearLayout
-
+        android:visibility="gone"
+        android:id="@+id/llemptyList"
+        android:layout_width="match_parent"
+        android:layout_height="36dp">
+        <TextView
+            android:id="@+id/emptyList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Product List is Empty"
+            android:textAlignment="center"
+            android:textColor="#629a1e"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+    <LinearLayout
+android:visibility="gone"
         android:id="@+id/linearMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,7 +107,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_weight="0.55"
+            android:layout_weight="0.50"
             android:gravity="center"
             android:text="Product"
             android:textAlignment="center"
@@ -71,12 +122,11 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_weight="0.20"
-            android:gravity="center"
+            android:gravity="start"
             android:text="Qty"
             android:textAlignment="center"
             android:textColor="#629a1e"
             android:textSize="16sp"
-
             android:textStyle="bold" />
 
 
@@ -86,8 +136,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="0dp"
+            android:layout_marginStart="10dp"
+            android:gravity="end"
             android:layout_weight="0.20"
             android:text="Sub Total"
             android:textColor="#629a1e"
@@ -97,6 +147,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 
     </LinearLayout>
     <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:visibility="gone"
         android:id="@+id/productList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,6 +155,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:listSelector="@drawable/bill_bg" />
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/llTotal"
             android:layout_width="match_parent"
             android:layout_height="36dp"
@@ -113,10 +165,10 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 
             <TextView
                 android:id="@+id/tvTax"
-                android:layout_width="167dp"
-                android:layout_height="29dp"
-                android:layout_marginLeft="50dp"
-                android:gravity="right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.90"
+                android:gravity="end"
                 android:text="Tax"
                 android:textColor="#629a1e"
                 android:textSize="16sp"
@@ -124,26 +176,29 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 
             <TextView
                 android:id="@+id/displayTax"
-                android:layout_width="match_parent"
-                android:layout_height="29dp"
-                android:layout_marginLeft="30dp"
-                android:gravity="right"
+                android:layout_width="94dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:gravity="center"
                 android:textColor="#629a1e"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_weight="0.04" />
 
         </LinearLayout>
         <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/llTotalAmount"
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:orientation="horizontal"
             android:weightSum="1">
             <TextView
                 android:id="@+id/tvTotal"
-                android:layout_width="167dp"
-                android:layout_height="29dp"
-                android:layout_marginLeft="50dp"
-                android:gravity="right"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="0.90"
+                android:gravity="end"
                 android:text="Total"
                 android:textColor="#629a1e"
                 android:textSize="16sp"
@@ -151,19 +206,22 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 
             <TextView
                 android:id="@+id/displayTotal"
-                android:layout_width="match_parent"
-                android:layout_height="29dp"
-                android:layout_marginLeft="30dp"
-                android:gravity="right"
+                android:layout_width="94dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_weight="0.05"
+                android:gravity="center"
                 android:textColor="#629a1e"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
 <android.support.design.widget.CoordinatorLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/ccDropDown"
+    android:visibility="gone">
 
         <RelativeLayout
             android:id="@+id/bottomSheet"
@@ -191,18 +249,20 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/llDiscount"
         android:orientation="horizontal"
         android:weightSum="1">
+
         <EditText
             android:id="@+id/discountValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:hint="Discount Value"
-            android:layout_weight="0.27" />
+            android:layout_weight="0.35"/>
+
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/discountType"
-            android:layout_weight="0.60"></Spinner>
+            android:layout_weight="0.52"></Spinner>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

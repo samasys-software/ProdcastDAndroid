@@ -27,14 +27,7 @@ import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 
 import java.util.List;
 
-/**
- * An activity representing a list of Customers. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a {@link CustomerDetailActivity} representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
- */
+
 public class CustomerListActivity extends ProdcastBaseActivity {
 
     /**
@@ -73,6 +66,12 @@ public class CustomerListActivity extends ProdcastBaseActivity {
             mTwoPane = true;
         }
     }
+
+    @Override
+    public String getProdcastTitle() {
+        return "My Customers";
+    }
+
     private void setupRecyclerView(@NonNull final RecyclerView recyclerView, boolean useCache) {
         if( !useCache) {
             Call<CustomerListDTO> customerListDTOCall = new ProdcastDClient().getClient().getCustomers(SessionInfo.instance().getEmployee().getEmployeeId());

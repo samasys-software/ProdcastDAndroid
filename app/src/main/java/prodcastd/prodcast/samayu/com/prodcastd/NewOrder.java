@@ -1,5 +1,6 @@
 package prodcastd.prodcast.samayu.com.prodcastd;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -22,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -60,16 +63,18 @@ public class NewOrder extends ProdcastBaseActivity implements
 
     private AutoCompleteTextView productList;
     private EditText quantity,discountValue;
-    private TextView displayTax,displayTotal,tax,total;
+    private TextView displayTax,displayTotal,tax,total,customerName;
     private FloatingActionButton addToList;
     private SwipeMenuListView addedProducts;
     private Spinner discountType;
     private Button saveOrder,applyDiscount,addDiscount;
-    private View focusView;
+    private View focusView = null;
     private Product selectedProductItem;
+    private ImageView dropDown;
     private long customerId=0;
     private String value = "0";
     private long itemPosition = 0 ;
+    ProgressDialog progress;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +86,7 @@ public class NewOrder extends ProdcastBaseActivity implements
         SessionInfo.instance().setCart(new LinkedList<OrderEntry>());
         displayTax = (TextView) findViewById(R.id.displayTax);
         displayTotal = (TextView) findViewById(R.id.displayTotal);
+        customerName = (TextView) findViewById(R.id.customerName);
         discountValue = (EditText)findViewById(R.id.discountValue);
         tax = (TextView) findViewById(R.id.tvTax);
         addDiscount = (Button)findViewById(R.id.addDiscount);
@@ -89,8 +95,10 @@ public class NewOrder extends ProdcastBaseActivity implements
         quantity = (EditText) findViewById(R.id.etQuantity);
         applyDiscount =(Button)findViewById(R.id.discountButton);
         View bottomSheet = findViewById(R.id.bottomSheet);
+        dropDown = (ImageView) findViewById(R.id.dropDown);
+        customerName.setText(String.valueOf(customerIdCus));
         final BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
-
+        findViewById(R.id.llemptyList).setVisibility(View.VISIBLE);
         behavior.setHideable(false);
         behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
@@ -100,6 +108,7 @@ public class NewOrder extends ProdcastBaseActivity implements
         addedProducts = (SwipeMenuListView) findViewById(R.id.productList);
         saveOrder = (Button) findViewById(R.id.button);
         productList = (AutoCompleteTextView) findViewById(R.id.productSearch);
+
 
 
 
@@ -131,6 +140,12 @@ public class NewOrder extends ProdcastBaseActivity implements
 
             }
         });
+        dropDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                productList.showDropDown();
+            }
+        });
 
         productList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -143,29 +158,18 @@ public class NewOrder extends ProdcastBaseActivity implements
         addToList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (validate()) {
+                    return;
+                }
+                List<OrderEntry> entries = SessionInfo.instance().getCart();
+                if (entries.size() <= 0) {
+                    findViewById(R.id.llemptyList).setVisibility(View.VISIBLE);
 
+                }
 
-                    List<OrderEntry> entries = SessionInfo.instance().getCart();
-                    OrderEntry entry = new OrderEntry();
-
-                    entry.setProductName(selectedProductItem.toString());
-                    entry.setProductId(selectedProductItem.getId());
-                    entry.setUnitPrice(selectedProductItem.getUnitPrice());
-                    final int totalQuantity = Integer.parseInt(quantity.getText().toString());
-                    entry.setQuantity(totalQuantity);
-                    entry.setSubtotal(totalQuantity * (selectedProductItem.getUnitPrice()));
-                    entry.setOtherTax((Float.parseFloat(selectedProductItem.getOtherTax())));
-                    entry.setSalesTax((Float.parseFloat(selectedProductItem.getSalesTax())));
-                    entries.add(entry);
-                    ProductViewAdapter adapter = new ProductViewAdapter(NewOrder.this, entries, NewOrder.this);
-                    addedProducts.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
+                item();
 
                 selectedProductItem = null;
-                productList.clearListSelection();
-                productList.setText("");
-                quantity.setText("");
-                grandTotal();
 
 
             }
@@ -191,6 +195,14 @@ public class NewOrder extends ProdcastBaseActivity implements
                 ProductViewAdapter adapter = new ProductViewAdapter(NewOrder.this, SessionInfo.instance().getCart(), NewOrder.this);
                 addedProducts.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+                if (SessionInfo.instance().getCart() != null && SessionInfo.instance().getCart().size() == 0) {
+                    findViewById(R.id.llemptyList).setVisibility(View.VISIBLE);
+                    findViewById(R.id.linearmain).setVisibility(View.GONE);
+                    productList.setVisibility(View.GONE);
+                    findViewById(R.id.llTotal).setVisibility(View.GONE);
+                    findViewById(R.id.llTotalAmount).setVisibility(View.GONE);
+                    findViewById(R.id.ccDropDown).setVisibility(View.GONE);
+                }
                 grandTotal();
                 return false;
             }
@@ -249,6 +261,10 @@ public class NewOrder extends ProdcastBaseActivity implements
         addDiscount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (validateDiscount()) {
+                    return;
+                }
                 grandTotal();
             }
         });
@@ -260,7 +276,9 @@ public class NewOrder extends ProdcastBaseActivity implements
             @Override
             public void onClick(View view) {
 
-
+                if (listValidation()) {
+                    return;
+                }
                 OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
                 orderDetailDTO.setEmployeeId(SessionInfo.instance().getEmployee().getEmployeeId());
                 orderDetailDTO.setCustomerId(customerId);
@@ -278,7 +296,10 @@ public class NewOrder extends ProdcastBaseActivity implements
                 float paymentAmount = 0;
                 orderDetailDTO.setPaymentAmount(paymentAmount);
                 orderDetailDTO.setOrderStatus("F");
+
                 //Make a call to the Service.
+                progress = ProgressDialog.show(NewOrder.this, "In Progress",
+                        "One moment Please...", true);
                 Call<CustomerDTO> customerDTOCall = new ProdcastDClient().getClient().saveOrder(orderDetailDTO);
                 customerDTOCall.enqueue(new Callback<CustomerDTO>() {
                     @Override
@@ -303,6 +324,7 @@ public class NewOrder extends ProdcastBaseActivity implements
                                 SessionInfo.instance().setSelectedCustomer(customerDto.getCustomer());
                                 SessionInfo.instance().setOutStandingBills(newOutstandingBills);
                                 Toast.makeText(NewOrder.this, "saved the list", Toast.LENGTH_LONG).show();
+                                progress.dismiss();
                                 Intent intent = new Intent(NewOrder.this, prodcastd.prodcast.samayu.com.prodcastd.OrderEntry.class);
 
                                 startActivity(intent);
@@ -363,10 +385,9 @@ public class NewOrder extends ProdcastBaseActivity implements
                     dto.setDiscountType(name);
                     dto.setDiscountValue(value);
                 } else {
-
                     displayTotal.setText(Constants.PRICE_FORMAT.format(totalPriceTax));
-
                     displayTax.setText(Constants.PRICE_FORMAT.format(totalTax));
+
                 }
         }
     }
@@ -391,6 +412,115 @@ public class NewOrder extends ProdcastBaseActivity implements
             productView.setData();
             return productView;
         }
+    }
+    public boolean validate(){
+        boolean cancel = false;
+        String quantityEntered = quantity.getText().toString();
+        String productEntered = productList.getText().toString();
+        if (TextUtils.isEmpty(quantityEntered)) {
+            quantity.setError("Enter the quantity");
+            focusView = quantity;
+            cancel = true;
+        }
+        if (TextUtils.isEmpty(productEntered)) {
+            productList.setError("Choose the product");
+            focusView = productList;
+            cancel = true;
+        }
+        return cancel;
+    }
+    public boolean listValidation(){
+        boolean cancel = false;
+        List<OrderEntry> entries = SessionInfo.instance().getCart();
+        if (entries.size() <= 0) {
+            Toast.makeText(NewOrder.this,"The product list is empty",Toast.LENGTH_LONG).show();
+            cancel = true;
+        }
+        return cancel;
+    }
+    public boolean validateDiscount(){
+        boolean cancel = false;
+        String discountAmount = discountValue.getText().toString();
+        if (TextUtils.isEmpty(discountAmount)) {
+            discountValue.setError("Please Enter the Value");
+            focusView = discountValue;
+            cancel =true;
+        }
+        if (discountType.getSelectedItem().toString().trim().equals("Type")){
+            Toast.makeText(NewOrder.this,"Please select Payment type!!",Toast.LENGTH_LONG).show();
+            focusView = discountType;
+            cancel = true;
+        }
+        return cancel;
+    }
+    public void onBackPressed(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(NewOrder.this);
+        builder.setTitle("Exit this page!!!")
+                .setMessage("Do yo want to Exit without Saving the Order")
+                .setCancelable(false)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        NewOrder.super.onBackPressed();
+                    }
+                })
+                .setNegativeButton("Cancel",null);
+        AlertDialog alert = builder.create();
+
+        alert.show();
+
+    }
+
+    @Override
+    public String getProdcastTitle() {
+        return "New Order";
+    }
+
+    public void item(){
+        findViewById(R.id.llemptyList).setVisibility(View.GONE);
+        findViewById(R.id.linearMain).setVisibility(View.VISIBLE);
+        addedProducts.setVisibility(View.VISIBLE);
+        findViewById(R.id.llTotal).setVisibility(View.VISIBLE);
+        findViewById(R.id.llTotalAmount).setVisibility(View.VISIBLE);
+        findViewById(R.id.ccDropDown).setVisibility(View.VISIBLE);
+        final int enteredQuantity = Integer.parseInt(quantity.getText().toString());
+        List<OrderEntry> entryList = SessionInfo.instance().getCart();
+        long allId = 0;
+        int allQuantity = 0;
+        int totalQuantity = 0;
+        OrderEntry newEntry = new OrderEntry();
+        for (int i =0; i<entryList.size();i++) {
+            OrderEntry inEntry = new OrderEntry();
+            inEntry= entryList.get(i);
+            allId = inEntry.getProductId();
+            if (selectedProductItem.getId() == allId ) {
+
+                allQuantity = entryList.get(i).getQuantity();
+                Toast.makeText(NewOrder.this," "+selectedProductItem.getProductName()+" is already in the list so the quantity is added ",Toast.LENGTH_LONG).show();
+                SessionInfo.instance().getCart().remove(inEntry);
+            }
+        }
+        totalQuantity = allQuantity + enteredQuantity;
+
+        newEntry.setProductName(selectedProductItem.toString());
+        newEntry.setProductId(selectedProductItem.getId());
+        newEntry.setUnitPrice(selectedProductItem.getUnitPrice());
+        newEntry.setOtherTax((Float.parseFloat(selectedProductItem.getOtherTax())));
+        newEntry.setSalesTax((Float.parseFloat(selectedProductItem.getSalesTax())));
+        newEntry.setQuantity(totalQuantity);
+        newEntry.setSubtotal(totalQuantity * (selectedProductItem.getUnitPrice()));
+        entryList.add(newEntry);
+        ProductViewAdapter adapter = new ProductViewAdapter(NewOrder.this, SessionInfo.instance().getCart(), NewOrder.this);
+
+        addedProducts.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        productList.clearListSelection();
+        productList.setText("");
+        focusView = productList;
+        quantity.setText("");
+        grandTotal();
+
     }
 
 }

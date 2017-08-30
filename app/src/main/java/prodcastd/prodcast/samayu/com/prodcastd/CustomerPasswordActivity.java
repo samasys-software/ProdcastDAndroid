@@ -20,7 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CustomerPasswordActivity extends AppCompatActivity {
+public class CustomerPasswordActivity extends ProdcastBaseActivity {
    private   EditText oldPassword,newPassword,confirmPassword;
    private Button submit,reset;
    private View focusView = null;
@@ -99,6 +99,11 @@ public class CustomerPasswordActivity extends AppCompatActivity {
 
         alert.show();
 
+    }
+
+    @Override
+    public String getProdcastTitle() {
+        return "Change Password";
     }
 
     private void attemptChangePassword(){

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Prodcast Distributors</string>
     <string-array name="discount_type">
-        <item> Discount Type</item>
+        <item>Type</item>
         <item>Amount</item>
         <item>Percentage</item>
     </string-array>

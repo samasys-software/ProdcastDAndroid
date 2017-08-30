@@ -53,5 +53,10 @@ public class Home extends ProdcastBaseActivity  {
 
     }
 
+    @Override
+    public String getProdcastTitle() {
+        return "Dashboard";
+    }
+
 
 }

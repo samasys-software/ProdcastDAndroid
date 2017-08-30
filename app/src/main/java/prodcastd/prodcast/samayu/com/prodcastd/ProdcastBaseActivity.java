@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.Customer;
@@ -22,7 +23,7 @@ import com.samayu.prodcast.prodcastd.dto.Employee;
 
 import java.io.File;
 
-public class ProdcastBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public abstract class ProdcastBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,8 @@ public class ProdcastBaseActivity extends AppCompatActivity implements Navigatio
         FrameLayout activityContainer = (FrameLayout) fullView.findViewById(R.id.activity_content);
         getLayoutInflater().inflate(layoutId, activityContainer, true);
         initializeDrawer(fullView);
+       TextView distributorName = (TextView)fullView.findViewById(R.id.distributorName);
+        distributorName.setText(SessionInfo.instance().getEmployee().getDistributorName()+ " - "+getProdcastTitle());
         super.setContentView(fullView);
 
     }
@@ -116,5 +119,6 @@ public class ProdcastBaseActivity extends AppCompatActivity implements Navigatio
 
         return true;
     }
+    public abstract String getProdcastTitle();
 
 }

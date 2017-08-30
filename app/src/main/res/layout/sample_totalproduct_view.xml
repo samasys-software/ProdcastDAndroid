@@ -16,15 +16,15 @@
         android:textSize="16sp"/>
     <EditText
         android:layout_width="0dp"
-        android:layout_weight="0.25"
+        android:layout_weight="0.10"
         android:gravity="center"
         android:layout_height="wrap_content"
         android:id="@+id/quantityEdit"
         android:textSize="16sp"/>
     <TextView
         android:layout_width="0dp"
-        android:layout_weight="0.25"
-        android:gravity="right"
+        android:layout_weight="0.35"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:id="@+id/subTotalAmount"
         android:textSize="16sp"/>

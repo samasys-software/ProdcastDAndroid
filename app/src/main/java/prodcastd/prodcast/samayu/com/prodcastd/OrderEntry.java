@@ -1,5 +1,6 @@
 package prodcastd.prodcast.samayu.com.prodcastd;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInstaller;
@@ -52,6 +53,7 @@ public class OrderEntry extends ProdcastBaseActivity {
     Button payButton;
     View.OnKeyListener listener = null;
     Bundle productBundle = null;
+    private ProgressDialog progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,6 +171,12 @@ public class OrderEntry extends ProdcastBaseActivity {
         }
 
     }
+
+    @Override
+    public String getProdcastTitle() {
+        return "Order Entry";
+    }
+
     public void fetchCustomers(){
         long empId= SessionInfo.instance().getEmployee().getEmployeeId();
         findViewById(R.id.llName).setVisibility(View.VISIBLE);
@@ -297,15 +305,15 @@ public class OrderEntry extends ProdcastBaseActivity {
             return;
         }
         long employeeId =SessionInfo.instance().getEmployee().getEmployeeId();
-        Bill bill = SessionInfo.instance().getCustomerBills().get(selectedBillIndex);
+        final Bill bill = SessionInfo.instance().getCustomerBills().get(selectedBillIndex);
         long billId = bill.getBillNumber();
         double amount = Double.parseDouble(cash);
         long customerId =bill.getCustomerId();
         String message = ""+bill.getBillNumber()+" "+bill.getBillDate()+" "+bill.getBillAmount();
-        Toast.makeText(OrderEntry.this,message,Toast.LENGTH_LONG).show();
         String checkNo = checkNumber.getText().toString();
         String checkCmt = checkComments.getText().toString();
         payButton.setEnabled(false);
+        progress = ProgressDialog.show(OrderEntry.this,"In Progress","One moment Please......",true);
         final Call<CustomerDTO> customerDTOCall = new ProdcastDClient().getClient().makePayment(methodOfPayment.getSelectedItemPosition(), employeeId,billId,amount,customerId,checkNo,checkCmt);
         customerDTOCall.enqueue(new Callback<CustomerDTO>() {
             @Override
@@ -313,7 +321,9 @@ public class OrderEntry extends ProdcastBaseActivity {
                 if (response.isSuccessful()){
                     CustomerDTO dto = response.body();
                     if (!dto.isError()){
-                        Toast.makeText(OrderEntry.this,"Payment Successful",Toast.LENGTH_LONG).show();
+                        progress.dismiss();
+                        Toast.makeText(OrderEntry.this,"Payment Successful for Bill no : "+bill.getBillNumber(),Toast.LENGTH_LONG).show();
+
                         SessionInfo.instance().setCustomerBills(dto.getCustomer().getOutstandingBill());
                         List<Bill> newAllOutstandingBills = new LinkedList<Bill>();
                         for(Bill aBill: SessionInfo.instance().getOutStandingBills()){

@@ -7,6 +7,7 @@ import com.samayu.prodcast.prodcastd.dto.CountryDTO;
 import com.samayu.prodcast.prodcastd.dto.CustomerDTO;
 import com.samayu.prodcast.prodcastd.dto.CustomerListDTO;
 import com.samayu.prodcast.prodcastd.dto.LoginDTO;
+import com.samayu.prodcast.prodcastd.dto.OrderDTO;
 import com.samayu.prodcast.prodcastd.dto.OrderDetailDTO;
 import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
 import com.samayu.prodcast.prodcastd.dto.ProductListDTO;
@@ -31,6 +32,10 @@ public interface ProdcastDistributorService {
     @POST("prodcast/global/loginp")
     @FormUrlEncoded
     public Call<LoginDTO> authenticate(@Field("userid") String userId , @Field("password") String password);
+    @GET("prodcast/global/billdetails")
+    Call<OrderDTO> getBillDetails(@Query("billId") long id,
+                                  @Query("employeeId") long employeeId,
+                                  @Query("userRole") String userRole) ;
 
     @GET("prodcast/global/customers")
     public Call<CustomerListDTO> getCustomers(@Query ("employeeId") long employeeId );

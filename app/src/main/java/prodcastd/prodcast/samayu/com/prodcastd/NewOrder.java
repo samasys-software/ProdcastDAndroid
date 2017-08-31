@@ -73,7 +73,6 @@ public class NewOrder extends ProdcastBaseActivity implements
     private ImageView dropDown;
     private long customerId=0;
     private String value = "0";
-    private long itemPosition = 0 ;
     ProgressDialog progress;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -158,6 +157,7 @@ public class NewOrder extends ProdcastBaseActivity implements
         addToList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                addedProducts.requestFocus();
                 if (validate()) {
                     return;
                 }
@@ -197,8 +197,7 @@ public class NewOrder extends ProdcastBaseActivity implements
                 adapter.notifyDataSetChanged();
                 if (SessionInfo.instance().getCart() != null && SessionInfo.instance().getCart().size() == 0) {
                     findViewById(R.id.llemptyList).setVisibility(View.VISIBLE);
-                    findViewById(R.id.linearmain).setVisibility(View.GONE);
-                    productList.setVisibility(View.GONE);
+                    findViewById(R.id.linearMain).setVisibility(View.GONE);
                     findViewById(R.id.llTotal).setVisibility(View.GONE);
                     findViewById(R.id.llTotalAmount).setVisibility(View.GONE);
                     findViewById(R.id.ccDropDown).setVisibility(View.GONE);

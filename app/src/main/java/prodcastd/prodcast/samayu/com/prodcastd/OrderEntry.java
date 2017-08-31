@@ -35,6 +35,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
+import prodcastd.prodcast.samayu.com.prodcastd.ui.dummy.BillDetailsActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -129,6 +130,18 @@ public class OrderEntry extends ProdcastBaseActivity {
                     b4.setVisibility(View.VISIBLE);
                 payButton.setEnabled(true);
 
+
+            }
+        });
+        billsView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Bundle bundle = new Bundle();
+                Intent intent = new Intent(OrderEntry.this, BillDetailsActivity.class);
+                bundle.putLong("billId",selectedBillIndex);
+                intent.putExtras(bundle);
+                startActivity(intent,bundle);
+                return false;
             }
         });
         payButton = (Button)findViewById(R.id.pay);

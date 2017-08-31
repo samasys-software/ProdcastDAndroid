@@ -41,10 +41,7 @@ public class Payment extends AppCompatActivity {
                         intent = new Intent(Payment.this, CheckNumber.class);
                         startActivity(intent);
                         break;
-                    case 2:
-                        intent = new Intent(Payment.this,CreditCardDetails.class);
-                        startActivity(intent);
-                        break;
+
                 }
 
             }

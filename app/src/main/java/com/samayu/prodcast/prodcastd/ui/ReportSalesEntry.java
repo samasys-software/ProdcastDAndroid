@@ -39,10 +39,10 @@ public class ReportSalesEntry extends FrameLayout {
    // }
 
     public void setData(){
-        ((TextView)findViewById(R.id.customer)).setText(String.valueOf( order.getCustomerName()));
-        ((TextView)findViewById(R.id.dat)).setText(String.valueOf(order.getBillDate()));
-        ((TextView)findViewById(R.id.total)).setText(String.valueOf(order.getTotalAmount()));
-        ((TextView)findViewById(R.id.balanc)).setText(String.valueOf(order.getOutstandingBalance()));
+        ((TextView)findViewById(R.id.sCustomer)).setText(String.valueOf( order.getCustomerName()));
+        ((TextView)findViewById(R.id.sDate)).setText(String.valueOf(order.getBillDate()));
+        ((TextView)findViewById(R.id.sTotal)).setText(String.valueOf(order.getTotalAmount()));
+        ((TextView)findViewById(R.id.SBalance)).setText(String.valueOf(order.getOutstandingBalance()));
     }
 
 

@@ -1,368 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-   >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-
-<LinearLayout
 
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginStart="5dp"
-    android:layout_marginEnd="5dp"
-   >
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/reports"
-        android:text="Reports"/>
+        <LinearLayout
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Select Report Date"
-        android:layout_marginTop="20dp"
-        android:id="@+id/selectDate"
-        android:layout_alignParentStart="true" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/selectReportDate"
-        android:minHeight="40dp"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/selectDate">
-
-    </Spinner>
-
-    <Button
-        android:id="@+id/advancedReport"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Advanced Report"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/selectReportDate"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:id="@+id/summarytext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Summary"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/advancedReport"
-        android:layout_alignParentStart="true" />
-
-    <LinearLayout
-        android:id="@+id/summary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/summarytext"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/sales"
-            android:layout_width="124dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Sales"
-            android:layout_weight="1.5"
-            android:textColor="#629a1e"
-            android:layout_gravity="center" />
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/reports"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reports" />
+
+            <TextView
+                android:id="@+id/selectDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:text="Select Report Date" />
+
+            <Spinner
+                android:id="@+id/selectReportDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:minHeight="40dp">
+
+            </Spinner>
+            <LinearLayout
+                android:id="@+id/btnCalendar"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp">
+
+                <TextView
+                    android:id="@+id/startDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Start Date"
+                    android:layout_weight="1.72" />
+
+                <DatePicker
+                    android:visibility="gone"
+                    android:id="@+id/startDatePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.72" />
+
+                <TextView
+                    android:id="@+id/endDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.72"
+                    android:text="End Date"/>
+
+                <DatePicker
+                    android:visibility="gone"
+                    android:id="@+id/endDatePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.72" />
+            </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/collection"
-            android:layout_width="125dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Collection"
-            android:layout_weight="2"
-            android:textColor="#629a1e"
-            android:layout_gravity="center"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="10dp">
 
-        <TextView
-            android:id="@+id/balance"
-            android:layout_width="125dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Balance"
-            android:layout_weight="2"
-            android:textColor="#629a1e"
-            android:layout_gravity="center"/>
+                <Button
+                    android:id="@+id/refresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Refresh Report"/>
 
-    </LinearLayout>
+                </LinearLayout>
 
-    <LinearLayout
+            <TextView
+                android:id="@+id/summarytext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Summary" />
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/summarytext"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:id="@+id/summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/summarytext"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/sale"
-            android:layout_width="124dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Sale"
-            android:layout_weight="1.5"
-            android:textColor="#629a1e"
-            android:layout_gravity="center" />
-
-
-        <TextView
-            android:id="@+id/collections"
-            android:layout_width="125dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Collections"
-            android:layout_weight="2"
-            android:textColor="#629a1e"
-            android:layout_gravity="center" />
-
-        <TextView
-            android:id="@+id/balances"
-            android:layout_width="125dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Balances"
-            android:layout_weight="2"
-            android:textColor="#629a1e"
-            android:layout_gravity="center"/>
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/saleText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sales Details"/>
-
-    <LinearLayout
-        android:id="@+id/salesDetails"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/sales"
+                    android:layout_width="124dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/border"
+                    android:text="Sales"
+                    android:textColor="#629a1e" />
 
 
+                <TextView
+                    android:id="@+id/collection"
+                    android:layout_width="125dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:background="@drawable/border"
+                    android:text="Collection"
+                    android:textColor="#629a1e" />
 
-        <TextView
-            android:id="@+id/saleCustomer"
-            android:layout_width="110dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Customer"
-            android:layout_weight="4"
-            android:textColor="#629a1e"
-            android:layout_gravity="center"/>
+                <TextView
+                    android:id="@+id/balance"
+                    android:layout_width="125dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:background="@drawable/border"
+                    android:text="Balance"
+                    android:textColor="#629a1e" />
 
-        <TextView
-            android:id="@+id/date"
-            android:layout_width="65dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Date"
-            android:layout_weight="2"
-            android:textColor="#629a1e"
-            android:layout_gravity="center"/>
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/saleTotal"
-            android:layout_width="75dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Total"
-            android:layout_weight="1"
-            android:textColor="#629a1e"
-            android:layout_gravity="center"/>
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/salesSummaryHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-        <TextView
-            android:id="@+id/saleBalance"
-            android:layout_width="70dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Balance"
-            android:layout_weight="1"
-            android:textColor="#629a1e"
-            android:layout_gravity="center"/>
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/sale"
+                    android:layout_width="124dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/border"
+                    android:text="Sale"
+                    android:textColor="#629a1e" />
 
 
-    <ListView
-        android:id="@+id/salesList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/salesDetails">
-        
-    </ListView>
+                <TextView
+                    android:id="@+id/collections"
+                    android:layout_width="125dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:background="@drawable/border"
+                    android:text="Collections"
+                    android:textColor="#629a1e" />
 
-    <TextView
-        android:id="@+id/paymentText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Payment Details"/>
+                <TextView
+                    android:id="@+id/balances"
+                    android:layout_width="125dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:background="@drawable/border"
+                    android:text="Balances"
+                    android:textColor="#629a1e" />
 
-    <LinearLayout
-        android:id="@+id/paymentDetails"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/paymentCustomer"
-            android:layout_width="115dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Customer"
-            android:textColor="#629a1e"
-            android:layout_weight="4"
-            android:layout_gravity="center"                        />
-
-        <TextView
-            android:id="@+id/paymentDate"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Date"
-            android:textColor="#629a1e"
-            android:layout_weight="2"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:id="@+id/paymentAmount"
-            android:layout_width="95dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Amount"
-            android:textColor="#629a1e"
-            android:layout_weight="1"
-            android:layout_gravity="center"/>
-
-        <TextView
-            android:id="@+id/paymentType"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Type"
-            android:textColor="#629a1e"
-            android:layout_weight="1"
-            android:layout_gravity="center"/>
-
-    </LinearLayout>
-    <ListView
-        android:id="@+id/paymentList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/paymentDetails">
-
-    </ListView>
-
-    <TextView
-        android:id="@+id/expenseText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:text="Expenses"/>
-
-    <LinearLayout
-        android:id="@+id/expenses"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/expenseText"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/expensesNo"
-            android:layout_width="27dp"
-            android:layout_height="match_parent"
-
-            android:background="@drawable/border"
-            android:text="No"
-
-            android:textColor="#629a1e"
-
-            android:layout_gravity="center" />
+            </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/expensesCategory"
-            android:layout_width="108dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Category"
+            <ExpandableListView
+                android:id="@+id/expandableSalesList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft">
 
-            android:textColor="#629a1e"
-
-            android:layout_gravity="center"                        />
-
-        <TextView
-            android:id="@+id/expensesDate"
-            android:layout_width="55dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Date"
-
-            android:textColor="#629a1e"
-
-            android:layout_gravity="center"
-            />
-        <TextView
-            android:id="@+id/expensesAmount"
-            android:layout_width="90dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Amount"
-
-            android:textColor="#629a1e"
-
-            android:layout_gravity="center"
-            />
-        <TextView
-            android:id="@+id/expensesDescription"
-            android:layout_width="70dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/border"
-            android:text="Description"
-
-            android:textColor="#629a1e"
-
-            android:layout_gravity="center"
-            />
-
-    </LinearLayout>
-    <ListView
-        android:id="@+id/expensesList"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/expenses">
-
-    </ListView>
+            </ExpandableListView>
 
 
 
+        </LinearLayout>
 
 </LinearLayout>
-    </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>

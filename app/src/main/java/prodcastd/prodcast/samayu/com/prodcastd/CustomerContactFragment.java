@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.samayu.prodcast.prodcastd.dto.StoreType;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 import com.samayu.prodcast.prodcastd.ui.CustomerCreateEditActivity;
 import com.samayu.prodcast.prodcastd.ui.OnFragmentInteractionListener;
+import com.samayu.prodcast.prodcastd.util.EmailVerification;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,6 +55,7 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
     Button saveButton;
 
     View focusView = null;
+    View.OnKeyListener listener = null;
 
     public CustomerContactFragment() {
         // Required empty public constructor
@@ -78,6 +81,16 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
         lastName = (EditText) view.findViewById(R.id.lastName);
         phoneNumber = (EditText) view.findViewById(R.id.phoneNumber);
         mobileNumber = (EditText) view.findViewById(R.id.mobileNumber);
+
+        listener = new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                mobileNumber.setOnKeyListener(null);
+
+                return false;
+            }
+        };
+
         emailAddress = (EditText) view.findViewById(R.id.emailAddress);
         note = (EditText) view.findViewById(R.id.note);
         smsAllowed = (CheckBox) view.findViewById(R.id.smsAllowed);
@@ -103,15 +116,26 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public  void onClick(View view) {
-               mListener.validateAndSave();
+                String email = emailAddress.getText().toString();
+                if (!EmailVerification.validateEmail(email)){
+                    emailAddress.setText("Please Enetr Valid email Id");
+                    return;
+                }
+
+                mListener.validateAndSave();
 
             }
         });
+
+
         if (customer != null) {
             lastName.setText(customer.getLastname());
             firstName.setText(customer.getFirstname());
             phoneNumber.setText(customer.getPhonenumber());
             mobileNumber.setText(customer.getCellPhone());
+
+            mobileNumber.setVisibility(View.VISIBLE);
+
             emailAddress.setText(customer.getEmailaddress());
             note.setText(customer.getNotes());
             active.setVisibility(View.VISIBLE);
@@ -209,7 +233,10 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
         customer.setFirstname(firstName.getText().toString());
         customer.setLastname(lastName.getText().toString());
         customer.setPhonenumber(phoneNumber.getText().toString());
+       // customer.setCellPhone(mobileNumber.setVisibility(View.VISIBLE));
         customer.setCellPhone(mobileNumber.getText().toString());
+
+
         customer.setEmailaddress(emailAddress.getText().toString());
         customer.setNotes(note.getText().toString());
         customer.setSmsAllowed(smsAllowed.isChecked());

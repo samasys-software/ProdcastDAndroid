@@ -172,7 +172,7 @@
             android:layout_height="40dp"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="textPersonName"
             android:hint="Postal Code"
             android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>

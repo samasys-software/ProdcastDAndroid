@@ -15,10 +15,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
+import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.Customer;
+import com.samayu.prodcast.prodcastd.dto.Employee;
 
-public class ProdcastBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import java.io.File;
+
+public abstract class ProdcastBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,8 @@ public class ProdcastBaseActivity extends AppCompatActivity implements Navigatio
         FrameLayout activityContainer = (FrameLayout) fullView.findViewById(R.id.activity_content);
         getLayoutInflater().inflate(layoutId, activityContainer, true);
         initializeDrawer(fullView);
+       TextView distributorName = (TextView)fullView.findViewById(R.id.distributorName);
+        distributorName.setText(SessionInfo.instance().getEmployee().getDistributorName()+ " - "+getProdcastTitle());
         super.setContentView(fullView);
 
     }
@@ -101,8 +108,17 @@ public class ProdcastBaseActivity extends AppCompatActivity implements Navigatio
         } else if (id == R.id.nav_passwordReset) {
             intent =new Intent(this, CustomerPasswordActivity.class);
             startActivity(intent);
+        }else if(id == R.id.nav_logOut){
+            File dir = getFilesDir();
+            File file = new File(dir, "prodcastLogin.txt");
+            SessionInfo.instance().destroy();
+            boolean deleted = file.delete();
+            intent = new Intent(this,LoginActivity.class);
+            startActivity(intent);
         }
+
         return true;
     }
+    public abstract String getProdcastTitle();
 
 }

@@ -20,7 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CustomerPasswordActivity extends AppCompatActivity {
+public class CustomerPasswordActivity extends ProdcastBaseActivity {
    private   EditText oldPassword,newPassword,confirmPassword;
    private Button submit,reset;
    private View focusView = null;
@@ -87,7 +87,7 @@ public class CustomerPasswordActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(CustomerPasswordActivity.this);
         builder.setTitle("Exit this page!!!")
                 .setMessage("Do yo want to go to previous page?")
-                .setCancelable(false)
+                .setCancelable(true)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -99,6 +99,11 @@ public class CustomerPasswordActivity extends AppCompatActivity {
 
         alert.show();
 
+    }
+
+    @Override
+    public String getProdcastTitle() {
+        return "Change Password";
     }
 
     private void attemptChangePassword(){

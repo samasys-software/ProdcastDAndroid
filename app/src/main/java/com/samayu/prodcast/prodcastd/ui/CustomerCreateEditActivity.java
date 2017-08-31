@@ -135,6 +135,10 @@ public class CustomerCreateEditActivity extends ProdcastBaseActivity implements 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public String getProdcastTitle() {
+        return "Customer Activity";
+    }
 
 
     @Override

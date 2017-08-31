@@ -3,6 +3,8 @@ package com.samayu.prodcast.prodcastd;
 import com.samayu.prodcast.prodcastd.dto.Bill;
 import com.samayu.prodcast.prodcastd.dto.Customer;
 import com.samayu.prodcast.prodcastd.dto.Employee;
+import com.samayu.prodcast.prodcastd.dto.OrderEntry;
+import com.samayu.prodcast.prodcastd.dto.Product;
 
 import java.util.List;
 
@@ -13,6 +15,35 @@ import java.util.List;
 public class SessionInfo {
 
     private Employee employee;
+
+    private List<OrderEntry> cart;
+
+    public Customer getSelectedCustomer() {
+        return selectedCustomer;
+    }
+
+    public void setSelectedCustomer(Customer selectedCustomer) {
+        this.selectedCustomer = selectedCustomer;
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
+
+    private float total;
+    private Customer selectedCustomer;
+
+    public List<OrderEntry> getCart() {
+        return cart;
+    }
+
+    public void setCart(List<OrderEntry> cart) {
+        this.cart = cart;
+    }
 
     private List<Customer> customerList;
 
@@ -35,6 +66,16 @@ public class SessionInfo {
     private List<Bill> customerBills;
 
     private List<Bill> outStandingBills;
+
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+    }
+
+    private List<Product> productList;
 
     public List<Customer> getCustomerList() {
         return customerList;
@@ -61,6 +102,7 @@ public class SessionInfo {
     public void destroy(){
         sessionInfo = new SessionInfo();
     }
+
 
 
 }

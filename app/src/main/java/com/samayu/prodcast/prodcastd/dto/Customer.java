@@ -1,12 +1,13 @@
 package com.samayu.prodcast.prodcastd.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by sarathan732 on 8/11/2017.
  */
 
-public class Customer {
+public class Customer implements Serializable{
 
     public String getCellPhone() {
         return cellPhone;
@@ -276,6 +277,9 @@ public class Customer {
     public void setStoreType(long storeType)
     {
         this.storeType = storeType;
+    }
+    public String toString(){
+        return customerName;
     }
 
 }

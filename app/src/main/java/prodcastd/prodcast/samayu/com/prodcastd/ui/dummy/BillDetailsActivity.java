@@ -1,6 +1,8 @@
 package prodcastd.prodcast.samayu.com.prodcastd.ui.dummy;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
+import com.samayu.prodcast.prodcastd.dto.Bill;
 import com.samayu.prodcast.prodcastd.dto.Collection;
 import com.samayu.prodcast.prodcastd.dto.Order;
 import com.samayu.prodcast.prodcastd.dto.OrderDTO;
@@ -27,15 +30,19 @@ public class BillDetailsActivity extends ProdcastBaseActivity {
     ListView orderListView;
     ListView paymentListView;
     Context context;
+    private ProgressDialog progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bill_details);
-        Long billId = getIntent().getExtras().getLong("billId");
+        int billDetail = getIntent().getExtras().getInt("billId");
+        Bill bill = SessionInfo.instance().getCustomerBills().get(billDetail);
+        Long requiredBillId = bill.getBillNumber();
         paymentListView=(ListView) findViewById(R.id.paymentEntriesAdapter);
         orderListView=(ListView) findViewById(R.id.orderEntriesAdapter);
         context=this;
-        Call<OrderDTO> billDetailsDTO = new ProdcastDClient().getClient().getBillDetails(billId,SessionInfo.instance().getEmployee().getEmployeeId(),"D");
+        progress = ProgressDialog.show(BillDetailsActivity.this,"In Progress","One moment Please...",true);
+        Call<OrderDTO> billDetailsDTO = new ProdcastDClient().getClient().getBillDetails(requiredBillId,SessionInfo.instance().getEmployee().getEmployeeId(),"D");
         billDetailsDTO.enqueue(new Callback<OrderDTO>() {
             @Override
             public void onResponse(Call<OrderDTO> call, Response<OrderDTO> response) {
@@ -44,11 +51,9 @@ public class BillDetailsActivity extends ProdcastBaseActivity {
                 if (dto.isError()) {
                     Toast.makeText(BillDetailsActivity.this, dto.getErrorMessage(), Toast.LENGTH_LONG).show();
                 } else {
+                    progress.dismiss();
                     Order order=dto.getOrder();
                     setBillDetails(order);
-                    Toast.makeText(context, "vvgfv", Toast.LENGTH_LONG).show();
-
-
                         paymentListView.setAdapter(new PaymentDetailsList(BillDetailsActivity.this,order.getCollectionEntries()));
 
                         orderListView.setAdapter(new BillDetailList(BillDetailsActivity.this,order.getOrderEntries()));

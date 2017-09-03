@@ -1,11 +1,17 @@
 <resources>
     <string name="app_name">Prodcast Distributors</string>
+    <string-array name="discount_type">
+        <item>Type</item>
+        <item>Amount</item>
+        <item>Percentage</item>
+    </string-array>
     <string-array name="payment_method">
         <item>Payment Type</item>
         <item>Cash</item>
         <item>Check</item>
         <item>Credit Card</item>
     </string-array>
+
     <string-array name="select_day">
         <item> Select Day</item>
         <item>Sunday</item>
@@ -49,6 +55,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_customer_create_edit">CustomerCreateEditActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_bottom_test">BottomTest</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 
 </resources>

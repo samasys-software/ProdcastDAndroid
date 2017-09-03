@@ -77,6 +77,11 @@ public class CustomersActivity extends ProdcastBaseActivity {
             }
         });
     }
+
+    @Override
+    public String getProdcastTitle() {
+        return "My Customers";
+    }
 }
 
 

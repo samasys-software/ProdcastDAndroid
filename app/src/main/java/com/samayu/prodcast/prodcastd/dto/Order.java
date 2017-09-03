@@ -1,6 +1,5 @@
 package com.samayu.prodcast.prodcastd.dto;
 
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -20,12 +19,29 @@ public class Order implements Serializable{
     private String distributorName;
     private String countryCode;
     private String cellPhone;
+
+    private List<OrderEntry> returnEntries;
     private long distributorId;
     private long salesRepId;
     private long customerId;
+    private Distributor distributor;
 
-    public Order(){
+    public Employee getEmployee() {
+        return employee;
+    }
 
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    private Employee employee;
+
+    public Distributor getDistributor() {
+        return distributor;
+    }
+
+    public void setDistributor(Distributor distributor) {
+        this.distributor = distributor;
     }
 
     public Customer getCustomer() {
@@ -52,6 +68,14 @@ public class Order implements Serializable{
 
     public void setSalesRepId(long salesRepId) {
         this.salesRepId = salesRepId;
+    }
+
+    public List<OrderEntry> getReturnEntries() {
+        return returnEntries;
+    }
+
+    public void setReturnEntries(List<OrderEntry> returnEntries) {
+        this.returnEntries = returnEntries;
     }
 
     public String getCountryCode() {
@@ -120,13 +144,30 @@ public class Order implements Serializable{
         this.discountType = discountType;
     }
 
+    public String getCreateTime() {
+        return createTime;
+    }
 
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    private String createTime;
     private float totalAmount;
     private String customerName;
     private String employeeName;
     private float discount=0f;
     private int discountType=0;
 
+    public List<Collection> getCollectionEntries() {
+        return collectionEntries;
+    }
+
+    public void setCollectionEntries(List<Collection> collectionEntries) {
+        this.collectionEntries = collectionEntries;
+    }
+
+    private List<Collection> collectionEntries;
 
     public String getCustomerName() {
         return customerName;
@@ -155,6 +196,15 @@ public class Order implements Serializable{
     private float outstandingBalance;
 
     private java.sql.Date billDate;
+    private List<OrderEntry> orderEntries;
+
+    public List<OrderEntry> getOrderEntries() {
+        return orderEntries;
+    }
+
+    public void setOrderEntries(List<OrderEntry> orderEntries) {
+        this.orderEntries = orderEntries;
+    }
 
     public long getOrderId() {
 
@@ -197,7 +247,6 @@ public class Order implements Serializable{
         this.customerId = customerId;
     }
 
-
     public float getTotalAmount() {
         return totalAmount;
     }
@@ -205,5 +254,4 @@ public class Order implements Serializable{
     public void setTotalAmount(float totalAmount) {
         this.totalAmount = totalAmount;
     }
-
 }

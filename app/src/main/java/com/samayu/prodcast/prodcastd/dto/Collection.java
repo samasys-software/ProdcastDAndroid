@@ -1,13 +1,17 @@
 package com.samayu.prodcast.prodcastd.dto;
 
 
-import java.sql.Date;
-
 /**
- * Created by kdsdh on 8/24/2017.
+ * Created by kathir on 8/30/2017.
  */
 
+import java.sql.Date;
+import java.sql.Timestamp;
 
+
+/**
+ * Created by SamayuSoftcorp on 29-08-2017.
+ */
 public class Collection {
 
     private long billId;

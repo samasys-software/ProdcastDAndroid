@@ -7,14 +7,18 @@ import com.samayu.prodcast.prodcastd.dto.CountryDTO;
 import com.samayu.prodcast.prodcastd.dto.CustomerDTO;
 import com.samayu.prodcast.prodcastd.dto.CustomerListDTO;
 import com.samayu.prodcast.prodcastd.dto.LoginDTO;
+import com.samayu.prodcast.prodcastd.dto.OrderDTO;
+import com.samayu.prodcast.prodcastd.dto.OrderDetailDTO;
 import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
 import com.samayu.prodcast.prodcastd.dto.ReportDTO;
 import com.samayu.prodcast.prodcastd.dto.ReportTypeDTO;
+import com.samayu.prodcast.prodcastd.dto.ProductListDTO;
 import com.samayu.prodcast.prodcastd.dto.StoreType;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -30,10 +34,18 @@ public interface ProdcastDistributorService {
     @POST("prodcast/global/loginp")
     @FormUrlEncoded
     public Call<LoginDTO> authenticate(@Field("userid") String userId , @Field("password") String password);
+    @GET("prodcast/global/billdetails")
+    Call<OrderDTO> getBillDetails(@Query("billId") long id,
+                                  @Query("employeeId") long employeeId,
+                                  @Query("userRole") String userRole) ;
 
     @GET("prodcast/global/customers")
     public Call<CustomerListDTO> getCustomers(@Query ("employeeId") long employeeId );
 
+    @GET("prodcast/global/products")
+    public Call<ProductListDTO> getProducts(@Query("employeeId") long employeeId);
+    @POST("prodcast/global/saveOrder")
+    public Call<CustomerDTO> saveOrder(@Body OrderDetailDTO orderDto);
     @POST("prodcast/global/changePassword")
     @FormUrlEncoded
     public Call<ProdcastDTO> changePassword(@Field("employeeId") String employeeId , @Field("oldPassword") String oldPassword, @Field("newPassword") String newPassword);

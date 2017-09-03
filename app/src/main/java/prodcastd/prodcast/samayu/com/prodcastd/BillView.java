@@ -26,6 +26,7 @@ public class BillView extends FrameLayout {
         super(context);
         this.bill = bill;
 
+
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.sample_bill_view, this );
     }

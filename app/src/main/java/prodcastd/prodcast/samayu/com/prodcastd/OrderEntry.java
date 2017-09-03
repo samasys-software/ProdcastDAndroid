@@ -1,5 +1,6 @@
 package prodcastd.prodcast.samayu.com.prodcastd;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInstaller;
@@ -19,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
@@ -33,6 +35,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
+import prodcastd.prodcast.samayu.com.prodcastd.ui.dummy.BillDetailsActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,15 +47,20 @@ public class OrderEntry extends ProdcastBaseActivity {
     private Spinner methodOfPayment;
     private int selectedBillIndex;
     private FloatingActionButton fabNewOrder;
+    private TextView name;
     View focusView;
     EditText cashPay, checkNumber,checkComments ;
     private Customer selectedCustomer;
     Button payButton;
     View.OnKeyListener listener = null;
+    Bundle productBundle = null;
+    private ProgressDialog progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_entry);
+        productBundle = getIntent().getExtras();
+        name =(TextView)findViewById(R.id.tvName);
         checkPanel=(LinearLayout)findViewById(R.id.checkPanel);
         billsView = (ListView)findViewById(R.id.billsView);
         methodOfPayment=(Spinner)findViewById(R.id.paymentType);
@@ -65,11 +73,11 @@ public class OrderEntry extends ProdcastBaseActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(OrderEntry.this,R.array.payment_method,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         methodOfPayment.setAdapter(adapter);
-
         listener = new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 customerNames.setOnKeyListener(null);
+                findViewById(R.id.llName).setVisibility(View.GONE);
                 findViewById(R.id.llbills).setVisibility(View.GONE);
                 findViewById(R.id.llnoOutstandingBills).setVisibility(View.GONE);
                 fabNewOrder.setVisibility(View.GONE);
@@ -104,16 +112,13 @@ public class OrderEntry extends ProdcastBaseActivity {
                 selectedCustomer= null;
                 customerNames.setOnKeyListener(listener);
                 findViewById(R.id.llbills).setVisibility(View.GONE);
+                findViewById(R.id.llName).setVisibility(View.GONE);
                 List<Customer> customerList =SessionInfo.instance().getCustomerList();
-                String customerName = (String)adapterView.getItemAtPosition(i);
-                for (int a =0;a<customerList.size();a++){
-                    selectedCustomer = customerList.get(a);
-                    if (selectedCustomer.getCustomerName().equalsIgnoreCase(customerName)){
-                        break;
-                    }
-                }
-
+                selectedCustomer  = (Customer)adapterView.getItemAtPosition(i);
+                name.setText(selectedCustomer.getCustomerName());
+                SessionInfo.instance().setSelectedCustomer( selectedCustomer );
                 recreateOutstandingBills();
+
             }
         });
         billsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -123,7 +128,20 @@ public class OrderEntry extends ProdcastBaseActivity {
                 fabNewOrder.setVisibility(View.VISIBLE);
                     View b4 = findViewById(R.id.llpayment);
                     b4.setVisibility(View.VISIBLE);
+                payButton.setEnabled(true);
 
+
+            }
+        });
+        billsView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Bundle bundle = new Bundle();
+                Intent intent = new Intent(OrderEntry.this, BillDetailsActivity.class);
+                bundle.putLong("billId",selectedBillIndex);
+                intent.putExtras(bundle);
+                startActivity(intent,bundle);
+                return false;
             }
         });
         payButton = (Button)findViewById(R.id.pay);
@@ -137,44 +155,81 @@ public class OrderEntry extends ProdcastBaseActivity {
         fabNewOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent i = new Intent(OrderEntry.this,NewOrder.class);
+                SessionInfo.instance().setSelectedCustomer(selectedCustomer);
                 startActivity(i);
             }
         });
+
+
+
+        selectedCustomer = SessionInfo.instance().getSelectedCustomer();
+
+
+        if( selectedCustomer == null ){
+            fetchCustomers();
+        }
+        else{
+
+            findViewById(R.id.llName).setVisibility(View.VISIBLE);
+
+            ArrayAdapter<Customer> customeAdapter = new ArrayAdapter<Customer>(OrderEntry.this, android.R.layout.select_dialog_item,SessionInfo.instance().getCustomerList());
+            customerNames.setThreshold(1);
+            customerNames.setAdapter(customeAdapter);
+            name.setText(selectedCustomer.getCustomerName());
+            recreateOutstandingBills();
+
+
+        }
+
+    }
+
+    @Override
+    public String getProdcastTitle() {
+        return "Order Entry";
+    }
+
+    public void fetchCustomers(){
         long empId= SessionInfo.instance().getEmployee().getEmployeeId();
+        findViewById(R.id.llName).setVisibility(View.VISIBLE);
         Call<CustomerListDTO> customerListDTOCall = new ProdcastDClient().getClient().getCustomers(empId);
-       customerListDTOCall.enqueue(new Callback<CustomerListDTO>() {
-           @Override
+        customerListDTOCall.enqueue(new Callback<CustomerListDTO>() {
+            @Override
             public void onResponse(Call<CustomerListDTO> call, Response<CustomerListDTO> response) {
                 if (response.isSuccessful()) {
                     CustomerListDTO customerListDTO = response.body();
                     SessionInfo.instance().setCustomerList(customerListDTO.getCustomerList());
                     SessionInfo.instance().setOutStandingBills(customerListDTO.getOutstandingBills());
-                        List<Customer> customerList = customerListDTO.getCustomerList();
+                    List<Customer> customerList = customerListDTO.getCustomerList();
                     String[] newList = new String[customerList.size()];
-                        for (int i = 0; i < customerList.size(); i++) {
-                            Customer customer = customerList.get(i);
-                            newList[i] = customer.getCustomerName();
-                        }
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(OrderEntry.this, android.R.layout.select_dialog_item, newList);
-                            customerNames.setThreshold(1);
-                            customerNames.setAdapter(adapter);
+                    for (int i = 0; i < customerList.size(); i++) {
+                        Customer customer = customerList.get(i);
+                        newList[i] = customer.getCustomerName();
+                    }
+                    ArrayAdapter<Customer> adapter = new ArrayAdapter<Customer>(OrderEntry.this, android.R.layout.select_dialog_item,SessionInfo.instance().getCustomerList());
+                    customerNames.setThreshold(1);
+                    customerNames.setAdapter(adapter);
                 }
                 else {
                 }
             }
-           @Override
+            @Override
             public void onFailure(Call<CustomerListDTO> call, Throwable t) {
             }
         });
     }
     public void recreateOutstandingBills() {
         billsView.clearChoices();
+        customerNames.setText("");
+        findViewById(R.id.llName).setVisibility(View.VISIBLE);
         fabNewOrder.setVisibility(View.VISIBLE);
         findViewById(R.id.llpayment).setVisibility(View.GONE);
         findViewById(R.id.checkPanel).setVisibility(View.GONE);
         cashPay.setText("");
         methodOfPayment.setSelection(0);
+
+
         List<String> bills = new LinkedList<String>();
         List<Bill> allOutStandingBills = SessionInfo.instance().getOutStandingBills();
         List<Bill> customerBills = new LinkedList<Bill>();
@@ -186,8 +241,11 @@ public class OrderEntry extends ProdcastBaseActivity {
                 customerBills.add(bill);
             }
         }
+
+
         Bill[] billArray = new Bill[customerBills.size()];
         if (customerBills.size() != 0) {
+                findViewById(R.id.llName).setVisibility(View.VISIBLE);
             findViewById(R.id.llnoOutstandingBills).setVisibility(View.GONE);
             fabNewOrder.setVisibility(View.VISIBLE);
             for (int i = 0; i < customerBills.size(); i++) {
@@ -195,17 +253,17 @@ public class OrderEntry extends ProdcastBaseActivity {
             }
             BillViewAdapter adapter = new BillViewAdapter(OrderEntry.this, billArray);
             billsView.setAdapter(adapter);
-        /*ArrayAdapter<Object> billsAdapter = new ArrayAdapter<Object>(OrderEntry.this
-                ,android.R.layout.simple_list_item_1,bills.toArray());
-        billsView.setAdapter(billsAdapter);
-        billsAdapter.notifyDataSetChanged();*/
+            findViewById(R.id.llName).setVisibility(View.VISIBLE);
             findViewById(R.id.llbills).setVisibility(View.VISIBLE);
             fabNewOrder.setVisibility(View.VISIBLE);
+            name.setText(selectedCustomer.getCustomerName());
         }
         else {
+            findViewById(R.id.llName).setVisibility(View.VISIBLE);
             findViewById(R.id.llnoOutstandingBills).setVisibility(View.VISIBLE);
             findViewById(R.id.llbills).setVisibility(View.GONE);
             fabNewOrder.setVisibility(View.VISIBLE);
+            name.setText(selectedCustomer.getCustomerName());
         }
     }
     private boolean validatePayment(){
@@ -260,14 +318,15 @@ public class OrderEntry extends ProdcastBaseActivity {
             return;
         }
         long employeeId =SessionInfo.instance().getEmployee().getEmployeeId();
-        Bill bill = SessionInfo.instance().getCustomerBills().get(selectedBillIndex);
+        final Bill bill = SessionInfo.instance().getCustomerBills().get(selectedBillIndex);
         long billId = bill.getBillNumber();
         double amount = Double.parseDouble(cash);
         long customerId =bill.getCustomerId();
         String message = ""+bill.getBillNumber()+" "+bill.getBillDate()+" "+bill.getBillAmount();
-        Toast.makeText(OrderEntry.this,message,Toast.LENGTH_LONG).show();
         String checkNo = checkNumber.getText().toString();
         String checkCmt = checkComments.getText().toString();
+        payButton.setEnabled(false);
+        progress = ProgressDialog.show(OrderEntry.this,"In Progress","One moment Please......",true);
         final Call<CustomerDTO> customerDTOCall = new ProdcastDClient().getClient().makePayment(methodOfPayment.getSelectedItemPosition(), employeeId,billId,amount,customerId,checkNo,checkCmt);
         customerDTOCall.enqueue(new Callback<CustomerDTO>() {
             @Override
@@ -275,7 +334,9 @@ public class OrderEntry extends ProdcastBaseActivity {
                 if (response.isSuccessful()){
                     CustomerDTO dto = response.body();
                     if (!dto.isError()){
-                        Toast.makeText(OrderEntry.this,"Payment Successful",Toast.LENGTH_LONG).show();
+                        progress.dismiss();
+                        Toast.makeText(OrderEntry.this,"Payment Successful for Bill no : "+bill.getBillNumber(),Toast.LENGTH_LONG).show();
+
                         SessionInfo.instance().setCustomerBills(dto.getCustomer().getOutstandingBill());
                         List<Bill> newAllOutstandingBills = new LinkedList<Bill>();
                         for(Bill aBill: SessionInfo.instance().getOutStandingBills()){
@@ -300,9 +361,10 @@ public class OrderEntry extends ProdcastBaseActivity {
             }
         });
     }
+
     public static  class  BillViewAdapter extends ArrayAdapter<Bill>{
         public BillViewAdapter(Context context,Bill[] bills){
-            super(context,R.layout.sample_bill_view,R.id.billNumber,bills);
+            super(context,R.layout.sample_bill_view,bills);
         }
         public View getView(int position,View converView,ViewGroup parent){
             BillView billView = new BillView(getContext(),getItem(position));

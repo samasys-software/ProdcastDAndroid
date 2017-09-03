@@ -1,5 +1,6 @@
 package prodcastd.prodcast.samayu.com.prodcastd;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     View focusView = null;
     EditText password = null;
     public static final String FILE_NAME = "prodcastLogin.txt";
-
+private ProgressDialog progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                     return ;
 
                 }
+                progress = ProgressDialog.show(LoginActivity.this,"In Progress","One moment Please......",true);
                 Call<LoginDTO> loginDTOCall = new ProdcastDClient().getClient().authenticate( userName.getText().toString() , password.getText().toString() );
                 loginDTOCall.enqueue(new Callback<LoginDTO>() {
                     @Override
@@ -87,14 +89,17 @@ public class LoginActivity extends AppCompatActivity {
                             LoginDTO loginDTO = response.body();
                             if( !loginDTO.isError()){
                                 //TODO Now go to DashBoard.
+                                progress.dismiss();
                                 Intent intent =new Intent(LoginActivity.this,Home.class);
                                 SessionInfo.instance().setEmployee( loginDTO.getEmployee());
                                 loginToFile(loginDTO.getEmployee());
                                 Bundle bundle =  new Bundle();
+
                                 bundle.putString("employeeId",String.valueOf(loginDTO.getEmployee().getEmployeeId()));
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                                 signInButton.setEnabled(false);
+
                                 //new ProdcastDClient().getClient().getCustomers(""+employeeId)
                                 //Pass in a Bundle to Dashboard loginDTO.getEmployee().getEmployeeId()
                             }

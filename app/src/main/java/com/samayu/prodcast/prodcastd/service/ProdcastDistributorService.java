@@ -10,6 +10,8 @@ import com.samayu.prodcast.prodcastd.dto.LoginDTO;
 import com.samayu.prodcast.prodcastd.dto.OrderDTO;
 import com.samayu.prodcast.prodcastd.dto.OrderDetailDTO;
 import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
+import com.samayu.prodcast.prodcastd.dto.ReportDTO;
+import com.samayu.prodcast.prodcastd.dto.ReportTypeDTO;
 import com.samayu.prodcast.prodcastd.dto.ProductListDTO;
 import com.samayu.prodcast.prodcastd.dto.StoreType;
 
@@ -53,6 +55,13 @@ public interface ProdcastDistributorService {
 
     @GET("prodcast/global/getCountries")
     public Call<CountryDTO> getCountries();
+
+    @GET("prodcast/global/salesReport")
+    public Call<ReportDTO>  getReports(@Query("reportType") String reportType,
+                                      @Query("employeeId") long employeeId,
+                                      @Query("selectedEmpId") String selectedEmployeeId,
+                                      @Query("startDate") String customStartDate ,
+                                      @Query("endDate") String customEndDate );
 
     @GET("prodcast/global/areas")
     public Call<AreaDTO> getAreasForEmployee(@Query("employeeId") long employeeId);

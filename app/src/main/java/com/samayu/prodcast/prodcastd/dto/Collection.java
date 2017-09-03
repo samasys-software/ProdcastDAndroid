@@ -1,5 +1,6 @@
 package com.samayu.prodcast.prodcastd.dto;
 
+
 /**
  * Created by kathir on 8/30/2017.
  */
@@ -11,7 +12,6 @@ import java.sql.Timestamp;
 /**
  * Created by SamayuSoftcorp on 29-08-2017.
  */
-
 public class Collection {
 
     private long billId;
@@ -22,6 +22,9 @@ public class Collection {
     private String refNo;
     private String refDetail;
 
+    public Collection(){
+
+    }
     public String getRefNo() {
         return refNo;
     }
@@ -92,19 +95,19 @@ public class Collection {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(java.sql.Date paymentDate) {
         this.paymentDate = paymentDate;
     }
 
-    public Timestamp getEntryTime() {
+    public String getEntryTime() {
         return entryTime;
     }
 
-    public void setEntryTime(Timestamp entryTime) {
+    public void setEntryTime(String entryTime) {
         this.entryTime = entryTime;
     }
 
     private Date paymentDate;
-    private Timestamp entryTime;
-}
+    private String entryTime;
 
+}

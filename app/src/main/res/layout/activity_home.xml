@@ -11,8 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_alignParentStart="true"
-        android:weightSum="1">
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/linearLayout">
+>
 
 
         <LinearLayout
@@ -35,27 +36,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="VIEWORDER" />
+                android:text="View Order" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
             android:layout_row="0"
+
             android:orientation="vertical"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="40dp">
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="35dp">
+
             <ImageView
                 android:id="@+id/Customers"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/customer"
-                />
+                android:layout_height="96dp"
+                app:srcCompat="@drawable/customer" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_gravity="center"
-                android:text="CUSTOMERS" />
+                android:text="Customers" />
         </LinearLayout>
 
     </LinearLayout>
@@ -64,7 +67,8 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_marginTop="200dp"
-        android:layout_marginStart="25dp">
+        android:layout_marginStart="25dp"
+        android:id="@+id/linearLayout">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="PAYMENT"/>
+                android:text="Payment"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -109,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="REPORTS"/>
+                    android:text="Reports"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -139,7 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="EDIT REPORT"
+                android:text="Edit Report"
                 android:fontFamily="casual"/>
         </LinearLayout>
         <LinearLayout
@@ -158,7 +162,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="CHANGE PASSWORD"
+                android:text="Change Password"
                 android:fontFamily="casual"/>
         </LinearLayout>
     </LinearLayout>

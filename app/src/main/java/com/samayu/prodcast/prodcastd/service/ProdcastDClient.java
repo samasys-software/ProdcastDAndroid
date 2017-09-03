@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.lang.reflect.Modifier;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -42,6 +43,8 @@ public class ProdcastDClient {
        });
        Gson gson = new GsonBuilder()
                .setDateFormat("yyyy-MM-dd")
+               .excludeFieldsWithModifiers(Modifier.FINAL,Modifier.STATIC,Modifier.TRANSIENT)
+               .serializeNulls()
                .create();
        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://ec2-52-91-5-22.compute-1.amazonaws.com:8080")
                .addConverterFactory( GsonConverterFactory.create(gson));

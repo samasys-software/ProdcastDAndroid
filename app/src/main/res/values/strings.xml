@@ -28,6 +28,14 @@
         <item>Retailer</item>
         <item>Wholesaler</item>
     </string-array>
+    <string-array name="select_report_day">
+
+        <item>Today</item>
+        <item>Yesterday</item>
+        <item>Week</item>
+        <item>Custom Range</item>
+        </string-array>
+
 
     <string name="title_customer_list">Customers</string>
     <string name="title_customer_detail">Customer Detail</string>

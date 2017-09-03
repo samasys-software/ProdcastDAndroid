@@ -1,15 +1,16 @@
 package com.samayu.prodcast.prodcastd.dto;
 
-import java.sql.Date;
-
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
+import prodcastd.prodcast.samayu.com.prodcastd.OrderEntry;
+
 /**
- * Created by kathir on 8/30/2017.
+ * Created by kdsdh on 8/24/2017.
  */
 
-public class Order {
-
+public class Order implements Serializable{
     private long orderId;
     private long billNumber;
     private long employeeId;
@@ -18,6 +19,7 @@ public class Order {
     private String distributorName;
     private String countryCode;
     private String cellPhone;
+
     private List<OrderEntry> returnEntries;
     private long distributorId;
     private long salesRepId;
@@ -193,7 +195,7 @@ public class Order {
 
     private float outstandingBalance;
 
-    private Date billDate;
+    private java.sql.Date billDate;
     private List<OrderEntry> orderEntries;
 
     public List<OrderEntry> getOrderEntries() {
@@ -233,7 +235,7 @@ public class Order {
         return billDate;
     }
 
-    public void setBillDate(Date billDate) {
+    public void setBillDate(java.sql.Date billDate) {
         this.billDate = billDate;
     }
 
@@ -244,8 +246,6 @@ public class Order {
     public void setCustomerId(long customerId) {
         this.customerId = customerId;
     }
-
-
 
     public float getTotalAmount() {
         return totalAmount;

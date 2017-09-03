@@ -1,237 +1,245 @@
 package com.samayu.prodcast.prodcastd.dto;
 
 /**
- * Created by kathir on 8/30/2017.
+ * Created by kdsdh on 8/24/2017.
  */
 
 public class Distributor {
-    private long distributorId;
 
-    public String getLogo() {
-        return logo;
-    }
 
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
+        public Distributor(){
 
-    private String logo;
-    private String companyName;
-    private String type;
-    private String firstName;
-    private String lastName;
-    private String title;
-    private String emailAddress;
-    private String cellPhone;
-    private String homePhone;
-    private String workPhone;
-    private String address1;
-    private String address2;
-    private String address3;
-    private String city;
-    private String state;
-    private String postalCode;
-    private String country;
-    private String currencySymbol;
-    private String timezone;
-    private boolean openToPublic;
+        }
+        private long distributorId;
 
-    public String getTimezone() {
-        return timezone;
-    }
+        public String getLogo() {
+            return logo;
+        }
 
-    public void setTimezone(String timezone) {
-        this.timezone = timezone;
-    }
+        public void setLogo(String logo) {
+            this.logo = logo;
+        }
 
-    public String getComments() {
-        return comments;
-    }
+        private String logo;
+        private String companyName;
+        private String type;
+        private String firstName;
+        private String lastName;
+        private String title;
+        private String emailAddress;
+        private String cellPhone;
+        private String homePhone;
+        private String workPhone;
+        private String address1;
+        private String address2;
+        private String address3;
+        private String city;
+        private String state;
+        private String postalCode;
+        private String country;
+        private String currencySymbol;
+        private String timezone;
+        private boolean openToPublic;
 
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
+        public String getTimezone() {
+            return timezone;
+        }
 
-    private String comments;
+        public void setTimezone(String timezone) {
+            this.timezone = timezone;
+        }
 
-    public String getCurrencySymbol() {
-        return currencySymbol;
-    }
+        public String getComments() {
+            return comments;
+        }
 
-    public void setCurrencySymbol(String currencySymbol) {
-        this.currencySymbol = currencySymbol;
-    }
+        public void setComments(String comments) {
+            this.comments = comments;
+        }
 
-    public String getGender() {
-        return gender;
-    }
+        private String comments;
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+        public String getCurrencySymbol() {
+            return currencySymbol;
+        }
 
-    public long getDistributorId() {
-        return distributorId;
-    }
+        public void setCurrencySymbol(String currencySymbol) {
+            this.currencySymbol = currencySymbol;
+        }
 
-    public void setDistributorId(long distributorId) {
-        this.distributorId = distributorId;
-    }
+        public String getGender() {
+            return gender;
+        }
 
-    public String getCompanyName() {
-        return companyName;
-    }
+        public void setGender(String gender) {
+            this.gender = gender;
+        }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
+        public long getDistributorId() {
+            return distributorId;
+        }
 
-    public String getType() {
-        return type;
-    }
+        public void setDistributorId(long distributorId) {
+            this.distributorId = distributorId;
+        }
 
-    public void setType(String type) {
-        this.type = type;
-    }
+        public String getCompanyName() {
+            return companyName;
+        }
 
-    public String getFirstName() {
-        return firstName;
-    }
+        public void setCompanyName(String companyName) {
+            this.companyName = companyName;
+        }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+        public String getType() {
+            return type;
+        }
 
-    public String getLastName() {
-        return lastName;
-    }
+        public void setType(String type) {
+            this.type = type;
+        }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+        public String getFirstName() {
+            return firstName;
+        }
 
-    public String getTitle() {
-        return title;
-    }
+        public void setFirstName(String firstName) {
+            this.firstName = firstName;
+        }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+        public String getLastName() {
+            return lastName;
+        }
 
-    public String getEmailAddress() {
-        return emailAddress;
-    }
+        public void setLastName(String lastName) {
+            this.lastName = lastName;
+        }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
+        public String getTitle() {
+            return title;
+        }
 
-    public String getCellPhone() {
-        return cellPhone;
-    }
+        public void setTitle(String title) {
+            this.title = title;
+        }
 
-    public void setCellPhone(String cellPhone) {
-        this.cellPhone = cellPhone;
-    }
+        public String getEmailAddress() {
+            return emailAddress;
+        }
 
-    public String getHomePhone() {
-        return homePhone;
-    }
+        public void setEmailAddress(String emailAddress) {
+            this.emailAddress = emailAddress;
+        }
 
-    public void setHomePhone(String homePhone) {
-        this.homePhone = homePhone;
-    }
+        public String getCellPhone() {
+            return cellPhone;
+        }
 
-    public String getWorkPhone() {
-        return workPhone;
-    }
+        public void setCellPhone(String cellPhone) {
+            this.cellPhone = cellPhone;
+        }
 
-    public void setWorkPhone(String workPhone) {
-        this.workPhone = workPhone;
-    }
+        public String getHomePhone() {
+            return homePhone;
+        }
 
-    public String getAddress1() {
-        return address1;
-    }
+        public void setHomePhone(String homePhone) {
+            this.homePhone = homePhone;
+        }
 
-    public void setAddress1(String address1) {
-        this.address1 = address1;
-    }
+        public String getWorkPhone() {
+            return workPhone;
+        }
 
-    public String getAddress2() {
-        return address2;
-    }
+        public void setWorkPhone(String workPhone) {
+            this.workPhone = workPhone;
+        }
 
-    public void setAddress2(String address2) {
-        this.address2 = address2;
-    }
+        public String getAddress1() {
+            return address1;
+        }
 
-    public String getAddress3() {
-        return address3;
-    }
+        public void setAddress1(String address1) {
+            this.address1 = address1;
+        }
 
-    public void setAddress3(String address3) {
-        this.address3 = address3;
-    }
+        public String getAddress2() {
+            return address2;
+        }
 
-    public String getCity() {
-        return city;
-    }
+        public void setAddress2(String address2) {
+            this.address2 = address2;
+        }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+        public String getAddress3() {
+            return address3;
+        }
 
-    public String getState() {
-        return state;
-    }
+        public void setAddress3(String address3) {
+            this.address3 = address3;
+        }
 
-    public void setState(String state) {
-        this.state = state;
-    }
+        public String getCity() {
+            return city;
+        }
 
-    public String getPostalCode() {
-        return postalCode;
-    }
+        public void setCity(String city) {
+            this.city = city;
+        }
 
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
+        public String getState() {
+            return state;
+        }
 
-    public String getCountry() {
-        return country;
-    }
+        public void setState(String state) {
+            this.state = state;
+        }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
+        public String getPostalCode() {
+            return postalCode;
+        }
 
-    public boolean isManufacturer() {
-        return manufacturer;
-    }
+        public void setPostalCode(String postalCode) {
+            this.postalCode = postalCode;
+        }
 
-    public void setManufacturer(boolean manufacturer) {
-        this.manufacturer = manufacturer;
-    }
+        public String getCountry() {
+            return country;
+        }
 
-    public boolean isActive() {
-        return active;
-    }
+        public void setCountry(String country) {
+            this.country = country;
+        }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+        public boolean isManufacturer() {
+            return manufacturer;
+        }
 
-    public boolean isOpenToPublic() {
-        return openToPublic;
-    }
+        public void setManufacturer(boolean manufacturer) {
+            this.manufacturer = manufacturer;
+        }
 
-    public void setOpenToPublic(boolean openToPublic)
-    {
-        this.openToPublic = openToPublic;
-    }
+        public boolean isActive() {
+            return active;
+        }
 
-    private String gender;
-    private boolean manufacturer;
-    private boolean active;
+        public void setActive(boolean active) {
+            this.active = active;
+        }
+
+        public boolean isOpenToPublic() {
+            return openToPublic;
+        }
+
+        public void setOpenToPublic(boolean openToPublic)
+        {
+            this.openToPublic = openToPublic;
+        }
+
+        private String gender;
+        private boolean manufacturer;
+        private boolean active;
+
+
+
 }

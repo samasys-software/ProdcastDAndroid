@@ -47,6 +47,9 @@
         <activity android:name=".ui.dummy.BillDetailsActivity">
 
         </activity>
+        <activity android:name=".ReportTypeActivity">
+
+        </activity>
         <activity android:name=".ui.dummy.BillDetailList" />
         <activity android:name=".ui.dummy.PaymentDetailsList"></activity>
     </application>

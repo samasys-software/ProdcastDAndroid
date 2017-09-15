@@ -15,9 +15,9 @@
         android:roundIcon="@drawable/p_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Home" />
-        <activity android:name=".CustomersActivity" />
-        <activity android:name=".LoginActivity" >
+        <activity android:name="com.samayu.prodcast.prodcastd.ui.HomeActivity" />
+        <activity android:name="com.samayu.prodcast.prodcastd.ui.CustomersActivity" />
+        <activity android:name="com.samayu.prodcast.prodcastd.ui.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,15 +25,15 @@
             </intent-filter>
         </activity>
         <activity android:name="com.samayu.prodcast.prodcastd.ui.CustomerListActivity" />
-        <activity android:name=".CustomerPasswordActivity" />
-        <activity android:name=".OrderEntry" ></activity>
-        <activity android:name=".OutstandingbillsPayment" />
-        <activity android:name=".Payment" />
-        <activity android:name=".CheckNumber" />
-        <activity android:name=".NewOrder" />
-        <activity android:name=".MainMenu" />
+        <activity android:name="com.samayu.prodcast.prodcastd.ui.CustomerPasswordActivity" />
+        <activity android:name="com.samayu.prodcast.prodcastd.ui.OrderEntryActivity" ></activity>
+        <activity android:name="com.samayu.prodcast.prodcastd.ui.OutstandingbillsPaymentActivity" />
+        <activity android:name="com.samayu.prodcast.prodcastd.ui.PaymentActivity" />
+        <activity android:name="com.samayu.prodcast.prodcastd.ui.CheckNumberActivity" />
+        <activity android:name="com.samayu.prodcast.prodcastd.ui.NewOrderActivity" />
+        <activity android:name="com.samayu.prodcast.prodcastd.ui.MainMenuActivity" />
         <activity
-            android:name=".ProdcastBaseActivity"
+            android:name="com.samayu.prodcast.prodcastd.ui.ProdcastBaseActivity"
             android:label="@string/title_activity_prodcast_base"
             android:theme="@style/AppTheme">
             android:name="com.samayu.prodcast.prodcastd.ui.CustomerListActivity"
@@ -44,14 +44,14 @@
             android:name="com.samayu.prodcast.prodcastd.ui.CustomerCreateEditActivity"
             android:label="@string/title_activity_customer_create_edit"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.dummy.BillDetailsActivity">
+        <activity android:name="com.samayu.prodcast.prodcastd.ui.BillDetailsActivity">
 
         </activity>
-        <activity android:name=".ReportTypeActivity">
+        <activity android:name="com.samayu.prodcast.prodcastd.ui.ReportTypeActivity">
 
         </activity>
-        <activity android:name=".ui.dummy.BillDetailList" />
-        <activity android:name=".ui.dummy.PaymentDetailsList"></activity>
+        <activity android:name="com.samayu.prodcast.prodcastd.ui.BillDetailListAdapter" />
+        <activity android:name="com.samayu.prodcast.prodcastd.ui.PaymentDetailsListAdapter"></activity>
     </application>
 
 </manifest>

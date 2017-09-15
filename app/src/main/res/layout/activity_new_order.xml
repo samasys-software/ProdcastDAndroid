@@ -6,7 +6,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="prodcastd.prodcast.samayu.com.prodcastd.NewOrder"
+    tools:context="prodcastd.prodcast.samayu.com.prodcastd.NewOrderActivityActivity"
     android:fillViewport="true"
     >-->
     <LinearLayout

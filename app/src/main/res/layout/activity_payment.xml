@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_store"
-    tools:context="prodcastd.prodcast.samayu.com.prodcastd.Payment">
+    tools:context="prodcastd.prodcast.samayu.com.prodcastd.com.samayu.prodcast.prodcastd.ui.PaymentActivity">
 
     <TextView
         android:id="@+id/amounttv"

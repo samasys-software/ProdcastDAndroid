@@ -1,4 +1,4 @@
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,9 +10,11 @@ import android.widget.TextView;
 import com.samayu.prodcast.prodcastd.dto.Collection;
 import com.samayu.prodcast.prodcastd.dto.Order;
 import com.samayu.prodcast.prodcastd.ui.CollectionView;
-import com.samayu.prodcast.prodcastd.ui.ReportSalesEntry;
+import com.samayu.prodcast.prodcastd.ui.ReportSalesEntryView;
 
 import java.util.List;
+
+import prodcastd.prodcast.samayu.com.prodcastd.R;
 
 /**
  * Created by kdsdh on 8/26/2017.
@@ -100,7 +102,7 @@ public class ReportExpandableListViewAdapter extends BaseExpandableListAdapter {
                 childView = inflater.inflate( R.layout.reportsalesheader , null );
             }
             else {
-                ReportSalesEntry entry = new ReportSalesEntry(context, (Order) getChild(i, i1-1));
+                ReportSalesEntryView entry = new ReportSalesEntryView(context, (Order) getChild(i, i1-1));
                 entry.setData();
                 childView = entry;
             }

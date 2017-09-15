@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="prodcastd.prodcast.samayu.com.prodcastd.ProdcastBaseActivity"
+    tools:context="prodcastd.prodcast.samayu.com.prodcastd.com.samayu.prodcast.prodcastd.ui.ProdcastBaseActivity"
     tools:showIn="@layout/activity_prodcast_base">
 
 </android.support.constraint.ConstraintLayout>

@@ -1,4 +1,4 @@
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import prodcastd.prodcast.samayu.com.prodcastd.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,7 +43,7 @@ private ProgressDialog progress;
         Employee ep =loginRetrive();
         if (ep != null){
             SessionInfo.instance().setEmployee(ep);
-            Intent intent =new Intent(LoginActivity.this,Home.class);
+            Intent intent =new Intent(LoginActivity.this,HomeActivity.class);
             startActivity(intent);
         }
          userName = (EditText)findViewById(R.id.logmn);
@@ -90,7 +91,7 @@ private ProgressDialog progress;
                             if( !loginDTO.isError()){
                                 //TODO Now go to DashBoard.
                                 progress.dismiss();
-                                Intent intent =new Intent(LoginActivity.this,Home.class);
+                                Intent intent =new Intent(LoginActivity.this,HomeActivity.class);
                                 SessionInfo.instance().setEmployee( loginDTO.getEmployee());
                                 loginToFile(loginDTO.getEmployee());
                                 Bundle bundle =  new Bundle();

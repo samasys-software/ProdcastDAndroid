@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/ffCstomerAddress"
-    tools:context="prodcastd.prodcast.samayu.com.prodcastd.CustomerAddressFragment">
+    tools:context="prodcastd.prodcast.samayu.com.prodcastd.com.samayu.prodcast.prodcastd.ui.CustomerAddressFragment">
 
 
     <LinearLayout

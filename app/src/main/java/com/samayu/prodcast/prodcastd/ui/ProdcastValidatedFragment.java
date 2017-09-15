@@ -1,4 +1,4 @@
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.support.v4.app.Fragment;
 

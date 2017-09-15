@@ -1,4 +1,4 @@
-package com.samayu.prodcast.prodcastd.dummy;
+package com.samayu.prodcast.prodcastd.ui;
 
 import java.util.ArrayList;
 import java.util.HashMap;

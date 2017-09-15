@@ -1,8 +1,6 @@
-package prodcastd.prodcast.samayu.com.prodcastd.ui.dummy;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,7 @@ import java.util.List;
 
 import prodcastd.prodcast.samayu.com.prodcastd.R;
 
-public class PaymentDetailsList extends BaseAdapter {
+public class PaymentDetailsListAdapter extends BaseAdapter {
     List<Collection> collections;
 
 
@@ -23,7 +21,7 @@ public class PaymentDetailsList extends BaseAdapter {
     Context context;
     public static LayoutInflater inflater = null;
 
-    public PaymentDetailsList(BillDetailsActivity billdetailsActivity, List<Collection> orders) {
+    public PaymentDetailsListAdapter(BillDetailsActivity billdetailsActivity, List<Collection> orders) {
         collections = orders;
 
 
@@ -58,7 +56,7 @@ public class PaymentDetailsList extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertview, ViewGroup viewGroup) {
-        PaymentDetailsList.Holder holder = new PaymentDetailsList.Holder();
+        PaymentDetailsListAdapter.Holder holder = new PaymentDetailsListAdapter.Holder();
         if (convertview == null) {
             convertview = inflater.inflate(R.layout.activity_payment_details_list, null);
             holder.paymentDate=(TextView) convertview.findViewById(R.id.paymentDate);

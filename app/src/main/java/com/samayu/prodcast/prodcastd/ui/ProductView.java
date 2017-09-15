@@ -1,4 +1,4 @@
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.content.Context;
 import android.os.Parcelable;
@@ -18,6 +18,8 @@ import com.samayu.prodcast.prodcastd.dto.OrderEntryDTO;
 import com.samayu.prodcast.prodcastd.util.Constants;
 
 import java.util.List;
+
+import prodcastd.prodcast.samayu.com.prodcastd.R;
 
 /**
  * Created by kathir on 8/24/2017.

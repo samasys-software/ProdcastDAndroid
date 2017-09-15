@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="prodcastd.prodcast.samayu.com.prodcastd.MainMenu"
+    tools:context="prodcastd.prodcast.samayu.com.prodcastd.com.samayu.prodcast.prodcastd.ui.MainMenuActivity"
     android:id="@+id/dddrawerLayout">
     <LinearLayout
         android:id="@+id/llnavigation"

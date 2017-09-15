@@ -1,22 +1,14 @@
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.nfc.Tag;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -25,7 +17,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,17 +37,15 @@ import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 import com.samayu.prodcast.prodcastd.dto.OrderEntry;
 import com.samayu.prodcast.prodcastd.util.Constants;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import prodcastd.prodcast.samayu.com.prodcastd.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class NewOrder extends ProdcastBaseActivity implements
+public class NewOrderActivity extends ProdcastBaseActivity implements
         ProductView.QuantityChangedListener{
 //extends ProdcastBaseActivity {
 
@@ -112,7 +101,7 @@ public class NewOrder extends ProdcastBaseActivity implements
 
 
         long employeeId = SessionInfo.instance().getEmployee().getEmployeeId();
-        final ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(NewOrder.this,R.array.discount_type,android.R.layout.simple_spinner_item);
+        final ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(NewOrderActivity.this,R.array.discount_type,android.R.layout.simple_spinner_item);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         discountType.setAdapter(arrayAdapter);
 
@@ -126,7 +115,7 @@ public class NewOrder extends ProdcastBaseActivity implements
                     SessionInfo.instance().setProductList(productListDTO.getProductList());
                     List<Product> fullProductList = productListDTO.getProductList();
 
-                    ArrayAdapter<Product> adapter = new ArrayAdapter<Product>(NewOrder.this, android.R.layout.select_dialog_item, fullProductList);
+                    ArrayAdapter<Product> adapter = new ArrayAdapter<Product>(NewOrderActivity.this, android.R.layout.select_dialog_item, fullProductList);
                     productList.setThreshold(1);
                     productList.setAdapter(adapter);
                     //productList.showDropDown();
@@ -192,7 +181,7 @@ public class NewOrder extends ProdcastBaseActivity implements
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
 
                 SessionInfo.instance().getCart().remove(position);
-                ProductViewAdapter adapter = new ProductViewAdapter(NewOrder.this, SessionInfo.instance().getCart(), NewOrder.this);
+                ProductViewAdapter adapter = new ProductViewAdapter(NewOrderActivity.this, SessionInfo.instance().getCart(), NewOrderActivity.this);
                 addedProducts.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
                 if (SessionInfo.instance().getCart() != null && SessionInfo.instance().getCart().size() == 0) {
@@ -297,7 +286,7 @@ public class NewOrder extends ProdcastBaseActivity implements
                 orderDetailDTO.setOrderStatus("F");
 
                 //Make a call to the Service.
-                progress = ProgressDialog.show(NewOrder.this, "In Progress",
+                progress = ProgressDialog.show(NewOrderActivity.this, "In Progress",
                         "One moment Please...", true);
                 Call<CustomerDTO> customerDTOCall = new ProdcastDClient().getClient().saveOrder(orderDetailDTO);
                 customerDTOCall.enqueue(new Callback<CustomerDTO>() {
@@ -322,16 +311,16 @@ public class NewOrder extends ProdcastBaseActivity implements
                                 newOutstandingBills.addAll(customerBills);
                                 SessionInfo.instance().setSelectedCustomer(customerDto.getCustomer());
                                 SessionInfo.instance().setOutStandingBills(newOutstandingBills);
-                                Toast.makeText(NewOrder.this, "saved the list", Toast.LENGTH_LONG).show();
+                                Toast.makeText(NewOrderActivity.this, "saved the list", Toast.LENGTH_LONG).show();
                                 progress.dismiss();
-                                Intent intent = new Intent(NewOrder.this, prodcastd.prodcast.samayu.com.prodcastd.OrderEntry.class);
+                                Intent intent = new Intent(NewOrderActivity.this, OrderEntryActivity.class);
 
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(NewOrder.this, "Error saving the list", Toast.LENGTH_LONG).show();
+                                Toast.makeText(NewOrderActivity.this, "Error saving the list", Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(NewOrder.this, "Error saving the list", Toast.LENGTH_LONG).show();
+                            Toast.makeText(NewOrderActivity.this, "Error saving the list", Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -432,7 +421,7 @@ public class NewOrder extends ProdcastBaseActivity implements
         boolean cancel = false;
         List<OrderEntry> entries = SessionInfo.instance().getCart();
         if (entries.size() <= 0) {
-            Toast.makeText(NewOrder.this,"The product list is empty",Toast.LENGTH_LONG).show();
+            Toast.makeText(NewOrderActivity.this,"The product list is empty",Toast.LENGTH_LONG).show();
             cancel = true;
         }
         return cancel;
@@ -446,21 +435,21 @@ public class NewOrder extends ProdcastBaseActivity implements
             cancel =true;
         }
         if (discountType.getSelectedItem().toString().trim().equals("Type")){
-            Toast.makeText(NewOrder.this,"Please select Payment type!!",Toast.LENGTH_LONG).show();
+            Toast.makeText(NewOrderActivity.this,"Please select PaymentActivity type!!",Toast.LENGTH_LONG).show();
             focusView = discountType;
             cancel = true;
         }
         return cancel;
     }
     public void onBackPressed(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(NewOrder.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(NewOrderActivity.this);
         builder.setTitle("Exit this page!!!")
                 .setMessage("Do yo want to Exit without Saving the Order")
                 .setCancelable(false)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        NewOrder.super.onBackPressed();
+                        NewOrderActivity.super.onBackPressed();
                     }
                 })
                 .setNegativeButton("Cancel",null);
@@ -495,7 +484,7 @@ public class NewOrder extends ProdcastBaseActivity implements
             if (selectedProductItem.getId() == allId ) {
 
                 allQuantity = entryList.get(i).getQuantity();
-                Toast.makeText(NewOrder.this," "+selectedProductItem.getProductName()+" is already in the list so the quantity is added ",Toast.LENGTH_LONG).show();
+                Toast.makeText(NewOrderActivity.this," "+selectedProductItem.getProductName()+" is already in the list so the quantity is added ",Toast.LENGTH_LONG).show();
                 SessionInfo.instance().getCart().remove(inEntry);
             }
         }
@@ -509,7 +498,7 @@ public class NewOrder extends ProdcastBaseActivity implements
         newEntry.setQuantity(totalQuantity);
         newEntry.setSubtotal(totalQuantity * (selectedProductItem.getUnitPrice()));
         entryList.add(newEntry);
-        ProductViewAdapter adapter = new ProductViewAdapter(NewOrder.this, SessionInfo.instance().getCart(), NewOrder.this);
+        ProductViewAdapter adapter = new ProductViewAdapter(NewOrderActivity.this, SessionInfo.instance().getCart(), NewOrderActivity.this);
 
         addedProducts.setAdapter(adapter);
         adapter.notifyDataSetChanged();

@@ -1,22 +1,19 @@
-package prodcastd.prodcast.samayu.com.prodcastd.ui.dummy;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.samayu.prodcast.prodcastd.dto.Order;
 import com.samayu.prodcast.prodcastd.dto.OrderEntry;
 
 import java.util.List;
 
 import prodcastd.prodcast.samayu.com.prodcastd.R;
 
-public class BillDetailList extends BaseAdapter {
+public class BillDetailListAdapter extends BaseAdapter {
     List<OrderEntry> orderDetails;
 
 
@@ -25,7 +22,7 @@ public class BillDetailList extends BaseAdapter {
     Context context;
     public static LayoutInflater inflater = null;
 
-    public BillDetailList(BillDetailsActivity billdetailsActivity, List<OrderEntry> orders) {
+    public BillDetailListAdapter(BillDetailsActivity billdetailsActivity, List<OrderEntry> orders) {
         orderDetails = orders;
 
 
@@ -70,7 +67,7 @@ public class BillDetailList extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertview, ViewGroup viewGroup) {
-        BillDetailList.Holder holder = new BillDetailList.Holder();
+        BillDetailListAdapter.Holder holder = new BillDetailListAdapter.Holder();
         if (convertview == null) {
             convertview = inflater.inflate(R.layout.activity_bill_detail_list, null);
            holder.productName=(TextView) convertview.findViewById(R.id.productName);

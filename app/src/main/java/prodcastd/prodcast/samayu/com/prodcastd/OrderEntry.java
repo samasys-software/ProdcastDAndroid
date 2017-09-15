@@ -138,7 +138,7 @@ public class OrderEntry extends ProdcastBaseActivity {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Bundle bundle = new Bundle();
                 Intent intent = new Intent(OrderEntry.this, BillDetailsActivity.class);
-                bundle.putLong("billId",selectedBillIndex);
+                bundle.putInt("billId",selectedBillIndex);
                 intent.putExtras(bundle);
                 startActivity(intent,bundle);
                 return false;

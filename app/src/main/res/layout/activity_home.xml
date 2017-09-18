@@ -2,169 +2,207 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background ="@drawable/green_bg">
+    android:layout_height="match_parent">
+
 
 
 
     <LinearLayout
+        android:id="@+id/row1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/linearLayout">
->
-
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="0"
             android:orientation="vertical"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="35dp"
-            >
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="top"
+            android:id="@+id/Screen">
 
             <ImageView
                 android:id="@+id/OrderIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="96dp"
+                android:layout_width="96dp"
+                android:layout_height="134dp"
                 app:srcCompat="@drawable/order_entry" />
 
             <TextView
+                android:id="@+id/orderText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="View Order" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="0"
+                android:textColor="@color/colorPrimaryDark"
+                android:textAllCaps="true"
+                android:textSize="16sp"
+                android:text="Order Entry" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="35dp">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="top"
+            android:id="@+id/customerScreen">
 
             <ImageView
                 android:id="@+id/Customers"
-                android:layout_width="wrap_content"
-                android:layout_height="96dp"
+                android:layout_width="96dp"
+                android:layout_height="129dp"
                 app:srcCompat="@drawable/customer" />
 
             <TextView
+                android:id="@+id/customerText"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
                 android:text="Customers" />
+
+
+
         </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="200dp"
-        android:layout_marginStart="25dp"
-        android:id="@+id/linearLayout">
+        android:layout_marginTop="160dp"
+        android:baselineAligned="false">
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/paymentScreen"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="35dp"
-            android:layout_column="0"
-            android:layout_row="1">
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/Payement"
-                android:layout_width="150dp"
-                android:layout_height="96dp"
+                android:layout_width="96dp"
+                android:layout_height="136dp"
                 app:srcCompat="@drawable/payment" />
+
             <TextView
+                android:id="@+id/PaymentText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Payment"/>
+                android:text="Payment"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp" />
+
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="wrap_content"
+
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:id="@+id/reportScreen"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:orientation="vertical"
-            android:layout_column="1"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="40dp"
-            android:layout_row="1">
-            <LinearLayout
+            android:layout_weight="1">
+
+
+            <ImageView
+                android:id="@+id/Report"
+                android:layout_width="96dp"
+                android:layout_height="134dp"
+                app:srcCompat="@drawable/report" />
+
+            <TextView
+                android:id="@+id/orderHistroyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:textColor="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:textSize="16sp"
+                android:text="Report" />
 
-                <ImageView
-                    android:id="@+id/Report"
-                    android:layout_width="150dp"
-                    android:layout_height="96dp"
-
-                    app:srcCompat="@drawable/report" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Reports"/>
-            </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="350dp">
+        android:layout_marginTop="320dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_row="2"
             android:orientation="vertical"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="35dp">
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/ViewOrderScreen">
+
             <ImageView
                 android:id="@+id/ViewOrder"
-                android:layout_width="150dp"
-                android:layout_height="96dp"
-                android:layout_marginStart="25dp"
+                android:layout_width="96dp"
+                android:layout_height="130dp"
                 app:srcCompat="@drawable/editreg" />
+
             <TextView
+                android:id="@+id/ViewOrderText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
                 android:gravity="center"
-                android:text="Edit Report"
-                android:fontFamily="casual"/>
+                android:textAllCaps="true"
+                android:textSize="16sp"
+                android:text="View Order" />
+
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:id="@+id/changePasswordScreen"
             android:gravity="center"
-            android:orientation="vertical">
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+
             <ImageView
                 android:id="@+id/ChangePassword"
-                android:layout_width="150dp"
-                android:layout_height="96dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="35dp"
+                android:layout_width="96dp"
+                android:layout_height="130dp"
                 app:srcCompat="@drawable/chnge" />
+
             <TextView
+                android:id="@+id/ChangePAsswordText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
                 android:gravity="center"
-                android:text="Change Password"
-                android:fontFamily="casual"/>
+                android:textAllCaps="true"
+                android:textSize="16sp"
+                android:text="Change Password" />
+
         </LinearLayout>
+
     </LinearLayout>
+
+
+
+
+
+
+
 
 </RelativeLayout>

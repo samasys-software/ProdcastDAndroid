@@ -36,8 +36,12 @@ public abstract class ProdcastBaseActivity extends AppCompatActivity implements 
         getLayoutInflater().inflate(layoutId, activityContainer, true);
         initializeDrawer(fullView);
        TextView distributorName = (TextView)fullView.findViewById(R.id.distributorName);
-        if( SessionInfo.instance().getEmployee()!=null)
-        distributorName.setText(SessionInfo.instance().getEmployee().getDistributorName()+ " - "+getProdcastTitle());
+       TextView screenName = (TextView)fullView.findViewById(R.id.screenName);
+        if( SessionInfo.instance().getEmployee()!=null) {
+            distributorName.setText(SessionInfo.instance().getEmployee().getDistributorName().toUpperCase());
+
+        }
+        screenName.setText(getProdcastTitle().toUpperCase());
         super.setContentView(fullView);
 
     }
@@ -67,6 +71,8 @@ public abstract class ProdcastBaseActivity extends AppCompatActivity implements 
         }
     }
 
+    /*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -86,6 +92,7 @@ public abstract class ProdcastBaseActivity extends AppCompatActivity implements 
 
         return super.onOptionsItemSelected(item);
     }
+    */
 
 
 

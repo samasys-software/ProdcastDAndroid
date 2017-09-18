@@ -3,10 +3,85 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background ="@drawable/green_bg"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout">
+
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/proToolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:logo="@drawable/logo"
+                android:background="@color/colorPrimaryDark"
+                android:minHeight="?attr/actionBarSize"
+                android:visibility="visible"
+                android:layout_weight="1"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+
+                android:background="@color/colorInversePrimary"
+                >
+                <TextView
+                    android:id="@+id/distributorName"
+                    android:layout_width="match_parent"
+
+                    android:gravity="bottom|right"
+                    android:textColor="@color/colorInversePrimary"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+
+                    android:text=""
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:id="@+id/screenName"
+
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical|right"
+
+                    android:textColor="@color/colorInversePrimary"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textSize="12sp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/activity_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="5dp"
+            />
+    </LinearLayout>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        app:theme="@style/PopupMenuItem"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+
+        app:headerLayout="@layout/nav_header_navigation_drawer"
+        app:menu="@menu/activity_navigation_drawer_drawer" />
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" android:orientation="vertical">
         <LinearLayout
@@ -43,7 +118,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_navigation_drawer"
-        app:menu="@menu/activity_navigation_drawer_drawer" />
+        app:menu="@menu/activity_navigation_drawer_drawer" />-->
 
 
     </android.support.v4.widget.DrawerLayout>

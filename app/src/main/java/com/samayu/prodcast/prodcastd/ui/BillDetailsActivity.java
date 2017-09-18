@@ -1,9 +1,7 @@
-package prodcastd.prodcast.samayu.com.prodcastd.ui.dummy;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -11,16 +9,10 @@ import android.widget.Toast;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.Bill;
-import com.samayu.prodcast.prodcastd.dto.Collection;
 import com.samayu.prodcast.prodcastd.dto.Order;
 import com.samayu.prodcast.prodcastd.dto.OrderDTO;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 
-import java.util.ArrayList;
-
-import java.util.List;
-
-import prodcastd.prodcast.samayu.com.prodcastd.ProdcastBaseActivity;
 import prodcastd.prodcast.samayu.com.prodcastd.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,9 +46,9 @@ public class BillDetailsActivity extends ProdcastBaseActivity {
                     progress.dismiss();
                     Order order=dto.getOrder();
                     setBillDetails(order);
-                        paymentListView.setAdapter(new PaymentDetailsList(BillDetailsActivity.this,order.getCollectionEntries()));
+                        paymentListView.setAdapter(new PaymentDetailsListAdapter(BillDetailsActivity.this,order.getCollectionEntries()));
 
-                        orderListView.setAdapter(new BillDetailList(BillDetailsActivity.this,order.getOrderEntries()));
+                        orderListView.setAdapter(new BillDetailListAdapter(BillDetailsActivity.this,order.getOrderEntries()));
 
                 }
             }

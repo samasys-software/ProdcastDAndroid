@@ -1,5 +1,5 @@
 
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.Manifest;
 import android.content.Context;
@@ -15,7 +15,6 @@ import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,17 +23,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.AdminDTO;
 import com.samayu.prodcast.prodcastd.dto.Area;
-import com.samayu.prodcast.prodcastd.dto.AreaDTO;
 import com.samayu.prodcast.prodcastd.dto.Country;
 import com.samayu.prodcast.prodcastd.dto.CountryDTO;
-import com.samayu.prodcast.prodcastd.dto.Customer;
 import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
 import com.samayu.prodcast.prodcastd.dto.StoreType;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
@@ -45,9 +41,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.concurrent.ExecutionException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import prodcastd.prodcast.samayu.com.prodcastd.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

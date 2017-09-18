@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="prodcastd.prodcast.samayu.com.prodcastd.CustomerCompanyFragment">
+    tools:context="prodcastd.prodcast.samayu.com.prodcastd.com.samayu.prodcast.prodcastd.ui.CustomerCompanyFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

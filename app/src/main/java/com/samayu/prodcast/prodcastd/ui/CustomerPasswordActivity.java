@@ -1,10 +1,8 @@
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,6 +14,7 @@ import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 
+import prodcastd.prodcast.samayu.com.prodcastd.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -130,7 +129,7 @@ public class CustomerPasswordActivity extends ProdcastBaseActivity {
                     else{
                      //TODO Show Confirmation MEssage - and clear all the textboxes.
                         Toast.makeText(CustomerPasswordActivity.this, "Password Changed Successfully", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(CustomerPasswordActivity.this,Home.class);
+                        Intent intent = new Intent(CustomerPasswordActivity.this,HomeActivity.class);
                         startActivity(intent);
                     }
                 }

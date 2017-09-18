@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="prodcastd.prodcast.samayu.com.prodcastd.CustomerContactFragment">
+    tools:context="prodcastd.prodcast.samayu.com.prodcastd.com.samayu.prodcast.prodcastd.ui.CustomerContactFragment">
 
     <android.support.design.widget.TextInputLayout
         android:paddingLeft="5dp"

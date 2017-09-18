@@ -1,4 +1,4 @@
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.Manifest;
 import android.content.Context;
@@ -13,14 +13,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,14 +27,13 @@ import com.samayu.prodcast.prodcastd.dto.Country;
 import com.samayu.prodcast.prodcastd.dto.CountryDTO;
 import com.samayu.prodcast.prodcastd.dto.Customer;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
-import com.samayu.prodcast.prodcastd.ui.CustomerCreateEditActivity;
-import com.samayu.prodcast.prodcastd.ui.OnFragmentInteractionListener;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.concurrent.ExecutionException;
 
+import prodcastd.prodcast.samayu.com.prodcastd.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

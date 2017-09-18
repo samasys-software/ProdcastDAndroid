@@ -1,11 +1,9 @@
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,15 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
-import com.samayu.prodcast.prodcastd.dto.Customer;
-import com.samayu.prodcast.prodcastd.dto.Employee;
 
 import java.io.File;
+
+import prodcastd.prodcast.samayu.com.prodcastd.R;
 
 public abstract class ProdcastBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -39,6 +36,7 @@ public abstract class ProdcastBaseActivity extends AppCompatActivity implements 
         getLayoutInflater().inflate(layoutId, activityContainer, true);
         initializeDrawer(fullView);
        TextView distributorName = (TextView)fullView.findViewById(R.id.distributorName);
+        if( SessionInfo.instance().getEmployee()!=null)
         distributorName.setText(SessionInfo.instance().getEmployee().getDistributorName()+ " - "+getProdcastTitle());
         super.setContentView(fullView);
 
@@ -77,7 +75,7 @@ public abstract class ProdcastBaseActivity extends AppCompatActivity implements 
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
+        // automatically handle clicks on the HomeActivity/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
@@ -97,13 +95,13 @@ public abstract class ProdcastBaseActivity extends AppCompatActivity implements 
         final Intent intent;
         final Bundle b;
         if (id == R.id.nav_home) {
-            intent =new Intent(this, Home.class);
+            intent =new Intent(this, HomeActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_orderEntry) {
-            intent =new Intent(this, OrderEntry.class);
+            intent =new Intent(this, OrderEntryActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_customer) {
-            intent =new Intent(this, Customer.class);
+            intent =new Intent(this, CustomersActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_passwordReset) {
             intent =new Intent(this, CustomerPasswordActivity.class);

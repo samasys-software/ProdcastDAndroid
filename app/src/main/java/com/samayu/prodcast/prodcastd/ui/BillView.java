@@ -1,4 +1,4 @@
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -14,6 +14,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.samayu.prodcast.prodcastd.dto.Bill;
+
+import prodcastd.prodcast.samayu.com.prodcastd.R;
 
 /**
  * TODO: document your custom view class.

@@ -1,4 +1,4 @@
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
-import com.samayu.prodcast.prodcastd.ui.CustomerCreateEditActivity;
-import com.samayu.prodcast.prodcastd.ui.CustomerListActivity;
+
+import prodcastd.prodcast.samayu.com.prodcastd.R;
 
 
-public class Home extends ProdcastBaseActivity  {
+public class HomeActivity extends ProdcastBaseActivity  {
     private ImageView customers, orderEntry,changePassword;
     Bundle homeBundle = null;
 
@@ -26,7 +26,7 @@ public class Home extends ProdcastBaseActivity  {
                 orderEntry.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(Home.this,OrderEntry.class);
+                        Intent intent = new Intent(HomeActivity.this,OrderEntryActivity.class);
 
                         startActivity(intent);
                     }
@@ -38,7 +38,7 @@ public class Home extends ProdcastBaseActivity  {
                     public void onClick(View view) {
 
 
-                        Intent i = new Intent(Home.this, CustomerListActivity.class);
+                        Intent i = new Intent(HomeActivity.this, CustomerListActivity.class);
 
                         startActivity(i );
                     }
@@ -46,7 +46,7 @@ public class Home extends ProdcastBaseActivity  {
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Home.this,CustomerPasswordActivity.class);
+                Intent i = new Intent(HomeActivity.this,CustomerPasswordActivity.class);
                 startActivity(i);
             }
         });

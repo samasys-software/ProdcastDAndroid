@@ -1,4 +1,4 @@
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +12,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Payment extends AppCompatActivity {
+import prodcastd.prodcast.samayu.com.prodcastd.R;
+
+public class PaymentActivity extends AppCompatActivity {
     TextView amountHeading,paymentHeading;
     EditText amountEntry;
     Spinner methodOfPayment;
@@ -28,17 +30,17 @@ public class Payment extends AppCompatActivity {
         methodOfPayment=(Spinner)findViewById(R.id.paymentType);
         payButton = (Button)findViewById(R.id.pay);
         newOrderButton =(Button)findViewById(R.id.newOrder);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Payment.this,R.array.payment_method,android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(PaymentActivity.this,R.array.payment_method,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         methodOfPayment.setAdapter(adapter);
         methodOfPayment.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(Payment.this,adapterView.getItemAtPosition(i)+" selected",Toast.LENGTH_LONG).show();
+                Toast.makeText(PaymentActivity.this,adapterView.getItemAtPosition(i)+" selected",Toast.LENGTH_LONG).show();
                 Intent intent;
                 switch(i) {
                     case 1:
-                        intent = new Intent(Payment.this, CheckNumber.class);
+                        intent = new Intent(PaymentActivity.this, CheckNumberActivity.class);
                         startActivity(intent);
                         break;
 

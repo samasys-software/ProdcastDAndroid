@@ -54,7 +54,7 @@ public class Employee implements Serializable {
         this.distributorName = distributorName;
     }
 
-    private java.sql.Date hireDate;
+    private String hireDate;
     private String distributorName;
 
     public long getAreaId() {
@@ -139,19 +139,19 @@ public class Employee implements Serializable {
         this.salary = salary;
     }
 
-    public Date getHireDate() {
+    public String getHireDate() {
         return hireDate;
     }
 
-    public void setHireDate(Date hireDate) {
+    public void setHireDate(String hireDate) {
         this.hireDate = hireDate;
     }
 
-    public Date getTerminationDate() {
+    public String getTerminationDate() {
         return terminationDate;
     }
 
-    public void setTerminationDate(Date terminationDate) {
+    public void setTerminationDate(String terminationDate) {
         this.terminationDate = terminationDate;
     }
 
@@ -251,11 +251,11 @@ public class Employee implements Serializable {
         this.gender = gender;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -299,7 +299,7 @@ public class Employee implements Serializable {
         this.currencySymbol = currencySymbol;
     }
 
-    private java.sql.Date terminationDate;
+    private String terminationDate;
     private int allowance;
     private String address1;
     private String address2;
@@ -312,7 +312,7 @@ public class Employee implements Serializable {
     private String type;
     private String location;
     private String gender;
-    private java.sql.Date dateOfBirth;
+    private String dateOfBirth;
     private String comments;
     private String password;
     private String userRole;

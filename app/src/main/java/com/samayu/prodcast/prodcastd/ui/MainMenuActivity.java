@@ -1,4 +1,4 @@
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.app.ActionBar;
 import android.support.v4.widget.DrawerLayout;
@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-public class MainMenu extends AppCompatActivity {
+import prodcastd.prodcast.samayu.com.prodcastd.R;
+
+public class MainMenuActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
 

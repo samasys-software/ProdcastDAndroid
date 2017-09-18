@@ -1,9 +1,11 @@
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class CheckNumber extends AppCompatActivity {
+import prodcastd.prodcast.samayu.com.prodcastd.R;
+
+public class CheckNumberActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

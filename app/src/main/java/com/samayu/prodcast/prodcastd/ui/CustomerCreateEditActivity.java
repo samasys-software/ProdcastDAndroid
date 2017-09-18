@@ -1,52 +1,29 @@
 package com.samayu.prodcast.prodcastd.ui;
 
 import android.content.Intent;
-import android.content.pm.PackageInstaller;
-import android.net.Uri;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
-import com.samayu.prodcast.prodcastd.dto.Area;
-import com.samayu.prodcast.prodcastd.dto.Country;
 import com.samayu.prodcast.prodcastd.dto.Customer;
 import com.samayu.prodcast.prodcastd.dto.CustomerListDTO;
-import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
-import com.samayu.prodcast.prodcastd.dto.StoreType;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 
 import java.util.List;
 
-import prodcastd.prodcast.samayu.com.prodcastd.CustomerActivity;
-import prodcastd.prodcast.samayu.com.prodcastd.CustomerAddressFragment;
-import prodcastd.prodcast.samayu.com.prodcastd.CustomerCompanyFragment;
-import prodcastd.prodcast.samayu.com.prodcastd.CustomerContactFragment;
-import prodcastd.prodcast.samayu.com.prodcastd.CustomersActivity;
-import prodcastd.prodcast.samayu.com.prodcastd.ProdcastBaseActivity;
-import prodcastd.prodcast.samayu.com.prodcastd.ProdcastValidatedFragment;
 import prodcastd.prodcast.samayu.com.prodcastd.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static prodcastd.prodcast.samayu.com.prodcastd.R.layout.fragment_customer_address;
 
 public class CustomerCreateEditActivity extends ProdcastBaseActivity implements OnFragmentInteractionListener{
 
@@ -123,7 +100,7 @@ public class CustomerCreateEditActivity extends ProdcastBaseActivity implements 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
+        // automatically handle clicks on the HomeActivity/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 

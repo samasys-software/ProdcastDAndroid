@@ -1,10 +1,7 @@
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.AdminDTO;
 import com.samayu.prodcast.prodcastd.dto.Area;
 import com.samayu.prodcast.prodcastd.dto.Customer;
 import com.samayu.prodcast.prodcastd.dto.StoreType;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
-import com.samayu.prodcast.prodcastd.ui.CustomerCreateEditActivity;
-import com.samayu.prodcast.prodcastd.ui.OnFragmentInteractionListener;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -30,16 +24,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import prodcastd.prodcast.samayu.com.prodcastd.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static prodcastd.prodcast.samayu.com.prodcastd.R.id.area;
-import static prodcastd.prodcast.samayu.com.prodcastd.R.id.companyName;
-import static prodcastd.prodcast.samayu.com.prodcastd.R.id.customer;
-import static prodcastd.prodcast.samayu.com.prodcastd.R.id.customerId1;
-import static prodcastd.prodcast.samayu.com.prodcastd.R.id.selectDay;
-import static prodcastd.prodcast.samayu.com.prodcastd.R.id.storetype;
 
 
 public class CustomerCompanyFragment extends ProdcastValidatedFragment {

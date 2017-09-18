@@ -1,9 +1,11 @@
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class OutstandingbillsPayment extends AppCompatActivity {
+import prodcastd.prodcast.samayu.com.prodcastd.R;
+
+public class OutstandingbillsPaymentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

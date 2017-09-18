@@ -22,11 +22,11 @@ import prodcastd.prodcast.samayu.com.prodcastd.R;
 /**
  * TODO: document your custom view class.
  */
-public class ReportSalesEntry extends FrameLayout {
+public class ReportSalesEntryView extends FrameLayout {
     private Order order ;
     LayoutInflater inflater;
 
-    public ReportSalesEntry(Context context, Order order) {
+    public ReportSalesEntryView(Context context, Order order) {
         super(context);
         this.order = order;
 

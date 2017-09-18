@@ -1,6 +1,6 @@
 package com.samayu.prodcast.prodcastd.dto;
 
-import prodcastd.prodcast.samayu.com.prodcastd.ProdcastBaseActivity;
+import com.samayu.prodcast.prodcastd.ui.ProdcastBaseActivity;
 
 /**
  * Created by kdsdh on 8/24/2017.
@@ -158,4 +158,8 @@ public class ReportTypeDTO extends ProdcastBaseActivity{
 
     }
 
+    @Override
+    public String getProdcastTitle() {
+        return "Reports";
+    }
 }

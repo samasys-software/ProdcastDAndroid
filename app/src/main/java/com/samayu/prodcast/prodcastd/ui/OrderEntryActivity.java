@@ -1,11 +1,9 @@
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInstaller;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -19,7 +17,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,19 +25,18 @@ import com.samayu.prodcast.prodcastd.dto.Bill;
 import com.samayu.prodcast.prodcastd.dto.Customer;
 import com.samayu.prodcast.prodcastd.dto.CustomerDTO;
 import com.samayu.prodcast.prodcastd.dto.CustomerListDTO;
-import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 
 import java.util.LinkedList;
 import java.util.List;
 
 
-import prodcastd.prodcast.samayu.com.prodcastd.ui.dummy.BillDetailsActivity;
+import prodcastd.prodcast.samayu.com.prodcastd.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrderEntry extends ProdcastBaseActivity {
+public class OrderEntryActivity extends ProdcastBaseActivity {
     private ListView billsView,payment;
     private LinearLayout checkPanel;
     private AutoCompleteTextView customerNames;
@@ -70,7 +66,7 @@ public class OrderEntry extends ProdcastBaseActivity {
         cashPay = (EditText)findViewById(R.id.cash);
         Button newOrder = (Button)findViewById(R.id.newOrder);
         customerNames = (AutoCompleteTextView)findViewById(R.id.acTextViev);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(OrderEntry.this,R.array.payment_method,android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(OrderEntryActivity.this,R.array.payment_method,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         methodOfPayment.setAdapter(adapter);
         listener = new View.OnKeyListener() {
@@ -137,7 +133,7 @@ public class OrderEntry extends ProdcastBaseActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Bundle bundle = new Bundle();
-                Intent intent = new Intent(OrderEntry.this, BillDetailsActivity.class);
+                Intent intent = new Intent(OrderEntryActivity.this, BillDetailsActivity.class);
                 bundle.putInt("billId",selectedBillIndex);
                 intent.putExtras(bundle);
                 startActivity(intent,bundle);
@@ -156,7 +152,7 @@ public class OrderEntry extends ProdcastBaseActivity {
             @Override
             public void onClick(View view) {
 
-                Intent i = new Intent(OrderEntry.this,NewOrder.class);
+                Intent i = new Intent(OrderEntryActivity.this,NewOrderActivity.class);
                 SessionInfo.instance().setSelectedCustomer(selectedCustomer);
                 startActivity(i);
             }
@@ -174,7 +170,7 @@ public class OrderEntry extends ProdcastBaseActivity {
 
             findViewById(R.id.llName).setVisibility(View.VISIBLE);
 
-            ArrayAdapter<Customer> customeAdapter = new ArrayAdapter<Customer>(OrderEntry.this, android.R.layout.select_dialog_item,SessionInfo.instance().getCustomerList());
+            ArrayAdapter<Customer> customeAdapter = new ArrayAdapter<Customer>(OrderEntryActivity.this, android.R.layout.select_dialog_item,SessionInfo.instance().getCustomerList());
             customerNames.setThreshold(1);
             customerNames.setAdapter(customeAdapter);
             name.setText(selectedCustomer.getCustomerName());
@@ -207,7 +203,7 @@ public class OrderEntry extends ProdcastBaseActivity {
                         Customer customer = customerList.get(i);
                         newList[i] = customer.getCustomerName();
                     }
-                    ArrayAdapter<Customer> adapter = new ArrayAdapter<Customer>(OrderEntry.this, android.R.layout.select_dialog_item,SessionInfo.instance().getCustomerList());
+                    ArrayAdapter<Customer> adapter = new ArrayAdapter<Customer>(OrderEntryActivity.this, android.R.layout.select_dialog_item,SessionInfo.instance().getCustomerList());
                     customerNames.setThreshold(1);
                     customerNames.setAdapter(adapter);
                 }
@@ -251,7 +247,7 @@ public class OrderEntry extends ProdcastBaseActivity {
             for (int i = 0; i < customerBills.size(); i++) {
                 billArray[i] = customerBills.get(i);
             }
-            BillViewAdapter adapter = new BillViewAdapter(OrderEntry.this, billArray);
+            BillViewAdapter adapter = new BillViewAdapter(OrderEntryActivity.this, billArray);
             billsView.setAdapter(adapter);
             findViewById(R.id.llName).setVisibility(View.VISIBLE);
             findViewById(R.id.llbills).setVisibility(View.VISIBLE);
@@ -277,8 +273,8 @@ public class OrderEntry extends ProdcastBaseActivity {
               focusView = cashPay;
             cancel = true;
         }
-        if (methodOfPayment.getSelectedItem().toString().trim().equals("Payment Type")){
-            Toast.makeText(OrderEntry.this,"Please select Payment type!!",Toast.LENGTH_LONG).show();
+        if (methodOfPayment.getSelectedItem().toString().trim().equals("PaymentActivity Type")){
+            Toast.makeText(OrderEntryActivity.this,"Please select PaymentActivity type!!",Toast.LENGTH_LONG).show();
             focusView = methodOfPayment;
             cancel = true;
         }
@@ -326,7 +322,7 @@ public class OrderEntry extends ProdcastBaseActivity {
         String checkNo = checkNumber.getText().toString();
         String checkCmt = checkComments.getText().toString();
         payButton.setEnabled(false);
-        progress = ProgressDialog.show(OrderEntry.this,"In Progress","One moment Please......",true);
+        progress = ProgressDialog.show(OrderEntryActivity.this,"In Progress","One moment Please......",true);
         final Call<CustomerDTO> customerDTOCall = new ProdcastDClient().getClient().makePayment(methodOfPayment.getSelectedItemPosition(), employeeId,billId,amount,customerId,checkNo,checkCmt);
         customerDTOCall.enqueue(new Callback<CustomerDTO>() {
             @Override
@@ -335,7 +331,7 @@ public class OrderEntry extends ProdcastBaseActivity {
                     CustomerDTO dto = response.body();
                     if (!dto.isError()){
                         progress.dismiss();
-                        Toast.makeText(OrderEntry.this,"Payment Successful for Bill no : "+bill.getBillNumber(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(OrderEntryActivity.this,"PaymentActivity Successful for Bill no : "+bill.getBillNumber(),Toast.LENGTH_LONG).show();
 
                         SessionInfo.instance().setCustomerBills(dto.getCustomer().getOutstandingBill());
                         List<Bill> newAllOutstandingBills = new LinkedList<Bill>();
@@ -349,14 +345,14 @@ public class OrderEntry extends ProdcastBaseActivity {
                         recreateOutstandingBills();
                         }
                     else {
-                        Toast.makeText(OrderEntry.this,"Payment Not Success",Toast.LENGTH_LONG).show();
+                        Toast.makeText(OrderEntryActivity.this,"PaymentActivity Not Success",Toast.LENGTH_LONG).show();
                         payButton.setEnabled(true);
                     }
                 }
             }
             @Override
             public void onFailure(Call<CustomerDTO> call, Throwable t) {
-                Toast.makeText(OrderEntry.this,"Sorry!! Due to technical failure payment is not successful ",Toast.LENGTH_LONG).show();
+                Toast.makeText(OrderEntryActivity.this,"Sorry!! Due to technical failure payment is not successful ",Toast.LENGTH_LONG).show();
                 payButton.setEnabled(true);
             }
         });

@@ -1,4 +1,4 @@
-package prodcastd.prodcast.samayu.com.prodcastd;
+package com.samayu.prodcast.prodcastd.ui;
 
 
 
@@ -6,15 +6,10 @@ package prodcastd.prodcast.samayu.com.prodcastd;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.Customer;
@@ -23,6 +18,7 @@ import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 
 import java.util.List;
 
+import prodcastd.prodcast.samayu.com.prodcastd.R;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,7 +29,7 @@ import retrofit2.Response;
 
 
 public class CustomersActivity extends ProdcastBaseActivity {
-    private String employeeId;
+    private long employeeId;
     private ListView cuslist;
     private ListView listView;
 
@@ -42,7 +38,7 @@ public class CustomersActivity extends ProdcastBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_activity);
         
-        employeeId = getIntent().getExtras().getString("employeeId");
+        employeeId = SessionInfo.instance().getEmployee().getEmployeeId();
 
         listView = (ListView) findViewById(R.id.customerListView);
 

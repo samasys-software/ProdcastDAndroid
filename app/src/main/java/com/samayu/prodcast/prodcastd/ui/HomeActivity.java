@@ -11,7 +11,7 @@ import prodcastd.prodcast.samayu.com.prodcastd.R;
 
 
 public class HomeActivity extends ProdcastBaseActivity  {
-    private ImageView customers, orderEntry,changePassword;
+    private ImageView customers, orderEntry,changePassword,viewOrder;
     Bundle homeBundle = null;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ public class HomeActivity extends ProdcastBaseActivity  {
                homeBundle = getIntent().getExtras();
                 customers = (ImageView) findViewById(R.id.Customers);
                orderEntry =(ImageView)findViewById(R.id.OrderIcon);
+               viewOrder=(ImageView)findViewById(R.id.ViewOrder);
         changePassword=(ImageView)findViewById(R.id.ChangePassword);
                 orderEntry.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -31,6 +32,14 @@ public class HomeActivity extends ProdcastBaseActivity  {
                         startActivity(intent);
                     }
                 });
+        viewOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this,ViewOrdersActivity.class);
+
+                startActivity(intent);
+            }
+        });
 
 
                 customers.setOnClickListener(new View.OnClickListener() {

@@ -34,7 +34,7 @@
         <item>Yesterday</item>
         <item>Week</item>
         <item>Custom Range</item>
-        </string-array>
+    </string-array>
 
 
     <string name="title_customer_list">Customers</string>

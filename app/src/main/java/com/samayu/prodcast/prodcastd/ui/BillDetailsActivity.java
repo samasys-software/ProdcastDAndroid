@@ -93,36 +93,29 @@ public class BillDetailsActivity extends ProdcastBaseActivity {
     public void setBillDetails(Order order){
 
         TextView custName = (TextView) findViewById(R.id.custName);
-
         TextView custAddress1 = (TextView) findViewById(R.id.custAddress1);
-
         TextView custAddress2 = (TextView) findViewById(R.id.custAddress2);
         TextView custAddress3 = (TextView) findViewById(R.id.custAddress3);
-
         TextView custPhoneNo = (TextView) findViewById(R.id.custPhonenumber);
         TextView orderNo = (TextView) findViewById(R.id.orderNo);
         TextView billDate = (TextView) findViewById(R.id.billDate);
         TextView total = (TextView) findViewById(R.id.total);
-
         TextView balance = (TextView) findViewById(R.id.balance);
         TextView discount = (TextView) findViewById(R.id.discount);
-
         custName.setText(order.getCustomerName());
         custAddress1.setText(order.getCustomer().getBillingAddress1() + " " + order.getCustomer().getBillingAddress2() + " " + order.getCustomer().getBillingAddress3());
         custAddress2.setText(order.getCustomer().getCity());
         custAddress3.setText(order.getCustomer().getState() + " " + order.getCustomer().getPostalCode());
         custPhoneNo.setText(order.getCustomer().getCellPhone());
-
         orderNo.setText("Order No:"+" "+String.valueOf(order.getBillNumber()));
         billDate.setText("BillDate:"+" "+String.valueOf(order.getBillDate()));
-
-        total.setText("Total:"+" "+"("+currencySymbol+")"+String.valueOf(order.getTotalAmount()));
-        balance.setText("Balance:"+" "+"("+currencySymbol+")"+String.valueOf(order.getOutstandingBalance()));
+        total.setText("Total:"+" "+currencySymbol+String.valueOf(order.getTotalAmount()));
+        balance.setText("Balance:"+" "+currencySymbol+String.valueOf(order.getOutstandingBalance()));
         if(order.getDiscountType()==0){
-            discount.setText("Discount:"+" "+"("+currencySymbol+")"+0);
+            discount.setText("Discount:"+" "+currencySymbol+0);
         }
         if(order.getDiscountType()==1) {
-            discount.setText("Discount:"+" "+"("+currencySymbol+")"+String.valueOf(order.getDiscount()));
+            discount.setText("Discount:"+" "+currencySymbol+String.valueOf(order.getDiscount()));
         }
          if(order.getDiscountType()==2){
             discount.setText("Discount:"+" "+String.valueOf(order.getDiscount())+"%");

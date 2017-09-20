@@ -50,12 +50,17 @@ public class OrderEntryActivity extends ProdcastBaseActivity {
     Button payButton;
     View.OnKeyListener listener = null;
     Bundle productBundle = null;
+    private String screenName;
+    boolean paymentScreen=false;
     private ProgressDialog progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_entry);
+
         productBundle = getIntent().getExtras();
+
+        screenName=getIntent().getStringExtra("Screen Name");
         name =(TextView)findViewById(R.id.tvName);
         checkPanel=(LinearLayout)findViewById(R.id.checkPanel);
         billsView = (ListView)findViewById(R.id.billsView);
@@ -69,6 +74,11 @@ public class OrderEntryActivity extends ProdcastBaseActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(OrderEntryActivity.this,R.array.payment_method,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         methodOfPayment.setAdapter(adapter);
+        if(screenName.equals("paymentScreen")){
+            paymentScreen=true;
+
+        }
+
         listener = new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -121,9 +131,10 @@ public class OrderEntryActivity extends ProdcastBaseActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 selectedBillIndex = i;
-                fabNewOrder.setVisibility(View.VISIBLE);
-                    View b4 = findViewById(R.id.llpayment);
-                    b4.setVisibility(View.VISIBLE);
+                if(!paymentScreen)
+                    fabNewOrder.setVisibility(View.VISIBLE);
+                View b4 = findViewById(R.id.llpayment);
+                b4.setVisibility(View.VISIBLE);
                 payButton.setEnabled(true);
 
 
@@ -219,7 +230,8 @@ public class OrderEntryActivity extends ProdcastBaseActivity {
         billsView.clearChoices();
         customerNames.setText("");
         findViewById(R.id.llName).setVisibility(View.VISIBLE);
-        fabNewOrder.setVisibility(View.VISIBLE);
+        if(!paymentScreen)
+            fabNewOrder.setVisibility(View.VISIBLE);
         findViewById(R.id.llpayment).setVisibility(View.GONE);
         findViewById(R.id.checkPanel).setVisibility(View.GONE);
         cashPay.setText("");
@@ -243,7 +255,8 @@ public class OrderEntryActivity extends ProdcastBaseActivity {
         if (customerBills.size() != 0) {
                 findViewById(R.id.llName).setVisibility(View.VISIBLE);
             findViewById(R.id.llnoOutstandingBills).setVisibility(View.GONE);
-            fabNewOrder.setVisibility(View.VISIBLE);
+            if(!paymentScreen)
+                fabNewOrder.setVisibility(View.VISIBLE);
             for (int i = 0; i < customerBills.size(); i++) {
                 billArray[i] = customerBills.get(i);
             }
@@ -251,14 +264,16 @@ public class OrderEntryActivity extends ProdcastBaseActivity {
             billsView.setAdapter(adapter);
             findViewById(R.id.llName).setVisibility(View.VISIBLE);
             findViewById(R.id.llbills).setVisibility(View.VISIBLE);
-            fabNewOrder.setVisibility(View.VISIBLE);
+            if(!paymentScreen)
+                fabNewOrder.setVisibility(View.VISIBLE);
             name.setText(selectedCustomer.getCustomerName());
         }
         else {
             findViewById(R.id.llName).setVisibility(View.VISIBLE);
             findViewById(R.id.llnoOutstandingBills).setVisibility(View.VISIBLE);
             findViewById(R.id.llbills).setVisibility(View.GONE);
-            fabNewOrder.setVisibility(View.VISIBLE);
+            if(!paymentScreen)
+                fabNewOrder.setVisibility(View.VISIBLE);
             name.setText(selectedCustomer.getCustomerName());
         }
     }

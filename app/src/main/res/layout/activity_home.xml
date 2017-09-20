@@ -87,7 +87,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/Payement"
+                android:id="@+id/Payment"
                 android:layout_width="96dp"
                 android:layout_height="136dp"
                 app:srcCompat="@drawable/payment" />

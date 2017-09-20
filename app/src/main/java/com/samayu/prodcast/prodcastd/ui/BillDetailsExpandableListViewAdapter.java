@@ -22,20 +22,20 @@ public class BillDetailsExpandableListViewAdapter extends BaseExpandableListAdap
     Context context;
     List<OrderEntry> orderDetails;
     List<Collection> collections;
-    List<OrderEntry> returnEntries;
+//    List<OrderEntry> returnEntries;
     String  currencySymbol= SessionInfo.instance().getEmployee().getCurrencySymbol();
-    public BillDetailsExpandableListViewAdapter(Context context, List<String> titles, List<OrderEntry> orders, List<Collection> collections,List<OrderEntry> returnProduct){
+    public BillDetailsExpandableListViewAdapter(Context context, List<String> titles, List<OrderEntry> orders, List<Collection> collections){
 
         this.context = context;
         this.orderDetails = orders;
         this.collections = collections;
-        this.returnEntries=returnProduct;
+//        this.returnEntries=returnProduct;
         this.expandableListTitle = titles;
     }
     @Override
     public int getGroupCount() {
 
-        return 3;
+        return 2;
     }
 
     @Override
@@ -43,12 +43,13 @@ public class BillDetailsExpandableListViewAdapter extends BaseExpandableListAdap
         if(i==0){
             return orderDetails.size()+1;
         }
-        else if(i==1){
+
+        else{
             return collections.size()+1;
         }
-        else{
+         /*else{
             return returnEntries.size()+1;
-        }
+        }*/
     }
 
     @Override
@@ -56,8 +57,8 @@ public class BillDetailsExpandableListViewAdapter extends BaseExpandableListAdap
 
         if(i==0){return orderDetails;}
 
-        else if(i==1){return collections;}
-        else {return  returnEntries;}
+        else {return collections;}
+//        else {return  returnEntries;}
     }
 
     @Override
@@ -65,12 +66,12 @@ public class BillDetailsExpandableListViewAdapter extends BaseExpandableListAdap
         if(i==0){
             return orderDetails.get(j);
         }
-        else if(i==1){
+        else {
             return collections.get(j);
         }
-        else {
+      /*  else {
             return returnEntries.get(j);
-        }
+        }*/
     }
 
     @Override
@@ -121,7 +122,7 @@ public class BillDetailsExpandableListViewAdapter extends BaseExpandableListAdap
             }
             return childView;
         }
-        else if(i==1){
+        else {
             View childView = null;
             if (j==0) {
                 LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
@@ -137,7 +138,7 @@ public class BillDetailsExpandableListViewAdapter extends BaseExpandableListAdap
             return  childView;
 
         }
-        else{
+      /*  else{
             View childView=null;
             if(j==0){
                 LayoutInflater inflater=(LayoutInflater) this.context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
@@ -153,7 +154,7 @@ public class BillDetailsExpandableListViewAdapter extends BaseExpandableListAdap
                 childView=entry;
             }
             return childView;
-        }
+        }*/
     }
 
 

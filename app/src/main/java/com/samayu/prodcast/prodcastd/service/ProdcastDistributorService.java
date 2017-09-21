@@ -31,21 +31,22 @@ import retrofit2.http.Query;
  */
 
 public interface ProdcastDistributorService {
+
     @POST("prodcast/global/loginp")
     @FormUrlEncoded
     public Call<LoginDTO> authenticate(@Field("userid") String userId , @Field("password") String password);
-    @GET("prodcast/global/billdetails")
-    Call<OrderDTO> getBillDetails(@Query("billId") long id,
-                                  @Query("employeeId") long employeeId,
-                                  @Query("userRole") String userRole) ;
+
 
     @GET("prodcast/global/customers")
     public Call<CustomerListDTO> getCustomers(@Query ("employeeId") long employeeId );
 
     @GET("prodcast/global/products")
     public Call<ProductListDTO> getProducts(@Query("employeeId") long employeeId);
+
     @POST("prodcast/global/saveOrder")
     public Call<CustomerDTO> saveOrder(@Body OrderDetailDTO orderDto);
+
+
     @POST("prodcast/global/changePassword")
     @FormUrlEncoded
     public Call<ProdcastDTO> changePassword(@Field("employeeId") String employeeId , @Field("oldPassword") String oldPassword, @Field("newPassword") String newPassword);
@@ -102,4 +103,15 @@ public interface ProdcastDistributorService {
                                           @Field("customerId") Long customerId,
                                           @Field("active") boolean activ,
                                           @Field("storeTypeId") Long storeTypeId);
+
+    @GET("prodcast/global/billdetails")
+    Call<OrderDTO> getBillDetails(@Query("billId") long id,
+                                  @Query("employeeId") long employeeId,
+                                  @Query("userRole") String userRole) ;
+
+    @GET("prodcast/global/retrievePassword")
+    Call<ProdcastDTO> retrievePassword(@Query("emailId") String emailId);
+
+
+
 }

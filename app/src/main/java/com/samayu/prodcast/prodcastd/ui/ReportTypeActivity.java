@@ -219,6 +219,7 @@ return cancel;
             @Override
             public void onResponse(Call<ReportDTO> call, Response<ReportDTO> response) {
                 if (response.isSuccessful()) {
+
                     progress.dismiss();
                     ReportDTO reportDTO = response.body();
                     sale.setText(String.valueOf(reportDTO.getTotalSales() ));
@@ -226,7 +227,7 @@ return cancel;
                     balances.setText(String.valueOf( reportDTO.getBalance()));
                     List<String> titles = new LinkedList<String>();
                     titles.add("Sales Details");
-                    titles.add("Payement Details");
+                    titles.add("Payment Details");
 
                     reportLists.setAdapter(
                             new ReportExpandableListViewAdapter(
@@ -242,8 +243,7 @@ return cancel;
 
             @Override
             public void onFailure(Call<ReportDTO> call, Throwable t) {
-                t.printStackTrace(
-                );
+                t.printStackTrace();
             }
         });
 

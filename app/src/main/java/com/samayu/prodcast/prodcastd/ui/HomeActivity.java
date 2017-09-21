@@ -11,7 +11,7 @@ import prodcastd.prodcast.samayu.com.prodcastd.R;
 
 
 public class HomeActivity extends ProdcastBaseActivity  {
-    private ImageView customers, orderEntry,changePassword,viewOrder,payment;
+    private ImageView customers, orderEntry,changePassword,viewOrder,payment, report;
     Bundle homeBundle = null;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,9 @@ public class HomeActivity extends ProdcastBaseActivity  {
                orderEntry =(ImageView)findViewById(R.id.OrderIcon);
                 payment =(ImageView)findViewById(R.id.Payment);
                viewOrder=(ImageView)findViewById(R.id.ViewOrder);
-        changePassword=(ImageView)findViewById(R.id.ChangePassword);
+                changePassword=(ImageView)findViewById(R.id.ChangePassword);
+                report = (ImageView) findViewById(R.id.report);
+
                 orderEntry.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -35,23 +37,23 @@ public class HomeActivity extends ProdcastBaseActivity  {
                     }
                 });
 
-        payment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,OrderEntryActivity.class);
-                intent.putExtra("Screen Name","paymentScreen");
+                payment.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(HomeActivity.this,OrderEntryActivity.class);
+                        intent.putExtra("Screen Name","paymentScreen");
 
-                startActivity(intent);
-            }
-        });
-        viewOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,ViewOrdersActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                viewOrder.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(HomeActivity.this,ViewOrdersActivity.class);
 
-                startActivity(intent);
-            }
-        });
+                        startActivity(intent);
+                    }
+                });
 
 
                 customers.setOnClickListener(new View.OnClickListener() {
@@ -64,13 +66,22 @@ public class HomeActivity extends ProdcastBaseActivity  {
                         startActivity(i );
                     }
                 });
-        changePassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(HomeActivity.this,CustomerPasswordActivity.class);
-                startActivity(i);
-            }
-        });
+
+                changePassword.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(HomeActivity.this,CustomerPasswordActivity.class);
+                        startActivity(i);
+                    }
+                });
+
+                report.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(HomeActivity.this, ReportTypeActivity.class);
+                        startActivity(i);
+                    }
+                });
 
     }
 

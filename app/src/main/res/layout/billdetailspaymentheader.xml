@@ -12,7 +12,7 @@
 
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:background="@color/headerBackground"
+        android:background="@drawable/border_headerends"
         style="@style/TableHeader"
         android:gravity="center"
         android:layout_weight="0.9"
@@ -23,7 +23,7 @@
 
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:background="@color/headerBackground"
+        android:background="@drawable/border_headerends"
         style="@style/TableHeader"
         android:gravity="center"
         android:layout_weight="2"
@@ -37,7 +37,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center"
-        android:background="@drawable/border_headermiddle"
+
         >
 
     <TextView
@@ -46,7 +46,7 @@
         android:layout_height="match_parent"
         android:id="@+id/paymentAmount"
         android:gravity="center"
-        android:background="@color/headerBackground"
+        android:background="@drawable/border_headerends"
         style="@style/TableHeader"
 
         android:text="Amount"/>
@@ -56,6 +56,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/paymentTotalCurrency"
             style="@style/TableHeader"
+            android:background="@drawable/border_headerends"
             />
         </LinearLayout>
 

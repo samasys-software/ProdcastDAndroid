@@ -108,75 +108,86 @@
 
                 <TextView
                     android:id="@+id/sales"
-                    android:layout_width="124dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:background="@drawable/border_headerends"
+                    style = "@style/TableHeader"
                     android:text="Sales"
-                    android:textColor="#629a1e" />
+                    />
 
 
                 <TextView
                     android:id="@+id/collection"
-                    android:layout_width="125dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_weight="2"
-                    android:background="@drawable/border"
+                    android:background="@drawable/border_headerends"
+                    style="@style/TableHeader"
                     android:text="Collection"
-                    android:textColor="#629a1e" />
+                     />
 
                 <TextView
                     android:id="@+id/balance"
-                    android:layout_width="125dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_weight="2"
-                    android:background="@drawable/border"
+                    android:background="@drawable/border_headerends"
+                    style="@style/TableHeader"
                     android:text="Balance"
-                    android:textColor="#629a1e" />
+                    />
 
             </LinearLayout>
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <LinearLayout
                 android:id="@+id/salesSummaryHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/sale"
-                    android:layout_width="124dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_weight="1.5"
-                    android:background="@drawable/border"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:background="@drawable/border_entryends"
+                    style="@style/TableEntry"
                     android:text="Sale"
-                    android:textColor="#629a1e" />
+                     />
 
 
                 <TextView
                     android:id="@+id/collections"
-                    android:layout_width="125dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_weight="2"
-                    android:background="@drawable/border"
+                    android:background="@drawable/border_entrymiddle"
+                    style="@style/TableEntry"
                     android:text="Collections"
-                    android:textColor="#629a1e" />
+                    />
 
                 <TextView
                     android:id="@+id/balances"
-                    android:layout_width="125dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_weight="2"
-                    android:background="@drawable/border"
+                    android:background="@drawable/border_entrymiddle"
+                    style="@style/TableEntry"
                     android:text="Balances"
-                    android:textColor="#629a1e" />
+                     />
 
             </LinearLayout>
 
@@ -185,7 +196,8 @@
                 android:id="@+id/expandableSalesList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft">
+                android:divider="@null"
+                >
 
             </ExpandableListView>
 

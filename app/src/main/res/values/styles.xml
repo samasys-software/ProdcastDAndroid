@@ -42,7 +42,7 @@
         <item name="android:lineSpacingExtra">0dp</item>
         <item name="android:padding">2dp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:typeface">serif</item>
+
 
     </style>
 
@@ -76,7 +76,7 @@
 
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_alignParentTop">true</item>
-        <item name="android:ems">10</item>
+
 
         <item name="android:paddingLeft">10dp</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>

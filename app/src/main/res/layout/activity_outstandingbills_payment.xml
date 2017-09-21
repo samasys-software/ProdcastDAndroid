@@ -24,10 +24,10 @@
             android:text="BILL NO"
             android:textAllCaps="true"
             android:textColor="#629a1e"
-            android:textSize="25sp"
+
             android:layout_gravity="center"
 
-            android:textStyle="bold" />
+             />
 
 
         <TextView
@@ -38,9 +38,9 @@
             android:text="Bill Date"
             android:textAllCaps="true"
             android:textColor="#629a1e"
-            android:textSize="25sp"
+
             android:layout_gravity="center"
-            android:textStyle="bold"
+
 
 
 
@@ -54,9 +54,9 @@
             android:text="Total($)"
             android:textAllCaps="true"
             android:textColor="#629a1e"
-            android:textSize="25sp"
+
             android:layout_gravity="center"
-            android:textStyle="bold"
+
 
             />
 

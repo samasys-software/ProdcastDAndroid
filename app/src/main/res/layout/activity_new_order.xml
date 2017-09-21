@@ -46,6 +46,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:hint="Search Products"
         android:layout_gravity="start"
         android:gravity="start"
+        android:textSize="12dp"
         android:focusedByDefault="true"/>
 
 

@@ -177,7 +177,7 @@ public class NewOrderActivity extends ProdcastBaseActivity implements
                 SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
                 //deleteItem.setBackground(getDrawable(R.drawable.yellow_background));
                 deleteItem.setWidth(170);
-                deleteItem.setIcon(R.drawable.ic_delete);
+                deleteItem.setIcon(R.drawable.ic_delete_icon);
                 menu.addMenuItem(deleteItem);
             }
         };

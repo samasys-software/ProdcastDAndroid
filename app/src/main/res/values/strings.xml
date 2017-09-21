@@ -34,7 +34,7 @@
         <item>Yesterday</item>
         <item>Week</item>
         <item>Custom Range</item>
-        </string-array>
+    </string-array>
 
 
     <string name="title_customer_list">Customers</string>
@@ -59,6 +59,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_activity_register_employee">RegisterEmployee</string>
 
 
 </resources>

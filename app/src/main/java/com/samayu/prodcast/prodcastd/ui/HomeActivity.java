@@ -11,7 +11,7 @@ import prodcastd.prodcast.samayu.com.prodcastd.R;
 
 
 public class HomeActivity extends ProdcastBaseActivity  {
-    private ImageView customers, orderEntry,changePassword;
+    private ImageView customers, orderEntry,changePassword,viewOrder,payment,report;
     Bundle homeBundle = null;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,15 +22,49 @@ public class HomeActivity extends ProdcastBaseActivity  {
                homeBundle = getIntent().getExtras();
                 customers = (ImageView) findViewById(R.id.Customers);
                orderEntry =(ImageView)findViewById(R.id.OrderIcon);
+                payment =(ImageView)findViewById(R.id.Payment);
+               viewOrder=(ImageView)findViewById(R.id.ViewOrder);
+               report=(ImageView)findViewById(R.id.Report);
         changePassword=(ImageView)findViewById(R.id.ChangePassword);
                 orderEntry.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(HomeActivity.this,OrderEntryActivity.class);
+                        intent.putExtra("Screen Name","orderScreen");
 
                         startActivity(intent);
                     }
                 });
+
+        payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this,OrderEntryActivity.class);
+                intent.putExtra("Screen Name","paymentScreen");
+
+                startActivity(intent);
+            }
+        });
+
+        report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this,ReportTypeActivity.class);
+
+
+                startActivity(intent);
+            }
+        });
+
+
+        viewOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this,ViewOrdersActivity.class);
+
+                startActivity(intent);
+            }
+        });
 
 
                 customers.setOnClickListener(new View.OnClickListener() {

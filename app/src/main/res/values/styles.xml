@@ -34,7 +34,7 @@
 
     </style>
 
-    <style name="AlertTitle" >
+    <style name="AlertTitle">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/colorInversePrimary</item>
         <item name="android:paddingTop">4pt</item>
@@ -86,7 +86,7 @@
     </style>
 
 
-    <style name="submitButton" >
+    <style name="submitButton">
 
         <!-- Customize your theme here. -->
         <item name="android:layout_width">wrap_content</item>
@@ -94,7 +94,7 @@
 
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/colorInversePrimary</item>
-
+        <item name="android:background">@drawable/selector_prodcast_button_button</item>
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginRight">5dp</item>
 

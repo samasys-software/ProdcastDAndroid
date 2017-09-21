@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.Employee;
 import com.samayu.prodcast.prodcastd.dto.LoginDTO;
+import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 import com.samayu.prodcast.prodcastd.util.EmailVerification;
 
@@ -35,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     View focusView = null;
     EditText password = null;
     public static final String FILE_NAME = "prodcastLogin.txt";
-private ProgressDialog progress;
+    private ProgressDialog progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,7 @@ private ProgressDialog progress;
             Intent intent =new Intent(LoginActivity.this,HomeActivity.class);
             startActivity(intent);
         }
-         userName = (EditText)findViewById(R.id.logmn);
+        userName = (EditText)findViewById(R.id.logmn);
         password = (EditText)findViewById(R.id.loginPinNumber);
         signInButton = (Button)findViewById(R.id.logIn);
         clearButton = (Button)findViewById(R.id.logClear);
@@ -56,9 +57,14 @@ private ProgressDialog progress;
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userName.setText("");
-                password.setText("");
-                signInButton.setEnabled(true);
+                clear();
+            }
+        });
+
+        forgotPin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptRetrive();
             }
         });
 
@@ -69,64 +75,16 @@ private ProgressDialog progress;
             @Override
             public void onClick(View view) {
 
-                String username = userName.getText().toString();
-                String pass = password.getText().toString();
-                String email = userName.getText().toString();
-               if (!EmailVerification.validateEmail(email)){
-                   userName.setText("Enetr Valid email Id");
-                   return;
-               }
+               attemptLogin();
 
-                if (checkValid(username,pass)){
-                    return ;
+            }
+        });
 
-                }
-                progress = ProgressDialog.show(LoginActivity.this,"In Progress","One moment Please......",true);
-                Call<LoginDTO> loginDTOCall = new ProdcastDClient().getClient().authenticate( userName.getText().toString() , password.getText().toString() );
-                loginDTOCall.enqueue(new Callback<LoginDTO>() {
-                    @Override
-                    public void onResponse(retrofit2.Call<LoginDTO> call, Response<LoginDTO> response) {
-                        if( response.isSuccessful() ){
-                            LoginDTO loginDTO = response.body();
-                            if( !loginDTO.isError()){
-                                //TODO Now go to DashBoard.
-                                progress.dismiss();
-                                Intent intent =new Intent(LoginActivity.this,HomeActivity.class);
-                                SessionInfo.instance().setEmployee( loginDTO.getEmployee());
-                                loginToFile(loginDTO.getEmployee());
-                                Bundle bundle =  new Bundle();
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                                bundle.putString("employeeId",String.valueOf(loginDTO.getEmployee().getEmployeeId()));
-                                intent.putExtras(bundle);
-                                startActivity(intent);
-                                signInButton.setEnabled(false);
-
-                                //new ProdcastDClient().getClient().getCustomers(""+employeeId)
-                                //Pass in a Bundle to Dashboard loginDTO.getEmployee().getEmployeeId()
-                            }
-                            else {
-                                //TODO Show error message TextBox that user is invalid
-                                Toast.makeText(LoginActivity.this,"User is Invalid",Toast.LENGTH_LONG).show();
-                                signInButton.setEnabled(true);
-                            }
-                        }
-                        else{
-                            //Do Validation code here.
-                            //TODO Error - Message-  Technical Problem. Pls try again.
-                           Toast.makeText(LoginActivity.this,"Sorry for the technical problem. Please try again",Toast.LENGTH_LONG).show();
-                        signInButton.setEnabled(true);
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<LoginDTO> call, Throwable t) {
-                        //DoValidation here.
-                        //TODO Error - Message-  Technical Problem. Pls try again.
-                        t.printStackTrace();
-                        signInButton.setEnabled(true);
-                    }
-                });
+                registerEmployee();
 
             }
         });
@@ -137,27 +95,43 @@ private ProgressDialog progress;
         userName.setError(null);
         password.setError(null);
 
-        if(TextUtils.isEmpty(pass)){
-            password.setError("Please enter some value");
-            focusView = password;
-            password.setText("");
-            cancel = true;
-
-        }
-        if (!isPasswordValid(pass)){
-            password.setError("Minimun is 5 char");
-        }
         if (TextUtils.isEmpty(username)){
             userName.setError("Please enter the user name");
             focusView = userName;
             cancel = true;
         }
+        if(pass!=null){
+
+            if(TextUtils.isEmpty(pass)){
+                password.setError("Please enter some value");
+                focusView = password;
+                cancel = true;
+                return cancel;
+
+            }
+            if (!isPasswordValid(pass)){
+                password.setError("Minimun is 5 char");
+                focusView=password;
+                cancel=true;
+                return cancel;
+            }
+
+        }
+        if (!EmailVerification.validateEmail(username)){
+            userName.setText("Enetr Valid email Id");
+            focusView = userName;
+            cancel=true;
+            return cancel;
+        }
+
+
+
         return cancel;
     }
     public boolean isPasswordValid(String pass){
         return  password.length()>=5;
     }
-     public void loginToFile(Employee employee) {
+    public void loginToFile(Employee employee) {
          File file = new File(getFilesDir(), FILE_NAME);
 
 
@@ -173,7 +147,7 @@ private ProgressDialog progress;
          }
 
      }
- public Employee loginRetrive(){
+    public Employee loginRetrive(){
      try {
         ObjectInputStream ois =new ObjectInputStream(openFileInput(FILE_NAME));
          Employee r =(Employee)ois.readObject();
@@ -185,5 +159,129 @@ private ProgressDialog progress;
      }
 
  }
+
+    public void attemptRetrive(){
+        String email=userName.getText().toString();
+        if(checkValid(email,null)){
+            return;
+        }
+        else{
+
+            progress = ProgressDialog.show(LoginActivity.this,"In Progress","One moment Please......",true);
+
+            Call<ProdcastDTO> retrivePassword = new ProdcastDClient().getClient().retrievePassword(email );
+            retrivePassword.enqueue(new Callback<ProdcastDTO>() {
+                @Override
+                public void onResponse(retrofit2.Call<ProdcastDTO> call, Response<ProdcastDTO> response) {
+                    if( response.isSuccessful() ){
+                        ProdcastDTO dto = response.body();
+                        if(dto.isError()) {
+                            progress.dismiss();
+                            Toast.makeText(LoginActivity.this,"User is Invalid",Toast.LENGTH_LONG).show();
+                            signInButton.setEnabled(true);
+
+                        }
+                        else{
+
+                            //TODO Now go to DashBoard.
+                            progress.dismiss();
+                            Toast.makeText(LoginActivity.this,"Send Successfully",Toast.LENGTH_LONG);
+                            signInButton.setVisibility(View.GONE);
+
+                            //new ProdcastDClient().getClient().getCustomers(""+employeeId)
+                            //Pass in a Bundle to Dashboard loginDTO.getEmployee().getEmployeeId()
+                        }
+
+                    }
+                    else{
+                        //Do Validation code here.
+                        //TODO Error - Message-  Technical Problem. Pls try again.
+                        progress.dismiss();
+                        Toast.makeText(LoginActivity.this,"Sorry for the technical problem. Please try again",Toast.LENGTH_LONG).show();
+
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<ProdcastDTO> call, Throwable t) {
+                    //DoValidation here.
+                    //TODO Error - Message-  Technical Problem. Pls try again.
+                    progress.dismiss();
+                    t.printStackTrace();
+
+                }
+            });
+
+        }
+
+    }
+
+    public  void  clear(){
+        userName.setText("");
+        password.setText("");
+        signInButton.setEnabled(true);
+    }
+
+    public void attemptLogin(){
+        String username = userName.getText().toString();
+        String pass = password.getText().toString();
+
+        if (checkValid(username,pass)){
+            return ;
+
+        }
+        progress = ProgressDialog.show(LoginActivity.this,"In Progress","One moment Please......",true);
+        Call<LoginDTO> loginDTOCall = new ProdcastDClient().getClient().authenticate( username , pass );
+        loginDTOCall.enqueue(new Callback<LoginDTO>() {
+            @Override
+            public void onResponse(retrofit2.Call<LoginDTO> call, Response<LoginDTO> response) {
+                if( response.isSuccessful() ){
+                    LoginDTO loginDTO = response.body();
+                    if( !loginDTO.isError()){
+                        //TODO Now go to DashBoard.
+                        progress.dismiss();
+                        Intent intent =new Intent(LoginActivity.this,HomeActivity.class);
+                        SessionInfo.instance().setEmployee( loginDTO.getEmployee());
+                        loginToFile(loginDTO.getEmployee());
+                        Bundle bundle =  new Bundle();
+
+                        bundle.putString("employeeId",String.valueOf(loginDTO.getEmployee().getEmployeeId()));
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        signInButton.setEnabled(false);
+
+                        //new ProdcastDClient().getClient().getCustomers(""+employeeId)
+                        //Pass in a Bundle to Dashboard loginDTO.getEmployee().getEmployeeId()
+                    }
+                    else {
+                        //TODO Show error message TextBox that user is invalid
+                        Toast.makeText(LoginActivity.this,"User is Invalid",Toast.LENGTH_LONG).show();
+                        signInButton.setEnabled(true);
+                    }
+                }
+                else{
+                    //Do Validation code here.
+                    //TODO Error - Message-  Technical Problem. Pls try again.
+                    Toast.makeText(LoginActivity.this,"Sorry for the technical problem. Please try again",Toast.LENGTH_LONG).show();
+                    signInButton.setEnabled(true);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<LoginDTO> call, Throwable t) {
+                //DoValidation here.
+                //TODO Error - Message-  Technical Problem. Pls try again.
+                t.printStackTrace();
+                signInButton.setEnabled(true);
+            }
+        });
+    }
+
+    public void registerEmployee(){
+        Intent intent=new Intent(LoginActivity.this,RegisterEmployee.class);
+        startActivity(intent);
+    }
 
 }

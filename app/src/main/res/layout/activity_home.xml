@@ -182,7 +182,7 @@
                 android:id="@+id/ChangePassword"
                 android:layout_width="96dp"
                 android:layout_height="130dp"
-                app:srcCompat="@drawable/chnge" />
+                app:srcCompat="@drawable/change_pwd" />
 
             <TextView
                 android:id="@+id/ChangePAsswordText"

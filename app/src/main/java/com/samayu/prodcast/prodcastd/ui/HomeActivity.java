@@ -11,7 +11,9 @@ import prodcastd.prodcast.samayu.com.prodcastd.R;
 
 
 public class HomeActivity extends ProdcastBaseActivity  {
-    private ImageView customers, orderEntry,changePassword,viewOrder,payment, report;
+
+    private ImageView customers, orderEntry,changePassword,viewOrder,payment,report;
+
     Bundle homeBundle = null;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +26,10 @@ public class HomeActivity extends ProdcastBaseActivity  {
                orderEntry =(ImageView)findViewById(R.id.OrderIcon);
                 payment =(ImageView)findViewById(R.id.Payment);
                viewOrder=(ImageView)findViewById(R.id.ViewOrder);
-                changePassword=(ImageView)findViewById(R.id.ChangePassword);
-                report = (ImageView) findViewById(R.id.report);
+
+
+               report=(ImageView)findViewById(R.id.Report);
+        changePassword=(ImageView)findViewById(R.id.ChangePassword);
 
                 orderEntry.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -43,17 +47,31 @@ public class HomeActivity extends ProdcastBaseActivity  {
                         Intent intent = new Intent(HomeActivity.this,OrderEntryActivity.class);
                         intent.putExtra("Screen Name","paymentScreen");
 
+
                         startActivity(intent);
                     }
                 });
+
                 viewOrder.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(HomeActivity.this,ViewOrdersActivity.class);
 
-                        startActivity(intent);
-                    }
-                });
+                startActivity(intent);
+            }
+        });
+
+        report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this,ReportTypeActivity.class);
+
+
+                startActivity(intent);
+            }
+        });
+
+
 
 
                 customers.setOnClickListener(new View.OnClickListener() {

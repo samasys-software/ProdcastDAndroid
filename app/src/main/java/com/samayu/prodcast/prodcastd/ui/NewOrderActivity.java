@@ -4,9 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
@@ -30,11 +30,11 @@ import com.samayu.prodcast.prodcastd.dto.Bill;
 import com.samayu.prodcast.prodcastd.dto.Customer;
 import com.samayu.prodcast.prodcastd.dto.CustomerDTO;
 import com.samayu.prodcast.prodcastd.dto.OrderDetailDTO;
+import com.samayu.prodcast.prodcastd.dto.OrderEntry;
 import com.samayu.prodcast.prodcastd.dto.OrderEntryDTO;
 import com.samayu.prodcast.prodcastd.dto.Product;
 import com.samayu.prodcast.prodcastd.dto.ProductListDTO;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
-import com.samayu.prodcast.prodcastd.dto.OrderEntry;
 import com.samayu.prodcast.prodcastd.util.Constants;
 
 import java.util.LinkedList;
@@ -62,6 +62,12 @@ public class NewOrderActivity extends ProdcastBaseActivity implements
     private ImageView dropDown;
     private long customerId=0;
     private String value = "0";
+
+
+
+
+
+
     ProgressDialog progress;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -171,7 +177,7 @@ public class NewOrderActivity extends ProdcastBaseActivity implements
                 SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
                 //deleteItem.setBackground(getDrawable(R.drawable.yellow_background));
                 deleteItem.setWidth(170);
-                deleteItem.setIcon(R.drawable.ic_delete);
+                deleteItem.setIcon(R.drawable.ic_delete_icon);
                 menu.addMenuItem(deleteItem);
             }
         };
@@ -350,6 +356,7 @@ public class NewOrderActivity extends ProdcastBaseActivity implements
         float totalTax = otherTax + salesTax;
         float totalPriceTax =totalPrice +totalTax;
         String name= null;
+        String currencySymbol = SessionInfo.instance().getEmployee().getCurrencySymbol();
         if (discountType != null && discountType.getSelectedItem() != null) {
                 name = (String) discountType.getSelectedItem();
                 int selectedSpinner = discountType.getSelectedItemPosition();
@@ -358,8 +365,8 @@ public class NewOrderActivity extends ProdcastBaseActivity implements
                     value = discountValue.getText().toString();
                     float discountCash = totalPriceTax - (Float.parseFloat(value));
                     float cash = discountCash;
-                    displayTotal.setText(Constants.PRICE_FORMAT.format(cash));
-                    displayTax.setText(Constants.PRICE_FORMAT.format(totalTax));
+                    displayTotal.setText(currencySymbol+""+Constants.PRICE_FORMAT.format(cash));
+                    displayTax.setText(currencySymbol+""+Constants.PRICE_FORMAT.format(totalTax));
                     dto.setDiscountType(name);
                     dto.setDiscountValue(value);
 

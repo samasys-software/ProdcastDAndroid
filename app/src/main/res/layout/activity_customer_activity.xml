@@ -10,7 +10,7 @@
     <ListView
         android:id="@+id/customerList"
         android:layout_width="match_parent"
-        android:layout_height="495dp" />
+        android:layout_height="wrap_content" />
 
 
 
@@ -28,8 +28,8 @@
            android:text="New Customer" />
     <ListView
         android:id="@+id/customerListView"
-        android:layout_width="131dp"
-        android:layout_height="488dp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

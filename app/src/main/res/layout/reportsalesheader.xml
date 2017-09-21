@@ -5,48 +5,53 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+
         android:orientation="horizontal">
 
 
         <TextView
             android:id="@+id/saleCustomer"
-            android:layout_width="110dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="4"
-            android:background="@drawable/border"
+            android:gravity="center"
+            android:layout_weight="2"
+            android:background="@drawable/border_headerends"
             android:text="Customer"
-            android:textColor="#629a1e" />
+            style="@style/TableHeader" />
 
         <TextView
             android:id="@+id/date"
-            android:layout_width="70dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="2"
-            android:background="@drawable/border"
+            android:gravity="center"
+            android:layout_weight="1.3"
+            android:background="@drawable/border_headerends"
             android:text="Date"
-            android:textColor="#629a1e" />
+            style="@style/TableHeader" />
 
         <TextView
             android:id="@+id/saleTotal"
-            android:layout_width="65dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@drawable/border"
-            android:text="Total"
-            android:textColor="#629a1e" />
+            android:gravity="center"
+            android:layout_weight="0.9"
+            android:background="@drawable/border_headerends"
+            android:text="Tot"
+            style="@style/TableHeader" />
 
         <TextView
             android:id="@+id/saleBalance"
-            android:layout_width="55dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="0.5"
-            android:background="@drawable/border"
-            android:text="Balance"
-            android:textColor="#629a1e" />
+            android:gravity="center"
+            android:layout_weight="0.9"
+            android:background="@drawable/border_headerends"
+            android:text="Bal"
+            style="@style/TableHeader" />
 
     </LinearLayout>
 

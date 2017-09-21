@@ -5,7 +5,7 @@
         android:layout_height="match_parent"
         android:id="@+id/rl"
         android:orientation="vertical"
-        android:background="#fff"
+
         android:weightSum="1">
 
     <AutoCompleteTextView
@@ -13,10 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Search Customers"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp"
-        android:textColor="#000000"/>
+
+        android:layout_marginTop="25dp"
+        />
     <LinearLayout
         android:visibility="gone"
         android:id="@+id/llName"
@@ -25,32 +24,30 @@
         android:layout_weight="0.03">
         <TextView
             android:id="@+id/tvName"
-            android:layout_width="300dp"
-            android:layout_height="match_parent" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llnoOutstandingBills"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:visibility="gone">
 
         <TextView
             android:id="@+id/noOutstandingBills"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:text="No Outstanding Bills Available"
-            android:textColor="#629a1e"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+             />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llbills"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:orientation="vertical"
         android:visibility="gone">
@@ -60,23 +57,23 @@
             android:id="@+id/tvOutstandingBill"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
+
             android:layout_alignTop="@+id/acTextViev"
             android:layout_marginTop="0dp"
-            android:ems="10"
-            android:text="OUTSTANDING BILLS"
-            android:textColor="#629a1e"
-            android:textStyle="bold" />
+
+            android:text="Outstanding Bills"
+
+             />
 
         <LinearLayout
 
             android:id="@+id/linearmain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
             android:layout_below="@+id/tvOutstandingBill"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
             android:weightSum="1">
 
 
@@ -84,55 +81,46 @@
                 android:id="@+id/billNo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_weight="0.25"
                 android:gravity="center"
                 android:text="Bill No"
                 android:textAlignment="center"
-                android:textColor="#629a1e"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                style="@style/TableHeader"
+                android:background="@drawable/border_headerends"/>
 
 
             <TextView
                 android:id="@+id/billDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_weight="0.25"
                 android:gravity="center"
                 android:text="Bill Date"
                 android:textAlignment="center"
-                android:textColor="#629a1e"
-                android:textSize="16sp"
-
-                android:textStyle="bold" />
+                style="@style/TableHeader"
+                android:background="@drawable/border_headerends" />
 
             <TextView
                 android:id="@+id/total"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_weight="0.25"
-                android:gravity="right"
+                android:gravity="end"
                 android:text="Total"
                 android:textAlignment="center"
-                android:textColor="#629a1e"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                style="@style/TableHeader"
+                android:background="@drawable/border_headerends" />
 
             <TextView
                 android:id="@+id/bOutstandingAmount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_weight="0.25"
-                android:gravity="right"
+                android:gravity="end"
                 android:text="O.Total"
                 android:textAlignment="center"
-                android:textColor="#629a1e"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                style="@style/TableHeader"
+                android:background="@drawable/border_headerends" />
 
 
         </LinearLayout>
@@ -140,11 +128,10 @@
         <ListView
             android:id="@+id/billsView"
             android:layout_width="match_parent"
-            android:layout_height="125dp"
-            android:layout_alignEnd="@+id/linearmain"
-            android:layout_alignStart="@+id/linearmain"
+            android:layout_height="wrap_content"
+            android:divider="@null"
             android:layout_below="@+id/linearmain"
-            android:listSelector="@drawable/bill_bg" />
+             />
 
 
     </LinearLayout>
@@ -153,8 +140,8 @@
     <LinearLayout
         android:id="@+id/llpayment"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentStart="true"
+        android:layout_height="wrap_content"
+
         android:layout_below="@+id/billsView"
         android:layout_toEndOf="@+id/tvOutstandingBill"
         android:orientation="vertical"
@@ -162,12 +149,11 @@
 
         <TextView
             android:id="@+id/amounttv"
-            android:layout_width="200dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="27dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
             android:text="Make Payment"
-            android:textColor="#345904"
-            android:textStyle="bold" />
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -178,20 +164,19 @@
             <EditText
                 android:id="@+id/cash"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/amounttv"
                 android:layout_marginTop="0dp"
                 android:background="@null"
                 android:ems="8"
                 android:hint="Enter the Amount"
                 android:inputType="numberDecimal"
-                android:textColor="#345904"
-                android:textStyle="bold" />
+                 />
 
             <Spinner
                 android:id="@+id/paymentType"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
                 android:hint="Cash"
@@ -208,15 +193,17 @@
 
             <EditText
                 android:id="@+id/checkNumber"
-                android:layout_width="200dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Check Number"
+                android:layout_weight="2"
                 android:inputType="number" />
 
             <EditText
                 android:id="@+id/checkComments"
-                android:layout_width="200dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:hint="Comments" />
 
         </LinearLayout>
@@ -225,7 +212,7 @@
         <LinearLayout
             android:id="@+id/llpay"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
@@ -233,10 +220,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/log_in_button"
-                android:elevation="18dp"
+                style="@style/submitButton"
+
                 android:text="Pay"
-                android:textColor="#fff" />
+                 />
 
 
         </LinearLayout>
@@ -247,10 +234,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:layout_marginTop="10dp"
         android:visibility="gone"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@drawable/ic_shopping_cart_new" />
 
 </LinearLayout>
 

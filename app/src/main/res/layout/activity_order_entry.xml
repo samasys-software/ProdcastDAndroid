@@ -233,9 +233,10 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="end|bottom"
+        android:layout_gravity="end|top"
         android:visibility="gone"
-        app:srcCompat="@drawable/ic_shopping_cart_new" />
+        app:srcCompat="@drawable/ic_shopping_cart_new"
+        />
 
 </LinearLayout>
 

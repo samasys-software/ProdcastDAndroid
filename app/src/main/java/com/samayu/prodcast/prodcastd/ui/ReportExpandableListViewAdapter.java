@@ -7,10 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.Collection;
 import com.samayu.prodcast.prodcastd.dto.Order;
-import com.samayu.prodcast.prodcastd.ui.CollectionView;
-import com.samayu.prodcast.prodcastd.ui.ReportSalesEntryView;
 
 import java.util.List;
 
@@ -26,6 +25,8 @@ public class ReportExpandableListViewAdapter extends BaseExpandableListAdapter {
     Context context;
     Order[] orders;
     Collection[] collections;
+
+
 
     public ReportExpandableListViewAdapter(Context context, List<String> titles, Order[] orders, Collection[] collections){
         this.context = context;
@@ -89,17 +90,29 @@ public class ReportExpandableListViewAdapter extends BaseExpandableListAdapter {
         LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.reportnestedheaderlayout, null);
         ((TextView)view.findViewById(R.id.expandableReportHeader)).setText( title );
+
         return view;
     }
 
     @Override
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
+        String currencySymbol = SessionInfo.instance().getEmployee().getCurrencySymbol();
         if( i == 0 ){
             View childView = null;
+
             if( i1 == 0 ){
                 //Header
+
                 LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 childView = inflater.inflate( R.layout.reportsalesheader , null );
+
+
+
+                TextView saleTotalCurrency = childView.findViewById(R.id.saleTotalCurrency);
+                TextView saleBalanceCurrency = childView.findViewById(R.id.saleBalanceCurrency);
+
+                saleTotalCurrency.setText("("+currencySymbol+")");
+                saleBalanceCurrency.setText("("+currencySymbol+")");
             }
             else {
                 ReportSalesEntryView entry = new ReportSalesEntryView(context, (Order) getChild(i, i1-1));
@@ -115,6 +128,9 @@ public class ReportExpandableListViewAdapter extends BaseExpandableListAdapter {
                 //Header
                 LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 childView = inflater.inflate( R.layout.reportpayementheader , null );
+
+                TextView paymentAmountCurrency = childView.findViewById(R.id.paymentAmountCurrency);
+                paymentAmountCurrency.setText("("+currencySymbol+")");
             }
             else {
                 CollectionView entry = new CollectionView(context, (Collection) getChild(i, i1-1));

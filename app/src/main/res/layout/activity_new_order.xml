@@ -12,7 +12,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
@@ -39,18 +39,17 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_weight="5"
             >
 
-    <AutoCompleteTextView
-        android:id="@+id/productSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Search Products"
-        android:layout_gravity="start"
-        android:gravity="start"
-        android:textSize="12dp"
-        android:focusedByDefault="true"/>
+        <AutoCompleteTextView
+            android:id="@+id/productSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search Products"
+            android:layout_gravity="start"
+            android:gravity="start"
+            android:focusedByDefault="true"/>
 
 
-        </android.support.design.widget.TextInputLayout>
+            </android.support.design.widget.TextInputLayout>
 
         <ImageView
             android:id="@+id/dropDown"
@@ -59,9 +58,6 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_gravity="center"
             android:layout_weight="0.8"
             app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
-
-
-
 
 
 
@@ -74,6 +70,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/etQuantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:hint="Quantity"
             android:inputType="number"/>
         </android.support.design.widget.TextInputLayout>
@@ -82,9 +80,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/floatingActionButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:layout_gravity="center"
-            app:srcCompat="@android:drawable/ic_input_add"/>
+            app:srcCompat="@drawable/ic_shopping_cart"/>
 
     </LinearLayout>
     <LinearLayout
@@ -150,7 +148,10 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/productList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@null"
+        android:layout_marginTop="0dp"
+        android:dividerHeight="1dp"
+        android:divider="@android:color/darker_gray"
+        android:headerDividersEnabled="true"
          />
 
         <LinearLayout

@@ -28,7 +28,7 @@ public class HomeActivity extends ProdcastBaseActivity  {
                viewOrder=(ImageView)findViewById(R.id.ViewOrder);
 
 
-               report=(ImageView)findViewById(R.id.Report);
+               report=(ImageView)findViewById(R.id.report);
         changePassword=(ImageView)findViewById(R.id.ChangePassword);
 
                 orderEntry.setOnClickListener(new View.OnClickListener() {

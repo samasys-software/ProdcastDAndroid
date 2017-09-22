@@ -374,14 +374,14 @@ public class NewOrderActivity extends ProdcastBaseActivity implements
                 } else if (selectedSpinner == 2) {
                     value = discountValue.getText().toString();
                     float discountPercentage = totalPriceTax*(1-((Float.parseFloat(value)) / 100));
-                    displayTotal.setText(Constants.PRICE_FORMAT.format(discountPercentage));
+                    displayTotal.setText(currencySymbol+""+Constants.PRICE_FORMAT.format(discountPercentage));
                     //float discountTax = totalTax *(1-((Float.parseFloat(value)) / 100));
-                    displayTax.setText(Constants.PRICE_FORMAT.format(totalTax));
+                    displayTax.setText(currencySymbol+""+Constants.PRICE_FORMAT.format(totalTax));
                     dto.setDiscountType(name);
                     dto.setDiscountValue(value);
                 } else {
-                    displayTotal.setText(Constants.PRICE_FORMAT.format(totalPriceTax));
-                    displayTax.setText(Constants.PRICE_FORMAT.format(totalTax));
+                    displayTotal.setText(currencySymbol+""+Constants.PRICE_FORMAT.format(totalPriceTax));
+                    displayTax.setText(currencySymbol+""+Constants.PRICE_FORMAT.format(totalTax));
 
                 }
         }

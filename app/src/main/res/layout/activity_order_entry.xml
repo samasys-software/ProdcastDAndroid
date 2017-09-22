@@ -99,28 +99,48 @@
                 android:textAlignment="center"
                 style="@style/TableHeader"
                 android:background="@drawable/border_headerends" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:background="@drawable/border_headerends" >
 
             <TextView
                 android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                style="@style/TableHeader"/>
+
+                <TextView
+                    android:id="@+id/totalCurrencySymbol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TableHeader"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
-                android:gravity="end"
-                android:text="Total"
-                android:textAlignment="center"
-                style="@style/TableHeader"
-                android:background="@drawable/border_headerends" />
+                android:gravity="center"
+                android:background="@drawable/border_headerends">
 
             <TextView
                 android:id="@+id/bOutstandingAmount"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.25"
-                android:gravity="end"
                 android:text="O.Total"
-                android:textAlignment="center"
-                style="@style/TableHeader"
-                android:background="@drawable/border_headerends" />
+                style="@style/TableHeader"/>
+
+                <TextView
+                    android:id="@+id/oTotalCurrencySymbol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TableHeader"/>
+            </LinearLayout>
 
 
         </LinearLayout>
@@ -233,9 +253,10 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="end|bottom"
+        android:layout_gravity="end|top"
         android:visibility="gone"
-        app:srcCompat="@drawable/ic_shopping_cart_new" />
+        app:srcCompat="@drawable/ic_shopping_cart_new"
+        />
 
 </LinearLayout>
 

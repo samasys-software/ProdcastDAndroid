@@ -30,16 +30,27 @@
             android:text="Date"
             style="@style/TableHeader" />
 
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_headerends"
+        android:layout_weight="0.9"
+        android:layout_gravity="center"
+        android:gravity="center">
+
         <TextView
             android:id="@+id/paymentAmount"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_weight="0.9"
-            android:background="@drawable/border_headerends"
             android:text="Amt"
             style="@style/TableHeader" />
+
+        <TextView
+            android:id="@+id/paymentAmountCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TableHeader"/>
+    </LinearLayout>
 
         <TextView
             android:id="@+id/paymentType"

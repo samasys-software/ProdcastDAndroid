@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 
+import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.ReportDTO;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 
@@ -37,6 +38,8 @@ public class ReportTypeActivity extends ProdcastBaseActivity  {
     TextView sale;
     TextView collections;
     TextView balances;
+
+    TextView salesCurrency,collectionsCurrency,balancesCurrency;
 
     TextView sCustomer;
     TextView sDate;
@@ -82,6 +85,20 @@ public class ReportTypeActivity extends ProdcastBaseActivity  {
         endDate = (TextView)findViewById(R.id.endDate);
         startDatePicker = (DatePicker)findViewById(R.id.startDatePicker);
         endDatePicker = (DatePicker) findViewById(R.id.endDatePicker);
+
+        String currencySymbol = SessionInfo.instance().getEmployee().getCurrencySymbol();
+
+        salesCurrency = (TextView) findViewById(R.id.salesCurrency);
+        collectionsCurrency = (TextView) findViewById(R.id.collectionsCurrency);
+        balancesCurrency = (TextView) findViewById(R.id.balancesCurrency);
+
+
+
+        salesCurrency.setText("("+currencySymbol+")");
+        collectionsCurrency.setText("("+currencySymbol+")");
+        balancesCurrency.setText("("+currencySymbol+")");
+
+
 
         listener = new View.OnKeyListener() {
             @Override

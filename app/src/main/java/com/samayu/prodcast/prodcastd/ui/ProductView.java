@@ -1,11 +1,8 @@
 package com.samayu.prodcast.prodcastd.ui;
 
 import android.content.Context;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.KeyListener;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -14,10 +11,7 @@ import android.widget.TextView;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.OrderEntry;
-import com.samayu.prodcast.prodcastd.dto.OrderEntryDTO;
 import com.samayu.prodcast.prodcastd.util.Constants;
-
-import java.util.List;
 
 import prodcastd.prodcast.samayu.com.prodcastd.R;
 
@@ -28,6 +22,8 @@ import prodcastd.prodcast.samayu.com.prodcastd.R;
 public class ProductView extends FrameLayout {
     private com.samayu.prodcast.prodcastd.dto.OrderEntry product;
     private QuantityChangedListener quantityChangedListener ;
+
+    String currencySymbol = SessionInfo.instance().getEmployee().getCurrencySymbol();
 
     public ProductView(Context context, OrderEntry product, QuantityChangedListener listener ) {
         super(context);
@@ -43,7 +39,7 @@ public class ProductView extends FrameLayout {
         ((TextView)findViewById(R.id.product)).setText(String.valueOf( product.getProductName()));
         ((EditText)findViewById(R.id.quantityEdit)).setText(String.valueOf(product.getQuantity()));
 
-        ((TextView)findViewById(R.id.subTotalAmount)).setText(Constants.PRICE_FORMAT.format( product.getSubtotal() ));
+        ((TextView)findViewById(R.id.subTotalAmount)).setText("("+currencySymbol+")"+Constants.PRICE_FORMAT.format( product.getSubtotal() ));
 
 
         ((EditText)findViewById(R.id.quantityEdit)).addTextChangedListener(new TextWatcher() {

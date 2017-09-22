@@ -30,28 +30,48 @@
             android:background="@drawable/border_headerends"
             android:text="Date"
             style="@style/TableHeader" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_weight="0.9"
+        android:background="@drawable/border_headerends">
 
         <TextView
             android:id="@+id/saleTotal"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_weight="0.9"
-            android:background="@drawable/border_headerends"
             android:text="Tot"
             style="@style/TableHeader" />
+        <TextView
+            android:id="@+id/saleTotalCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TableHeader"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_weight="0.9"
+        android:background="@drawable/border_headerends">
 
         <TextView
             android:id="@+id/saleBalance"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_weight="0.9"
-            android:background="@drawable/border_headerends"
             android:text="Bal"
             style="@style/TableHeader" />
+
+        <TextView
+            android:id="@+id/saleBalanceCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TableHeader"/>
+    </LinearLayout>
 
     </LinearLayout>
 

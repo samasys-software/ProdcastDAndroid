@@ -177,7 +177,7 @@
             android:layout_marginLeft="30dp"
             android:text="Register"
             android:textColor="#345904"
-            android:textSize="16sp"
+
             android:layout_alignBaseline="@+id/forgotPin"
             android:layout_alignBottom="@+id/forgotPin"
             android:layout_alignParentStart="true"
@@ -191,7 +191,7 @@
             android:layout_marginRight="30dp"
             android:text="Forgot Pin?"
             android:textColor="#345904"
-            android:textSize="16sp"
+
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true" />
     </RelativeLayout>

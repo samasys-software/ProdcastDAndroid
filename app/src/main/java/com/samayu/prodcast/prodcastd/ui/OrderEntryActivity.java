@@ -53,6 +53,9 @@ public class OrderEntryActivity extends ProdcastBaseActivity {
     private String screenName;
     boolean paymentScreen=false;
     private ProgressDialog progress;
+
+    TextView totalCurrencySymbol, oTotalCurrencySymbol;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +74,16 @@ public class OrderEntryActivity extends ProdcastBaseActivity {
         cashPay = (EditText)findViewById(R.id.cash);
         Button newOrder = (Button)findViewById(R.id.newOrder);
         customerNames = (AutoCompleteTextView)findViewById(R.id.acTextViev);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(OrderEntryActivity.this,R.array.payment_method,android.R.layout.simple_spinner_item);
+
+        String currencySymbol = SessionInfo.instance().getEmployee().getCurrencySymbol();
+
+        totalCurrencySymbol = (TextView) findViewById(R.id.totalCurrencySymbol);
+        oTotalCurrencySymbol = (TextView) findViewById(R.id.oTotalCurrencySymbol);
+
+        totalCurrencySymbol.setText("("+currencySymbol+")");
+        oTotalCurrencySymbol.setText("("+currencySymbol+")");
+
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(OrderEntryActivity.this,R.array.payment_method,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         methodOfPayment.setAdapter(adapter);
         if(screenName.equals("paymentScreen")){
@@ -143,11 +155,11 @@ public class OrderEntryActivity extends ProdcastBaseActivity {
         billsView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Bundle bundle = new Bundle();
+
                 Intent intent = new Intent(OrderEntryActivity.this, BillDetailsActivity.class);
-                bundle.putInt("billId",selectedBillIndex);
-                intent.putExtras(bundle);
-                startActivity(intent,bundle);
+
+                intent.putExtra("billId",String.valueOf(SessionInfo.instance().getCustomerBills().get(selectedBillIndex).getBillNumber()));
+                startActivity(intent);
                 return false;
             }
         });

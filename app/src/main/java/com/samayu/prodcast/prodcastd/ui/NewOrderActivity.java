@@ -63,21 +63,22 @@ public class NewOrderActivity extends ProdcastBaseActivity implements
     private long customerId=0;
     private String value = "0";
 
-
-
-
-
+    private TextView bSubTotalCurrencySymbol;
 
     ProgressDialog progress;
+    String currencySymbol = SessionInfo.instance().getEmployee().getCurrencySymbol();
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_new_order);
+
         Customer customerIdCus = SessionInfo.instance().getSelectedCustomer();
         customerId = customerIdCus.getId();
         String customerType = customerIdCus.getCustomerType();
         SessionInfo.instance().setCart(new LinkedList<OrderEntry>());
+
         displayTax = (TextView) findViewById(R.id.displayTax);
         displayTotal = (TextView) findViewById(R.id.displayTotal);
         customerName = (TextView) findViewById(R.id.customerName);
@@ -90,7 +91,10 @@ public class NewOrderActivity extends ProdcastBaseActivity implements
         applyDiscount =(Button)findViewById(R.id.discountButton);
         View bottomSheet = findViewById(R.id.bottomSheet);
         dropDown = (ImageView) findViewById(R.id.dropDown);
+
         customerName.setText(String.valueOf(customerIdCus));
+
+
         final BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
         findViewById(R.id.llemptyList).setVisibility(View.VISIBLE);
         behavior.setHideable(false);
@@ -104,6 +108,8 @@ public class NewOrderActivity extends ProdcastBaseActivity implements
         productList = (AutoCompleteTextView) findViewById(R.id.productSearch);
 
 
+        bSubTotalCurrencySymbol = (TextView) findViewById(R.id.bSubTotalCurrencySymbol);
+        bSubTotalCurrencySymbol.setText("("+currencySymbol+")");
 
 
         long employeeId = SessionInfo.instance().getEmployee().getEmployeeId();
@@ -356,7 +362,7 @@ public class NewOrderActivity extends ProdcastBaseActivity implements
         float totalTax = otherTax + salesTax;
         float totalPriceTax =totalPrice +totalTax;
         String name= null;
-        String currencySymbol = SessionInfo.instance().getEmployee().getCurrencySymbol();
+
         if (discountType != null && discountType.getSelectedItem() != null) {
                 name = (String) discountType.getSelectedItem();
                 int selectedSpinner = discountType.getSelectedItemPosition();

@@ -129,17 +129,27 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             style="@style/TableHeader"
             android:background="@drawable/border_headerends"/>
 
-
-
-        <TextView
-            android:id="@+id/bSubTotal"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_weight="1"
+            android:background="@drawable/border_headerends">
+
+        <TextView
+            android:id="@+id/bSubTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Sub Total"
             style="@style/TableHeader"
-            android:background="@drawable/border_headerends"/>
+            />
+
+            <TextView
+                android:id="@+id/bSubTotalCurrencySymbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TableHeader"/>
+        </LinearLayout>
 
 
     </LinearLayout>

@@ -6,33 +6,29 @@
     android:layout_height="match_parent"
     tools:context="com.samayu.prodcast.prodcastd.ui.ReportTypeActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginEnd="5dp"
-        android:layout_marginStart="5dp"
-        android:orientation="vertical">
+        <LinearLayout
 
-        <!--TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:visibility="gone"
                 android:id="@+id/reports"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Reports" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/selectDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
-                android:text="Select Report Date"/-->
-
-        <RelativeLayout
-            android:id="@+id/reportPicker"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/form_box">
+                android:text="Select Report Date" />
 
             <Spinner
                 android:id="@+id/selectReportDate"
@@ -43,224 +39,204 @@
 
             </Spinner>
 
-        </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/btnCalendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:orientation="horizontal"
+                android:visibility="invisible">
 
-        <LinearLayout
-            android:id="@+id/btnCalendar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal"
-            android:visibility="invisible">
+                <TextView
+                    android:id="@+id/startDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.72"
+                    android:text="Start Date" />
+
+                <DatePicker
+                    android:id="@+id/startDatePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.72"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/endDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.72"
+                    android:text="End Date" />
+
+                <DatePicker
+                    android:id="@+id/endDatePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.72"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/refresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:gravity="center"
+                    style="@style/submitButton"
+                    android:text="Go"/>
+
+            </LinearLayout>
+
+            <!--LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="end"
+                android:layout_margin="10dp">
+
+
+
+            </LinearLayout-->
 
             <TextView
-                android:id="@+id/startDate"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_weight="1.72"
-                android:background="@drawable/form_box"
-                android:padding="6dp"
-                android:text="Start Date" />
-
-            <DatePicker
-                android:id="@+id/startDatePicker"
-                android:layout_width="wrap_content"
+                android:id="@+id/summarytext"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.72"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/endDate"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_weight="1.72"
-                android:background="@drawable/form_box"
-                android:padding="6dp"
-                android:text="End Date" />
-
-            <DatePicker
-                android:id="@+id/endDatePicker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.72"
-                android:visibility="gone" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <!--Button
-                android:id="@+id/refresh"
-                style="@style/submitButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Refresh Report"/-->
-
-            <ImageButton
-                android:id="@+id/refresh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_refresh"
-                android:background="#00000000"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/summarytext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:padding="3dp"
-            android:text="Summary" />
-
-        <LinearLayout
-            android:id="@+id/summaryTable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                android:layout_marginTop="10dp"
+                android:text="Summary" />
 
             <LinearLayout
-                android:id="@+id/summary1"
-                android:layout_width="0dp"
+                android:id="@+id/summary"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:background="@drawable/border_headermiddle">
+                android:layout_below="@id/summarytext"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:background="@drawable/border_headerends">
 
                 <TextView
                     android:id="@+id/sales"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="@drawable/border_headerends"
-                    android:text="Sales"
-                    android:textColor="#ffffff"/>
+                    style = "@style/TableHeader"
+                    android:text="Sales"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:text="()"
+                    <TextView
+                        android:id="@+id/salesCurrency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style = "@style/TableHeader"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/salesCurrency"
-                    style="@style/TableHeader"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/summary2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:background="@drawable/border_headermiddle">
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:background="@drawable/border_headerends">
 
                 <TextView
                     android:id="@+id/collection"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="@drawable/border_headerends"
-                    android:text="Collection"
-                    android:textColor="#ffffff" />
+                    style="@style/TableHeader"
+                    android:text="Collection"/>
 
                 <TextView
+                    android:id="@+id/collectionsCurrency"
                     android:layout_width="wrap_content"
-                    android:layout_gravity="start"
-                    android:text="()"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/collectionCurrency"
+                    android:layout_height="match_parent"
                     style="@style/TableHeader"/>
 
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/summary3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:background="@drawable/border_headermiddle">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:background="@drawable/border_headerends"
 
+                    android:layout_weight="2">
                 <TextView
                     android:id="@+id/balance"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="@drawable/border_headerends"
-                    android:text="Balance"
-                    android:textColor="#ffffff" />
+                    style = "@style/TableHeader"
+                    android:text="Balance"/>
 
                 <TextView
+                    android:id="@+id/balancesCurrency"
                     android:layout_width="wrap_content"
-                    android:text="()"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/balanceCurrency"
-                    style="@style/TableHeader"/>
+                    android:layout_height="match_parent"
+                    style = "@style/TableHeader"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/salesSummaryHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/sale"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:background="@drawable/border_entryends"
+                    style="@style/TableEntry"
+                    android:text="Sale"/>
+
+                <TextView
+                    android:id="@+id/collections"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:background="@drawable/border_entrymiddle"
+                    style="@style/TableEntry"
+                    android:text="Collections"/>
+
+                <TextView
+                    android:id="@+id/balances"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:background="@drawable/border_entrymiddle"
+                    style="@style/TableEntry"
+                    android:text="Balances"/>
+
+            </LinearLayout>
+
+            <ExpandableListView
+                android:id="@+id/expandableSalesList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:groupIndicator="@null">
+
+            </ExpandableListView>
+
         </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/salesSummaryHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/sale"
-                android:layout_width="124dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1.5"
-                android:padding="2dp"
-                android:background="@drawable/border_billdetailsend"
-                android:text="Sale"
-                android:textColor="#629a1e" />
-
-            <TextView
-                android:id="@+id/collections"
-                android:layout_width="125dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="2"
-                android:padding="2dp"
-                android:background="@drawable/border_billdetailsend"
-                android:text="Collections"
-                android:textColor="#629a1e" />
-
-            <TextView
-                android:id="@+id/balances"
-                android:layout_width="125dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="2"
-                android:padding="2dp"
-                android:background="@drawable/border_billdetailsend"
-                android:text="Balances"
-                android:textColor="#629a1e" />
-
-        </LinearLayout>
-
-        <ExpandableListView
-            android:id="@+id/expandableSalesList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft">
-
-        </ExpandableListView>
-
-    </LinearLayout>
 
 </LinearLayout>

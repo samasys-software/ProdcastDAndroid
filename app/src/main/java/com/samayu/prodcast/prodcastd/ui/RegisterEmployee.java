@@ -1,10 +1,10 @@
 package com.samayu.prodcast.prodcastd.ui;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import android.widget.ArrayAdapter;
@@ -16,11 +16,8 @@ import android.widget.Toast;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.Country;
-import com.samayu.prodcast.prodcastd.dto.CountryDTO;
-import com.samayu.prodcast.prodcastd.dto.Registration;
 import com.samayu.prodcast.prodcastd.dto.RegistrationDTO;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
-import com.samayu.prodcast.prodcastd.service.ProdcastDistributorService;
 
 import java.util.List;
 
@@ -36,7 +33,7 @@ public class RegisterEmployee extends ProdcastBaseActivity {
     View focusView=null;
     Button submit,reset;
     Context context;
-    private ProgressDialog progress;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,32 +47,11 @@ public class RegisterEmployee extends ProdcastBaseActivity {
         cellPhone=(EditText)findViewById(R.id.regCellPhone);
         submit=(Button)findViewById(R.id.regSubmit);
         reset=(Button)findViewById(R.id.regReset);
-        progress = ProgressDialog.show(RegisterEmployee.this,"In Progress","One moment Please...",true);
-        Call<CountryDTO> countryDTOCall = new ProdcastDClient().getClient().getCountries();
-        countryDTOCall.enqueue(new Callback<CountryDTO>() {
-            @Override
-            public void onResponse(Call<CountryDTO> call, Response<CountryDTO> response) {
-                if (response.isSuccessful()){
-                    CountryDTO countryDTO = response.body();
-                    List<Country> countryList= countryDTO.getResult();
-                    SessionInfo.instance().setCountries(countryList);
-                    Country defaultCountry = new Country();
-                    defaultCountry.setCountryId("");
-                    defaultCountry.setCountryName("Select Country");
-                    countryList.add(0, defaultCountry  );
+        //progress = ProgressDialog.show(RegisterEmployee.this,"In Progress","One moment Please...",true);
 
-                    ArrayAdapter<Country> adapter = new ArrayAdapter<Country>(RegisterEmployee.this,R.layout.drop_down_list, countryList);
-                    country.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CountryDTO> call, Throwable t) {
-
-              t.printStackTrace();
-                progress.dismiss();
-            }
-        });
+        List<Country> countryList= SessionInfo.instance().getCountries();
+        ArrayAdapter<Country> adapter = new ArrayAdapter<Country>(RegisterEmployee.this,R.layout.drop_down_list, countryList);
+        country.setAdapter(adapter);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,33 +82,33 @@ public class RegisterEmployee extends ProdcastBaseActivity {
             return;
         }
         else{
-            progress.show();
-            Call<RegistrationDTO<List<Registration>>> registrationDTO=new ProdcastDClient().getClient().registration(regFirstName,regLastName,selectedCountryId,regEmail,regCellPhone);
-            registrationDTO.enqueue(new Callback<RegistrationDTO<List<Registration>>>() {
+            //progress.show();
+            Call<RegistrationDTO> registrationDTO=new ProdcastDClient().getClient().newRegistration(regFirstName,regLastName,selectedCountryId,regEmail,regCellPhone);
+            registrationDTO.enqueue(new Callback<RegistrationDTO>() {
                 @Override
-                public void onResponse(Call<RegistrationDTO<List<Registration>>> call, Response<RegistrationDTO<List<Registration>>> response) {
-                    if(response.isSuccessful()){
-                        RegistrationDTO<List<Registration>> dto=response.body();
+                public void onResponse(Call<RegistrationDTO> call, Response<RegistrationDTO> response) {
+
+                        RegistrationDTO dto=response.body();
                         if(dto.isError()){
-                            progress.dismiss();
-                            firstName.setError(dto.getErrorMessage());
-                            focusView=firstName;
-                            focusView.requestFocus();
-                            return;
+                            Log.e("error",dto.getErrorMessage());
                         }
                         else{
-                            SessionInfo.instance().setEmployeeRegistration(dto.getResult());
-                            progress.dismiss();
-                            attemptReset();
+                            //SessionInfo.instance().setEmployeeRegistration(dto.getResult());
+                            //progress.dismiss();
+                            //attemptReset();
+                            finish();
+                           // Toast.makeText(context,"Your Request Has Been Registered Successfully And Prodcast Representative will Contact You Shortly",Toast.LENGTH_LONG);
+
+
 
                         }
                     }
-                }
+
 
                 @Override
-                public void onFailure(Call<RegistrationDTO<List<Registration>>> call, Throwable t) {
+                public void onFailure(Call<RegistrationDTO> call, Throwable t) {
                     t.printStackTrace();
-                    progress.dismiss();
+                    //progress.dismiss();
 
                 }
             });

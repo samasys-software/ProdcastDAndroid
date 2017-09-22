@@ -10,10 +10,8 @@ import com.samayu.prodcast.prodcastd.dto.LoginDTO;
 import com.samayu.prodcast.prodcastd.dto.OrderDTO;
 import com.samayu.prodcast.prodcastd.dto.OrderDetailDTO;
 import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
-import com.samayu.prodcast.prodcastd.dto.Registration;
 import com.samayu.prodcast.prodcastd.dto.RegistrationDTO;
 import com.samayu.prodcast.prodcastd.dto.ReportDTO;
-import com.samayu.prodcast.prodcastd.dto.ReportTypeDTO;
 import com.samayu.prodcast.prodcastd.dto.ProductListDTO;
 import com.samayu.prodcast.prodcastd.dto.StoreType;
 
@@ -25,7 +23,6 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -113,13 +110,15 @@ public interface ProdcastDistributorService {
 
     @GET("prodcast/global/retrievePassword")
     Call<ProdcastDTO> retrievePassword(@Query("emailId") String emailId);
+
+
     @POST("prodcast/global/saveRegistration")
     @FormUrlEncoded
-    public Call<RegistrationDTO<List<Registration>>> registration(@Field("firstName") String firstName,
-                                                                          @Field("lastName")String lastName,
-                                                                          @Field("country") String country,
-                                                                          @Field("emailId") String emailId,
-                                                                          @Field("cellPhone") String cellPhone);
+    public Call<RegistrationDTO> newRegistration(@Field("firstName") String firstName,
+                                                 @Field("lastName")String lastName,
+                                                 @Field("country") String country,
+                                                 @Field("emailId") String emailId,
+                                                 @Field("cellPhone") String cellPhone);
 
 
 

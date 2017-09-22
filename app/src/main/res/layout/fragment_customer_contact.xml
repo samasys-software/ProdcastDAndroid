@@ -124,12 +124,10 @@
             android:id="@+id/reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_marginLeft="10dp"
             android:layout_marginStart="5dp"
-            android:background="@drawable/log_in_button"
-            android:hint="Reset"
-            android:textColor="#fff" />
+            style="@style/submitButton"
+            android:text="Reset" />
 
         <Button
             android:id="@+id/save"
@@ -138,9 +136,8 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/log_in_button"
-            android:hint="Save"
-            android:textColor="#fff" />
+            style="@style/submitButton"
+            android:text="Save" />
 
 
     </RelativeLayout>

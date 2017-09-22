@@ -1,17 +1,21 @@
 package com.samayu.prodcast.prodcastd.ui;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
+import com.samayu.prodcast.prodcastd.dto.Country;
+import com.samayu.prodcast.prodcastd.dto.CountryDTO;
 import com.samayu.prodcast.prodcastd.dto.Employee;
 import com.samayu.prodcast.prodcastd.dto.LoginDTO;
 import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
@@ -22,6 +26,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.List;
 
 import prodcastd.prodcast.samayu.com.prodcastd.R;
 import retrofit2.Call;
@@ -35,12 +40,39 @@ public class LoginActivity extends AppCompatActivity {
     TextView forgotPin,register;
     View focusView = null;
     EditText password = null;
+    Context context;
     public static final String FILE_NAME = "prodcastLogin.txt";
     private ProgressDialog progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        context=this;
+        Call<CountryDTO> countryDTOCall = new ProdcastDClient().getClient().getCountries();
+        countryDTOCall.enqueue(new Callback<CountryDTO>() {
+            @Override
+            public void onResponse(Call<CountryDTO> call, Response<CountryDTO> response) {
+                if (response.isSuccessful()){
+                    CountryDTO countryDTO = response.body();
+                    List<Country> countryList= countryDTO.getResult();
+
+                    Country defaultCountry = new Country();
+                    defaultCountry.setCountryId("");
+                    defaultCountry.setCountryName("Select Country");
+                    countryList.add(0, defaultCountry  );
+                    SessionInfo.instance().setCountries(countryList);
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CountryDTO> call, Throwable t) {
+
+                t.printStackTrace();
+                //progress.dismiss();
+            }
+        });
         Employee ep =loginRetrive();
         if (ep != null){
             SessionInfo.instance().setEmployee(ep);
@@ -89,6 +121,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void onResume(){
+
+        super.onResume();
+        Toast.makeText(LoginActivity.this,"Your Request Has Been Registered Successfully And Prodcast Representative will Contact You Shortly",Toast.LENGTH_LONG);
+
+    }
+
 
     public boolean checkValid(String username,String pass){
         boolean cancel = false;

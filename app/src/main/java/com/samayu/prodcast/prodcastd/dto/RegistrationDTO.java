@@ -3,7 +3,7 @@ package com.samayu.prodcast.prodcastd.dto;
 import java.util.List;
 
 /**
- * Created by fgs on 9/22/2017.
+ * Created by nandhini on 22/09/17.
  */
 
 public class RegistrationDTO<T> extends ProdcastDTO{

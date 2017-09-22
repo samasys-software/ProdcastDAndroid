@@ -83,7 +83,7 @@ public class OrderEntryActivity extends ProdcastBaseActivity {
         totalCurrencySymbol.setText("("+currencySymbol+")");
         oTotalCurrencySymbol.setText("("+currencySymbol+")");
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(OrderEntryActivity.this,R.array.payment_method,android.R.layout.simple_spinner_item);
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(OrderEntryActivity.this,R.array.payment_method,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         methodOfPayment.setAdapter(adapter);
         if(screenName.equals("paymentScreen")){
@@ -155,11 +155,11 @@ public class OrderEntryActivity extends ProdcastBaseActivity {
         billsView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Bundle bundle = new Bundle();
+
                 Intent intent = new Intent(OrderEntryActivity.this, BillDetailsActivity.class);
-                bundle.putInt("billId",selectedBillIndex);
-                intent.putExtras(bundle);
-                startActivity(intent,bundle);
+
+                intent.putExtra("billId",String.valueOf(SessionInfo.instance().getCustomerBills().get(selectedBillIndex).getBillNumber()));
+                startActivity(intent);
                 return false;
             }
         });

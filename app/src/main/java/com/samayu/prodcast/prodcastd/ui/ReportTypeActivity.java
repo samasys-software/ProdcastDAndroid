@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -41,6 +42,8 @@ public class ReportTypeActivity extends ProdcastBaseActivity  {
 
     TextView salesCurrency,collectionsCurrency,balancesCurrency;
 
+    LinearLayout calender;
+
     TextView sCustomer;
     TextView sDate;
     TextView sTotal;
@@ -53,7 +56,7 @@ public class ReportTypeActivity extends ProdcastBaseActivity  {
     private TextView startDate;
     private TextView endDate;
     View.OnKeyListener listener = null;
-    private ProgressDialog progress;
+    //private ProgressDialog progress;
 
 
     @Override
@@ -92,7 +95,7 @@ public class ReportTypeActivity extends ProdcastBaseActivity  {
         collectionsCurrency = (TextView) findViewById(R.id.collectionsCurrency);
         balancesCurrency = (TextView) findViewById(R.id.balancesCurrency);
 
-
+        calender = (LinearLayout) findViewById(R.id.btnCalendar);
 
         salesCurrency.setText("("+currencySymbol+")");
         collectionsCurrency.setText("("+currencySymbol+")");
@@ -156,6 +159,11 @@ public class ReportTypeActivity extends ProdcastBaseActivity  {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i<=2){
                     refreshReport();
+                    calender.setVisibility(View.INVISIBLE);
+                }
+                else
+                {
+                    calender.setVisibility(View.VISIBLE);
                 }
 
 
@@ -228,7 +236,8 @@ return cancel;
 
         }
 
-        progress = ProgressDialog.show(ReportTypeActivity.this,"In Progress","One moment Please....",true);
+
+        //progress = ProgressDialog.show(ReportTypeActivity.this,"In Progress","One moment Please....",true);
 
         Call<ReportDTO> reportDTOCall = new ProdcastDClient().getClient().getReports(reportType , employeeId,null, startDate.getText().toString() , endDate.getText().toString() );
 
@@ -237,7 +246,7 @@ return cancel;
             public void onResponse(Call<ReportDTO> call, Response<ReportDTO> response) {
                 if (response.isSuccessful()) {
 
-                    progress.dismiss();
+                    //progress.dismiss();
                     ReportDTO reportDTO = response.body();
                     sale.setText(String.valueOf(reportDTO.getTotalSales() ));
                     collections.setText(String.valueOf( reportDTO.getTotalCollection()));

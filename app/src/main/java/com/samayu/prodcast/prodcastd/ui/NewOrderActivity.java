@@ -4,9 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
@@ -30,11 +30,11 @@ import com.samayu.prodcast.prodcastd.dto.Bill;
 import com.samayu.prodcast.prodcastd.dto.Customer;
 import com.samayu.prodcast.prodcastd.dto.CustomerDTO;
 import com.samayu.prodcast.prodcastd.dto.OrderDetailDTO;
+import com.samayu.prodcast.prodcastd.dto.OrderEntry;
 import com.samayu.prodcast.prodcastd.dto.OrderEntryDTO;
 import com.samayu.prodcast.prodcastd.dto.Product;
 import com.samayu.prodcast.prodcastd.dto.ProductListDTO;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
-import com.samayu.prodcast.prodcastd.dto.OrderEntry;
 import com.samayu.prodcast.prodcastd.util.Constants;
 
 import java.util.LinkedList;
@@ -62,16 +62,23 @@ public class NewOrderActivity extends ProdcastBaseActivity implements
     private ImageView dropDown;
     private long customerId=0;
     private String value = "0";
+
+    private TextView bSubTotalCurrencySymbol;
+
     ProgressDialog progress;
+    String currencySymbol = SessionInfo.instance().getEmployee().getCurrencySymbol();
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_new_order);
+
         Customer customerIdCus = SessionInfo.instance().getSelectedCustomer();
         customerId = customerIdCus.getId();
         String customerType = customerIdCus.getCustomerType();
         SessionInfo.instance().setCart(new LinkedList<OrderEntry>());
+
         displayTax = (TextView) findViewById(R.id.displayTax);
         displayTotal = (TextView) findViewById(R.id.displayTotal);
         customerName = (TextView) findViewById(R.id.customerName);
@@ -84,7 +91,10 @@ public class NewOrderActivity extends ProdcastBaseActivity implements
         applyDiscount =(Button)findViewById(R.id.discountButton);
         View bottomSheet = findViewById(R.id.bottomSheet);
         dropDown = (ImageView) findViewById(R.id.dropDown);
+
         customerName.setText(String.valueOf(customerIdCus));
+
+
         final BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
         findViewById(R.id.llemptyList).setVisibility(View.VISIBLE);
         behavior.setHideable(false);
@@ -98,6 +108,8 @@ public class NewOrderActivity extends ProdcastBaseActivity implements
         productList = (AutoCompleteTextView) findViewById(R.id.productSearch);
 
 
+        bSubTotalCurrencySymbol = (TextView) findViewById(R.id.bSubTotalCurrencySymbol);
+        bSubTotalCurrencySymbol.setText("("+currencySymbol+")");
 
 
         long employeeId = SessionInfo.instance().getEmployee().getEmployeeId();
@@ -171,7 +183,7 @@ public class NewOrderActivity extends ProdcastBaseActivity implements
                 SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
                 //deleteItem.setBackground(getDrawable(R.drawable.yellow_background));
                 deleteItem.setWidth(170);
-                deleteItem.setIcon(R.drawable.ic_delete);
+                deleteItem.setIcon(R.drawable.ic_delete_icon);
                 menu.addMenuItem(deleteItem);
             }
         };
@@ -350,6 +362,7 @@ public class NewOrderActivity extends ProdcastBaseActivity implements
         float totalTax = otherTax + salesTax;
         float totalPriceTax =totalPrice +totalTax;
         String name= null;
+
         if (discountType != null && discountType.getSelectedItem() != null) {
                 name = (String) discountType.getSelectedItem();
                 int selectedSpinner = discountType.getSelectedItemPosition();
@@ -358,8 +371,8 @@ public class NewOrderActivity extends ProdcastBaseActivity implements
                     value = discountValue.getText().toString();
                     float discountCash = totalPriceTax - (Float.parseFloat(value));
                     float cash = discountCash;
-                    displayTotal.setText(Constants.PRICE_FORMAT.format(cash));
-                    displayTax.setText(Constants.PRICE_FORMAT.format(totalTax));
+                    displayTotal.setText(currencySymbol+""+Constants.PRICE_FORMAT.format(cash));
+                    displayTax.setText(currencySymbol+""+Constants.PRICE_FORMAT.format(totalTax));
                     dto.setDiscountType(name);
                     dto.setDiscountValue(value);
 
@@ -367,14 +380,14 @@ public class NewOrderActivity extends ProdcastBaseActivity implements
                 } else if (selectedSpinner == 2) {
                     value = discountValue.getText().toString();
                     float discountPercentage = totalPriceTax*(1-((Float.parseFloat(value)) / 100));
-                    displayTotal.setText(Constants.PRICE_FORMAT.format(discountPercentage));
+                    displayTotal.setText(currencySymbol+""+Constants.PRICE_FORMAT.format(discountPercentage));
                     //float discountTax = totalTax *(1-((Float.parseFloat(value)) / 100));
-                    displayTax.setText(Constants.PRICE_FORMAT.format(totalTax));
+                    displayTax.setText(currencySymbol+""+Constants.PRICE_FORMAT.format(totalTax));
                     dto.setDiscountType(name);
                     dto.setDiscountValue(value);
                 } else {
-                    displayTotal.setText(Constants.PRICE_FORMAT.format(totalPriceTax));
-                    displayTax.setText(Constants.PRICE_FORMAT.format(totalTax));
+                    displayTotal.setText(currencySymbol+""+Constants.PRICE_FORMAT.format(totalPriceTax));
+                    displayTax.setText(currencySymbol+""+Constants.PRICE_FORMAT.format(totalTax));
 
                 }
         }

@@ -14,6 +14,7 @@
         android:orientation="horizontal" >
 
         <LinearLayout
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -51,7 +52,7 @@
             <ImageView
                 android:id="@+id/Customers"
                 android:layout_width="96dp"
-                android:layout_height="129dp"
+                android:layout_height="134dp"
                 app:srcCompat="@drawable/customer" />
 
             <TextView
@@ -71,11 +72,13 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/row2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="160dp"
-        android:baselineAligned="false">
+        android:layout_below="@id/row1"
+        android:baselineAligned="false"
+        >
 
         <LinearLayout
             android:id="@+id/paymentScreen"
@@ -89,7 +92,7 @@
             <ImageView
                 android:id="@+id/Payment"
                 android:layout_width="96dp"
-                android:layout_height="136dp"
+                android:layout_height="134dp"
                 app:srcCompat="@drawable/payment" />
 
             <TextView
@@ -116,7 +119,7 @@
 
 
             <ImageView
-                android:id="@+id/Report"
+                android:id="@+id/report"
                 android:layout_width="96dp"
                 android:layout_height="134dp"
                 app:srcCompat="@drawable/report" />
@@ -139,7 +142,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="320dp">
+
+        android:layout_below="@id/row2">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -153,7 +157,7 @@
             <ImageView
                 android:id="@+id/ViewOrder"
                 android:layout_width="96dp"
-                android:layout_height="130dp"
+                android:layout_height="134dp"
                 app:srcCompat="@drawable/editreg" />
 
             <TextView
@@ -175,14 +179,16 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:orientation="vertical"
+
             android:layout_weight="1">
 
 
             <ImageView
                 android:id="@+id/ChangePassword"
                 android:layout_width="96dp"
-                android:layout_height="130dp"
+                android:layout_height="134dp"
                 app:srcCompat="@drawable/change_pwd" />
+
 
             <TextView
                 android:id="@+id/ChangePAsswordText"

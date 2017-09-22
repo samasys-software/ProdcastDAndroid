@@ -1,10 +1,12 @@
 package com.samayu.prodcast.prodcastd;
 
 import com.samayu.prodcast.prodcastd.dto.Bill;
+import com.samayu.prodcast.prodcastd.dto.Country;
 import com.samayu.prodcast.prodcastd.dto.Customer;
 import com.samayu.prodcast.prodcastd.dto.Employee;
 import com.samayu.prodcast.prodcastd.dto.OrderEntry;
 import com.samayu.prodcast.prodcastd.dto.Product;
+import com.samayu.prodcast.prodcastd.dto.Registration;
 
 import java.util.List;
 
@@ -17,6 +19,26 @@ public class SessionInfo {
     private Employee employee;
 
     private List<OrderEntry> cart;
+
+    public List<Registration> getEmployeeRegistration() {
+        return employeeRegistration;
+    }
+
+    public void setEmployeeRegistration(List<Registration> employeeRegistration) {
+        this.employeeRegistration = employeeRegistration;
+    }
+
+    private List<Registration> employeeRegistration;
+
+    public List<Country> getCountries() {
+        return countries;
+    }
+
+    public void setCountries(List<Country> countries) {
+        this.countries = countries;
+    }
+
+    private List<Country> countries;
 
     public Customer getSelectedCustomer() {
         return selectedCustomer;

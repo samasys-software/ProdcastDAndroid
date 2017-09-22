@@ -49,6 +49,10 @@
         <activity android:name="com.samayu.prodcast.prodcastd.ui.BillDetailListAdapter" />
         <activity android:name="com.samayu.prodcast.prodcastd.ui.PaymentDetailsListAdapter" />
         <activity android:name="com.samayu.prodcast.prodcastd.ui.ViewOrdersActivity" />
+        <activity
+            android:name="com.samayu.prodcast.prodcastd.ui.RegisterEmployee"
+            android:label="@string/title_activity_register_employee"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

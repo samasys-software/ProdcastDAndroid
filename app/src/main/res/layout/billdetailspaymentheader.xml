@@ -15,7 +15,7 @@
         android:background="@drawable/border_headerends"
         style="@style/TableHeader"
         android:gravity="center"
-        android:layout_weight="0.9"
+        android:layout_weight="1.3"
         android:text="Date"/>
 
 
@@ -37,7 +37,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:gravity="center"
-
+        android:background="@drawable/border_headerends"
         >
 
     <TextView
@@ -46,17 +46,15 @@
         android:layout_height="match_parent"
         android:id="@+id/paymentAmount"
         android:gravity="center"
-        android:background="@drawable/border_headerends"
         style="@style/TableHeader"
+        android:text="Amt"/>
 
-        android:text="Amount"/>
         <TextView
             android:layout_width="wrap_content"
             android:text="()"
             android:layout_height="wrap_content"
             android:id="@+id/paymentTotalCurrency"
             style="@style/TableHeader"
-            android:background="@drawable/border_headerends"
             />
         </LinearLayout>
 

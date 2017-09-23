@@ -1,14 +1,11 @@
 package com.samayu.prodcast.prodcastd.ui;
 
 
-
-
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.ArrayAdapter;
-
 import android.widget.ListView;
 
 import com.samayu.prodcast.prodcastd.SessionInfo;
@@ -32,6 +29,7 @@ public class CustomersActivity extends ProdcastBaseActivity {
     private long employeeId;
     private ListView cuslist;
     private ListView listView;
+    private FloatingActionButton newCustomerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +39,12 @@ public class CustomersActivity extends ProdcastBaseActivity {
         employeeId = SessionInfo.instance().getEmployee().getEmployeeId();
 
         listView = (ListView) findViewById(R.id.customerListView);
+        newCustomerButton = (FloatingActionButton) findViewById(R.id.newCustomerButton);
 
-        findViewById(R.id.newCustomerButton).setOnClickListener(new View.OnClickListener() {
+        newCustomerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CustomersActivity.this , CustomerActivity.class);
+                Intent intent = new Intent(CustomersActivity.this , CustomerCreateEditActivity.class);
                 startActivity(intent );
             }
         });

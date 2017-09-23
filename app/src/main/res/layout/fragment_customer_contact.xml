@@ -3,61 +3,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="prodcastd.prodcast.samayu.com.prodcastd.com.samayu.prodcast.prodcastd.ui.CustomerContactFragment">
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    tools:context="com.samayu.prodcast.prodcastd.ui.CustomerContactFragment">
 
     <android.support.design.widget.TextInputLayout
-        android:paddingLeft="5dp"
+
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:paddingRight="5dp">
+        >
 
         <EditText
             android:id="@+id/firstName"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="textPersonName"
             android:hint="First Name"
             android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
-        android:paddingLeft="5dp"
+
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:paddingRight="5dp">
+        >
 
         <EditText
             android:id="@+id/lastName"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="textPersonName"
             android:hint="Last Name"
             android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
-        android:paddingLeft="5dp"
+
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:paddingRight="5dp">
+        >
 
         <EditText
             android:id="@+id/phoneNumber"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="phone"
             android:hint="Phone Number"
             android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
-        android:paddingLeft="5dp"
+
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:paddingRight="5dp">
+        >
 
         <EditText
             android:editable="true"
@@ -65,81 +67,88 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="phone"
             android:hint="Mobile Number"
             android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
-        android:paddingLeft="5dp"
+
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:paddingRight="5dp">
+        >
 
         <EditText
             android:id="@+id/emailAddress"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="textPersonName"
             android:hint="Email Address"
             android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
-        android:paddingLeft="5dp"
+
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:paddingRight="5dp">
+        >
 
         <EditText
             android:id="@+id/note"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="textPersonName"
             android:hint="Note"
             android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
-    <CheckBox
-        android:id="@+id/smsAllowed"
+    <LinearLayout
+        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center">
+    <CheckBox
+        android:id="@+id/smsAllowed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
         android:text="SMS Allowed" />
     <CheckBox
         android:visibility="gone"
         android:id="@+id/active"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:text="Active" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Active" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <Button
             android:id="@+id/reset"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="5dp"
+            android:layout_weight="3"
             style="@style/submitButton"
             android:text="Reset" />
 
         <Button
             android:id="@+id/save"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="10dp"
             style="@style/submitButton"
+            android:layout_weight="3"
             android:text="Save" />
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

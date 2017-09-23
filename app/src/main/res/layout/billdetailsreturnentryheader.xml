@@ -37,20 +37,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-
             android:gravity="center"
-            android:background="@drawable/border_headerends"
-
             style="@style/TableHeader"
             android:text="Price "/>
+
         <TextView
             android:layout_width="wrap_content"
             android:text="()"
             android:layout_height="wrap_content"
             android:id="@+id/priceCurrency"
-            style="@style/TableHeader"
-            android:background="@drawable/border_headerends"
-            />
+            style="@style/TableHeader"/>
+
     </LinearLayout>
 
     <LinearLayout

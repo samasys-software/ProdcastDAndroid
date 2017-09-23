@@ -12,9 +12,7 @@
         style="@style/TableEntry"
         android:background="@drawable/border_entryends"
         android:gravity="center"
-
-        android:layout_weight="1"
-        />
+        android:layout_weight="1"/>
 
     <TextView
         android:id="@+id/qty"
@@ -23,7 +21,6 @@
         style="@style/TableEntry"
         android:background="@drawable/border_entrymiddle"
         android:gravity="center"
-
         android:layout_weight="0.7"
         />
 
@@ -34,9 +31,8 @@
         style="@style/TableEntry"
         android:background="@drawable/border_entrymiddle"
         android:gravity="center"
-
-        android:layout_weight="0.7"
-        />
+        android:layout_gravity="end"
+        android:layout_weight="0.7"/>
 
 
 
@@ -46,10 +42,9 @@
         android:layout_height="match_parent"
         style="@style/TableEntry"
         android:background="@drawable/border_entrymiddle"
-        android:gravity="end"
-
-        android:layout_weight="1"
-        />
+        android:gravity="center"
+        android:layout_gravity="end"
+        android:layout_weight="1"/>
 
 
 

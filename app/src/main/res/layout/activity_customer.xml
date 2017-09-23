@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:hint="Company Name"
-            android:ems="10"
+
             android:inputType="textPersonName"
             android:background="@drawable/border_textbox"/>
     </android.support.design.widget.TextInputLayout>
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:padding="5dp"
             android:hint="Customer Id1"
 
@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:padding="5dp"
             android:hint="Customer Id2"
 
@@ -76,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="textPersonName"
             android:hint="Customer Desc1"
             android:background="@drawable/border_textbox"/>
@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="textPersonName"
             android:hint="Customer Desc2"
             android:background="@drawable/border_textbox"/>
@@ -161,7 +161,7 @@
             android:id="@+id/unitNumber"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:ems="10"
+
             android:inputType="textPersonName"
             android:hint="Unit Number"
             android:layout_marginLeft="5dp"
@@ -183,7 +183,7 @@
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
             android:background="@android:drawable/ic_menu_mylocation"
-            android:ems="10"
+
             android:textColor="@color/colorGreen" />
 
 
@@ -200,7 +200,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="textPersonName"
             android:hint="Billing Address1"
             android:background="@drawable/border_textbox"/>
@@ -218,7 +218,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="textPersonName"
             android:hint="Billing Address2"
             android:background="@drawable/border_textbox"/>
@@ -238,7 +238,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="textPersonName"
             android:hint="Billing Address3"
             android:background="@drawable/border_textbox"/>
@@ -254,7 +254,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="textPersonName"
             android:hint="City"
             android:background="@drawable/border_textbox"/>
@@ -271,7 +271,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="textPersonName"
             android:hint="State"
             android:background="@drawable/border_textbox"/>
@@ -296,7 +296,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="number"
             android:hint="Postal Code"
             android:background="@drawable/border_textbox"/>
@@ -341,7 +341,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="textPersonName"
             android:hint="First Name"
             android:background="@drawable/border_textbox"/>
@@ -357,7 +357,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="textPersonName"
             android:hint="Last Name"
             android:background="@drawable/border_textbox" />
@@ -373,7 +373,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="phone"
             android:hint="Phone Number"
             android:background="@drawable/border_textbox"
@@ -391,7 +391,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="phone"
             android:hint="Mobile Number"
             android:background="@drawable/border_textbox"/>
@@ -407,7 +407,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="textPersonName"
             android:hint="Email Address"
             android:background="@drawable/border_textbox"/>
@@ -423,7 +423,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:ems="10"
+
             android:inputType="textPersonName"
             android:hint="Note"
             android:background="@drawable/border_textbox"/>

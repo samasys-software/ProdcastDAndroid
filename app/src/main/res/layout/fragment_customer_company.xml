@@ -1,13 +1,17 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="prodcastd.prodcast.samayu.com.prodcastd.com.samayu.prodcast.prodcastd.ui.CustomerCompanyFragment">
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="5dp">
         <android.support.design.widget.TextInputLayout
 
             android:layout_height="wrap_content"
@@ -19,152 +23,170 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:hint="Company Name"
-                android:ems="10"
                 android:inputType="textPersonName"
                 android:background="@drawable/border_textbox"/>
         </android.support.design.widget.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
         <android.support.design.widget.TextInputLayout
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:layout_width="0dp"
+            android:layout_weight="1">
             <EditText
                 android:id="@+id/customerId1"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:padding="5dp"
+
                 android:hint="Customer Id1"
-
                 android:inputType="textPersonName"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/border_textbox"
-                />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
-            <EditText
-                android:id="@+id/customerId2"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:padding="5dp"
-                android:hint="Customer Id2"
-
-                android:inputType="textPersonName"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/border_textbox"
-                />
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
-            <EditText
-                android:id="@+id/customerDesc1"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="Customer Desc1"
                 android:background="@drawable/border_textbox"/>
         </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
-            <EditText
-                android:id="@+id/customerDesc2"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
                 android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="Customer Desc2"
-                android:background="@drawable/border_textbox"/>
-        </android.support.design.widget.TextInputLayout>
+                android:paddingStart="5dp"
+                android:paddingEnd="0dp">
+                <EditText
+                    android:id="@+id/customerDesc1"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:inputType="textPersonName"
+                    android:hint="Customer Desc1"
+                    android:background="@drawable/border_textbox"/>
+            </android.support.design.widget.TextInputLayout>
+
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
 
+        <android.support.design.widget.TextInputLayout
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1">
+            <EditText
+                android:id="@+id/customerId2"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Customer Id2"
+                android:inputType="textPersonName"
+                android:background="@drawable/border_textbox"/>
+        </android.support.design.widget.TextInputLayout>
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingStart="5dp"
+            android:paddingEnd="0dp">
+            <EditText
+                android:id="@+id/customerDesc2"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:inputType="textPersonName"
+                android:hint="Customer Desc2"
+                android:background="@drawable/border_textbox"/>
+        </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_textbox"
+            android:layout_marginTop="5dp">
+
             <Spinner
                 android:id="@+id/selectDay"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@drawable/border_textbox"
-
+                android:layout_height="wrap_content"
                 android:minHeight="40dp"
-
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"/>
+                />
         </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_textbox"
+        android:layout_marginTop="5dp">
         <Spinner
             android:id="@+id/area"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:minHeight="40dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/border_textbox"/>
 
+            />
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_textbox"
+        android:layout_marginTop="5dp">
         <Spinner
             android:id="@+id/selectCustomerType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="40dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
 
-            android:background="@drawable/border_textbox"/>
+            />
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_textbox"
+        android:layout_marginTop="5dp">
 
         <Spinner
             android:id="@+id/storetype"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-            android:layout_height="40dp"
             android:minHeight="40dp"
-
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-
-            android:background="@drawable/border_textbox"/>
-        <RelativeLayout
-
+            />
+        </LinearLayout>
+        <LinearLayout
+            android:paddingTop="10dp"
              android:layout_width="match_parent"
-             android:layout_height="wrap_content">
+             android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
          <Button
              android:id="@+id/reset"
-             android:layout_width="wrap_content"
+             android:layout_width="0dp"
              android:layout_height="wrap_content"
-
-             android:layout_marginLeft="10dp"
+             android:layout_weight="1"
              android:layout_marginStart="5dp"
-             android:background="@drawable/log_in_button"
-             android:hint="RESET"
-             android:textColor="#fff" />
+             android:layout_marginEnd="5dp"
+             style="@style/submitButton"
+             android:text="RESET"/>
 
          <Button
              android:id="@+id/next"
-             android:layout_width="wrap_content"
+             android:layout_width="0dp"
              android:layout_height="wrap_content"
-             android:layout_alignParentEnd="true"
-             android:layout_marginRight="10dp"
+             android:layout_weight="1"
+             android:layout_marginStart="5dp"
              android:layout_marginEnd="5dp"
-             android:background="@drawable/log_in_button"
-             android:hint="NEXT"
-             android:textColor="#fff" />
+             style="@style/submitButton"
+             android:text="NEXT"/>
 
 
-         </RelativeLayout>
+         </LinearLayout>
 
 
 
     </LinearLayout>
 
 
-</LinearLayout>
+</android.support.v4.widget.NestedScrollView>

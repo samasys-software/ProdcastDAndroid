@@ -95,11 +95,6 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public  void onClick(View view) {
-                String email = emailAddress.getText().toString();
-                if (!EmailVerification.validateEmail(email)){
-                    emailAddress.setText("Please Enetr Valid email Id");
-                    return;
-                }
 
                 mListener.validateAndSave();
 
@@ -189,6 +184,11 @@ public class CustomerContactFragment extends ProdcastValidatedFragment {
             cancel = true;
         }
 
+        if (!EmailVerification.validateEmail(emailAdd)){
+            emailAddress.setText("Please Enetr Valid email Id");
+            focusView = emailAddress;
+            cancel =  true;
+        }
         return cancel;
 
     }

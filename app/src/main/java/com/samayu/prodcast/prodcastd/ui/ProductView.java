@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.samayu.prodcast.prodcastd.SessionInfo;
 import com.samayu.prodcast.prodcastd.dto.OrderEntry;
 import com.samayu.prodcast.prodcastd.util.Constants;
 
@@ -23,7 +22,7 @@ public class ProductView extends FrameLayout {
     private com.samayu.prodcast.prodcastd.dto.OrderEntry product;
     private QuantityChangedListener quantityChangedListener ;
 
-    String currencySymbol = SessionInfo.instance().getEmployee().getCurrencySymbol();
+
 
     public ProductView(Context context, OrderEntry product, QuantityChangedListener listener ) {
         super(context);
@@ -39,7 +38,7 @@ public class ProductView extends FrameLayout {
         ((TextView)findViewById(R.id.product)).setText(String.valueOf( product.getProductName()));
         ((EditText)findViewById(R.id.quantityEdit)).setText(String.valueOf(product.getQuantity()));
 
-        ((TextView)findViewById(R.id.subTotalAmount)).setText("("+currencySymbol+")"+Constants.PRICE_FORMAT.format( product.getSubtotal() ));
+        ((TextView)findViewById(R.id.subTotalAmount)).setText(Constants.PRICE_FORMAT.format( product.getSubtotal() ));
 
 
         ((EditText)findViewById(R.id.quantityEdit)).addTextChangedListener(new TextWatcher() {

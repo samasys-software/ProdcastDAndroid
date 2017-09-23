@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <TextView
         android:id="@+id/paymentDate"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:gravity="center"
         android:background="@drawable/border_entryends"
         style="@style/TableEntry"
-        android:layout_weight="1"/>
+        android:layout_weight="1.3"/>
 
     <TextView
         android:id="@+id/paymentReceiver"
         android:layout_width="0dp"
-
         android:layout_height="match_parent"
-
+        android:layout_gravity="center"
         android:gravity="center"
         android:background="@drawable/border_entrymiddle"
         style="@style/TableEntry"
@@ -29,9 +30,8 @@
         android:background="@drawable/border_entrymiddle"
         style="@style/TableEntry"
         android:layout_height="match_parent"
-
-        android:gravity="end"
-
+        android:gravity="center"
+        android:layout_gravity="end"
         android:layout_weight="1"/>
 
 </LinearLayout>

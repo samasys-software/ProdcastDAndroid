@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
@@ -20,17 +21,19 @@
     android:layout_width="match_parent">
 
 
-       <Button
-           android:id="@+id/newCustomerButton"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:background="@android:color/holo_green_dark"
-           android:text="New Customer" />
-    <ListView
+      <ListView
         android:id="@+id/customerListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 
-</LinearLayout>
+   </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/newCustomerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_new"
+        android:text="New Customer" />
+
     </LinearLayout>

@@ -68,17 +68,17 @@
                         android:id="@+id/startDateButton"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:gravity="center"
+                        android:gravity="end"
                         android:layout_gravity="end|center"
                         android:background="@drawable/ic_calendar_button"/>
 
+               </LinearLayout>
                 <DatePicker
                     android:id="@+id/startDatePicker"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone" />
 
-                </LinearLayout>
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -95,19 +95,22 @@
                     android:layout_gravity="start|center"
                     android:text="End Date" />
 
-                <DatePicker
-                    android:id="@+id/endDatePicker"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone" />
 
                     <Button
                         android:background="@drawable/ic_calendar_button"
                         android:id="@+id/endDateButton"
                         android:layout_width="25dp"
-                        android:layout_height="25dp" />
+                        android:layout_height="25dp"
+                        android:layout_gravity="end|center"
+                        android:gravity="end|center"/>
 
                 </LinearLayout>
+                <DatePicker
+                    android:id="@+id/endDatePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
 
                 <Button
                     android:id="@+id/refresh"

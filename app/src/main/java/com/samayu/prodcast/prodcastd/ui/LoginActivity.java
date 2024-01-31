@@ -21,6 +21,7 @@ import com.samayu.prodcast.prodcastd.dto.LoginDTO;
 import com.samayu.prodcast.prodcastd.dto.ProdcastDTO;
 import com.samayu.prodcast.prodcastd.service.ProdcastDClient;
 import com.samayu.prodcast.prodcastd.util.EmailVerification;
+import io.github.pixee.security.ObjectInputFilters;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -190,7 +191,8 @@ public class LoginActivity extends AppCompatActivity {
     public Employee loginRetrive(){
      try {
         ObjectInputStream ois =new ObjectInputStream(openFileInput(FILE_NAME));
-         Employee r =(Employee)ois.readObject();
+        ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
+        Employee r =(Employee)ois.readObject();
          return r;
      }
      catch (Exception e){
